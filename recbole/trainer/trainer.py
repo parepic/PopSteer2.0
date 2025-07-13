@@ -111,7 +111,20 @@ class Trainer(AbstractTrainer):
     def __init__(self, config, model):
         super(Trainer, self).__init__(config, model)
 
-        self.logger = getLogger()
+        logger = logging.getLogger()
+        logger.setLevel(logging.INFO)  # or DEBUG if you want more detailed logs
+
+        # Create console handler and set level
+        console_handler = logging.StreamHandler()
+        console_handler.setLevel(logging.INFO)
+
+        # Create formatter and add it to the handler
+        formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+        console_handler.setFormatter(formatter)
+
+        # Add handler to the logger if not already added
+        if not logger.handlers:
+            logger.addHandler(console_handler)
         self.tensorboard = get_tensorboard(self.logger)
         self.wandblogger = WandbLogger(config)
         self.learner = config["learner"]
