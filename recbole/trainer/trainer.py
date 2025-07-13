@@ -18,6 +18,7 @@ recbole.trainer.trainer
 """
 
 import os
+from datetime import datetime
 
 from logging import getLogger
 from time import time
@@ -112,20 +113,29 @@ class Trainer(AbstractTrainer):
     def __init__(self, config, model):
         super(Trainer, self).__init__(config, model)
 
-        logger = logging.getLogger()
-        logger.setLevel(logging.INFO)  # or DEBUG if you want more detailed logs
+        # Configure the logger
+        logger = logging.getLogger()  # Get the root logger
+        logger.setLevel(logging.DEBUG)  # Set the root logger to debug
 
-        # Create console handler and set level
+        # Remove all existing handlers (to prevent duplicate logging)
+        if logger.hasHandlers():
+            logger.handlers.clear()
+
+        # Create console handler
         console_handler = logging.StreamHandler()
-        console_handler.setLevel(logging.INFO)
+        console_handler.setLevel(logging.DEBUG)  # Console handler also listens to DEBUG level
 
-        # Create formatter and add it to the handler
-        formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+        formatter = logging.Formatter('%(asctime)s %(levelname)s:%(message)s', datefmt='%d-%m-%Y %I:%M:%S %p')
         console_handler.setFormatter(formatter)
 
-        # Add handler to the logger if not already added
-        if not logger.handlers:
-            logger.addHandler(console_handler)
+        # Add console handler to the logger
+        logger.addHandler(console_handler)
+
+        # Add FileHandler
+        fhandler = logging.FileHandler(filename=f'{int(datetime.utcnow().timestamp())}.log', mode='a')
+        fhandler.setFormatter(formatter)
+        logger.addHandler(fhandler)
+        
         self.logger = logger
         self.tensorboard = get_tensorboard(self.logger)
         self.wandblogger = WandbLogger(config)
