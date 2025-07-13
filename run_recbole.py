@@ -9,9 +9,14 @@
 
 import argparse
 
-from recbole.quick_start import run
+from recbole.quick_start import run, run_recbole
 
 if __name__ == "__main__":
+    # parameter_dict = {
+    # 'train_neg_sample_args': None,
+    # }
+    # run_recbole(model='SASRec', dataset='ml-100k', config_dict=parameter_dict)
+    # exit()
     parser = argparse.ArgumentParser()
     parser.add_argument("--model", "-m", type=str, default="BPR", help="name of models")
     parser.add_argument(
