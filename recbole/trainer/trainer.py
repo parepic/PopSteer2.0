@@ -126,6 +126,7 @@ class Trainer(AbstractTrainer):
         # Add handler to the logger if not already added
         if not logger.handlers:
             logger.addHandler(console_handler)
+        self.logger = logger
         self.tensorboard = get_tensorboard(self.logger)
         self.wandblogger = WandbLogger(config)
         self.learner = config["learner"]
