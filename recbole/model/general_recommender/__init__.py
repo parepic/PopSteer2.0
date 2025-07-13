@@ -10,6 +10,7 @@ from recbole.model.general_recommender.fism import FISM
 from recbole.model.general_recommender.gcmc import GCMC
 from recbole.model.general_recommender.itemknn import ItemKNN
 from recbole.model.general_recommender.lightgcn import LightGCN
+from recbole.model.general_recommender.lightgcn_sae import LightGCN_SAE
 from recbole.model.general_recommender.line import LINE
 from recbole.model.general_recommender.macridvae import MacridVAE
 from recbole.model.general_recommender.multidae import MultiDAE

@@ -204,8 +204,6 @@ class LightGCN(GeneralRecommender):
             self.restore_user_e, self.restore_item_e = self.forward()
         # get user embedding from storage variable
         u_embeddings = self.restore_user_e[user]
-
         # dot with all item embedding to accelerate
         scores = torch.matmul(u_embeddings, self.restore_item_e.transpose(0, 1))
-
         return scores.view(-1)

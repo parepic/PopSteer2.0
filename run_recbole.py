@@ -36,6 +36,10 @@ if __name__ == "__main__":
         "--world_size", type=int, default=-1, help="total number of jobs"
     )
     parser.add_argument(
+        "--base_path", type=str, default='no path', help="base model path"
+    )
+    
+    parser.add_argument(
         "--group_offset",
         type=int,
         default=0,
@@ -48,10 +52,15 @@ if __name__ == "__main__":
         args.config_files.strip().split(" ") if args.config_files else None
     )
 
+    config_dict = dict()
+    if hasattr(args, "base_path") and args.base_path != "no path":
+        config_dict["base_path"] = args.base_path
+
     run(
         args.model,
         args.dataset,
         config_file_list=config_file_list,
+        config_dict=config_dict,
         nproc=args.nproc,
         world_size=args.world_size,
         ip=args.ip,

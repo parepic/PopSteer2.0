@@ -135,7 +135,6 @@ class Trainer(AbstractTrainer):
         fhandler = logging.FileHandler(filename=f'{int(datetime.utcnow().timestamp())}.log', mode='a')
         fhandler.setFormatter(formatter)
         logger.addHandler(fhandler)
-        
         self.logger = logger
         self.tensorboard = get_tensorboard(self.logger)
         self.wandblogger = WandbLogger(config)
