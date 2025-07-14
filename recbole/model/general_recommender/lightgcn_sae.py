@@ -109,7 +109,6 @@ class SAE(nn.Module):
 	def __init__(self,config):
 		super(SAE, self).__init__()
 		self.k = config["sae_k"]
-		print("This is k", self.k)
 		self.scale_size = config["sae_scale_size"]
 		self.neuron_count = None
 		self.unpopular_only = None
@@ -330,6 +329,7 @@ class SAE(nn.Module):
 	 
 	 
 	def forward(self, x, sequences=None, train_mode=False, save_result=False, epoch=None, dataset=None, pop_scores=None):
+			print("This is k", self.k)
 			sae_in = x - self.b_dec
 			pre_acts = self.encoder(sae_in)
 			self.last_activations = pre_acts
