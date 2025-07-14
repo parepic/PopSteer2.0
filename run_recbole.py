@@ -64,6 +64,8 @@ if __name__ == "__main__":
         config_dict["base_path"] = args.base_path
     if hasattr(args, "scale_size"):
         config_dict["base_path"] = args.base_path
+    if hasattr(args, "top_k"):
+        config_dict["top_k"] = args.base_path
 
     run(
         args.model,

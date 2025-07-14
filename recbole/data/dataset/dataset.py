@@ -18,6 +18,8 @@ import os
 import yaml
 from collections import Counter, defaultdict
 from logging import getLogger
+from datetime import datetime
+import logging 
 
 import numpy as np
 import pandas as pd
@@ -104,7 +106,25 @@ class Dataset(torch.utils.data.Dataset):
         super().__init__()
         self.config = config
         self.dataset_name = config["dataset"]
-        self.logger = getLogger()
+        # Configure the logger
+        logger = logging.getLogger()  # Get the root logger
+        logger.setLevel(logging.DEBUG)  # Set the root logger to debug
+
+        # Remove all existing handlers (to prevent duplicate logging)
+        if logger.hasHandlers():
+            logger.handlers.clear()
+
+        # Create console handler
+        console_handler = logging.StreamHandler()
+        console_handler.setLevel(logging.DEBUG)  # Console handler also listens to DEBUG level
+
+        formatter = logging.Formatter('%(asctime)s %(levelname)s:%(message)s', datefmt='%d-%m-%Y %I:%M:%S %p')
+        console_handler.setFormatter(formatter)
+        logger.addHandler(console_handler)
+        fhandler = logging.FileHandler(filename=f'{int(datetime.utcnow().timestamp())}.log', mode='a')
+        fhandler.setFormatter(formatter)
+        logger.addHandler(fhandler)
+        self.logger = logger
         self._from_scratch()
 
     def _from_scratch(self):

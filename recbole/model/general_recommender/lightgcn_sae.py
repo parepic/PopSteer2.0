@@ -64,7 +64,7 @@ class LightGCN_SAE(LightGCN):
 	def forward(self, train_mode=None):
 		u_emb, i_emb = super().forward()
 		bu = (self.sae_module(u_emb, train_mode=train_mode))
-		return bu, i_emb
+		return u_emb, i_emb
 	
 	def calculate_loss(self, interaction):
 		if self.restore_user_e is not None or self.restore_item_e is not None:
