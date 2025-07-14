@@ -13,10 +13,10 @@ LightGCN
 ################################################
 
 Reference:
-    Xiangnan He et al. "LightGCN: Simplifying and Powering Graph Convolution Network for Recommendation." in SIGIR 2020.
+	Xiangnan He et al. "LightGCN: Simplifying and Powering Graph Convolution Network for Recommendation." in SIGIR 2020.
 
 Reference code:
-    https://github.com/kuandeng/LightGCN
+	https://github.com/kuandeng/LightGCN
 """
 
 import numpy as np
@@ -33,57 +33,63 @@ from recbole.model.general_recommender.lightgcn import LightGCN
 
 
 class LightGCN_SAE(LightGCN):
-    r"""LightGCN is a GCN-based recommender model.
+	r"""LightGCN is a GCN-based recommender model.
 
-    LightGCN includes only the most essential component in GCN — neighborhood aggregation — for
-    collaborative filtering. Specifically, LightGCN learns user and item embeddings by linearly
-    propagating them on the user-item interaction graph, and uses the weighted sum of the embeddings
-    learned at all layers as the final embedding.
+	LightGCN includes only the most essential component in GCN — neighborhood aggregation — for
+	collaborative filtering. Specifically, LightGCN learns user and item embeddings by linearly
+	propagating them on the user-item interaction graph, and uses the weighted sum of the embeddings
+	learned at all layers as the final embedding.
 
-    We implement the model following the original author with a pairwise training mode.
-    """
+	We implement the model following the original author with a pairwise training mode.
+	"""
 
-    input_type = InputType.PAIRWISE
+	input_type = InputType.PAIRWISE
 
-    def __init__(self, config, dataset):
-        super().__init__(config, dataset)
-        self.recommendation_count = np.zeros(self.n_items)
-        model_path = config["base_path"]
-        checkpoint = torch.load(model_path, map_location=self.device, weights_only=False)
-        self.load_state_dict(checkpoint['state_dict'])
-        self.sae_module = SAE(config)
-        for param in self.parameters():
-            param.requires_grad = False
+	def __init__(self, config, dataset):
+		super().__init__(config, dataset)
+		self.recommendation_count = np.zeros(self.n_items)
+		model_path = config["base_path"]
+		checkpoint = torch.load(model_path, map_location=self.device, weights_only=False)
+		self.load_state_dict(checkpoint['state_dict'])
+		self.sae_module = SAE(config)
+		self.restore_item_e = None
+		self.restore_user_e = None
+		for param in self.parameters():
+			param.requires_grad = False
 
-        for param in self.sae_module.parameters():
-            param.requires_grad = True  
+		for param in self.sae_module.parameters():
+			param.requires_grad = True  
 
 
-    def forward(self, train_mode=False):
-        u_emb, i_emb = super().forward()
-        return self.sae_module(u_emb, train_mode=train_mode), i_emb
+	def forward(self, train_mode=None):
+		u_emb, i_emb = super().forward()
+		bu = (self.sae_module(u_emb, train_mode=train_mode))
+		return bu, i_emb
 	
-    def calculate_loss(self, interaction):
-        user_all_embeddings, item_all_embeddings = self.forward(train_mode=True)
-        sae_loss = self.sae_module.fvu + self.sae_module.auxk_loss / 2
-        return sae_loss
+	def calculate_loss(self, interaction):
+		if self.restore_user_e is not None or self.restore_item_e is not None:
+			self.restore_user_e, self.restore_item_e = None, None
+		user_all_embeddings, item_all_embeddings = self.forward(train_mode=True)
+		sae_loss = self.sae_module.fvu + self.sae_module.auxk_loss / 2
 
-    def full_sort_predict(self, interaction):
-        user = interaction[self.USER_ID]
-        if self.restore_user_e is None or self.restore_item_e is None:
-            self.restore_user_e, self.restore_item_e = self.forward(train_mode=False)
-        u_embeddings = self.restore_user_e[user]
-        scores = torch.matmul(u_embeddings, self.restore_item_e.transpose(0, 1))
-        top_recs = torch.argsort(scores, dim=1, descending=True)[:, :10]
-        scores[:, 0] =  float("-inf")
-        for key in top_recs.flatten():
-            self.recommendation_count[key.item()] += 1
+		return sae_loss
 
-        scores = torch.matmul(u_embeddings, self.restore_item_e.transpose(0, 1))
-        return scores.view(-1)
+	def full_sort_predict(self, interaction):
 
-    def set_sae_mode(self, train_mode=True):
-        self.sae_module.train_mode=train_mode
+		user = interaction[self.USER_ID]
+		if self.restore_user_e is None or self.restore_item_e is None:
+			self.restore_user_e, self.restore_item_e = self.forward(train_mode=False)
+		u_embeddings = self.restore_user_e[user]
+		scores = torch.matmul(u_embeddings, self.restore_item_e.transpose(0, 1))
+		top_recs = torch.argsort(scores, dim=1, descending=True)[:, :10]
+		scores[:, 0] =  float("-inf")
+		for key in top_recs.flatten():
+			self.recommendation_count[key.item()] += 1 
+
+		return scores.view(-1)
+
+	def set_sae_mode(self, train_mode=True):
+		self.sae_module.train_mode=train_mode
 		
 
 import torch
@@ -120,15 +126,15 @@ class SAE(nn.Module):
 		self.epoch_idx=0
 		self.item_activations = np.zeros(self.hidden_dim)
 		self.highest_activations = {
-            j: {
-                "values": torch.empty(0, dtype=torch.float32, device=self.device),
-                "low_values": torch.empty(0, dtype=torch.float32, device=self.device),
-                "items": torch.empty(0, dtype=torch.long, device=self.device),
-                "low_items": torch.empty(0, dtype=torch.long, device=self.device),
-                "recommendations": torch.empty((0, 10), dtype=torch.long, device=self.device)
-            }
-            for j in range(self.hidden_dim)
-        }
+			j: {
+				"values": torch.empty(0, dtype=torch.float32, device=self.device),
+				"low_values": torch.empty(0, dtype=torch.float32, device=self.device),
+				"items": torch.empty(0, dtype=torch.long, device=self.device),
+				"low_items": torch.empty(0, dtype=torch.long, device=self.device),
+				"recommendations": torch.empty((0, 10), dtype=torch.long, device=self.device)
+			}
+			for j in range(self.hidden_dim)
+		}
 		return
 
 
@@ -225,10 +231,10 @@ class SAE(nn.Module):
 					
 					# Find indices of the top-k scores
 					topk_indices = np.argsort(pred_scores, axis=1)[:, -k:][:, ::-1]  # Add 1 to match item IDs
-     
+	 
 					# Update the recommendations for this sequence
 					data["recommendations"].append(topk_indices.tolist())
-     
+	 
 
 
 	def dampen_neurons(self, pre_acts, dataset=None):
@@ -240,8 +246,8 @@ class SAE(nn.Module):
 		# 'unpop' neurons are those with higher activations for unpopular inputs (to be reinforced),
 		# while 'pop' neurons are those with lower activations (to be dampened).
 		combined_neurons = [(idx, cohen, 'unpop') for idx, cohen in unpop_neurons] + \
-                        [(idx, cohen, 'pop') for idx, cohen in pop_neurons]
-                        
+						[(idx, cohen, 'pop') for idx, cohen in pop_neurons]
+						
 		# Now sort by the absolute Cohen's d value (in descending order) and pick the overall top N neurons.
 		combined_sorted = sorted(combined_neurons, key=lambda x: abs(x[1]), reverse=True)
 		top_neurons = combined_sorted[:int(self.N)]
@@ -271,7 +277,7 @@ class SAE(nn.Module):
 				row = stats_unpop.iloc[neuron_idx]
 				mean_val = row["mean"]
 				std_val = row["std"]
-    
+	
 				# Identify positions where the neuron's activation is above its mean.
 				vals = pre_acts[:, neuron_idx]
 				# Increase activations by an amount proportional to the standard deviation and effective weight.
@@ -291,11 +297,11 @@ class SAE(nn.Module):
 				vals = pre_acts[:, neuron_idx]
 				# Decrease activations proportionally.
 				pre_acts[:, neuron_idx] -= weight * pop_sd
-    
+	
 		return pre_acts
-     
-     
-    
+	 
+	 
+	
 	def add_noise(self, pre_acts, std):
 		pre_actss = pre_acts.detach().cpu()
 		if self.N is None:
@@ -317,8 +323,8 @@ class SAE(nn.Module):
 			pre_actss[:, idx] += noise
 
 		return pre_actss.to(self.device)
-     
-     
+	 
+	 
 	def forward(self, x, sequences=None, train_mode=False, save_result=False, epoch=None, dataset=None, pop_scores=None):
 			sae_in = x - self.b_dec
 			pre_acts = self.encoder(sae_in)

@@ -22,6 +22,13 @@ if __name__ == "__main__":
     parser.add_argument(
         "--dataset", "-d", type=str, default="ml-100k", help="name of datasets"
     )
+    parser.add_argument('--top_k', '-k', type=int, default=32,
+                        help="Sparsity parameter K: keep only the top‑k activations per input in the SAE (Eq. 1).")
+
+    parser.add_argument('--scale', '--scale_size', type=int, default=8,
+                        dest='scale',
+                        help="Scale factor s controlling the SAE hidden size relative to the input (s × d).")
+
     parser.add_argument("--config_files", type=str, default=None, help="config files")
     parser.add_argument(
         "--nproc", type=int, default=1, help="the number of process in this group"
@@ -54,6 +61,8 @@ if __name__ == "__main__":
 
     config_dict = dict()
     if hasattr(args, "base_path") and args.base_path != "no path":
+        config_dict["base_path"] = args.base_path
+    if hasattr(args, "scale_size"):
         config_dict["base_path"] = args.base_path
 
     run(
