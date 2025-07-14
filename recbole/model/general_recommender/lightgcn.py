@@ -156,6 +156,7 @@ class LightGCN(GeneralRecommender):
     def calculate_loss(self, interaction):
         # clear the storage variable when training
         if self.restore_user_e is not None or self.restore_item_e is not None:
+            self.recommendation_count = torch.zeros(self.n_items, dtype=torch.long, device=self.device)
             self.restore_user_e, self.restore_item_e = None, None
 
         user = interaction[self.USER_ID]
@@ -207,4 +208,9 @@ class LightGCN(GeneralRecommender):
         u_embeddings = self.restore_user_e[user]
         # dot with all item embedding to accelerate
         scores = torch.matmul(u_embeddings, self.restore_item_e.transpose(0, 1))
+        top_recs = torch.argsort(scores, dim=1, descending=True)[:, :10]
+        scores[:, 0] =  float("-inf")
+        for key in top_recs.flatten():
+            self.recommendation_count[key] += 1
+
         return scores.view(-1)
