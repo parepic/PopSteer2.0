@@ -33,9 +33,22 @@ from recbole.evaluator.utils import _binary_clf_curve
 from recbole.evaluator.base_metric import AbstractMetric, TopkMetric, LossMetric
 from recbole.utils import EvaluatorType
 
+
+
+
+class SAE_Loss(AbstractMetric):
+    metric_type = EvaluatorType.RANKING
+    metric_need = ['SAE_Loss']
+    smaller = True
+    
+    def __init__(self, config):
+        return None
+
+    def calculate_metric(self, dataobject):
+        loss = dataobject.get('SAE_Loss')
+        return {"SAE_Loss": float(loss)}
+    
 # TopK Metrics
-
-
 class Hit(TopkMetric):
     r"""HR_ (also known as truncated Hit-Ratio) is a way of calculating how many 'hits'
     you have in an n-sized list of ranked items. If there is at least one item that falls in the ground-truth set,

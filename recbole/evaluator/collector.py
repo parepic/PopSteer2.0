@@ -202,8 +202,10 @@ class Collector(object):
         Args:
             model (nn.Module): the trained recommendation model.
         """
-        pass
-        # TODO:
+        self.data_struct.update_tensor(
+                "SAE_Loss", model.val_fvu
+        )
+        
 
     def eval_collect(self, eval_pred: torch.Tensor, data_label: torch.Tensor):
         """Collect the evaluation resource from total output and label.
@@ -226,7 +228,7 @@ class Collector(object):
         for key in self.data_struct._data_dict:
             self.data_struct._data_dict[key] = self.data_struct._data_dict[key].cpu()
         returned_struct = copy.deepcopy(self.data_struct)
-        for key in ["rec.topk", "rec.meanrank", "rec.score", "rec.items", "data.label"]:
+        for key in ["rec.topk", "rec.meanrank", "rec.score", "rec.items", "data.label", "SAE_Loss"]:
             if key in self.data_struct:
                 del self.data_struct[key]
         return returned_struct

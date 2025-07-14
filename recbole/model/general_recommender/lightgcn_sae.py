@@ -54,6 +54,7 @@ class LightGCN_SAE(LightGCN):
 		self.sae_module = SAE(config)
 		self.restore_item_e = None
 		self.restore_user_e = None
+		self.val_fvu = torch.tensor(0.0, device=self.device)
 		for param in self.parameters():
 			param.requires_grad = False
 
@@ -63,19 +64,20 @@ class LightGCN_SAE(LightGCN):
 
 	def forward(self, train_mode=None):
 		u_emb, i_emb = super().forward()
-		bu = (self.sae_module(u_emb, train_mode=train_mode))
-		return u_emb, i_emb
+		u_emb_sae = (self.sae_module(u_emb, train_mode=train_mode))
+		return u_emb_sae, i_emb
 	
 	def calculate_loss(self, interaction):
+		if self.val_fvu.item() != 0:
+			self.val_fvu = torch.tensor(0.0, device=self.device)
 		if self.restore_user_e is not None or self.restore_item_e is not None:
 			self.restore_user_e, self.restore_item_e = None, None
 		user_all_embeddings, item_all_embeddings = self.forward(train_mode=True)
 		sae_loss = self.sae_module.fvu + self.sae_module.auxk_loss / 2
-
+		
 		return sae_loss
 
 	def full_sort_predict(self, interaction):
-
 		user = interaction[self.USER_ID]
 		if self.restore_user_e is None or self.restore_item_e is None:
 			self.restore_user_e, self.restore_item_e = self.forward(train_mode=False)
@@ -85,7 +87,7 @@ class LightGCN_SAE(LightGCN):
 		scores[:, 0] =  float("-inf")
 		for key in top_recs.flatten():
 			self.recommendation_count[key.item()] += 1 
-
+		self.val_fvu += self.sae_module.fvu
 		return scores.view(-1)
 
 	def set_sae_mode(self, train_mode=True):

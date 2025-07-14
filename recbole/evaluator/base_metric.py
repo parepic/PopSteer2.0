@@ -25,7 +25,6 @@ class AbstractMetric(object):
     """
 
     smaller = False
-
     def __init__(self, config):
         self.decimal_place = config["metric_decimal_place"]
 
