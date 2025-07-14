@@ -64,7 +64,7 @@ class LightGCN_SAE(LightGCN):
 	def forward(self, train_mode=None):
 		u_emb, i_emb = super().forward()
 		u_emb_sae = (self.sae_module(u_emb, train_mode=train_mode))
-		return u_emb, i_emb
+		return u_emb_sae, i_emb
 	
 	def calculate_loss(self, interaction):
 		if self.val_fvu.item() != 0:
@@ -109,6 +109,7 @@ class SAE(nn.Module):
 	def __init__(self,config):
 		super(SAE, self).__init__()
 		self.k = config["sae_k"]
+		print("This is k", self.k)
 		self.scale_size = config["sae_scale_size"]
 		self.neuron_count = None
 		self.unpopular_only = None
