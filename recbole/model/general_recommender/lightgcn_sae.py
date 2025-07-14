@@ -329,7 +329,6 @@ class SAE(nn.Module):
 	 
 	 
 	def forward(self, x, sequences=None, train_mode=False, save_result=False, epoch=None, dataset=None, pop_scores=None):
-			print("This is k", self.k)
 			sae_in = x - self.b_dec
 			pre_acts = self.encoder(sae_in)
 			self.last_activations = pre_acts
