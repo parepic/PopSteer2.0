@@ -24,6 +24,8 @@ if __name__ == "__main__":
     )
     parser.add_argument('--sae_k', '-k', type=int, default=32,
                         help="Sparsity parameter K: keep only the top‑k activations per input in the SAE (Eq. 1).")
+    parser.add_argument('--lr', '-k', type=float, default=1e-4,
+                        help="learning rate")
 
     parser.add_argument('--scale', '--scale_size', type=int, default=8,
                         dest='scale',
@@ -66,6 +68,8 @@ if __name__ == "__main__":
         config_dict["sae_scale_size"] = args.base_path
     if hasattr(args, "sae_k"):
         config_dict["sae_k"] = args.sae_k
+    if hasattr(args, "lr"):
+        config_dict["learning_rate"] = args.lr
 
     run(
         args.model,
