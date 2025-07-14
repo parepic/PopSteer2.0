@@ -35,7 +35,10 @@ class Evaluator(object):
 
         """
         result_dict = OrderedDict()
+        print(self.metrics, " bleyyy")
         for metric in self.metrics:
             metric_val = self.metric_class[metric].calculate_metric(dataobject)
             result_dict.update(metric_val)
+        print(result_dict, " blettt")
+
         return result_dict
