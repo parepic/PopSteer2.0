@@ -47,7 +47,6 @@ class LightGCN_SAE(LightGCN):
 
 	def __init__(self, config, dataset):
 		super().__init__(config, dataset)
-		self.recommendation_count = np.zeros(self.n_items)
 		model_path = config["base_path"]
 		checkpoint = torch.load(model_path, map_location=self.device, weights_only=False)
 		self.load_state_dict(checkpoint['state_dict'])
@@ -70,8 +69,10 @@ class LightGCN_SAE(LightGCN):
 	def calculate_loss(self, interaction):
 		if self.val_fvu.item() != 0:
 			self.val_fvu = torch.tensor(0.0, device=self.device)
+			self.recommendation_count = torch.zeros(self.n_items, dtype=torch.long, device=self.device)
 		if self.restore_user_e is not None or self.restore_item_e is not None:
 			self.restore_user_e, self.restore_item_e = None, None
+		
 		user_all_embeddings, item_all_embeddings = self.forward(train_mode=True)
 		sae_loss = self.sae_module.fvu + self.sae_module.auxk_loss / 2
 		
@@ -86,7 +87,7 @@ class LightGCN_SAE(LightGCN):
 		top_recs = torch.argsort(scores, dim=1, descending=True)[:, :10]
 		scores[:, 0] =  float("-inf")
 		for key in top_recs.flatten():
-			self.recommendation_count[key.item()] += 1 
+			self.recommendation_count[key] += 1
 		self.val_fvu += self.sae_module.fvu
 		return scores.view(-1)
 

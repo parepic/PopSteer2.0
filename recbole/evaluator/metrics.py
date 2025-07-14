@@ -23,7 +23,7 @@ set of user(u)-item(i) pairs, :math:`\hat r_{u i}` represents the score predicte
 """
 
 from logging import getLogger
-
+import pandas as pd
 import numpy as np
 from collections import Counter
 from sklearn.metrics import auc as sk_auc
@@ -34,6 +34,30 @@ from recbole.evaluator.base_metric import AbstractMetric, TopkMetric, LossMetric
 from recbole.utils import EvaluatorType
 
 
+class Gini(AbstractMetric):
+    metric_type = EvaluatorType.RANKING
+    metric_need = ['recommendation_count']
+    smaller = True
+    
+    def __init__(self, config):
+        self.dataset = config["dataset"]
+        return None
+
+    def calculate_metric(self, dataobject):
+        file = rf'./dataset/{self.dataset}/item_popularity_labels_with_titles.csv'
+        item_data = pd.read_csv(file)
+        recommendation_count = dataobject.get('recommendation_count')
+        recommendation_count = recommendation_count[1:]
+        num_items = len(recommendation_count)
+        item_data = item_data[item_data['item_id:token'] <= num_items]
+        sorted_counts = np.sort(recommendation_count)
+        n = len(sorted_counts)
+        gini_coefficient = (
+            (2 * np.sum((np.arange(1, n + 1) * sorted_counts))) / (n * np.sum(sorted_counts)) - (n + 1) / n
+            if np.sum(sorted_counts) > 0 else 0
+        )
+        return {'gini@10': gini_coefficient}
+    
 
 
 class SAE_Loss(AbstractMetric):
@@ -48,6 +72,9 @@ class SAE_Loss(AbstractMetric):
         loss = dataobject.get('SAE_Loss')
         return {"sae_loss": float(loss)}
     
+
+
+
 # TopK Metrics
 class Hit(TopkMetric):
     r"""HR_ (also known as truncated Hit-Ratio) is a way of calculating how many 'hits'

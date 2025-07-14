@@ -44,6 +44,7 @@ class LightGCN(GeneralRecommender):
 
     def __init__(self, config, dataset):
         super(LightGCN, self).__init__(config, dataset)
+        self.recommendation_count = torch.zeros(self.n_items, dtype=torch.long, device=self.device)
 
         # load dataset info
         self.interaction_matrix = dataset.inter_matrix(form="coo").astype(np.float32)
