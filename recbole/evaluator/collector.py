@@ -202,12 +202,14 @@ class Collector(object):
         Args:
             model (nn.Module): the trained recommendation model.
         """
-        self.data_struct.update_tensor(
-                "SAE_Loss", model.val_fvu
-        )
-        self.data_struct.update_tensor(
-            'recommendation_count', model.recommendation_count
-        )
+        if self.register.need("SAE_Loss"):
+            self.data_struct.update_tensor(
+                    "SAE_Loss", model.val_fvu
+            )
+        if self.register.need("recommendation_count"):
+            self.data_struct.update_tensor(
+                'recommendation_count', model.recommendation_count
+            )
 
     def eval_collect(self, eval_pred: torch.Tensor, data_label: torch.Tensor):
         """Collect the evaluation resource from total output and label.
