@@ -329,6 +329,7 @@ class SAE(nn.Module):
 	 
 	 
 	def forward(self, x, sequences=None, train_mode=False, save_result=False, epoch=None, dataset=None, pop_scores=None):
+		
 			sae_in = x - self.b_dec
 			pre_acts = self.encoder(sae_in)
 			self.last_activations = pre_acts
@@ -355,7 +356,7 @@ class SAE(nn.Module):
 					self.auxk_loss = 0.0
 					return x_reconstructed
 				num_dead = self.hidden_dim - len(self.previous_activate_latents)
-				# print("num dead ", num_dead)
+				print("NUmber of dead ", num_dead)
 				k_aux = int(x.shape[-1]) * 2
 				if num_dead == 0:
 					self.auxk_loss = 0.0
