@@ -18,6 +18,8 @@ import sys
 import yaml
 from logging import getLogger
 from typing import Literal
+import logging
+from datetime import datetime
 
 from recbole.evaluator import metric_types, smaller_metrics
 from recbole.utils import (
@@ -183,7 +185,23 @@ class Config(object):
                 else:
                     cmd_config_dict[cmd_arg_name] = cmd_arg_value
         if len(unrecognized_args) > 0:
-            logger = getLogger()
+            logger = logging.getLogger()  # Get the root logger
+            logger.setLevel(logging.DEBUG)  # Set the root logger to debug
+
+            # Remove all existing handlers (to prevent duplicate logging)
+            if logger.hasHandlers():
+                logger.handlers.clear()
+
+            # Create console handler
+            console_handler = logging.StreamHandler()
+            console_handler.setLevel(logging.DEBUG)  # Console handler also listens to DEBUG level
+
+            formatter = logging.Formatter('%(asctime)s %(levelname)s:%(message)s', datefmt='%d-%m-%Y %I:%M:%S %p')
+            console_handler.setFormatter(formatter)
+            logger.addHandler(console_handler)
+            fhandler = logging.FileHandler(filename=f'{int(datetime.utcnow().timestamp())}.log', mode='a')
+            fhandler.setFormatter(formatter)
+            logger.addHandler(fhandler)
             logger.warning(
                 "command line args [{}] will not be used in RecBole".format(
                     " ".join(unrecognized_args)
@@ -420,7 +438,23 @@ class Config(object):
             self.final_config_dict.get("neg_sampling") is not None
             or self.final_config_dict.get("training_neg_sample_num") is not None
         ):
-            logger = getLogger()
+            logger = logging.getLogger()  # Get the root logger
+            logger.setLevel(logging.DEBUG)  # Set the root logger to debug
+
+            # Remove all existing handlers (to prevent duplicate logging)
+            if logger.hasHandlers():
+                logger.handlers.clear()
+
+            # Create console handler
+            console_handler = logging.StreamHandler()
+            console_handler.setLevel(logging.DEBUG)  # Console handler also listens to DEBUG level
+
+            formatter = logging.Formatter('%(asctime)s %(levelname)s:%(message)s', datefmt='%d-%m-%Y %I:%M:%S %p')
+            console_handler.setFormatter(formatter)
+            logger.addHandler(console_handler)
+            fhandler = logging.FileHandler(filename=f'{int(datetime.utcnow().timestamp())}.log', mode='a')
+            fhandler.setFormatter(formatter)
+            logger.addHandler(fhandler)
             logger.warning(
                 "Warning: Parameter 'neg_sampling' or 'training_neg_sample_num' has been deprecated in the new version, "
                 "please use 'train_neg_sample_args' instead and check the API documentation for proper usage."
