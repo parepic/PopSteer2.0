@@ -40,6 +40,7 @@ class Gini(AbstractMetric):
     smaller = True
     
     def __init__(self, config):
+        super().__init__(config)
         self.dataset = config["dataset"]
         return None
 
@@ -58,6 +59,31 @@ class Gini(AbstractMetric):
         )
         return {'gini@10': gini_coefficient}
     
+
+class Deep_LT_Coverage(AbstractMetric):
+    metric_type = EvaluatorType.RANKING
+    metric_need = ['recommendation_count']
+    smaller = True
+    
+    def __init__(self, config):
+        super().__init__(config)
+        self.dataset = config["dataset"]
+        return None
+
+    def calculate_metric(self, dataobject):
+        file = rf'./dataset/{self.dataset}/item_popularity_labels_with_titles.csv'
+        item_data = pd.read_csv(file)
+        recommendation_count = dataobject.get('recommendation_count')
+        recommendation_count = recommendation_count[1:]
+        offset = 1
+        deep_long_tail_items = set(item_data[item_data['popularity_label'] == -1]['item_id:token'])
+
+        recommended_items = {i + offset for i, count in enumerate(recommendation_count) if count > 0}
+        recommended_deep_LT_items = recommended_items & deep_long_tail_items
+
+        deep_long_tail_coverage = len(recommended_deep_LT_items) / len(deep_long_tail_items) if deep_long_tail_items else 0
+        return {'deep_lt_coverage@10': deep_long_tail_coverage}
+
 
 
 class SAE_Loss(AbstractMetric):

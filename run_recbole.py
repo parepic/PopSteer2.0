@@ -22,7 +22,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--dataset", "-d", type=str, default="ml-100k", help="name of datasets"
     )
-    parser.add_argument('--top_k', '-k', type=int, default=32,
+    parser.add_argument('--sae_k', '-k', type=int, default=32,
                         help="Sparsity parameter K: keep only the top‑k activations per input in the SAE (Eq. 1).")
 
     parser.add_argument('--scale', '--scale_size', type=int, default=8,
@@ -63,9 +63,9 @@ if __name__ == "__main__":
     if hasattr(args, "base_path") and args.base_path != "no path":
         config_dict["base_path"] = args.base_path
     if hasattr(args, "scale_size"):
-        config_dict["base_path"] = args.base_path
-    if hasattr(args, "top_k"):
-        config_dict["top_k"] = args.base_path
+        config_dict["sae_scale_size"] = args.base_path
+    if hasattr(args, "sae_k"):
+        config_dict["sae_k"] = args.sae_k
 
     run(
         args.model,
