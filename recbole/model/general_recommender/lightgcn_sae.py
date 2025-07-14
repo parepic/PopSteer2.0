@@ -64,6 +64,8 @@ class LightGCN_SAE(LightGCN):
 	def forward(self, train_mode=None):
 		u_emb, i_emb = super().forward()
 		u_emb_sae = (self.sae_module(u_emb, train_mode=train_mode))
+		if train_mode == True:
+			self.sae_module.new_epoch = True
 		return u_emb_sae, i_emb
 	
 	def calculate_loss(self, interaction):
@@ -127,6 +129,7 @@ class SAE(nn.Module):
 		self.activate_latents = set()
 		self.previous_activate_latents = None
 		self.epoch_idx=0
+		self.new_epoch = False
 		self.item_activations = np.zeros(self.hidden_dim)
 		self.highest_activations = {
 			j: {
@@ -345,18 +348,15 @@ class SAE(nn.Module):
 			self.fvu = e.pow(2).sum() / total_variance
 
 			if train_mode:
-				if self.epoch_idx != epoch:
-					self.epoch_idx = epoch
+				if self.new_epoch == True:
+					self.new_epoch = False
 					dead = self.get_dead_latent_ratio(need_update=1)
-					self.death_patience = 0
-
-				self.death_patience += pre_acts.shape[0]
+					print("Dead percentage ", dead)					
 				# First epoch, do not have dead latent info
 				if self.previous_activate_latents is None:
 					self.auxk_loss = 0.0
 					return x_reconstructed
 				num_dead = self.hidden_dim - len(self.previous_activate_latents)
-				print("NUmber of dead ", num_dead)
 				k_aux = int(x.shape[-1]) * 2
 				if num_dead == 0:
 					self.auxk_loss = 0.0
