@@ -32,8 +32,10 @@ from recbole.utils import (
     FeatureType,
     get_local_time,
     set_color,
-    ensure_dir,
-)
+    ensure_dir
+    )
+from recbole.data import create_item_popularity_csv
+
 from recbole.utils.url import (
     decide_download,
     download_url,
@@ -1187,7 +1189,10 @@ class Dataset(torch.utils.data.Dataset):
         for alias in self.alias.values():
             remap_list = self._get_remap_list(alias)
             self._remap(remap_list)
-
+            if(alias == 'item_id'):
+                self.remap_item_data( rf'./dataset/{self.dataset_name}/{self.dataset_name}.item', rf'./dataset/{self.dataset_name}/items_remapped.csv',
+                                        rf'./dataset/{self.dataset_name}/{self.dataset_name}.inter', rf'./dataset/{self.dataset_name}/interactions_remapped.csv'
+                                        )
         for field in self._rest_fields:
             remap_list = self._get_remap_list(np.array([field]))
             self._remap(remap_list)
@@ -1677,9 +1682,14 @@ class Dataset(torch.utils.data.Dataset):
                     next_index, [0] + split_ids, split_ids + [tot_cnt]
                 ):
                     index.extend(grouped_index[start:end])
-
         self._drop_unused_col()
         next_df = [self.inter_feat[index] for index in next_index]
+
+        np.savez(
+            rf'./dataset/{self.dataset_name}/biased_eval_train.npz',
+            labels=next_df[0]["item_id"]
+        )
+        create_item_popularity_csv(self.dataset_name, 0.2)
         next_ds = [self.copy(_) for _ in next_df]
         return next_ds
 
@@ -2245,3 +2255,34 @@ class Dataset(torch.utils.data.Dataset):
                     ]
                     new_data[k] = rnn_utils.pad_sequence(seq_data, batch_first=True)
         return Interaction(new_data)
+
+
+    def remap_item_data(self, filepath, output_path, interaction_filepath, interaction_out_filepath):
+        """
+        Remap the item_id column in the dataset and save the transformed dataset.
+        
+        Args:
+            filepath (str): Path to the input dataset.
+            field2token_id (dict): Mapping of old item IDs to new item IDs.
+            output_path (str): Path to save the transformed dataset.
+        """
+        
+        # Load the dataset
+        df = pd.read_csv(filepath, delimiter="\t",encoding='latin1')  # Assuming tab-delimited, adjust as needed
+        int_df = pd.read_csv(interaction_filepath, delimiter="\t",encoding='latin1')  # Assuming tab-delimited, adjust as needed
+        
+        # Remap item_id using the provided mapping
+        if 'item_id:token' in df.columns:
+            df['item_id:token'] = df['item_id:token'].astype(str).map(self.field2token_id['item_id'])
+            int_df['item_id:token'] = int_df['item_id:token'].astype(str).map(self.field2token_id['item_id'])
+            int_df['user_id:token'] = int_df['user_id:token'].astype(str).map(self.field2token_id['user_id'])
+
+        else:
+            raise ValueError("item_id column not found in the dataset.")
+        
+        # Save the transformed dataset
+        df.to_csv(output_path, index=False)
+        int_df.to_csv(interaction_out_filepath, index=False)
+
+        print(f"Remapped dataset saved to {output_path}")
+        print(f"Remapped dataset saved to {interaction_out_filepath}")

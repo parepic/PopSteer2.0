@@ -75,7 +75,7 @@ class LightGCN_SAE(LightGCN):
 		
 		user_all_embeddings, item_all_embeddings = self.forward(train_mode=True)
 		sae_loss = self.sae_module.fvu + self.sae_module.auxk_loss / 2
-		
+
 		return sae_loss
 
 	def full_sort_predict(self, interaction):
@@ -155,6 +155,7 @@ class SAE(nn.Module):
 		# Calculate the current number of dead latents
 		current_dead = self.hidden_dim - len(self.activate_latents)
 		print("Dead percentage: ", ans)
+		print(f"FVU: {self.fvu}, AUXK Loss: {self.auxk_loss}, AUXK Loss / 2: {self.auxk_loss / 2} SAE Total Loss: {(self.auxk_loss / 2) + self.fvu}")
 		if need_update:
 			# Convert current active latents to a tensor
 			current_active = torch.tensor(list(self.activate_latents), device=self.device)

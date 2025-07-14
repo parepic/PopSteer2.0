@@ -5,4 +5,5 @@ __all__ = [
     "data_preparation",
     "save_split_dataloaders",
     "load_split_dataloaders",
+    "create_item_popularity_csv"
 ]

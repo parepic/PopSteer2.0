@@ -18,7 +18,7 @@ import os
 import pickle
 import warnings
 from typing import Literal
-
+import pandas as pd
 from recbole.data.dataloader import *
 from recbole.sampler import KGSampler, Sampler, RepeatableSampler
 from recbole.utils import ModelType, ensure_dir, get_local_time, set_color
@@ -376,3 +376,72 @@ def create_samplers(config, dataset, built_datasets):
     )
     test_sampler = test_sampler.set_phase("test") if test_sampler else None
     return train_sampler, valid_sampler, test_sampler
+
+
+def create_item_popularity_csv(dataset: str, p: float):
+    # -------------------------------
+    # Step 1: Load the training NPZ file and compute item frequencies.
+    # -------------------------------
+    dataset_path = os.path.join(".", "dataset", dataset)
+    train_npz_path = os.path.join(dataset_path, "biased_eval_train.npz")
+    data = np.load(train_npz_path)
+    labels = data["labels"]  # assuming this array contains item IDs (item_id:token)
+    total_interactions = len(labels)
+
+    # Compute frequency counts for each unique item.
+    unique_items, counts = np.unique(labels, return_counts=True)
+    pop_scores = counts / total_interactions
+
+    df_counts = pd.DataFrame({
+        "item_id:token": unique_items,
+        "interaction_count": counts,
+        "pop_score": pop_scores
+    })
+
+    # -------------------------------
+    # Step 2: Load the items_remapped CSV file.
+    # -------------------------------
+    items_csv_path = os.path.join(dataset_path, "items_remapped.csv")
+    df_titles = pd.read_csv(items_csv_path)
+
+    # -------------------------------
+    # Step 3: Merge with interaction counts.
+    # -------------------------------
+    df_merged = pd.merge(df_titles, df_counts, on="item_id:token", how="left")
+    df_merged["interaction_count"] = df_merged["interaction_count"].fillna(0).astype(int)
+    df_merged["pop_score"] = df_merged["pop_score"].fillna(0)
+
+    # -------------------------------
+    # Step 4: Compute popularity_label
+    # -------------------------------
+    df_top = df_merged.sort_values(by="interaction_count", ascending=False).reset_index(drop=True)
+    total_sum = df_top["interaction_count"].sum()
+    df_top["cum_interaction"] = df_top["interaction_count"].cumsum()
+    df_top["cum_frac"] = df_top["cum_interaction"] / total_sum
+    df_top["popularity_label_top"] = (df_top["cum_frac"] <= p).astype(int)
+
+    df_bottom = df_merged.sort_values(by="interaction_count", ascending=True).reset_index(drop=True)
+    df_bottom["cum_interaction"] = df_bottom["interaction_count"].cumsum()
+    df_bottom["cum_frac"] = df_bottom["cum_interaction"] / total_sum
+    df_bottom["popularity_label_bottom"] = (df_bottom["cum_frac"] <= p).astype(int)
+
+    top_labels = df_top.set_index("item_id:token")["popularity_label_top"].to_dict()
+    bottom_labels = df_bottom.set_index("item_id:token")["popularity_label_bottom"].to_dict()
+
+    def assign_pop_label(item_id):
+        if top_labels.get(item_id, 0) == 1:
+            return 1
+        elif bottom_labels.get(item_id, 0) == 1:
+            return -1
+        else:
+            return 0
+
+    df_merged["popularity_label"] = df_merged["item_id:token"].apply(assign_pop_label)
+
+    # -------------------------------
+    # Step 5: Save the final DataFrame to a CSV file.
+    # -------------------------------
+    df_final = df_merged.sort_values(by="interaction_count", ascending=False).reset_index(drop=True)
+    output_csv = os.path.join(dataset_path, "item_popularity_labels_with_titles.csv")
+    df_final.to_csv(output_csv, index=False)
+    print(f"CSV file '{output_csv}' created successfully.")
