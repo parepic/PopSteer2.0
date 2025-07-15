@@ -126,9 +126,9 @@ class SAE(nn.Module):
 	def __init__(self,config):
 		super(SAE, self).__init__()
 		self.k = config["sae_k"]
-		self.fvu = torch.tensor(0.0)
+		self.fvu = torch.tensor(0.0, dtype=self.device)
 		self.scale_size = config["sae_scale_size"]
-		self.auxk_loss = torch.tensor(0.0)
+		self.fvu = torch.tensor(0.0, dtype=self.device)
 		self.neuron_count = None
 		self.unpopular_only = None
 		self.corr_file = None
