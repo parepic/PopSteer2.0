@@ -65,8 +65,8 @@ class LightGCN_SAE(LightGCN):
 		u_emb, i_emb = super().forward()
 		u_emb_sae = (self.sae_module(u_emb, train_mode=train_mode))
 		i_emb_sae = (self.sae_module(i_emb, train_mode=train_mode))
-		self.sae_module.auxk_loss = 0.0
-		self.sae_module.fvu = 0.0
+		self.sae_module.auxk_loss = torch.tensor(0.0, device=self.device)
+		self.sae_module.fvu = torch.tensor(0.0, device=self.device)
 		return u_emb_sae, i_emb_sae
 	
 	def calculate_loss(self, interaction):
