@@ -229,12 +229,14 @@ def objective_function(config_dict=None, config_file_list=None, saved=True):
         "test_result": test_result,
     }
 
+import torch
 
-def load_data_and_model(model_file):
+def load_data_and_model(model_file, device='cpu'):
     r"""Load filtered dataset, split dataloaders and saved model.
 
     Args:
-        model_file (str): The path of saved model file.
+        model_file (str): The path of sa  File "/home/parviz/Desktop/c_drive_stuff/TUDelft/thesis/recbole_new/RecBole/venv/lib/python3.12/site-packages/torch/serialization.py", line 1524, in load
+    raise pickle.UnpicklingError(_get_wo_message(str(e))) from Noneved model file.
 
     Returns:
         tuple:
@@ -245,10 +247,14 @@ def load_data_and_model(model_file):
             - valid_data (AbstractDataLoader): The dataloader for validation.
             - test_data (AbstractDataLoader): The dataloader for testing.
     """
-    import torch
 
-    checkpoint = torch.load(model_file)
+    checkpoint = torch.load(model_file, weights_only=False, map_location=torch.device(device))
     config = checkpoint["config"]
+    if(device == 'cpu'):
+        config.internal_config_dict['use_gpu'] = False
+        config.internal_config_dict['gpu_id'] = '-1'
+        config['device'] = 'cpu'
+
     init_seed(config["seed"], config["reproducibility"])
     init_logger(config)
     logger = getLogger()
@@ -259,8 +265,10 @@ def load_data_and_model(model_file):
     train_data, valid_data, test_data = data_preparation(config, dataset)
 
     init_seed(config["seed"], config["reproducibility"])
+
+    config['base_path'] = './saved/zorduda.pth'
     model = get_model(config["model"])(config, train_data._dataset).to(config["device"])
     model.load_state_dict(checkpoint["state_dict"])
-    model.load_other_parameter(checkpoint.get("other_parameter"))
+    # model.load_other_parameter(checkpoint.get("other_parameter"))
 
     return config, model, dataset, train_data, valid_data, test_data

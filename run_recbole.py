@@ -66,7 +66,8 @@ if __name__ == "__main__":
     # exit()
     parser = argparse.ArgumentParser()
     parser.add_argument("--model", "-m", type=str, default="BPR", help="name of models")
-    parser.add_argument("--train", action="store_true", help="Whether to use the SAE module")
+    parser.add_argument("--train", action="store_true", help="Whether to train model")
+    parser.add_argument("--test", action="store_true", help="Whether to test model")
 
     parser.add_argument(
         "--dataset", "-d", type=str, default="ml-100k", help="name of datasets"
@@ -96,7 +97,10 @@ if __name__ == "__main__":
     parser.add_argument(
         "--base_path", type=str, default='no path', help="base model path"
     )
-    
+    parser.add_argument(
+        "--path", type=str, default='no path', help="model path"
+    )
+
     parser.add_argument(
         "--group_offset",
         type=int,
@@ -148,3 +152,33 @@ if __name__ == "__main__":
         save_mean_SD(config["dataset"], popular=False)
         save_cohens_d(config["dataset"])
 
+
+    elif hasattr(args, "test") and args.test == True:
+        config, model, dataset, train_data, valid_data, test_data = load_data_and_model(
+            model_file=args.path
+        )  
+        trainer = get_trainer(config["MODEL_TYPE"], config["model"])(config, model)
+
+        test_result = trainer.evaluate(
+            test_data, model_file=args.path, load_best_model = False, show_progress=config["show_progress"]
+        )
+        
+        keys = [
+            'recall@10',
+            'mrr@10',
+            'ndcg@10',
+            'hit@10',
+            'deep_lt_coverage@10',
+            'gini@10'
+        ]
+
+        max_key_len = max(len(k) for k in keys)
+
+        # print header
+        print(f"{'Metric':<{max_key_len}} | Value")
+        print(f"{'-'*max_key_len}-|-------")
+
+        # print each metric with its dynamic value
+        for key in keys:
+            value = test_result[key]             # get value from your OrderedDict
+            print(f"{key:<{max_key_len}} | {value:>7.4f}")

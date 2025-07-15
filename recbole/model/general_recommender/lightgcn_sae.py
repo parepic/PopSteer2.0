@@ -53,6 +53,7 @@ class LightGCN_SAE(LightGCN):
 		self.sae_module = SAE(config)
 		self.restore_item_e = None
 		self.restore_user_e = None
+		print("nolduda brat ", self.restore_item_e)
 		self.val_fvu = torch.tensor(0.0, device=self.device)
 		for param in self.parameters():
 			param.requires_grad = False
@@ -63,8 +64,11 @@ class LightGCN_SAE(LightGCN):
 
 	def forward(self, train_mode=None):
 		u_emb, i_emb = super().forward()
+		print("qehbesen deyesen qardash ")
 		u_emb_sae = (self.sae_module(u_emb, train_mode=train_mode))
-		return u_emb_sae, i_emb
+		i_emb_sae = (self.sae_module(i_emb, train_mode=train_mode))
+
+		return u_emb_sae, i_emb_sae
 	
 	def calculate_loss(self, interaction):
 		if self.val_fvu.item() != 0:
@@ -79,6 +83,7 @@ class LightGCN_SAE(LightGCN):
 		return sae_loss
 
 	def full_sort_predict(self, interaction):
+		print(self.restore_user_e is None)
 		user = interaction[self.USER_ID]
 		if self.restore_user_e is None or self.restore_item_e is None:
 			self.restore_user_e, self.restore_item_e = self.forward(train_mode=False)
@@ -123,6 +128,7 @@ class SAE(nn.Module):
 	def __init__(self,config):
 		super(SAE, self).__init__()
 		self.k = config["sae_k"]
+		self.fvu = torch.tensor(0.0)
 		self.scale_size = config["sae_scale_size"]
 		self.neuron_count = None
 		self.unpopular_only = None
