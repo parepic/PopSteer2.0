@@ -65,7 +65,8 @@ class LightGCN_SAE(LightGCN):
 		u_emb, i_emb = super().forward()
 		u_emb_sae = (self.sae_module(u_emb, train_mode=train_mode))
 		i_emb_sae = (self.sae_module(i_emb, train_mode=train_mode))
-
+		self.sae_module.auxk_loss = 0.0
+		self.sae_module.fvu = 0.0
 		return u_emb_sae, i_emb_sae
 	
 	def calculate_loss(self, interaction):
@@ -127,6 +128,7 @@ class SAE(nn.Module):
 		self.k = config["sae_k"]
 		self.fvu = torch.tensor(0.0)
 		self.scale_size = config["sae_scale_size"]
+		self.auxk_loss = torch.tensor(0.0)
 		self.neuron_count = None
 		self.unpopular_only = None
 		self.corr_file = None
@@ -361,7 +363,7 @@ class SAE(nn.Module):
 			x_reconstructed = z @ self.W_dec + self.b_dec
 			e = x_reconstructed - x
 			total_variance = (x - x.mean(0)).pow(2).sum()
-			self.fvu = e.pow(2).sum() / total_variance
+			self.fvu += e.pow(2).sum() / total_variance
 
 			if train_mode:
 				if self.new_epoch == True:
@@ -394,7 +396,7 @@ class SAE(nn.Module):
 				e_hat = e_hat @ self.W_dec + self.b_dec
 
 				auxk_loss = (e_hat - e).pow(2).sum()
-				self.auxk_loss = scale * auxk_loss / total_variance
+				self.auxk_loss += scale * auxk_loss / total_variance
 
 			return x_reconstructed
 
