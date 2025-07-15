@@ -62,17 +62,8 @@ class LightGCN_SAE(LightGCN):
 
 	def forward(self, train_mode=None):
 		u_emb, i_emb = super().forward()
-		
-		# Concatenate along dim=0
-		combined = torch.cat([u_emb, i_emb], dim=0)
-		
-		# Pass through SAE module
-		combined_sae = self.sae_module(combined, train_mode=train_mode)
-		
-		# Split back into user and item embeddings
-		u_emb_sae, i_emb_sae = torch.split(combined_sae, [u_emb.size(0), i_emb.size(0)], dim=0)
-
-		return u_emb_sae, i_emb_sae
+		i_emb_sae = self.sae_module(i_emb, train_mode=train_mode)
+		return u_emb, i_emb_sae
 	
 	def calculate_loss(self, interaction):
 		if self.val_fvu.item() != 0:
