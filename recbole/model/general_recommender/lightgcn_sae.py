@@ -372,12 +372,12 @@ class SAE(nn.Module):
 					print("Dead percentage ", dead)					
 				# First epoch, do not have dead latent info
 				if self.previous_activate_latents is None:
-					self.auxk_loss = 0.0
+					self.auxk_loss._fill(0.0)
 					return x_reconstructed
 				num_dead = self.hidden_dim - len(self.previous_activate_latents)
 				k_aux = int(x.shape[-1]) * 2
 				if num_dead == 0:
-					self.auxk_loss = 0.0
+					self.auxk_loss._fill(0.0)
 					return x_reconstructed
 				scale = min(num_dead / k_aux, 1.0)
 				k_aux = min(k_aux, num_dead)
