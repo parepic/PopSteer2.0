@@ -26,7 +26,7 @@ import torch
 from recbole.model.abstract_recommender import GeneralRecommender
 from recbole.model.init import xavier_uniform_initialization
 from recbole.model.loss import BPRLoss, EmbLoss
-from recbole.utils import InputType
+from recbole.utils import InputType, compute_neuron_stats_by_row
 from recbole.model.general_recommender.lightgcn import LightGCN
 
 
@@ -54,6 +54,7 @@ class LightGCN_SAE(LightGCN):
 		self.restore_item_e = None
 		self.restore_user_e = None
 		self.val_fvu = torch.tensor(0.0, device=self.device)
+		self.dataset = config["dataset"]
 		for param in self.parameters():
 			param.requires_grad = False
 
@@ -121,6 +122,7 @@ class SAE(nn.Module):
 	
 	def __init__(self,config):
 		super(SAE, self).__init__()
+		self.dataset = config["dataset"]
 		self.k = config["sae_k"]
 		self.fvu = torch.tensor(0.0)
 		self.scale_size = config["sae_scale_size"]
@@ -257,9 +259,9 @@ class SAE(nn.Module):
 
 
 	def dampen_neurons(self, pre_acts, dataset=None):
-		if self.N is None or self.N==0:
-			return pre_acts
-		pop_neurons, unpop_neurons = utils.get_extreme_correlations(self.corr_file, self.unpopular_only, dataset=dataset)
+		# if self.N is None or self.N==0:
+		# 	return pre_acts
+		pop_neurons, unpop_neurons = utils.get_extreme_correlations('cohens_d.csv', dataset=dataset)
   
 		# Combine both groups into one list while labeling the group type.
 		# 'unpop' neurons are those with higher activations for unpopular inputs (to be reinforced),
@@ -269,10 +271,10 @@ class SAE(nn.Module):
 						
 		# Now sort by the absolute Cohen's d value (in descending order) and pick the overall top N neurons.
 		combined_sorted = sorted(combined_neurons, key=lambda x: abs(x[1]), reverse=True)
-		top_neurons = combined_sorted[:int(self.N)]
+		top_neurons = combined_sorted[:4096]
 		# Load the corresponding statistics files.
-		stats_unpop = pd.read_csv(rf"./dataset/{dataset}/row_stats_popular.csv")
-		stats_pop = pd.read_csv(rf"./dataset/{dataset}/row_stats_unpopular.csv")
+		stats_unpop = pd.read_csv(rf"./dataset/{dataset}/neuron_stats_popular.csv")
+		stats_pop = pd.read_csv(rf"./dataset/{dataset}/neuron_stats_unpopular.csv")
   
 		# Create tensors of the absolute Cohen's d values for the selected neurons.
 		abs_cohens = torch.tensor([abs(c) for _, c, _ in top_neurons], device=pre_acts.device)
@@ -286,7 +288,7 @@ class SAE(nn.Module):
 			return (x - min_val) / (max_val - min_val) * (new_max - new_min) + new_min
 
 		# Normalize the Cohen's d values to [0, 2.5]
-		weights = normalize_to_range(abs_cohens, new_min=0, new_max=self.beta)
+		weights = normalize_to_range(abs_cohens, new_min=0, new_max=-1)
 
 		# Now update the neuron activations based on group.
 		for i, (neuron_idx, cohen, group) in enumerate(top_neurons):
@@ -295,7 +297,7 @@ class SAE(nn.Module):
 				# For neurons to be reinforced, fetch stats from the unpopular file.
 				row = stats_unpop.iloc[neuron_idx]
 				mean_val = row["mean"]
-				std_val = row["std"]
+				std_val = row["sd"]
 	
 				# Identify positions where the neuron's activation is above its mean.
 				vals = pre_acts[:, neuron_idx]
@@ -304,13 +306,13 @@ class SAE(nn.Module):
 			else:  # group == 'pop'
 				# For neurons to be dampened, use the popular statistics for impact.
 				pop_mean = stats_pop.iloc[neuron_idx]["mean"]
-				pop_sd = stats_pop.iloc[neuron_idx]["std"]
+				pop_sd = stats_pop.iloc[neuron_idx]["sd"]
 
 				# Still fetch the comparison stats from the unpopular stats file
 				# (this is from your original logic; adjust if needed).
 				row = stats_unpop.iloc[neuron_idx]
 				mean_val = row["mean"]
-				std_val = row["std"]
+				std_val = row["sd"]
 
 				# Identify positions where the neuron's activation is below its mean.
 				vals = pre_acts[:, neuron_idx]
@@ -347,19 +349,20 @@ class SAE(nn.Module):
 	def forward(self, x, sequences=None, train_mode=False, save_result=False, epoch=None, dataset=None, pop_scores=None):
 		
 			sae_in = x - self.b_dec
-			pre_acts = self.encoder(sae_in)
-			self.last_activations = pre_acts
-			if self.corr_file:
-				pre_acts = self.dampen_neurons(pre_acts, dataset=dataset)
+			pre_acts1 = self.encoder(sae_in)
+			self.last_activations = pre_acts1
+			# if True:
+			# 	pre_acts1 = self.dampen_neurons(pre_acts1, dataset=self.dataset)
 				# pre_acts = self.add_noise(pre_acts, std=self.beta)
-			pre_acts = nn.functional.relu(pre_acts)   
+			pre_acts = nn.functional.relu(pre_acts1)   
 			z = self.topk_activation(pre_acts, sequences, save_result=False)
 
 			x_reconstructed = z @ self.W_dec + self.b_dec
 			e = x_reconstructed - x
 			total_variance = (x - x.mean(0)).pow(2).sum()
 			self.fvu = e.pow(2).sum() / total_variance
-
+			# if not train_mode:
+			# 	compute_neuron_stats_by_row(activations=pre_acts1, dataset=self.dataset)
 			if train_mode:
 				if self.new_epoch == True:
 					self.new_epoch = False

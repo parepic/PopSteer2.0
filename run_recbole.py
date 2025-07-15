@@ -57,7 +57,7 @@ def remove_sparse_users_items(n, dataset):
 
 
 if __name__ == "__main__":
-    # remove_sparse_users_items(20, "Amazon_CDs_and_Vinyl")
+    # remove_sparse_users_items(10, "amazon-cds-vinyl")
     # exit()
     # parameter_dict = {
     # 'train_neg_sample_args': None,
