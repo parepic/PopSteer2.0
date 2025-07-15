@@ -131,7 +131,7 @@ class SAE(nn.Module):
 		self.unpopular_only = None
 		self.corr_file = None
 		self.device = config["device"]
-		self.auxk_loss = torch.tensor(0.0, device=self.device)
+		self.fvu = torch.tensor(0.0, device=self.device)
 		self.auxk_loss = torch.tensor(0.0, device=self.device)
 		self.dtype = torch.float32
 		self.to(self.device)
