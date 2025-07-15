@@ -53,7 +53,6 @@ class LightGCN_SAE(LightGCN):
 		self.sae_module = SAE(config)
 		self.restore_item_e = None
 		self.restore_user_e = None
-		print("nolduda brat ", self.restore_item_e)
 		self.val_fvu = torch.tensor(0.0, device=self.device)
 		for param in self.parameters():
 			param.requires_grad = False
@@ -64,7 +63,6 @@ class LightGCN_SAE(LightGCN):
 
 	def forward(self, train_mode=None):
 		u_emb, i_emb = super().forward()
-		print("qehbesen deyesen qardash ")
 		u_emb_sae = (self.sae_module(u_emb, train_mode=train_mode))
 		i_emb_sae = (self.sae_module(i_emb, train_mode=train_mode))
 
@@ -83,7 +81,6 @@ class LightGCN_SAE(LightGCN):
 		return sae_loss
 
 	def full_sort_predict(self, interaction):
-		print(self.restore_user_e is None)
 		user = interaction[self.USER_ID]
 		if self.restore_user_e is None or self.restore_item_e is None:
 			self.restore_user_e, self.restore_item_e = self.forward(train_mode=False)
