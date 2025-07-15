@@ -60,11 +60,18 @@ class LightGCN_SAE(LightGCN):
 		for param in self.sae_module.parameters():
 			param.requires_grad = True  
 
-
 	def forward(self, train_mode=None):
 		u_emb, i_emb = super().forward()
-		u_emb_sae = (self.sae_module(u_emb, train_mode=train_mode))
-		i_emb_sae = (self.sae_module(i_emb, train_mode=train_mode))
+		
+		# Concatenate along dim=0
+		combined = torch.cat([u_emb, i_emb], dim=0)
+		
+		# Pass through SAE module
+		combined_sae = self.sae_module(combined, train_mode=train_mode)
+		
+		# Split back into user and item embeddings
+		u_emb_sae, i_emb_sae = torch.split(combined_sae, [u_emb.size(0), i_emb.size(0)], dim=0)
+
 		return u_emb_sae, i_emb_sae
 	
 	def calculate_loss(self, interaction):
@@ -76,8 +83,6 @@ class LightGCN_SAE(LightGCN):
 		
 		user_all_embeddings, item_all_embeddings = self.forward(train_mode=True)
 		sae_loss = self.sae_module.fvu + self.sae_module.auxk_loss / 2
-		self.sae_module.auxk_loss.fill_(0.0)
-		self.sae_module.fvu.fill_(0.0)
 
 		return sae_loss
 
@@ -126,13 +131,12 @@ class SAE(nn.Module):
 	def __init__(self,config):
 		super(SAE, self).__init__()
 		self.k = config["sae_k"]
+		self.fvu = torch.tensor(0.0)
 		self.scale_size = config["sae_scale_size"]
 		self.neuron_count = None
 		self.unpopular_only = None
 		self.corr_file = None
 		self.device = config["device"]
-		self.fvu = torch.tensor(0.0, device=self.device)
-		self.auxk_loss = torch.tensor(0.0, device=self.device)
 		self.dtype = torch.float32
 		self.to(self.device)
 		self.d_in = config['input_dim']
@@ -363,7 +367,7 @@ class SAE(nn.Module):
 			x_reconstructed = z @ self.W_dec + self.b_dec
 			e = x_reconstructed - x
 			total_variance = (x - x.mean(0)).pow(2).sum()
-			self.fvu += e.pow(2).sum() / total_variance
+			self.fvu = e.pow(2).sum() / total_variance
 
 			if train_mode:
 				if self.new_epoch == True:
@@ -372,12 +376,12 @@ class SAE(nn.Module):
 					print("Dead percentage ", dead)					
 				# First epoch, do not have dead latent info
 				if self.previous_activate_latents is None:
-					self.auxk_loss.fill_(0.0)
+					self.auxk_loss = 0.0
 					return x_reconstructed
 				num_dead = self.hidden_dim - len(self.previous_activate_latents)
 				k_aux = int(x.shape[-1]) * 2
 				if num_dead == 0:
-					self.auxk_loss.fill_(0.0)
+					self.auxk_loss = 0.0
 					return x_reconstructed
 				scale = min(num_dead / k_aux, 1.0)
 				k_aux = min(k_aux, num_dead)
@@ -396,7 +400,7 @@ class SAE(nn.Module):
 				e_hat = e_hat @ self.W_dec + self.b_dec
 
 				auxk_loss = (e_hat - e).pow(2).sum()
-				self.auxk_loss += scale * auxk_loss / total_variance
+				self.auxk_loss = scale * auxk_loss / total_variance
 
 			return x_reconstructed
 
