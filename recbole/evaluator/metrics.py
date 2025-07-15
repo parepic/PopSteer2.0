@@ -45,7 +45,7 @@ class Gini(AbstractMetric):
         return None
 
     def calculate_metric(self, dataobject):
-        file = rf'./dataset/{self.dataset}/item_popularity_labels_with_titles.csv'
+        file = rf'./dataset/{self.dataset}/item_popularity_labels.csv'
         item_data = pd.read_csv(file)
         recommendation_count = dataobject.get('recommendation_count')
         recommendation_count = recommendation_count[1:]
@@ -71,7 +71,7 @@ class Deep_LT_Coverage(AbstractMetric):
         return None
 
     def calculate_metric(self, dataobject):
-        file = rf'./dataset/{self.dataset}/item_popularity_labels_with_titles.csv'
+        file = rf'./dataset/{self.dataset}/item_popularity_labels.csv'
         item_data = pd.read_csv(file)
         recommendation_count = dataobject.get('recommendation_count')
         recommendation_count = recommendation_count[1:]

@@ -1507,3 +1507,33 @@ class NCLTrainer(Trainer):
                     set_color("GPU RAM: " + get_gpu_usage(self.device), "yellow")
                 )
         return total_loss
+
+
+    @torch.no_grad()
+    def analyze_neurons(
+        self, data, show_progress=True, eval_data=False):        
+        self.model.eval()
+        iter_data = (
+            tqdm(
+                data,
+                total=len(data),
+                ncols=100,
+            )
+            if show_progress
+            else data
+        )
+        for batch_idx, batched_data in enumerate(iter_data):
+            if eval_data:
+                interaction, history_index, positive_u, positive_i = batched_data
+            else:
+                interaction = batched_data
+            interaction = interaction.to(self.device)
+            # Update the maximum value
+            self.optimizer.zero_grad()
+            with torch.autocast(device_type=self.device.type, enabled=self.enable_amp):
+                self.model.full_sort_predict(interaction, dataset=self.dataset, popular=True)
+                self.model.full_sort_predict(interaction, dataset=self.dataset, popular=False)
+
+        ending = '_eval' if eval_data else ''
+        # self.model.sae_module.save_highest_activations()
+    

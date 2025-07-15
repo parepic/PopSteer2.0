@@ -44,7 +44,7 @@ eval_args:                      # (dict) 4 keys: group_by, order, split, and mod
   order: RO                     # (str) The ordering strategy ranging in ['RO', 'TO'].
   mode: full                    # (str) The evaluation mode ranging in ['full','unixxx','popxxx','labeled'].
 repeatable: False               # (bool) Whether to evaluate results with a repeatable recommendation scene. 
-metrics: ["Recall","MRR","NDCG","Hit","Precision", "Gini", "Deep_LT_Coverage"]
+metrics: ["Recall","MRR","NDCG","Hit","Precision"]
 topk: [10]                      # (list or int or None) The value of k for topk evaluation metrics.
 valid_metric: NDCG@10            # (str) The evaluation metric for early stopping. 
 valid_metric_bigger: True       # (bool) Whether to take a bigger valid metric value as a better result.

@@ -90,6 +90,20 @@ class LightGCN_SAE(LightGCN):
 			self.recommendation_count[key] += 1
 		self.val_fvu += self.sae_module.fvu
 		return scores.view(-1)
+	
+	def synthetic_inference(self, interaction, popular=None):
+		user = interaction[self.USER_ID]
+		if self.restore_user_e is None or self.restore_item_e is None:
+			self.restore_user_e, self.restore_item_e = self.forward(train_mode=False)
+		u_embeddings = self.restore_user_e[user]
+		scores = torch.matmul(u_embeddings, self.restore_item_e.transpose(0, 1))
+		top_recs = torch.argsort(scores, dim=1, descending=True)[:, :10]
+		scores[:, 0] =  float("-inf")
+		for key in top_recs.flatten():
+			self.recommendation_count[key] += 1
+		self.val_fvu += self.sae_module.fvu
+		return scores.view(-1)
+
 
 	def set_sae_mode(self, train_mode=True):
 		self.sae_module.train_mode=train_mode

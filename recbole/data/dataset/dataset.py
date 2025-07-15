@@ -1684,7 +1684,7 @@ class Dataset(torch.utils.data.Dataset):
                     index.extend(grouped_index[start:end])
         self._drop_unused_col()
         next_df = [self.inter_feat[index] for index in next_index]
-
+        
         np.savez(
             rf'./dataset/{self.dataset_name}/biased_eval_train.npz',
             labels=next_df[0]["item_id"]
