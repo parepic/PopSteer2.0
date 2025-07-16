@@ -23,6 +23,8 @@ import numpy as np
 import scipy.sparse as sp
 import torch
 
+import math
+import pandas as pd
 from recbole.model.abstract_recommender import GeneralRecommender
 from recbole.model.init import xavier_uniform_initialization
 from recbole.model.loss import BPRLoss, EmbLoss
@@ -48,7 +50,7 @@ class LightGCN(GeneralRecommender):
 
         # load dataset info
         self.interaction_matrix = dataset.inter_matrix(form="coo").astype(np.float32)
-
+        self.dataset = config["dataset"]
         # load parameters info
         self.latent_dim = config[
             "embedding_size"
@@ -208,9 +210,109 @@ class LightGCN(GeneralRecommender):
         u_embeddings = self.restore_user_e[user]
         # dot with all item embedding to accelerate
         scores = torch.matmul(u_embeddings, self.restore_item_e.transpose(0, 1))
-        # top_recs = torch.argsort(scores, dim=1, descending=True)[:, :10]
+        top_recs = torch.argsort(scores, dim=1, descending=True)[:, :10]
         scores[:, 0] =  float("-inf")
-        # for key in top_recs.flatten():
-        #     self.recommendation_count[key] += 1
+        # scores = self.FAIR(scores).to(self.device)
+        for key in top_recs.flatten():
+            self.recommendation_count[key] += 1
 
         return scores.view(-1)
+
+
+
+    def FAIR(self, scores, *, p: float = 0.99, alpha: float = 0.1,
+            L: int = 1500, K: int = 10):
+        """
+        Re-rank each batch row with FA*IR.
+            p      – target minimum proportion of protected items
+            alpha  – family-wise significance level for the binomial test
+        Remaining arguments are kept for backward-compatibility.
+        """
+        scores = scores.detach().cpu()
+
+        # ---- load popularity labels (unchanged) -----------------------
+        df   = pd.read_csv(rf"./dataset/{self.dataset}/item_popularity_labels.csv")
+        ids  = df["item_id:token"].astype(int).values
+        labs = df["popularity_label"].astype(int).values
+        max_id = ids.max()
+
+        popularity_label = torch.zeros(max_id + 1, dtype=torch.bool)
+        popularity_label[ids] = torch.from_numpy(labs != -1)  # True = popular
+        # We treat *unpopular* as protected
+        popularity_label = ~popularity_label
+
+        # ---- take top-L candidates per row ----------------------------
+        B, N          = scores.size()
+        top_idx       = torch.argsort(scores, dim=1, descending=True)[:, :L]
+        protected_top = popularity_label[top_idx]                  # (B,L) bool
+
+        # ---- run FA*IR row-wise ---------------------------------------
+        for b in range(B):
+            row_scores    = scores[b, top_idx[b]]          # (L,)
+            row_protected = protected_top[b]               # (L,)
+            sel_in_top    = self.fair_topk(row_scores,
+                                        row_protected,
+                                        K, p, alpha)    # indices into 0..L-1
+
+            # map back to original positions and overwrite scores
+            orig_pos = top_idx[b, sel_in_top]
+            base     = scores[b].max().item() + 1.0
+            offsets  = torch.arange(K - 1, -1, -1, dtype=scores.dtype)
+            scores[b, orig_pos] = base + offsets            # keep FA*IR order
+
+        return scores
+
+
+
+    def fair_topk(self,
+                scores1d: torch.Tensor,
+                protected1d: torch.Tensor,
+                K: int,
+                p: float,
+                alpha: float = 0.10):
+        """
+        One-dimensional FA*IR (Algorithm 2) that *exactly* follows the
+        binomial rule with Šidák-style multiple-test correction.
+        """
+        # --------------------------------------------------------------
+        # helper: minimum #protected required at each prefix
+        def _min_protected_per_prefix(k, p_, alpha_):
+            alpha_c = 1.0 - (1.0 - alpha_) ** (1.0 / k)          # Šidák :contentReference[oaicite:0]{index=0}&#8203;:contentReference[oaicite:1]{index=1}
+            m = np.zeros(k, dtype=int)
+            for t in range(1, k + 1):                            # prefix length
+                cdf = 0.0
+                for z in range(t + 1):                           # binomial CDF
+                    cdf += math.comb(t, z) * (p_ ** z) * ((1.0 - p_) ** (t - z))
+                    if cdf > alpha_c:
+                        m[t - 1] = z
+                        break
+            return m
+
+        m_needed = _min_protected_per_prefix(K, p, alpha)        # :contentReference[oaicite:2]{index=2}&#8203;:contentReference[oaicite:3]{index=3}
+
+        # --------------------------------------------------------------
+        # build two quality-sorted lists
+        idx_sorted   = np.argsort(-scores1d)                     # high→low
+        prot_list    = [i for i in idx_sorted if protected1d[i]]
+        nonprot_list = [i for i in idx_sorted if not protected1d[i]]
+
+        sel  = []
+        tp = tn = pp = np_ptr = 0
+
+        for pos in range(K):                                     # positions 0..K-1
+            need = m_needed[pos]                                 # min protected so far
+            if tp < need:                                        # *must* take protected
+                choose = prot_list[pp];  pp += 1;  tp += 1
+            else:                                                # free to take best
+                next_p  = prot_list[pp]  if pp  < len(prot_list)     else None
+                next_np = nonprot_list[np_ptr] if np_ptr < len(nonprot_list) else None
+
+                if next_np is None or (next_p is not None and
+                                    scores1d[next_p] >= scores1d[next_np]):
+                    choose = next_p;   pp += 1;  tp += 1
+                else:
+                    choose = next_np;  np_ptr += 1;  tn += 1
+
+            sel.append(choose)
+
+        return np.array(sel, dtype=int)

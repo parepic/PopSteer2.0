@@ -133,6 +133,8 @@ class SAE(nn.Module):
 		self.dtype = torch.float32
 		self.to(self.device)
 		self.d_in = config['input_dim']
+		self.N = config['N'] if 'N' in config else 0
+		self.alpha = config['alpha'] if 'alpha' in config else 0
 		self.hidden_dim = self.d_in * self.scale_size
 		self.activation_count = torch.zeros(self.hidden_dim, device=config["device"])
 		self.encoder = nn.Linear(self.d_in, self.hidden_dim, device=self.device,dtype = self.dtype)
@@ -288,7 +290,7 @@ class SAE(nn.Module):
 			return (x - min_val) / (max_val - min_val) * (new_max - new_min) + new_min
 
 		# Normalize the Cohen's d values to [0, 2.5]
-		weights = normalize_to_range(abs_cohens, new_min=0, new_max=-1)
+		weights = normalize_to_range(abs_cohens, new_min=0, new_max=0.25)
 
 		# Now update the neuron activations based on group.
 		for i, (neuron_idx, cohen, group) in enumerate(top_neurons):
@@ -351,8 +353,8 @@ class SAE(nn.Module):
 			sae_in = x - self.b_dec
 			pre_acts1 = self.encoder(sae_in)
 			self.last_activations = pre_acts1
-			# if True:
-			# 	pre_acts1 = self.dampen_neurons(pre_acts1, dataset=self.dataset)
+			# if self.N != 0:
+			# pre_acts1 = self.dampen_neurons(pre_acts1, dataset=self.dataset)
 				# pre_acts = self.add_noise(pre_acts, std=self.beta)
 			pre_acts = nn.functional.relu(pre_acts1)   
 			z = self.topk_activation(pre_acts, sequences, save_result=False)

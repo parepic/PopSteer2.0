@@ -80,6 +80,10 @@ if __name__ == "__main__":
     parser.add_argument('--scale', '--scale_size', type=int, default=8,
                         dest='scale',
                         help="Scale factor s controlling the SAE hidden size relative to the input (s × d).")
+    parser.add_argument('--N', '-n', type=int, default=0,
+                        help="Number of neurons to steer")
+    parser.add_argument('--alpha', '-a', type=int, default=0,
+                        help="Alpha")
 
     parser.add_argument("--config_files", type=str, default=None, help="config files")
     parser.add_argument(
@@ -160,7 +164,7 @@ if __name__ == "__main__":
         trainer = get_trainer(config["MODEL_TYPE"], config["model"])(config, model)
 
         test_result = trainer.evaluate(
-            test_data, model_file=args.path, load_best_model = False, show_progress=config["show_progress"]
+            valid_data, model_file=args.path, load_best_model = False, show_progress=config["show_progress"]
         )
         
         keys = [
