@@ -366,8 +366,8 @@ class SAE(nn.Module):
 			e = x_reconstructed - x
 			total_variance = (x - x.mean(0)).pow(2).sum()
 			self.fvu = e.pow(2).sum() / total_variance
-			if not train_mode:
-				compute_neuron_stats_by_row(activations=pre_acts1, dataset=self.dataset)
+			# if not train_mode:
+			# 	compute_neuron_stats_by_row(activations=pre_acts1, dataset=self.dataset)
 			if train_mode:
 				if self.new_epoch == True:
 					self.new_epoch = False
