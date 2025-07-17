@@ -68,8 +68,8 @@ class LightGCN_SAE(LightGCN):
 	def forward(self, train_mode=None):
 		u_emb, i_emb = super().forward()
 		i_emb_sae = self.sae_module_i(i_emb, train_mode=train_mode)
-		# u_emb_sae = self.sae_module_u(u_emb, train_mode=train_mode)
-		return u_emb, i_emb_sae
+		u_emb_sae = self.sae_module_u(u_emb, train_mode=train_mode)
+		return u_emb_sae, i_emb_sae
 	
 	def calculate_loss(self, interaction):
 		if self.val_fvu_i.item() != 0:
