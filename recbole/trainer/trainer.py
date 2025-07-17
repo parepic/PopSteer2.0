@@ -292,7 +292,7 @@ class Trainer(AbstractTrainer):
                     set_color("GPU RAM: " + get_gpu_usage(self.device), "yellow")
                 )
         if self.model.__class__.__name__ == 'LightGCN_SAE':
-            self.model.sae_module.new_epoch=True
+            self.model._i.new_epoch=True
                 
         return total_loss
 
