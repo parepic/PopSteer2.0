@@ -93,6 +93,9 @@ class SAE_Loss(AbstractMetric):
 
     def __init__(self, config):
         pass
+    def calculate_metric(self, dataobject):
+        loss = dataobject.get('SAE_Loss_i')
+        return {"sae_loss": float(loss)}
 
 class SAE_Loss_i(SAE_Loss):
     metric_need = ['SAE_Loss_i']
