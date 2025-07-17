@@ -15,6 +15,8 @@ from recbole.utils import (
     get_trainer
 )
 
+from recbole.data import create_item_popularity_csv
+
 
 def remove_sparse_users_items(n, dataset):
     # --- Step 1: Load the Data ---
@@ -64,6 +66,7 @@ if __name__ == "__main__":
     # }
     # run_recbole(model='SASRec', dataset='ml-100k', config_dict=parameter_dict)
     # exit()
+    # create_item_popularity_csv("ml-1m", 0.1)
     parser = argparse.ArgumentParser()
     parser.add_argument("--model", "-m", type=str, default="BPR", help="name of models")
     parser.add_argument("--train", action="store_true", help="Whether to train model")

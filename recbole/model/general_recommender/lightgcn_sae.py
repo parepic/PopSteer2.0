@@ -301,11 +301,11 @@ class SAE(nn.Module):
 			return (x - min_val) / (max_val - min_val) * (new_max - new_min) + new_min
 
 		# Normalize the Cohen's d values to [0, 2.5]
-		# weights = normalize_to_range(abs_cohens, new_min=0, new_max=2.0)
+		weights = normalize_to_range(abs_cohens, new_min=0, new_max=1.0)
 
 		# Now update the neuron activations based on group.
 		for i, (neuron_idx, cohen, group) in enumerate(top_neurons):
-			# weight = weights[i]		
+			weight = weights[i]		
 			if group == 'unpop':
 				# For neurons to be reinforced, fetch stats from the unpopular file.
 				row = stats_unpop.iloc[neuron_idx]
@@ -374,8 +374,8 @@ class SAE(nn.Module):
 			e = x_reconstructed - x
 			total_variance = (x - x.mean(0)).pow(2).sum()
 			self.fvu = e.pow(2).sum() / total_variance
-			if not train_mode:
-				compute_neuron_stats_by_row(activations=pre_acts1, dataset=self.dataset)
+			# if not train_mode:
+			# 	compute_neuron_stats_by_row(activations=pre_acts1, dataset=self.dataset)
 			if train_mode:
 				if self.new_epoch == True:
 					self.new_epoch = False
