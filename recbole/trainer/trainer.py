@@ -293,6 +293,8 @@ class Trainer(AbstractTrainer):
                 )
         if self.model.__class__.__name__ == 'LightGCN_SAE':
             self.model.sae_module_i.new_epoch=True
+            self.model.sae_module_u.new_epoch=True
+
                 
         return total_loss
 

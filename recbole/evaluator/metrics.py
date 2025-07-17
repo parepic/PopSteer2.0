@@ -88,16 +88,33 @@ class Deep_LT_Coverage(AbstractMetric):
 
 class SAE_Loss(AbstractMetric):
     metric_type = EvaluatorType.RANKING
-    metric_need = ['SAE_Loss']
     smaller = True
-    
+    metric_need = ['SAE_Loss_i']
+
     def __init__(self, config):
-        return None
+        pass
+
+class SAE_Loss_i(SAE_Loss):
+    metric_need = ['SAE_Loss_i']
 
     def calculate_metric(self, dataobject):
-        loss = dataobject.get('SAE_Loss')
-        return {"sae_loss": float(loss)}
+        loss = dataobject.get('SAE_Loss_i')
+        return {"sae_loss_i": float(loss)}
+
+class SAE_Loss_u(SAE_Loss):
+    metric_need = ['SAE_Loss_u']
+
+    def calculate_metric(self, dataobject):
+        loss = dataobject.get('SAE_Loss_u')
+        return {"sae_loss_u": float(loss)}
     
+class SAE_Loss_total(SAE_Loss):
+    metric_need = ['SAE_Loss_u', 'SAE_Loss_i']
+
+    def calculate_metric(self, dataobject):
+        loss_i = dataobject.get('SAE_Loss_i')
+        loss_u = dataobject.get('SAE_Loss_u')
+        return {"sae_loss_total": float(loss_i + loss_u)}
 
 
 

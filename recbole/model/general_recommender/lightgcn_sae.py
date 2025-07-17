@@ -50,11 +50,12 @@ class LightGCN_SAE(LightGCN):
 		model_path = config["base_path"]
 		checkpoint = torch.load(model_path, map_location=self.device, weights_only=False)
 		self.load_state_dict(checkpoint['state_dict'])
-		self.sae_module_i = SAE(config)
-		self.sae_module_u = SAE(config)
+		self.sae_module_i = SAE(config, side="item")
+		self.sae_module_u = SAE(config, side="user")
 		self.restore_item_e = None
 		self.restore_user_e = None
-		self.val_fvu = torch.tensor(0.0, device=self.device)
+		self.val_fvu_i = torch.tensor(0.0, device=self.device)
+		self.val_fvu_u = torch.tensor(0.0, device=self.device)
 		self.dataset = config["dataset"]
 		for param in self.parameters():
 			param.requires_grad = False
@@ -67,19 +68,23 @@ class LightGCN_SAE(LightGCN):
 	def forward(self, train_mode=None):
 		u_emb, i_emb = super().forward()
 		i_emb_sae = self.sae_module_i(i_emb, train_mode=train_mode)
-		return u_emb, i_emb_sae
+		u_emb_sae = self.sae_module_u(u_emb, train_mode=train_mode)
+		return u_emb_sae, i_emb_sae
 	
 	def calculate_loss(self, interaction):
-		if self.val_fvu.item() != 0:
-			self.val_fvu = torch.tensor(0.0, device=self.device)
+		if self.val_fvu_i.item() != 0:
+			self.val_fvu_i = torch.tensor(0.0, device=self.device)
+			self.val_fvu_u = torch.tensor(0.0, device=self.device)
+
 			self.recommendation_count = torch.zeros(self.n_items, dtype=torch.long, device=self.device)
 		if self.restore_user_e is not None or self.restore_item_e is not None:
 			self.restore_user_e, self.restore_item_e = None, None
 		
 		user_all_embeddings, item_all_embeddings = self.forward(train_mode=True)
-		sae_loss = self.sae_module_i.fvu + self.sae_module_i.auxk_loss / 2
-
-		return sae_loss
+		sae_loss_i = self.sae_module_i.fvu + self.sae_module_i.auxk_loss / 2
+		sae_loss_u = self.sae_module_u.fvu + self.sae_module_u.auxk_loss / 2
+		
+		return sae_loss_i + sae_loss_u
 
 	def full_sort_predict(self, interaction):
 		user = interaction[self.USER_ID]
@@ -91,7 +96,8 @@ class LightGCN_SAE(LightGCN):
 		scores[:, 0] =  float("-inf")
 		for key in top_recs.flatten():
 			self.recommendation_count[key] += 1
-		self.val_fvu += self.sae_module_i.fvu
+		self.val_fvu_i += (self.sae_module_i.fvu)
+		self.val_fvu_u += (self.sae_module_u.fvu)
 		return scores.view(-1)
 	
 	def synthetic_inference(self, interaction, popular=None):
@@ -104,13 +110,14 @@ class LightGCN_SAE(LightGCN):
 		scores[:, 0] =  float("-inf")
 		for key in top_recs.flatten():
 			self.recommendation_count[key] += 1
-		self.val_fvu += self.sae_module_i.fvu
+		self.val_fvu += (self.sae_module_i.fvu + self.sae_module_u.fvu)
 		return scores.view(-1)
 
 
 	def set_sae_mode(self, train_mode=True):
 		self.sae_module_i.train_mode=train_mode
-		
+		self.sae_module_u.train_mode=train_mode
+
 
 import torch
 import numpy as np
@@ -123,8 +130,9 @@ import random
 
 class SAE(nn.Module):
 	
-	def __init__(self,config):
+	def __init__(self,config, side="item"):
 		super(SAE, self).__init__()
+		self.side=side
 		self.dataset = config["dataset"]
 		self.k = config["sae_k"]
 		self.fvu = torch.tensor(0.0)
@@ -175,8 +183,8 @@ class SAE(nn.Module):
 		ans = 1 - len(self.activate_latents) / self.hidden_dim
 		# Calculate the current number of dead latents
 		current_dead = self.hidden_dim - len(self.activate_latents)
-		print("Dead percentage: ", ans)
-		print(f"FVU: {self.fvu}, AUXK Loss: {self.auxk_loss}, AUXK Loss / 2: {self.auxk_loss / 2} SAE Total Loss: {(self.auxk_loss / 2) + self.fvu}")
+		print(f" Side: {self.side}, Dead percentage:  {ans}")
+		print(f" Side: {self.side}, FVU: {self.fvu}, AUXK Loss: {self.auxk_loss}, AUXK Loss / 2: {self.auxk_loss / 2} SAE Total Loss: {(self.auxk_loss / 2) + self.fvu}")
 		if need_update:
 			# Convert current active latents to a tensor
 			current_active = torch.tensor(list(self.activate_latents), device=self.device)
@@ -293,11 +301,11 @@ class SAE(nn.Module):
 			return (x - min_val) / (max_val - min_val) * (new_max - new_min) + new_min
 
 		# Normalize the Cohen's d values to [0, 2.5]
-		weights = normalize_to_range(abs_cohens, new_min=0, new_max=0.25)
+		# weights = normalize_to_range(abs_cohens, new_min=0, new_max=2.0)
 
 		# Now update the neuron activations based on group.
 		for i, (neuron_idx, cohen, group) in enumerate(top_neurons):
-			weight = weights[i]		
+			# weight = weights[i]		
 			if group == 'unpop':
 				# For neurons to be reinforced, fetch stats from the unpopular file.
 				row = stats_unpop.iloc[neuron_idx]

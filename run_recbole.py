@@ -82,7 +82,7 @@ if __name__ == "__main__":
                         help="Scale factor s controlling the SAE hidden size relative to the input (s × d).")
     parser.add_argument('--N', '-n', type=int, default=0,
                         help="Number of neurons to steer")
-    parser.add_argument('--alpha', '-a', type=int, default=0,
+    parser.add_argument('--alpha', '-a', type=float, default=0,
                         help="Alpha")
 
     parser.add_argument("--config_files", type=str, default=None, help="config files")

@@ -265,7 +265,7 @@ def load_data_and_model(model_file, device='cpu'):
     train_data, valid_data, test_data = data_preparation(config, dataset)
 
     init_seed(config["seed"], config["reproducibility"])
-
+    # config["metrics"] = ["Recall", "MRR", "NDCG", "Hit", "Precision", "Gini", "Deep_LT_Coverage"]
     # config['base_path'] = './saved/zorduda.pth'
     model = get_model(config["model"])(config, train_data._dataset).to(config["device"])
     model.load_state_dict(checkpoint["state_dict"])
