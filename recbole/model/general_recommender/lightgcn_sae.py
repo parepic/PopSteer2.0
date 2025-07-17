@@ -82,7 +82,7 @@ class LightGCN_SAE(LightGCN):
 		
 		user_all_embeddings, item_all_embeddings = self.forward(train_mode=True)
 		sae_loss_i = self.sae_module_i.fvu + self.sae_module_i.auxk_loss / 2
-		sae_loss_u = self.sae_module_u.fvu + self.sae_module_u.auxk_loss / 2
+		# sae_loss_u = self.sae_module_u.fvu + self.sae_module_u.auxk_loss / 2
 		
 		return sae_loss_i
 
