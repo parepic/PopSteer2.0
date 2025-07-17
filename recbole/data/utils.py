@@ -387,7 +387,7 @@ def create_item_popularity_csv(dataset: str, p: float):
     dataset_path = os.path.join(".", "dataset", dataset)
     train_npz_path = os.path.join(dataset_path, "biased_eval_train.npz")
     data = np.load(train_npz_path)
-    labels = data["labels"]  # array of item IDs
+    labels = data["item_id"]  # array of item IDs
     total_interactions = len(labels)
 
     # Compute frequency counts for each unique item.
@@ -434,6 +434,111 @@ def create_item_popularity_csv(dataset: str, p: float):
 
 
 
+import os
+import numpy as np
+import pandas as pd
+from pathlib import Path
+from typing import Union
+from typing import Optional
+
+def create_user_popularity_csv(
+    dataset: str,
+    top_frac: float = 0.10,
+    bottom_frac: Optional[float] = None,
+) -> None:
+    """
+    Create <dataset>/user_popularity_labels.csv by averaging per-user item
+    popularity scores and labeling the top / bottom quantiles.
+
+    Source files expected in "./dataset/<dataset>/":
+        - biased_eval_train.npz    (arrays "item_id", "user_id" of equal length)
+        - item_popularity_labels.csv  (columns: item_id:token, popularity_score, ...)
+
+    Steps
+    -----
+    1. Load all interactions (user_id, item_id) from the NPZ.
+    2. Load item popularity scores.
+    3. For each user, compute the *mean* popularity_score across all interacted
+       items for which a score is available. (Items missing from the CSV are ignored.)
+       If a user has zero scored items, their pop_score is NaN → later treated as 0.
+    4. Determine score cutoffs:
+          * top users: score >= (1 - top_frac) quantile  → label  1
+          * bottom users: score <= bottom_frac quantile → label -1
+          * everyone else → label 0
+       (If bottom_frac is None, it defaults to top_frac.)
+    5. Users with NaN pop_score are labeled 0 and treated as score 0 for sorting.
+    6. Write CSV sorted by descending pop_score.
+
+    Parameters
+    ----------
+    dataset : str
+        Dataset subdirectory name under "./dataset".
+    top_frac : float, default 0.10
+        Fraction of users to mark as popular (top tail). Used for 1 - top_frac quantile.
+    bottom_frac : float, optional
+        Fraction of users to mark as unpopular (bottom tail). If None, uses top_frac.
+
+    Output
+    ------
+    Writes "./dataset/<dataset>/user_popularity_labels.csv".
+    """
+    if bottom_frac is None:
+        bottom_frac = top_frac
+
+    # Paths
+    dataset_path = Path(".", "dataset", dataset)
+    train_npz_path = dataset_path / "biased_eval_train.npz"
+    item_pop_csv = dataset_path / "item_popularity_labels.csv"
+    out_csv = dataset_path / "user_popularity_labels.csv"
+
+    # Load interactions
+    data = np.load(train_npz_path)
+    item_ids = data["item_id"]
+    user_ids = data["user_id"]
+
+    # Build interaction DataFrame
+    df_inter = pd.DataFrame({"user_id": user_ids, "item_id:token": item_ids})
+
+    # Load item popularity scores
+    # We only need item_id:token + popularity_score
+    df_items = pd.read_csv(item_pop_csv, usecols=["item_id:token", "pop_score"])
+
+    # Join scores onto interactions
+    df = df_inter.merge(df_items, on="item_id:token", how="left")
+
+    # Aggregate mean score per user (ignore NaNs automatically via mean(skipna=True))
+    user_scores = (
+        df.groupby("user_id")["pop_score"]
+          .mean()  # skipna=True default
+    )
+
+    # user_scores is a Series indexed by user_id
+    # Compute quantile cutoffs from *non-NaN* scores
+    non_nan_scores = user_scores.dropna()
+    if len(non_nan_scores) == 0:
+        # degenerate case: no scored items anywhere
+        # produce empty-ish CSV with all users score=0,label=0
+        pop_score = user_scores.fillna(0.0)
+        labels = pd.Series(0, index=user_scores.index)
+    else:
+        q_top = non_nan_scores.quantile(1 - top_frac)
+        q_bot = non_nan_scores.quantile(bottom_frac)
+
+        # Build label series
+        pop_score = user_scores.fillna(0.0)  # treat missing as 0 for output & sorting
+        labels = pd.Series(0, index=pop_score.index, dtype="int8")
+        labels.loc[user_scores >= q_top] = 1
+        labels.loc[user_scores <= q_bot] = -1
+        # NaN users (had no scored items) remain 0 because user_scores NaN <not> >= q_top or <= q_bot
+
+    # Assemble output DataFrame
+    out_df = pd.DataFrame({
+        "user_id:token": pop_score.index,
+        "pop_score": pop_score.values,
+        "popularity_label": labels.loc[pop_score.index].values,
+    }).sort_values("pop_score", ascending=False)
+
+    out_df.to_csv(out_csv, index=False)
 
 
 # def create_item_popularity_csv(dataset: str, p: float):

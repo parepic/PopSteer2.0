@@ -146,7 +146,7 @@ if __name__ == "__main__":
     
     elif hasattr(args, "analyze") and args.analyze == True:
         config, model, dataset, train_data, valid_data, test_data = load_data_and_model(
-            model_file=args.path, device=device,
+            model_file=args.path, device=device
         )  
         
         trainer = get_trainer(config["MODEL_TYPE"], config["model"])(config, model)

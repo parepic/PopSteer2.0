@@ -50,7 +50,8 @@ class LightGCN_SAE(LightGCN):
 		model_path = config["base_path"]
 		checkpoint = torch.load(model_path, map_location=self.device, weights_only=False)
 		self.load_state_dict(checkpoint['state_dict'])
-		self.sae_module = SAE(config)
+		self.sae_module_i = SAE(config)
+		self.sae_module_u = SAE(config)
 		self.restore_item_e = None
 		self.restore_user_e = None
 		self.val_fvu = torch.tensor(0.0, device=self.device)
@@ -58,12 +59,14 @@ class LightGCN_SAE(LightGCN):
 		for param in self.parameters():
 			param.requires_grad = False
 
-		for param in self.sae_module.parameters():
+		for param in self.sae_module_i.parameters():
+			param.requires_grad = True  
+		for param in self.sae_module_u.parameters():
 			param.requires_grad = True  
 
 	def forward(self, train_mode=None):
 		u_emb, i_emb = super().forward()
-		i_emb_sae = self.sae_module(i_emb, train_mode=train_mode)
+		i_emb_sae = self.sae_module_i(i_emb, train_mode=train_mode)
 		return u_emb, i_emb_sae
 	
 	def calculate_loss(self, interaction):
@@ -74,7 +77,7 @@ class LightGCN_SAE(LightGCN):
 			self.restore_user_e, self.restore_item_e = None, None
 		
 		user_all_embeddings, item_all_embeddings = self.forward(train_mode=True)
-		sae_loss = self.sae_module.fvu + self.sae_module.auxk_loss / 2
+		sae_loss = self.sae_module_i.fvu + self.sae_module_i.auxk_loss / 2
 
 		return sae_loss
 
@@ -88,7 +91,7 @@ class LightGCN_SAE(LightGCN):
 		scores[:, 0] =  float("-inf")
 		for key in top_recs.flatten():
 			self.recommendation_count[key] += 1
-		self.val_fvu += self.sae_module.fvu
+		self.val_fvu += self.sae_module_i.fvu
 		return scores.view(-1)
 	
 	def synthetic_inference(self, interaction, popular=None):
@@ -101,12 +104,12 @@ class LightGCN_SAE(LightGCN):
 		scores[:, 0] =  float("-inf")
 		for key in top_recs.flatten():
 			self.recommendation_count[key] += 1
-		self.val_fvu += self.sae_module.fvu
+		self.val_fvu += self.sae_module_i.fvu
 		return scores.view(-1)
 
 
 	def set_sae_mode(self, train_mode=True):
-		self.sae_module.train_mode=train_mode
+		self.sae_module_i.train_mode=train_mode
 		
 
 import torch
@@ -363,8 +366,8 @@ class SAE(nn.Module):
 			e = x_reconstructed - x
 			total_variance = (x - x.mean(0)).pow(2).sum()
 			self.fvu = e.pow(2).sum() / total_variance
-			# if not train_mode:
-			# 	compute_neuron_stats_by_row(activations=pre_acts1, dataset=self.dataset)
+			if not train_mode:
+				compute_neuron_stats_by_row(activations=pre_acts1, dataset=self.dataset)
 			if train_mode:
 				if self.new_epoch == True:
 					self.new_epoch = False

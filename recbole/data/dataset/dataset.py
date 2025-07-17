@@ -34,7 +34,7 @@ from recbole.utils import (
     set_color,
     ensure_dir
     )
-from recbole.data import create_item_popularity_csv
+from recbole.data import create_item_popularity_csv, create_user_popularity_csv
 
 from recbole.utils.url import (
     decide_download,
@@ -1687,9 +1687,12 @@ class Dataset(torch.utils.data.Dataset):
         
         np.savez(
             rf'./dataset/{self.dataset_name}/biased_eval_train.npz',
-            labels=next_df[0]["item_id"]
+            item_id=next_df[0]["item_id"],
+            user_id=next_df[0]["user_id"]
         )
         create_item_popularity_csv(self.dataset_name, 0.2)
+        create_user_popularity_csv(self.dataset_name, top_frac=0.1)
+
         next_ds = [self.copy(_) for _ in next_df]
         return next_ds
 
