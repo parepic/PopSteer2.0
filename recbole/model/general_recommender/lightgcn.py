@@ -210,9 +210,10 @@ class LightGCN(GeneralRecommender):
         u_embeddings = self.restore_user_e[user]
         # dot with all item embedding to accelerate
         scores = torch.matmul(u_embeddings, self.restore_item_e.transpose(0, 1))
-        top_recs = torch.argsort(scores, dim=1, descending=True)[:, :10]
         scores[:, 0] =  float("-inf")
         # scores = self.FAIR(scores).to(self.device)
+        top_recs = torch.argsort(scores, dim=1, descending=True)[:, :10]
+        scores[:, 0] =  float("-inf")
         for key in top_recs.flatten():
             self.recommendation_count[key] += 1
 
@@ -220,7 +221,7 @@ class LightGCN(GeneralRecommender):
 
 
 
-    def FAIR(self, scores, *, p: float = 0.99, alpha: float = 0.1,
+    def FAIR(self, scores, *, p: float = 0.9, alpha: float = 0.1,
             L: int = 1500, K: int = 10):
         """
         Re-rank each batch row with FA*IR.
