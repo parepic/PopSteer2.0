@@ -84,7 +84,7 @@ class LightGCN_SAE(LightGCN):
 		sae_loss_i = self.sae_module_i.fvu + self.sae_module_i.auxk_loss / 2
 		sae_loss_u = self.sae_module_u.fvu + self.sae_module_u.auxk_loss / 2
 		
-		return sae_loss_i + sae_loss_u
+		return sae_loss_i
 
 	def full_sort_predict(self, interaction):
 		user = interaction[self.USER_ID]
