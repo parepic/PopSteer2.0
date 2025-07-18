@@ -653,7 +653,7 @@ class Trainer(AbstractTrainer):
             self.eval_collector.eval_batch_collect(
                 scores, interaction, positive_u, positive_i
             )
-        plot_tensor_sorted_by_popularity(self.model.recommendation_count, dataset=self.dataset)
+        # plot_tensor_sorted_by_popularity(self.model.recommendation_count, dataset=self.dataset)
         self.eval_collector.model_collect(self.model)
         struct = self.eval_collector.get_data_struct()
         result = self.evaluator.evaluate(struct)
