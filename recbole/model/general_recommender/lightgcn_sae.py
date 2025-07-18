@@ -367,7 +367,7 @@ class SAE(nn.Module):
 			pre_acts1 = self.encoder(sae_in)
 			self.last_activations = pre_acts1
 			# if self.N != 0:
-			pre_acts1 = self.dampen_neurons(pre_acts1, dataset=self.dataset)
+			# pre_acts1 = self.dampen_neurons(pre_acts1, dataset=self.dataset)
 				# pre_acts = self.add_noise(pre_acts, std=self.beta)
 			pre_acts = nn.functional.relu(pre_acts1)   
 			z = self.topk_activation(pre_acts, sequences, save_result=False)
@@ -376,8 +376,8 @@ class SAE(nn.Module):
 			e = x_reconstructed - x
 			total_variance = (x - x.mean(0)).pow(2).sum()
 			self.fvu = e.pow(2).sum() / total_variance
-			if not train_mode:
-				compute_neuron_stats_by_row(activations=pre_acts1, dataset=self.dataset)
+			# if not train_mode:
+				# compute_neuron_stats_by_row(activations=pre_acts1, dataset=self.dataset)
 			if train_mode:
 				if self.new_epoch == True:
 					self.new_epoch = False
