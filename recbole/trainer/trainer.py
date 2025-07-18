@@ -46,6 +46,7 @@ from recbole.utils import (
     set_color,
     get_gpu_usage,
     WandbLogger,
+    plot_tensor_sorted_by_popularity
 )
 from torch.nn.parallel import DistributedDataParallel
 
@@ -156,6 +157,8 @@ class Trainer(AbstractTrainer):
         saved_model_file = "{}-{}.pth".format(self.config["model"], get_local_time())
         self.saved_model_file = os.path.join(self.checkpoint_dir, saved_model_file)
         self.weight_decay = config["weight_decay"]
+        self.dataset = config["dataset"]
+
 
         self.start_epoch = 0
         self.cur_step = 0
@@ -650,6 +653,7 @@ class Trainer(AbstractTrainer):
             self.eval_collector.eval_batch_collect(
                 scores, interaction, positive_u, positive_i
             )
+        plot_tensor_sorted_by_popularity(self.model.recommendation_count, dataset=self.dataset)
         self.eval_collector.model_collect(self.model)
         struct = self.eval_collector.get_data_struct()
         result = self.evaluator.evaluate(struct)

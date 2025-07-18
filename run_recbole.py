@@ -59,14 +59,14 @@ def remove_sparse_users_items(n, dataset):
 
 
 if __name__ == "__main__":
-    # remove_sparse_users_items(5, "ml-1m")
+    # remove_sparse_users_items(20, "ml-100k")
     # exit()
     # parameter_dict = {
     # 'train_neg_sample_args': None,
     # }
     # run_recbole(model='SASRec', dataset='ml-100k', config_dict=parameter_dict)
     # exit()
-    # create_item_popularity_csv("ml-1m", 0.1)
+    create_item_popularity_csv("ml-1m", 0.2)
     parser = argparse.ArgumentParser()
     parser.add_argument("--model", "-m", type=str, default="BPR", help="name of models")
     parser.add_argument("--train", action="store_true", help="Whether to train model")
@@ -87,6 +87,9 @@ if __name__ == "__main__":
                         help="Number of neurons to steer")
     parser.add_argument('--alpha', '-a', type=float, default=0,
                         help="Alpha")
+    parser.add_argument('--early_stop', '-e', type=int, default=0,
+                        help="early_stop")
+
 
     parser.add_argument("--config_files", type=str, default=None, help="config files")
     parser.add_argument(
@@ -133,6 +136,8 @@ if __name__ == "__main__":
             config_dict["sae_k"] = args.sae_k
         if hasattr(args, "lr"):
             config_dict["learning_rate"] = args.lr
+        if hasattr(args, "early_stop"):
+            config_dict["early_stop"] = args.early_stop
 
         run(
             args.model,
@@ -167,7 +172,7 @@ if __name__ == "__main__":
         trainer = get_trainer(config["MODEL_TYPE"], config["model"])(config, model)
 
         test_result = trainer.evaluate(
-            valid_data, model_file=args.path, load_best_model = False, show_progress=config["show_progress"]
+            test_data, model_file=args.path, load_best_model = False, show_progress=config["show_progress"]
         )
         
         keys = [

@@ -96,6 +96,7 @@ class LightGCN_SAE(LightGCN):
 		scores[:, 0] =  float("-inf")
 		for key in top_recs.flatten():
 			self.recommendation_count[key] += 1
+		
 		self.val_fvu_i += (self.sae_module_i.fvu)
 		self.val_fvu_u += (self.sae_module_u.fvu)
 		return scores.view(-1)
@@ -301,11 +302,12 @@ class SAE(nn.Module):
 			return (x - min_val) / (max_val - min_val) * (new_max - new_min) + new_min
 
 		# Normalize the Cohen's d values to [0, 2.5]
-		weights = normalize_to_range(abs_cohens, new_min=0, new_max=1.0)
+		weights = normalize_to_range(abs_cohens, new_min=0, new_max=10.0)
 
 		# Now update the neuron activations based on group.
 		for i, (neuron_idx, cohen, group) in enumerate(top_neurons):
 			weight = weights[i]		
+			# weight2 = weights2[i]
 			if group == 'unpop':
 				# For neurons to be reinforced, fetch stats from the unpopular file.
 				row = stats_unpop.iloc[neuron_idx]
@@ -316,21 +318,21 @@ class SAE(nn.Module):
 				vals = pre_acts[:, neuron_idx]
 				# Increase activations by an amount proportional to the standard deviation and effective weight.
 				pre_acts[:, neuron_idx] += weight * std_val
-			else:  # group == 'pop'
-				# For neurons to be dampened, use the popular statistics for impact.
-				pop_mean = stats_pop.iloc[neuron_idx]["mean"]
-				pop_sd = stats_pop.iloc[neuron_idx]["sd"]
+			# else:  # group == 'pop'
+			# 	# For neurons to be dampened, use the popular statistics for impact.
+			# 	pop_mean = stats_pop.iloc[neuron_idx]["mean"]
+			# 	pop_sd = stats_pop.iloc[neuron_idx]["sd"]
 
-				# Still fetch the comparison stats from the unpopular stats file
-				# (this is from your original logic; adjust if needed).
-				row = stats_unpop.iloc[neuron_idx]
-				mean_val = row["mean"]
-				std_val = row["sd"]
+			# 	# Still fetch the comparison stats from the unpopular stats file
+			# 	# (this is from your original logic; adjust if needed).
+			# 	row = stats_unpop.iloc[neuron_idx]
+			# 	mean_val = row["mean"]
+			# 	std_val = row["sd"]
 
-				# Identify positions where the neuron's activation is below its mean.
-				vals = pre_acts[:, neuron_idx]
-				# Decrease activations proportionally.
-				pre_acts[:, neuron_idx] -= weight * pop_sd
+			# 	# Identify positions where the neuron's activation is below its mean.
+			# 	vals = pre_acts[:, neuron_idx]
+			# 	# Decrease activations proportionally.
+			# 	pre_acts[:, neuron_idx] -= weight * pop_sd
 	
 		return pre_acts
 	 
@@ -365,7 +367,7 @@ class SAE(nn.Module):
 			pre_acts1 = self.encoder(sae_in)
 			self.last_activations = pre_acts1
 			# if self.N != 0:
-			# pre_acts1 = self.dampen_neurons(pre_acts1, dataset=self.dataset)
+			pre_acts1 = self.dampen_neurons(pre_acts1, dataset=self.dataset)
 				# pre_acts = self.add_noise(pre_acts, std=self.beta)
 			pre_acts = nn.functional.relu(pre_acts1)   
 			z = self.topk_activation(pre_acts, sequences, save_result=False)
@@ -374,8 +376,8 @@ class SAE(nn.Module):
 			e = x_reconstructed - x
 			total_variance = (x - x.mean(0)).pow(2).sum()
 			self.fvu = e.pow(2).sum() / total_variance
-			# if not train_mode:
-			# 	compute_neuron_stats_by_row(activations=pre_acts1, dataset=self.dataset)
+			if not train_mode:
+				compute_neuron_stats_by_row(activations=pre_acts1, dataset=self.dataset)
 			if train_mode:
 				if self.new_epoch == True:
 					self.new_epoch = False

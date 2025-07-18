@@ -13,7 +13,8 @@ from recbole.utils.utils import (
     get_gpu_usage,
     get_flops,
     list_to_latex,
-    compute_neuron_stats_by_row
+    compute_neuron_stats_by_row,
+    plot_tensor_sorted_by_popularity
 )
 from recbole.utils.enum_type import *
 from recbole.utils.argument_list import *
@@ -47,5 +48,6 @@ __all__ = [
     "get_environment",
     "list_to_latex",
     "WandbLogger",
-    "compute_neuron_stats_by_row"
+    "compute_neuron_stats_by_row",
+    "plot_tensor_sorted_by_popularity"
 ]

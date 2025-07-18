@@ -561,3 +561,47 @@ def get_extreme_correlations(file_name: str, dataset=None):
 
     return pos_list, neg_list
 
+
+import matplotlib.pyplot as plt
+
+
+def plot_tensor_sorted_by_popularity(tensor: torch.Tensor, dataset: str):
+    """
+    Sorts the given tensor (index 1 onwards) based on the pop_score from CSV,
+    and plots the sorted tensor values.
+
+    Parameters:
+        tensor (torch.Tensor): 1D tensor of size N+1, where index 0 is unused (item ID 0 doesn't exist).
+        csv_path (str): Path to the CSV file with 'item_id:token' and 'pop_score' columns.
+    """
+    # Load CSV
+    df = pd.read_csv(rf"./dataset/{dataset}/item_popularity_labels.csv")
+
+    # Use item_id:token as integer item ID
+    df['item_id'] = df['item_id:token'].astype(int)
+
+    # Sanity check
+    assert tensor.shape[0] == df['item_id'].max() + 1, "Tensor size must match max item ID + 1"
+
+    # Build pop_score tensor aligned to item ID
+    pop_scores = torch.zeros_like(tensor)
+    pop_scores[df['item_id'].values] = torch.tensor(df['pop_score'].values, dtype=torch.long)
+
+    # Skip index 0 (no item with ID 0)
+    tensor_valid = tensor[1:]
+    pop_scores_valid = pop_scores[1:]
+
+    # Sort tensor by popularity score
+    sorted_indices = torch.argsort(pop_scores_valid)
+    sorted_tensor = tensor_valid[sorted_indices]
+
+    # Plot
+    plt.figure(figsize=(10, 5))
+    plt.plot(range(len(sorted_tensor)), sorted_tensor.numpy())
+    plt.xlabel('Items sorted by pop_score')
+    plt.ylabel('Tensor values')
+    plt.title('Tensor values sorted by item popularity')
+    plt.grid(True)
+    plt.tight_layout()
+    plt.show()
+
