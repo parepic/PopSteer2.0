@@ -1,0 +1,734 @@
+item_id:token	title:token	sales_type:token	sales_rank:float	categories:token_seq	price:float	brand:token
+B0000CC64W	Olay Regenerist Daily Regenerating Serum - Fragrance Free Moisturizer 1.7 Fl Oz	Beauty	35.0	'Beauty', 'Skin Care', 'Face', 'Creams & Moisturizers', 'Fluids & Lotions', 'Fluids'	14.75	Olay
+B000142FVW	Opi Nail Lacquer, Not So Bora Pink, 0.5 Fluid Ounce	Beauty	37439.0	'Beauty', 'Makeup', 'Nails', 'Nail Polish'	6.56	OPI
+B0009EILKS	Biore  Deep Cleansing Pore Strips , 14 Nose Strips	Health & Personal Care	201602.0	'Beauty', 'Skin Care', 'Face', 'Treatments & Masks', 'Pore Cleansing Strips'	6.66	Biore
+B000AO2NXS	Dove Body Wash with NutriumMoisture, Sensitive Skin Nourishing, 24 Ounce	Beauty	480445.0	'Beauty', 'Bath & Body', 'Cleansers', 'Body Washes'	11.5	Dove
+B000E0K7NQ	Dove Hair Shampoo, Color Repair, 12 Ounce (Pack of 6)	Beauty	28100.0	'Beauty', 'Hair Care', 'Shampoo & Conditioner Sets'	37.2	Dove
+B000F6RFX4	Adovia Natural Dead Sea Mud Soap - Great for Eczema, Psoriasis or Acne! 125 GR (4.4OZ)	Beauty	5902.0	'Beauty', 'Bath & Body', 'Cleansers', 'Soaps'	6.0	Adovia
+B000FBNV1Y	Nature's Gate Organics Acne Treatment System with Oligopeptide-10, (1 acne treatment system)	Beauty	81882.0	'Beauty', 'Skin Care', 'Face', 'Creams & Moisturizers'		
+B000GUZ8HY	Fallene Cotz Plus SPF 58 Water Resistant UVB/UVA Sunscreen for Sensitive Skin, 2.5-Ounce Tube	Health & Personal Care	1314364.0	'Beauty', 'Skin Care', 'Sun', 'Skin Protection', 'Sports'	16.99	Fallene
+B000H8UN3Y	Biore Ultra Deep Cleansing Pore Strips, 6 Count	Beauty	82902.0	'Beauty', 'Skin Care', 'Face', 'Treatments & Masks', 'Pore Cleansing Strips'	4.51	Biore
+B000K7E2G6	Remington S2044 Damage Therapy Ceramic Hair Straightener with Teflon Fiber Plates	Beauty	208039.0	'Beauty', 'Hair Care', 'Styling Tools', 'Irons', 'Flattening Irons'		
+B000O3OZD6	SHANY Silver Aluminum Makeup Case, 4 Pounds	Beauty	231945.0	'Beauty', 'Tools & Accessories', 'Bags & Cases', 'Train Cases'	59.95	SHANY Cosmetics
+B000P1S0N8	Eucerin Redness Relief Daily Perfecting Lotion Broad Spectrum SPF 15, 1.7 Ounce	Beauty	346382.0	'Beauty', 'Skin Care', 'Body', 'Moisturizers', 'Lotions'	11.33	Eucerin
+B000Q6V1UG	Remington H-2050 T-Studio Ceramic Heated Clip Hair Rollers with Tourmaline	Beauty	829684.0	'Beauty', 'Hair Care', 'Styling Tools', 'Hair Rollers'		
+B000R46I1O	Hydroxatone AM/PM Anti-Wrinkle Complex SPF 15	Beauty	100939.0	'Beauty', 'Skin Care', 'Face'	33.99	Hydroxatone
+B000R80ZTQ	YOU Reel by Conair 2-in-1 Styler	Beauty	18331.0	'Beauty', 'Hair Care', 'Styling Tools', 'Hair Dryers'	24.96	Conair
+B000UPXU2A	SpaSensials* Combination Hand &amp; Foot Treatment Systems	Beauty	90934.0	'Beauty', 'Skin Care', 'Sets & Kits'		
+B000US0804	Ecco Bella Brown Mascara	Beauty	93199.0	'Beauty', 'Skin Care', 'Face', 'Creams & Moisturizers'	8.08	Ecco Bella
+B000V1BDIG	Belli Elasticity Belly Oil, 4 fl. oz.	Beauty	87921.0	'Beauty', 'Skin Care', 'Body', 'Moisturizers', 'Oils'	34.95	Belli
+B000V2DLJO	Neutrogena Healthy Skin Rejuvenator, The Anti-Aging Power Treatment Kit	Beauty	308532.0	'Beauty', 'Skin Care', 'Face', 'Sets & Kits'	39.99	Neutrogena
+B000V2J3ZK	Neutrogena Wave Power-Cleanser and Deep Clean Foaming Pads	Beauty	122204.0	'Beauty', 'Skin Care', 'Face', 'Cleansers'	28.0	Neutrogena
+B000VPPUEA	Bio-Oil, 2-Ounce Bottle	Beauty	119279.0	'Beauty', 'Skin Care', 'Face', 'Creams & Moisturizers'	3.92	Bio
+B000YZGP4G	Motions At Home Foaming Wrap Lotion, 8.5-Ounce Pump Bottles (Pack of 6)	Beauty	148570.0	'Beauty', 'Hair Care', 'Styling Products', 'Mousses & Foams'	24.99	
+B000YZGOZQ	Motions At Home Lavish Conditioning Shampoo, 13 Ounce Bottles (Pack of 6)	Beauty	47600.0	'Beauty', 'Hair Care', 'Shampoos'	22.02	
+B000YZLP4Q	Motions At Home Shine Enhancing Pomade, 3.5-Ounce Jars (Pack of 6)	Beauty	214884.0	'Beauty', 'Hair Care', 'Styling Products', 'Pomades & Waxes'	17.34	
+B000YZGPKU	Motions At Home Moisture Plus Conditioner, 13 Ounce Bottle	Health & Personal Care	1311403.0	'Beauty', 'Hair Care', 'Conditioners'	8.27	Motions
+B000YZJMHS	Motions At Home Oil Moisturizer Hair Lotion, 12-Ounce Bottles (Pack of 6)	Beauty	155550.0	'Beauty', 'Hair Care', 'Styling Products', 'Creams, Gels & Lotions'	20.94	
+B00106AC06	Motions At Home Deep Penetrating Treatment Conditioner, 10-Ounce Jar	Home &amp; Kitchen	118075.0	'Beauty', 'Hair Care', 'Conditioners'	7.99	Motions
+B0010A9RYO	Zia Bamboo Exfoliant, 1.6 Ounce Bottles (Pack of 12)	Beauty	552831.0	'Beauty', 'Skin Care', 'Face', 'Exfoliators & Scrubs', 'Scrubs'		
+B001118AYU	Dr. King's Natural Medicine Gout Symptom Formula, 2 Fluid Ounce	Beauty	213062.0	'Beauty', 'Skin Care', 'Body', 'Moisturizers', 'Lotions'	15.16	Dr. King&#39;s Natural Medicine
+B0011MJSD6	Very Private pH Balanced Body Wash, 6-Ounce Bottle	Beauty	567286.0	'Beauty', 'Bath & Body', 'Cleansers', 'Body Washes'	13.95	Very Private
+B00127U7QM	Nivea For Men Energy Hair and Body Wash, 16.9-Ounce Bottle (Pack of 3)	Beauty	491222.0	'Beauty', 'Bath & Body', 'Cleansers', 'Body Washes'	17.02	Nivea Men
+B0017TZD7S	Axe Detailer Shower Tool-Colors May Vary, 1 Count (Pack of 4)	Beauty	291332.0	'Beauty', 'Bath & Body', 'Cleansers', 'Body Washes'	15.87	AXE
+B0018S8MZ8	Clean &amp; Clear Blackhead Eraser Kit	Beauty	186501.0	'Beauty', 'Skin Care', 'Face'		
+B0019ZMFYE	Zeno Mini Acne Clearing Device, White	Beauty	271064.0	'Beauty', 'Skin Care', 'Face'	50.48	Zeno
+B001A5S3BM	Upper Canada Soap And Candle Naturally Whipped Hand Repair, Sweet Vanilla Fig, 4-Ounce Tubes (Pack of 2)	Beauty	841325.0	'Beauty', 'Skin Care', 'Hands & Nails', 'Hand Creams & Lotions'		
+B001D0ACUE	Infiniti by Conair 1875 Watt Professional Nano Silver Tourmaline Ceramic Styler, Iridescent Gray	Beauty	103951.0	'Beauty', 'Hair Care', 'Styling Tools', 'Hair Dryers'		
+B001D0IWEC	TRESemme Philips HP4990/05 Thermal Creations Hair Dryer	Health & Personal Care	252238.0	'Beauty', 'Hair Care', 'Styling Tools', 'Hair Dryers'		
+B001D0IWDS	TRESemme Philips HP4669/05 Thermal Creations Straightener, 1&quot;			'Beauty', 'Hair Care', 'Styling Tools', 'Irons', 'Flattening Irons'		
+B001E6G6RU	Healthy Infusions by Wahl Pro Straightener, 2&quot;	Beauty	3858.0	'Beauty', 'Hair Care', 'Styling Tools', 'Irons', 'Flattening Irons'		
+B001E6G6FC	Healthy Infusions by Wahl Pro Dryer	Beauty	5900.0	'Beauty', 'Hair Care', 'Styling Tools', 'Hair Dryers'		
+B001E7BEEE	Upper Canada Soap And Candle Naturally Whipped Hand Repair, Pressed Olive Avocado, 4-Ounce Tubes (Pack of 2)	Beauty	520233.0	'Beauty', 'Skin Care', 'Hands & Nails', 'Hand Creams & Lotions'		
+B001ECQ4JE	Vaseline Body Lotion, Aloe Fresh 20.3oz (Pack of 3)	Beauty	99367.0	'Beauty', 'Bath & Body', 'Scrubs & Body Treatments', 'Body Scrubs'	23.81	Vaseline
+B001ECQ4OY	Vaseline Total Moisture, Body Lotion, Pure Oat Extract, Packaging May Vary, 20.3 Fl  Oz. . (Pack of 3)	Beauty	423042.0	'Beauty', 'Skin Care', 'Body', 'Moisturizers', 'Lotions'	27.6	Vaseline
+B001ECQ4IU	Vaseline Intensive Rescue Repairing Moisture Lotion, Fragrance Free, 20.3-Ounce Pump (Pack of 3)	Beauty	455051.0	'Beauty', 'Skin Care', 'Body', 'Moisturizers', 'Lotions'	22.46	Vaseline
+B001ECQ4YO	Dove go fresh, Burst Body Wash, 24 Ounce (Pack of 2)	Beauty	128144.0	'Beauty', 'Bath & Body', 'Cleansers', 'Body Washes'	14.99	Dove
+B001ECQ55M	Vaseline Men Body and Face Lotion , 20.3 Ounce Bottle (Pack of 3)	Beauty	367721.0	'Beauty', 'Skin Care', 'Body', 'Moisturizers', 'Lotions'	23.88	Vaseline
+B001ECQ5CA	Vaseline, Total Moisture, Cocoa Radiant, Body Lotion, 20.3 oz Bottle (Pack of 3)	Beauty	258275.0	'Beauty', 'Skin Care', 'Body', 'Moisturizers', 'Lotions'	17.96	Vaseline
+B001ET7J6E	Almay Smart Shade Blush, Pink 010, 0.5-Ounce Tubes (Pack of 2)	Beauty	60517.0	'Beauty', 'Makeup', 'Face', 'Blush'	12.49	Almay
+B001EWETAK	Yes To Carrots Body Butter, Super Rich, Nourishing, 8.45 Ounce Tubs (Pack of 2)	Beauty	341623.0	'Beauty', 'Skin Care', 'Body', 'Moisturizers', 'Body Butter'	33.5	Yes To Carrots
+B001FB5IDW	Nivea Q10 Skin Firming Body Lotion , 13.5 fl oz  (Pack of 2)	Beauty	291109.0	'Beauty', 'Skin Care', 'Body', 'Moisturizers', 'Lotions'	11.0	Nivea
+B001FSK8QM	Axe Primed Just Clean Shampoo, 12-Ounce Bottle (Pack of 3)	Health & Personal Care	94260.0	'Beauty', 'Hair Care', 'Shampoos'	18.99	Axe
+B001FSK8SA	Axe Refined Clean-cut Look Pomade, 2.64-Ounce Jars (Pack of 3)	Home &amp; Kitchen	131563.0	'Beauty', 'Hair Care', 'Styling Products', 'Pomades & Waxes'	18.98	AXE
+B001FWXJ4G	Sunburnt Therapeutic After Sun Relief, 6-Ounce Tube	Beauty	296311.0	'Beauty', 'Skin Care', 'Sun', 'After Sun'	7.85	Sunburnt
+B001G0ML96	Gimme Clips Boutique Flower Hair Clips, Winter Blooms, 12 Flowers	Beauty	49821.0	'Beauty', 'Hair Care', 'Styling Tools', 'Styling Accessories', 'Clips'		
+B001GIOW3G	Cetaphil Daily Facial Moisturizer with Sunscreen, SPF 50+, 1.7 Fluid Ounce (Pack of 2) - Packaging May Vary	Beauty	52493.0	'Beauty', 'Skin Care', 'Face', 'Creams & Moisturizers'	26.73	Cetaphil
+B001IACZEK	Dove Beauty Bar, Cool Moisture, 4 Bars	Beauty	345655.0	'Beauty', 'Bath & Body', 'Cleansers', 'Soaps'	7.05	Dove
+B001J2ZXMI	Ilumina Organics Body Lotion, Creamsicle Scented, 8.0-Ounce Bottle	Beauty	95951.0	'Beauty', 'Skin Care', 'Body', 'Moisturizers', 'Lotions'		
+B001JKTTVQ	SHANY Professional 13-Piece Cosmetic Brush Set with Pouch, Set of 12 Brushes and 1 Pouch, Red	Beauty	367611.0	'Beauty', 'Tools & Accessories', 'Makeup Brushes & Tools', 'Brushes & Applicators'	12.95	SHANY Cosmetics
+B001JQLNPA	Olay Definity 14-Day Skin Rehabilitation	Beauty	2620.0	'Beauty', 'Skin Care', 'Face', 'Creams & Moisturizers', 'Fluids & Lotions', 'Lotions'	15.99	Olay
+B001JQLNFA	Gillette Venus Spa Breeze Razor	Beauty	391801.0	'Beauty', 'Skin Care', 'Body', 'Moisturizers', 'Oils'	12.99	
+B001JQLNNW	Olay Professional Pro-X Anti-Aging Starter Kit	Health & Personal Care	8783.0	'Beauty', 'Skin Care', 'Face', 'Sets & Kits'	19.49	Olay
+B001JQLNJ6	Olay 2-In-1 Advanced Ribbons Tone Brightening + Advanced Moisture Body Wash 18 Oz (Pack of 3)	Health & Personal Care	664111.0	'Beauty', 'Bath & Body', 'Cleansers', 'Body Washes'	24.99	Olay
+B001LF4G6W	Remington S1051 Salon Quality, Professional Ceramic Hair Straightener	Beauty	230792.0	'Beauty', 'Hair Care', 'Styling Tools', 'Irons', 'Flattening Irons'		
+B001LF4G7G	Remington D-2012 Salon Quality Ceramic Hair Dryer with Professional AC Motor and Tourmaline	Beauty	437805.0	'Beauty', 'Hair Care', 'Styling Tools', 'Hair Dryers'		
+B001LF4I8I	Remington S8500 Shine Therapy  Moisturizing and Conditioning Digital Ceramic Hair Straightener, 1&quot;	Beauty	26432.0	'Beauty', 'Hair Care', 'Styling Tools', 'Irons', 'Flattening Irons'	89.95	Remington
+B001LF4G44	Remington D1001 Ceramic Airwave Hair Dryer with Wave Attachment and Anti Static Technology	Beauty	514761.0	'Beauty', 'Hair Care', 'Styling Tools', 'Hair Dryers'		
+B001LF4G4E	Remington S-1051 Sleek n Curl  Digital Ceramic Hair Straightener with Tourmaline and Bonus DVD	Beauty	358477.0	'Beauty', 'Hair Care', 'Styling Tools', 'Irons', 'Flattening Irons'	39.99	
+B001OMI93S	Neutrogena Ageless Essentials Continuous Hydration, Night, 1.7 Ounce	Beauty	126819.0	'Beauty', 'Skin Care', 'Face', 'Oils & Serums'	5.0	Neutrogena
+B001T8MN16	Motions Salon Haircare Marula Natural Therapy Hair and Scalp Oil, 8 Ounce	Beauty	119623.0	'Beauty', 'Hair Care', 'Hair & Scalp Treatments'	9.86	Motions
+B001U0ONNY	Clearasil Ultra Acne Treatment Daily Face Wash, 6.78 Ounce (Pack of 3)	Beauty	60014.0	'Beauty', 'Skin Care', 'Face', 'Cleansers', 'Washes'	17.39	Clearasil
+B001U0OQN6	Clearasil Daily Clear Acne Treatment Face Wash, 6.5 Ounce (Pack of 4)	Beauty	328738.0	'Beauty', 'Skin Care', 'Face', 'Cleansers', 'Washes'	11.3	Clearasil
+B001U0OQL8	Clearasil Ultra Rapid Action Vanishing Acne Treatment Cream, 1 Ounce (Pack of 2)	Health & Personal Care	155117.0	'Beauty', 'Skin Care', 'Face', 'Creams & Moisturizers', 'Tinted Moisturizers'	18.93	Clearasil
+B0020122ZS	Suave Kids 2 in 1 Shampoo and Conditioner, Cowabunga Coconut, 22.5 Ounce (Packaging May Vary)	Beauty	12949.0	'Beauty', 'Hair Care', 'Shampoos'	5.16	Suave
+B0027CT5VO	Vaseline Sheer Infusion Body Lotion, Mineral Renewal, 13.5-Ounce Bottles (Pack of 2)	Beauty	257977.0	'Beauty', 'Skin Care', 'Body', 'Moisturizers', 'Lotions'		
+B0027CT5SC	Vaseline Sheer Infusion Body Lotion, Botanical Blend, 13.5-Ounce Bottles (Pack of 2)	Beauty	22337.0	'Beauty', 'Skin Care', 'Body', 'Moisturizers', 'Lotions'	47.9	
+B0027CT5TG	Vaseline Sheer Infusion Body Lotion, Vitamin Burst, 13.5-Ounce Bottles (Pack of 2)	Health & Personal Care	173433.0	'Beauty', 'Skin Care', 'Body', 'Moisturizers', 'Lotions'		
+B0028K3J9O	Olay Regenerist Advanced Anti-Aging Eye Anti-Aging Roller 0.2 Fl Oz	Home &amp; Kitchen	4143852.0	'Beauty', 'Skin Care', 'Eyes', 'Rollers & Pens'	18.45	Olay
+B0028K3J8K	Olay Professional Pro-X Intensive Wrinkle Protocol 1 Kit	Beauty	47021.0	'Beauty', 'Skin Care', 'Face', 'Creams & Moisturizers'	18.8	Olay
+B0028K3J6W	Olay Regenerist Advanced Anti-Aging DNA Superstructure UV Cream, SPF 25, 1.7 Ounce	Beauty	176452.0	'Beauty', 'Skin Care', 'Face'		
+B002AMUIBM	Nature's Gate Papaya Velvet Moisture Body Wash , 18-Ounce Bottles (Pack of 2)	Beauty	229245.0	'Beauty', 'Bath & Body', 'Cleansers', 'Body Washes'		
+B002DOO1VA	SHANY Studio Quality Natural Cosmetic Brush Set with Leather Pouch, 24 Count	Beauty	3677.0	'Beauty', 'Tools & Accessories', 'Bags & Cases', 'Cosmetic Bags'	26.99	SHANY Cosmetics
+B002MO780W	Just For Me Hair Milk Shampoo, 13.5-Ounce Bottle	Music	512681.0	'Beauty', 'Hair Care', 'Shampoos'	6.95	Just For Me
+B002MO9BW0	Just For Me Hair Milk Conditioner, 13.5-Ounce Bottle	Beauty	208683.0	'Beauty', 'Hair Care', 'Conditioners'	4.99	Just For Me
+B002MO3CG6	Just For Me Hair Milk Nourishing Detangler, 10-Ounce Bottle	Beauty	187127.0	'Beauty', 'Hair Care', 'Styling Products', 'Hair Sprays'	6.49	Just For Me
+B002MOBZSS	Just For Me Hair Milk Styling Creme, 8-Ounce Bottle	Health & Personal Care	147682.0	'Beauty', 'Hair Care', 'Styling Products', 'Creams, Gels & Lotions'	9.39	Just For Me
+B002PBHQP4	L'Oreal Paris Age Perfect Hydra-Nutrition Moisturizer, 1.7-Fluid Ounce	Beauty	16165.0	'Beauty', 'Skin Care', 'Face', 'Creams & Moisturizers', 'Fluids & Lotions', 'Fluids'	6.86	L&#39;Oreal Paris
+B002RXW5BA	SHANY Makeup Artists Must Have Pro Eyeshadow Palette, 96 Color	Beauty	161276.0	'Beauty', 'Makeup', 'Makeup Sets'	25.0	SHANY Cosmetics
+B002SFVP2W	Fytofontana Cosmeceuticals Botoceutical Gold Anti-Wrinkle Biotechnology Serum for Adult Skin Over 45, 1.05 Fluid Ounce	Beauty	244404.0	'Beauty', 'Skin Care', 'Face', 'Creams & Moisturizers'	105.26	
+B002SWAFVM	Cameo Carry All Beauty Case by Shany &copy; 90pc Pro Make Up Set - Premium Collection	Beauty	363240.0	'Beauty', 'Makeup', 'Makeup Sets'	42.64	Cameo Cosmetics
+B002TSA90M	Dove Men + Care Body and Face Bar, Extra Fresh, 4 Ounce, 8 Count	Beauty	3622.0	'Beauty', 'Bath & Body', 'Cleansers', 'Soaps'	8.91	Dove
+B002TSA916	Dove Men and Care Body and Face Wash, Clean Comfort, 18 Ounce (Pack of 3)	Beauty	35306.0	'Beauty', 'Skin Care', 'Face', 'Cleansers', 'Washes'	9.75	Dove
+B002UUT3AG	Olay Professional Pro-X Intensive Firming Treatment Kit	Beauty	15119.0	'Beauty', 'Skin Care', 'Face', 'Sets & Kits'	29.99	Olay
+B002UUT3YM	Olay Regenerist Anti-Aging Starter Trio Pack 1 Kit	Beauty	137670.0	'Beauty', 'Skin Care', 'Face', 'Sets & Kits'	22.59	Olay
+B002XXAUE8	SHANY Carry All Trunk Professional Makeup Kit - Eyeshadow,Pedicure,manicure - Gift Set	Health & Personal Care	205723.0	'Beauty', 'Makeup', 'Makeup Sets'	34.99	SHANY Cosmetics
+B002Z7EOOE	Olay Total Effects Advanced Anti-Aging Deep Penetrating Moisture Body Wash 15.2 Oz (Pack of 2)	Beauty	169216.0	'Beauty', 'Bath & Body', 'Cleansers', 'Body Washes'	11.79	Olay
+B0030DK7E8	Anti-aging Serum - Perfective Ceuticals Divine Age Guardian Serum with Growth Factor	Beauty	418209.0	'Beauty', 'Skin Care', 'Face', 'Oils & Serums'		
+B0030GFY02	Fekkai Glossing Hair Products Starter 1 Kit	Beauty	332.0	'Beauty', 'Hair Care'	22.95	Fekkai
+B003156NFW	Neutrogena Clinical Facial Lifting Wrinkle Treatment, Night, 1 Ounce	Beauty	59169.0	'Beauty', 'Skin Care', 'Face', 'Treatments & Masks'	54.95	Neutrogena
+B003156OJM	Aveeno Ageless Vitality Rejuvenating Day Treatment	Beauty	861169.0	'Beauty', 'Skin Care', 'Face', 'Creams & Moisturizers', 'Day Creams'	69.99	Aveeno
+B0032DHP6O	SHANY Studio Quality Cosmetic Brush Set, 7 Piece with Bag	Health & Personal Care	417374.0	'Beauty', 'Tools & Accessories', 'Makeup Brushes & Tools', 'Brushes & Applicators'	17.61	SHANY Cosmetics
+B0034F9KEU	Steam Activated Cleanser by Biore, 5 Ounce	Beauty	134636.0	'Beauty', 'Skin Care', 'Face', 'Cleansers'	8.34	Biore
+B0034KYDQ0	SHANY Eyeshadow Kit, Metallic Runway, 96 Color	Beauty	323216.0	'Beauty', 'Makeup', 'Eyes', 'Eye Shadow'	39.95	SHANY Cosmetics
+B0034KYDRE	SHANY Professional Eyeshadow Kit, 180 Color, 180 Grams	Beauty	17000.0	'Beauty', 'Makeup', 'Eyes', 'Eye Shadow'	19.94	SHANY Cosmetics
+B0034KYDSS	SHANY Eyeshadow Kit, 48 Color	Beauty	546435.0	'Beauty', 'Makeup', 'Eyes', 'Eye Shadow'		
+B0034KYDTM	SHANY Deluxe Make up kit 44pc GIFT SET	Beauty	270009.0	'Beauty', 'Makeup', 'Makeup Sets'	12.95	SHANY Cosmetics
+B0034XRYAO	SHANY Professional Multi Effect Velvet Touch Eyeshadow Palette, 24 Color	Beauty	308498.0	'Beauty', 'Makeup', 'Makeup Sets'	9.95	
+B00380DF3S	Multicolor Eyeshadow palette - All In One	Sports &amp; Outdoors	564486.0	'Beauty', 'Makeup', 'Makeup Sets'		
+B00387F41M	RoC BRILLIANCE Eye Beautifier  .3 fl. oz.	Health & Personal Care	309169.0	'Beauty', 'Skin Care', 'Eyes'		
+B0038QQ7OQ	BabyGanics Foaming Hand Soap, Unscented, 8.45-Fluid Ounce Bottles (Pack of 2), Packaging May Vary	Beauty	412871.0	'Beauty', 'Skin Care', 'Hands & Nails', 'Hand Soaps'	13.99	BabyGanics
+B0038T17WK	Hydroxatone Revitalizing Microdermabrasion, 1.7 oz.	Beauty	23563.0	'Beauty', 'Skin Care', 'Face', 'Treatments & Masks', 'Microdermabrasion'	15.97	Hydroxatone
+B0039NMCPG	Olay Regenerist Micro-Sculpting Serum 1.7 Fl Oz	Beauty	1003939.0	'Beauty', 'Skin Care', 'Face'	10.2	Olay
+B0039UTO3M	CoverGirl LashBlast Fusion Mascara Black 865, 1 Tube	Health & Personal Care	3927.0	'Beauty', 'Makeup', 'Eyes', 'Mascara'	4.99	COVERGIRL
+B003BJZ1M4	Johnson's Baby Natural Shampoo, 10 Ounce (Pack of 2)	Beauty	520605.0	'Beauty', 'Hair Care', 'Shampoos'	13.49	Johnson&#39;s Baby
+B003CGYUH8	SHANY Snake Skin Pink Aluminium Train Case with Shoulder Strap, 4-Pounds	Health & Personal Care	1019591.0	'Beauty', 'Tools & Accessories', 'Bags & Cases', 'Train Cases'		
+B003DKO7RG	SHANY Mark It Black Liquid Eye Liner, 0.1 Ounce	Beauty	473155.0	'Beauty', 'Makeup', 'Eyes', 'Eyeliner'		
+B003EH20ZO	Pantene Pro-V Volume Conditioner 25.4 Fl Oz (Pack of 3) (packaging may vary)	Beauty	24279.0	'Beauty', 'Hair Care', 'Conditioners'	20.97	Pantene
+B003EH20VI	Pantene Pro-V Volume Shampoo, 25.4 Fluid Ounce (Pack of 3) (packaging may vary)	Beauty	32046.0	'Beauty', 'Hair Care', 'Shampoos'	27.75	Pantene
+B003F2T0M4	Conair YOU CURL Curling Wand	Sports &amp; Outdoors	28683.0	'Beauty', 'Hair Care', 'Styling Tools', 'Irons', 'Curling Irons'	32.94	Conair
+B003FBG7UI	Remington S7100a Wet 2 Straight 1 Inch Wet/Dry Ceramic Hair Straightener	Beauty	70178.0	'Beauty', 'Hair Care', 'Styling Tools', 'Irons', 'Flattening Irons'	36.0	Remington
+B003FKSVMG	CoverGirl &amp; Olay Simply Ageless Serum Primer, 1-Ounce	Beauty	77469.0	'Beauty', 'Makeup', 'Face', 'Foundation Primers'	5.99	COVERGIRL
+B003JA3KDW	Pantene Pro-V Curly Hair Series Moisture Renewal Conditioner 12.6 Fl Oz (Pack of 6) (packaging may vary)	Beauty	800189.0	'Beauty', 'Hair Care', 'Conditioners'	32.99	Pantene
+B003JA5OJA	Pantene Pro-V Smooth Conditioner 12.6 Fl Oz (Pack of 6) (packaging may vary)	Beauty	368378.0	'Beauty', 'Hair Care', 'Conditioners'	25.75	Pantene
+B003JA3KQE	Pantene Pro-V Curly Hair Series Moisture Renewal Shampoo 12.6 Fl Oz (Pack of 6) (packaging may vary)	Beauty	264065.0	'Beauty', 'Hair Care', 'Shampoos'	34.08	Pantene
+B003JA3KSW	Pantene Pro-V Smooth Shampoo 12.6 Fl Oz (Pack of 6)	Beauty	455687.0	'Beauty', 'Hair Care', 'Shampoos'	26.08	Pantene
+B003JTF3VK	Eclos Moisture Therapy Regenerative Cream, 2-Ounce	Beauty	17361.0	'Beauty', 'Skin Care', 'Face', 'Creams & Moisturizers'	24.99	Eclos
+B003O5NGJK	Tweezerman LTD Soft Grip Foot File	Health & Personal Care	219529.0	'Beauty', 'Tools & Accessories', 'Nail Tools', 'Sets & Kits'	11.99	
+B003P904EA	Envyderm Eyelash Enhancement and Conditioning Nighttime Serum, 5ml (0.17oz)	Beauty	10807.0	'Beauty', 'Bath & Body', 'Scrubs & Body Treatments', 'Body Scrubs'	43.91	EnvyDerm
+B003QA8XFK	SHANY Jet Black Professional Rolling Makeup Case Premium Collection, Slim Design, 12 Pounds	Beauty	129844.0	'Beauty', 'Tools & Accessories', 'Bags & Cases', 'Train Cases'	177.14	
+B003QKH03Q	SHANY Leopard Professional Rolling Makeup Case, Light Weight, 12 Pounds	Beauty	346091.0	'Beauty', 'Tools & Accessories', 'Bags & Cases', 'Train Cases'		
+B003QOZ2C8	Neutrogena Healthy Defense Daily Liquid Moisturizer with Helioplex, 1.4 Ounces	Beauty	451474.0	'Beauty', 'Skin Care', 'Sun', 'Skin Protection'	10.5	Neutrogena
+B003TPA9XG	SHANY Zebra Rolling Trolly Makeup Case, Light Weight, 12 Pounds	Beauty	6107.0	'Beauty', 'Tools & Accessories', 'Bags & Cases', 'Train Cases'		
+B003U4LI7W	Just For Me Hair Milk Smoothing Edges Cr&egrave;me, 4-Ounce Container	Beauty	57435.0	'Beauty', 'Hair Care', 'Styling Products', 'Creams, Gels & Lotions'	7.49	Just For Me
+B003V21WO2	Remington S9520 Salon Collection Ceramic Hair Straightener with Pearl Infused Wide Plates, 2 Inch	Beauty	178431.0	'Beauty', 'Hair Care', 'Styling Tools', 'Irons', 'Flattening Irons'		
+B003V264WW	Remington Ac2015 Tstudio Salon Collection Pearl Ceramic Hair Dryer	Sports &amp; Outdoors	933796.0	'Beauty', 'Hair Care', 'Styling Tools', 'Hair Dryers'	28.69	Remington
+B003V265QW	Remington CI95AC/2 Tstudio Salon Collection Pearl Digital Ceramic Curling Wand, 1/2 Inch - 1 Inch	Sports &amp; Outdoors	925204.0	'Beauty', 'Hair Care', 'Styling Tools', 'Irons', 'Curling Irons'	27.77	Remington
+B003XUROEY	Neutrogena Ageless Intensives Anti-wrinkle Deep Wrinkle Filler, 1 Ounce	Beauty	120736.0	'Beauty', 'Skin Care', 'Face'	22.4	Neutrogena
+B0040H00PE	Just For Me Hair Milk Curl Smoother, 8-Ounce Bottle	Beauty	389156.0	'Beauty', 'Hair Care', 'Styling Products', 'Creams, Gels & Lotions'	0.89	Just For Me
+B0041OUGF0	SHANY Foundation Brush - Premium collection -Ultra Firm and smooth	Beauty	792227.0	'Beauty', 'Tools & Accessories', 'Makeup Brushes & Tools', 'Brushes & Applicators'	15.0	
+B0043OYFKU	Olay Pro-X Advanced Cleansing System 0.68 Fl Oz, 1-Count	Beauty	417009.0	'Beauty', 'Skin Care', 'Face', 'Treatments & Masks', 'Microdermabrasion'	26.99	Olay
+B004799QZA	Olay Total Effects Dark Circle Minimizing Brush 0.2 Fl Oz	Health & Personal Care	501373.0	'Beauty', 'Tools & Accessories', 'Makeup Brushes & Tools', 'Brushes & Applicators'	7.45	Olay
+B0047F9622	L'Oreal Paris Youth Code Regenerating Skincare Kit (Day Lotion, Day/Night Cream, Eye Cream)	Beauty	822399.0	'Beauty', 'Skin Care', 'Face', 'Creams & Moisturizers', 'Fluids & Lotions', 'Lotions'	15.98	L&#39;Oreal Paris
+B004B9C8MO	Anti-aging Cream - Perfective Ceuticals Divine Age Guardian Cream with Growth Factor	Beauty	415670.0	'Beauty', 'Skin Care', 'Face', 'Creams & Moisturizers', 'Night Creams'		
+B004BPVF7W	SHANY Cosmetics Carry All Train Case with Makeup and Reusable Aluminum Case, Cameo	Beauty	89468.0	'Beauty', 'Makeup', 'Makeup Sets'	39.99	SHANY Cosmetics
+B004BYNLIO	BabyGanics Fine and Handy Foaming Hand Soap, Apple, 250 Ml, 8.45-Ounce (Pack of 2), Packaging May Vary	Health & Personal Care	16171.0	'Beauty', 'Skin Care', 'Hands & Nails', 'Hand Soaps'	17.97	
+B004BYSOYK	Babyganics Pure Mineral Sunscreen Stick SPF 50, 0.47-Ounce (Pack of 2), Packaging May Vary	Beauty	504852.0	'Beauty', 'Skin Care', 'Sun', 'Skin Protection', 'Sports'	13.5	BabyGanics
+B004BYUQG4	Babyganics Mineral-Based Sunscreen SPF 50, 6 oz (Pack of 2), Packaging May Vary	Beauty	305844.0	'Beauty', 'Skin Care', 'Sun', 'Skin Protection', 'Sports'	21.31	Babyganics
+B004BYUQAU	BabyGanics Fine and Handy Foaming Hand Soap, Tangerine, 8.45-Ounce (Pack of 2), Packaging May Vary	Beauty	219801.0	'Beauty', 'Skin Care', 'Hands & Nails', 'Hand Soaps'		
+B004D247SC	Aveeno Smart Essentials Daily Detoxifying Scrub, 5 Ounce	Beauty	47084.0	'Beauty', 'Skin Care', 'Face', 'Creams & Moisturizers', 'Fluids & Lotions', 'Fluids'	7.12	Aveeno
+B004D24818	Neutrogena Rapid Wrinkle Repair Eye, 0.5  Ounce	Health & Personal Care	141197.0	'Beauty', 'Skin Care', 'Face', 'Creams & Moisturizers', 'Fluids & Lotions', 'Fluids'	8.91	Neutrogena
+B004D268RA	Neutrogena Naturals Purifying Facial Cleanser, 6  Ounce, (Pack of 2)	Beauty	34580.0	'Beauty', 'Skin Care', 'Face', 'Cleansers'	14.87	Neutrogena
+B004D267RG	Aveeno Living Color Preserving Shampoo for Medium-Thick Hair, 10.5 Ounce (Pack of 2)	Beauty	96432.0	'Beauty', 'Hair Care', 'Hair Color', 'Color Refreshers'	16.89	Aveeno
+B004DJUHMA	SHANY Acrylic Nail Brush Sets with Pouch, 5 Ounce	Beauty	12081.0	'Beauty', 'Tools & Accessories', 'Nail Tools', 'Sets & Kits'	14.7	SHANY Cosmetics
+B004DK0UDA	SHANY 2012 Nail Art Polish Stamp Manicure Image Plates set of 25pcs	Beauty	12377.0	'Beauty', 'Tools & Accessories', 'Nail Tools', 'Nail Art Equipment'	16.99	SHANY Cosmetics
+B004GIM68G	Minera Dead Sea Salt 20 Lbs Fine Grain	Health & Personal Care	265690.0	'Beauty', 'Bath & Body', 'Bath', 'Minerals & Salts'	87.02	Minera
+B004INQ65S	Infiniti Pro by Conair 1 Inch  Tourmaline Ceramic Flat Iron	Beauty	234762.0	'Beauty', 'Hair Care', 'Styling Tools', 'Irons', 'Flattening Irons'	25.89	Conair
+B004INUY06	Infiniti Pro by Conair 1875 Watt Salon Performance Folding Handle Hair Dryer	Beauty	286410.0	'Beauty', 'Hair Care', 'Styling Tools', 'Hair Dryers'	24.5	Conair
+B004INUWX0	Infiniti Pro by Conair Spin Air Rotating Styler	Clothing	636854.0	'Beauty', 'Hair Care', 'Styling Tools', 'Hot-Air Brushes'	36.73	Conair
+B004MBJKRC	Muscle Soak Bath Salts 2 Lbs	Beauty	644187.0	'Beauty', 'Bath & Body', 'Bath', 'Minerals & Salts'	9.99	
+B004MKEGWM	Clearasil Ultra Acne + Marks Wash and Mask: 6.78 OZ	Kitchen & Dining	264413.0	'Beauty', 'Skin Care', 'Face', 'Treatments & Masks', 'Masks'	7.88	Clearasil
+B004MTF3KC	Sleep Lavender Bath Salts 20 Lbs	Beauty	245464.0	'Beauty', 'Bath & Body', 'Bath', 'Minerals & Salts'	44.99	
+B004N7DQHA	Epsoak Epsom Salt 19.75 Lbs	Beauty	215717.0	'Beauty', 'Bath & Body', 'Bath', 'Minerals & Salts'	32.99	
+B004PANDIC	T3 Micro Luminous Flat Iron, Black, 1&quot;	Beauty	342271.0	'Beauty', 'Hair Care', 'Styling Tools', 'Irons', 'Flattening Irons'	53.75	T3
+B004Q8GYES	Neutrogena Wave Sonic Power Cleanser with 14 Foaming Pads			'Beauty', 'Skin Care', 'Face', 'Cleansers'	11.86	Neutrogena
+B004SPY1SU	2011 Ultimate Makeup set - Eyeshadow/ Blush/ Lipgloss/ Mascara	Beauty	348028.0	'Beauty', 'Makeup', 'Makeup Sets'	16.99	
+B004UDQ6GK	Olay Regenerist Instant Fix Wrinkle Revolution Complex Primer Plus, 1.7 Fl Oz	Beauty	422449.0	'Beauty', 'Skin Care', 'Face', 'Creams & Moisturizers', 'Fluids & Lotions', 'Lotions'	10.69	Olay
+B004UKENRC	Axe Styling Aid, Hold Plus Touch, Spiking Glue, 3.2 Ounce	Beauty	102234.0	'Beauty', 'Hair Care', 'Styling Products', 'Creams, Gels & Lotions'	4.78	AXE
+B004UQPCGM	Hydroxatone Intensive Anti-Wrinkle Complex	Beauty	80034.0	'Beauty', 'Skin Care', 'Face', 'Creams & Moisturizers', 'Fluids & Lotions', 'Lotions'	37.99	Hydroxatone
+B004Y4JNZ6	Covergirl Natureluxe Mousse Mascara, Very Black 500, 0.27-Ounce	Beauty	31735.0	'Beauty', 'Makeup', 'Eyes', 'Mascara'	7.25	COVERGIRL
+B004Y9L50C	SOHO Pro Texture Diamond Silver Beauty Case	Beauty	57749.0	'Beauty', 'Tools & Accessories', 'Bags & Cases', 'Train Cases'	48.41	SOHO
+B004YZMKKU	John Frieda JF1 Full Volume Hair Dryer	Beauty	279023.0	'Beauty', 'Hair Care', 'Styling Tools', 'Hair Dryers'	35.89	John Frieda
+B004YZMKLE	John Frieda Volume Curls 1&frac12; Inch  Curling Iron	Beauty	218515.0	'Beauty', 'Hair Care', 'Styling Tools', 'Irons', 'Curling Irons'	15.99	John Frieda
+B004YZMKLY	John Frieda Sleek Finish 1 Inch  Flat Iron	Beauty	69531.0	'Beauty', 'Hair Care', 'Styling Tools', 'Irons', 'Flattening Irons'	28.95	John Frieda
+B004Z209HS	Pura d'or 100% Pure &amp; USDA Organic Argan Oil (4 fl. oz.) For Face, Hair, Skin and Nails	Health & Personal Care	207954.0	'Beauty', 'Skin Care', 'Body', 'Moisturizers', 'Oils'	21.99	Pura d&#39;or
+B0050QJ0YQ	Remington CI52FO Wrap to Waves Ceramic Hair Styler	Beauty	61464.0	'Beauty', 'Hair Care', 'Styling Tools', 'Irons', 'Curling Irons'	34.0	Remington
+B0050QJ0S2	Remington S6600 Ultimate Styling Ceramic Hair Straightener	Beauty	152098.0	'Beauty', 'Hair Care', 'Styling Tools', 'Irons', 'Flattening Irons'	19.49	Remington
+B0050QLDGY	Remington D3710 Ceramic Fast Finish Dual Fan Turbo Hair Dryer, 1875 Watts	Beauty	532238.0	'Beauty', 'Hair Care', 'Styling Tools', 'Hair Dryers'		
+B0052BHMOO	Conair 276R Infiniti Pro Volume Dryer	Beauty	253830.0	'Beauty', 'Hair Care', 'Styling Tools', 'Hair Dryers'	11.99	Conair
+B00547H5U2	Nu Brilliance Microdermabrasion Skin Care System	Beauty	609025.0	'Beauty', 'Skin Care', 'Face', 'Treatments & Masks', 'Microdermabrasion'	239.95	NuBrilliance
+B0054MSBZA	Neutrogena Ultra Gentle Soothing Lotion SPF 15, 4  Ounce	Health & Personal Care	278324.0	'Beauty', 'Skin Care', 'Face', 'Creams & Moisturizers', 'Fluids & Lotions', 'Lotions'	12.75	Neutrogena
+B0055S4BZ2	L'Oreal Paris Age Perfect Hydra-Nutrition Golden Balm Eye, 0.5 Fluid Ounce	Beauty	397824.0	'Beauty', 'Skin Care', 'Eyes'	8.99	L&#39;Oreal Paris
+B0057VQ9R0	Clearasil Ultra Rapid Action Acne Treatment Overnight Face Scrub, 5 Ounce	Beauty	96302.0	'Beauty', 'Skin Care', 'Face', 'Exfoliators & Scrubs', 'Scrubs'		
+B0058P6S2Q	SHANY Cosmetics Zebra Makeup Train Case with Mirror, 48 Ounce	Beauty	221798.0	'Beauty', 'Tools & Accessories', 'Bags & Cases', 'Train Cases'	39.99	SHANY Cosmetics
+B005ACLU3E	SHANY Cosmetics Female Styrofoam Head, 12 Inches, 4 Ounce	Beauty	117636.0	'Beauty', 'Hair Care', 'Styling Products', 'Hair Extensions & Wigs', 'Wigs'	8.99	
+B005CE21YW	Infiniti Pro by Conair Instant Heat 20 Ceramic Flocked Rollers	Beauty	377690.0	'Beauty', 'Hair Care', 'Styling Tools', 'Hair Rollers'	36.32	Conair
+B005F2AD3W	AINHOA Luxe Gold Facial Serum, 1.05 Fluid Ounce	Home &amp; Kitchen	2847869.0	'Beauty', 'Skin Care', 'Face', 'Oils & Serums'	67.9	
+B005FKAQ7M	Babyganics Eczema Care Skin Protectant Cream, 8 oz, Packaging May Vary	Beauty	234325.0	'Beauty', 'Skin Care', 'Body', 'Moisturizers', 'Creams'	12.69	BabyGanics
+B005FPWORC	Hydroxatone 90 Second Wrinkle Reducer	Beauty	13438.0	'Beauty', 'Skin Care', 'Face', 'Creams & Moisturizers', 'Fluids & Lotions', 'Lotions'	27.77	Hydroxatone
+B005HIHD2I	L'Oreal Paris EverSleek Sulfate-Free Smoothing System Super Sleek Intense Serum, 1.9 Fluid Ounce	Beauty	58343.0	'Beauty', 'Hair Care', 'Styling Products', 'Hair Styling Serums'	5.75	L&#39;Oreal Paris
+B005HO0A1I	Dove Bar Soap, White, 16 Count	Beauty	655500.0	'Beauty', 'Bath & Body', 'Cleansers', 'Soaps'	24.96	Dove
+B005IHS8KY	SHANY Pro Vegan Mineral Brush Set with Pink Clutch	Beauty	322455.0	'Beauty', 'Tools & Accessories', 'Makeup Brushes & Tools', 'Brushes & Applicators'	16.95	SHANY Cosmetics
+B005KJ353U	Own Products Rejuvenating Facial Cleanser	Beauty	85644.0	'Beauty', 'Skin Care', 'Face', 'Cleansers', 'Washes'		
+B005KJ35D0	Own Products Refining Moisture Night Cream	Beauty	155981.0	'Beauty', 'Skin Care', 'Face', 'Creams & Moisturizers', 'Night Creams'	25.0	Own Products Inc
+B005QZQ9JU	Clearasil Perfectawash Automatic Acne Treatment Face Wash Dispenser and Refills, 1 Count	Beauty	26353.0	'Beauty', 'Skin Care', 'Face', 'Creams & Moisturizers', 'Fluids & Lotions', 'Lotions'	11.99	Clearasil
+B005R3UYEW	SHANY Stamping Nail Art Set (Nail Art Image Plate Holder, Scraper, Stamper)	Beauty	608306.0	'Beauty', 'Tools & Accessories', 'Nail Tools', 'Nail Art Equipment'	9.08	SHANY Cosmetics
+B005TI7NPI	Simple Soothing Facial Toner, 6.7 Ounce (Pack of 2)	Beauty	166156.0	'Beauty', 'Skin Care', 'Face', 'Toners & Astringents'	17.2	Simple
+B005TI7LB4	Simple Moisturizing Facial Wash, 5 Ounce (Pack of 2)	Beauty	190128.0	'Beauty', 'Skin Care', 'Face', 'Cleansers'	14.01	Simple
+B005TI7LHS	Simple Cleansing Facial Wipes, 25 Count (Pack of 2)	Beauty	436674.0	'Beauty', 'Skin Care', 'Face', 'Cleansers', 'Cloths & Towelettes'	10.9	Simple
+B005TI7L6O	Simple Replenishing Rich Moisturizer, 4.2 Ounce	Beauty	19169.0	'Beauty', 'Skin Care', 'Face', 'Creams & Moisturizers', 'Fluids & Lotions', 'Lotions'	7.02	Simple
+B005TI7NQW	Simple Refreshing Facial Wash Gel, 5 Ounce	Beauty	24071.0	'Beauty', 'Skin Care', 'Face', 'Cleansers', 'Washes'	8.49	Simple
+B005TI7NQ2	Simple Smoothing Facial Scrub, 5 Ounce (Pack of 2)	Beauty	370318.0	'Beauty', 'Skin Care', 'Face', 'Exfoliators & Scrubs', 'Scrubs'	16.21	Simple
+B005TI7LD2	Simple Exfoliating Wipes, 25 Count (Pack of 2)	Health & Personal Care	48560.0	'Beauty', 'Skin Care', 'Face', 'Cleansers', 'Cloths & Towelettes'	8.46	Simple
+B005TI7L7I	Simple Hydrating Light Moisturizer, 4.2 Ounce	Beauty	290816.0	'Beauty', 'Skin Care', 'Face', 'Creams & Moisturizers', 'Fluids & Lotions', 'Lotions'	8.49	Simple
+B005UKNUAC	SHANY Fall Colors Eyeshadow Palette (12 Colors, Fall Natural and Hues, Limited), 0.63 Oz	Beauty	34748.0	'Beauty', 'Makeup', 'Eyes', 'Eye Shadow'	10.4	SHANY Cosmetics
+B005UL3LVY	SHANY Slick &amp; Shine Lipstick Set - Set of 12 Famouse Colors	Beauty	339938.0	'Beauty', 'Makeup', 'Lips', 'Lipstick'	29.95	SHANY Cosmetics
+B005UL6QDO	SHANY Cosmetics Desert Beauty Cracked Nail Polish Set (12 Famouse Colors), 15 Fluid Ounce	Health & Personal Care	267631.0	'Beauty', 'Makeup', 'Nails', 'Nail Polish'		
+B005UL1B34	SHANY 180 Color Eyeshadow Palette (180 Color Eyeshadow Palette, United Colors of SHANY, Neon Frenzy, Limited), 6.25 Ounce	Health & Personal Care	176456.0	'Beauty', 'Makeup', 'Eyes', 'Eye Shadow'	49.99	SHANY Cosmetics
+B005UKZAJG	SHANY 2012 Edition All In One Harmony Makeup Kit, 25 Ounce	Beauty	64928.0	'Beauty', 'Makeup', 'Face', 'Foundation'	37.95	SHANY Cosmetics
+B005X2F7JY	SHANY Cosmetics The Cosmopolitan Nail Polish Set (24 Colors Premium Quality and Quick Dry), 40 Fluid Ounce	Beauty	148138.0	'Beauty', 'Makeup', 'Nails', 'Nail Polish'	29.95	SHANY Cosmetics
+B005X2F7KI	SHANY Nail Art Set (24 Famouse Colors Nail Art Polish, Nail Art Decoration)	Beauty	183875.0	'Beauty', 'Makeup', 'Nails', 'Nail Polish'	19.95	
+B005XIM6J2	Q-Tips Cotton Swabs, Precision Tips, 170 Count (Pack of 3)	Health & Personal Care	1099656.0	'Beauty', 'Tools & Accessories', 'Cotton & Swabs', 'Cotton Swabs'	8.99	Q-Tips
+B005YVI3UO	Lysol No-Touch Kitchen System Dish Soap Dispenser Starter Kit, Tangerine, 8.5 Ounce	Beauty	203603.0	'Beauty', 'Bath & Body', 'Cleansers', 'Soaps'	9.99	Lysol
+B00604MSSC	Dove, Cr&egrave;me Mousse Body Wash, Rich and Creamy, Sensitive Skin, 18 ounce	Beauty	516921.0	'Beauty', 'Skin Care', 'Face', 'Cleansers'	11.0	Dove
+B0060HOOA4	vbeaut&eacute; Eye Never Nourishing DNA Repair Eye Cr&egrave;me, 0.5 Ounce	Beauty	31907.0	'Beauty', 'Skin Care', 'Eyes', 'Creams'	43.0	vbeaut&eacute;
+B0060HOMHY	vbeaut&eacute; Buying Time Everyday Cr&egrave;me, 1.7 Ounce	Beauty	145448.0	'Beauty', 'Skin Care', 'Face', 'Creams & Moisturizers', 'Fluids & Lotions', 'Lotions'	53.0	vbeaut&eacute;
+B0060HOMHE	vbeaut&eacute; It Kit	Health & Personal Care	322747.0	'Beauty', 'Skin Care', 'Face', 'Cleansers'	116.49	vbeaut&eacute;
+B0061KQF2K	SHANY Cosmetics Fuchsia 6 Color Blush Palette, 8 Ounce	Beauty	301728.0	'Beauty', 'Makeup', 'Face', 'Blush'	16.95	
+B0061KQEVW	SHANY Cosmetics Professional Cream Foundation and Camouflage Concealer 15 Color Palette, 13 Ounce	Beauty	254438.0	'Beauty', 'Makeup', 'Face', 'Foundation'	18.95	
+B0061JQY40	SHANY Cosmetics NY Collection Pro Brush Kit, 13 Ounce (22 Piece Mix Natural and Synthetic with Burgundy Faux Crocodile Case)	Beauty	44342.0	'Beauty', 'Tools & Accessories', 'Makeup Brushes & Tools', 'Brushes & Applicators'	45.43	SHANY Cosmetics
+B0061KQG6K	Shany Cosmetics Everyday Travel Trio Eyeshadow Palette, Olive, Champagne, 4 Ounce	Beauty	235905.0	'Beauty', 'Makeup', 'Eyes', 'Eye Shadow'	9.99	SHANY Cosmetics
+B0061YRVNS	SHANY Cosmetics Professional Cotton Makeup Apron with Makeup Artist Brush Belt, Light Weight, 8 Ounce	Beauty	155297.0	'Beauty', 'Tools & Accessories', 'Makeup Brushes & Tools', 'Brushes & Applicators'	24.85	SHANY Cosmetics
+B0061YSLKA	SHANY Cosmetics Urban Gal Collection Brush Kit (18 Piece Pro Brushes with Zebra Magnetic Pouch), 13 Ounce	Health & Personal Care	367490.0	'Beauty', 'Tools & Accessories', 'Makeup Brushes & Tools', 'Brushes & Applicators'	20.95	SHANY Cosmetics
+B0061YRVOC	SHANY Cosmetics Feather Hair Extension Kit, 8 Ounce (Feather Hair, Hook, Beads, Feather Grizzly Solid Mix All-In-One) -100 Piece	Health & Personal Care	936489.0	'Beauty', 'Hair Care', 'Styling Products', 'Hair Extensions & Wigs', 'Hair Extensions'	16.99	SHANY Cosmetics
+B0061YRVMO	SHANY Cosmetics Urban Gal Collection Brush Kit (15 Piece Vegan Travel Brushes with Carry On Case), 13 Ounce	Health & Personal Care	214966.0	'Beauty', 'Tools & Accessories', 'Makeup Brushes & Tools', 'Brushes & Applicators'	27.94	SHANY Cosmetics
+B0063A432W	Banana Boat Sport Cool Zone Sunscreen Continuous Spray SPF 50, 6 Fluid Ounce	Beauty	879300.0	'Beauty', 'Skin Care', 'Sun', 'Skin Protection', 'Sports'	9.54	Banana Boat
+B00639DLV2	Hawaiian Tropic Silk Hydration SPF 30 Sunscreen Lotion, 6 Fluid Ounce	Beauty	247811.0	'Beauty', 'Skin Care', 'Sun', 'Skin Protection', 'Sports'	2.9	Hawaiian Tropic
+B00644YNAO	SHANY Professional Nail Brush Set (7 Piece Natural Nail Brush Set with Pouch), 5 Ounce	Beauty	5187.0	'Beauty', 'Tools & Accessories', 'Nail Tools', 'Nail Brushes'		
+B00644YNCM	SHANY UV Gel Light Nail Dryer, 36 Watts Pro Series	Beauty	100485.0	'Beauty', 'Tools & Accessories', 'Nail Tools', 'Nail Dryers'	26.69	SHANY Cosmetics
+B0067H6JCI	Neutrogena Deep Clean Shine Control Blotting Sheets, 50 Count (Pack of 2)	Beauty	233924.0	'Beauty', 'Skin Care', 'Face', 'Cleansers', 'Cloths & Towelettes'	14.0	Neutrogena
+B0068G8EZ8	Biore Deep Cleansing Pore Strips Combo Pack, 14 strips	Beauty	369534.0	'Beauty', 'Skin Care', 'Face', 'Treatments & Masks', 'Pore Cleansing Strips'	8.99	Biore
+B0068G8DTA	Biore Deep Cleansing Pore Strips, 8 Nose Strips	Beauty	21324.0	'Beauty', 'Skin Care', 'Face', 'Treatments & Masks', 'Pore Cleansing Strips'	5.81	Biore
+B006BNFXHU	MANGROOMER 1680XL-6 Professional Ionic Hair Dryer for Men	Beauty	375074.0	'Beauty', 'Hair Care', 'Styling Tools', 'Hair Dryers'	44.0	MANGROOMER
+B006ENQHLS	SHANY Cosmetics Gel Polish -DIY UV Color Gel Set Of 24 Colors - Powder Acrylic UV Gel - Glitter Frenzy	Health & Personal Care	46812.0	'Beauty', 'Makeup', 'Nails', 'Nail Polish'	52.47	SHANY Cosmetics
+B006GTKSHY	SHANY COSMETICS The Masterpiece 7 Layers All-in-One Makeup Set	Beauty	115334.0	'Beauty', 'Makeup', 'Makeup Sets'	41.89	SHANY Cosmetics
+B006HT0AK8	Conair Power Facial Cleanser	Beauty	484075.0	'Beauty', 'Skin Care', 'Face'	10.29	Conair
+B006L2137U	Cetaphil Dermacontrol Moisturizer SPF 30, 4 Fluid Ounce	Beauty	68336.0	'Beauty', 'Skin Care', 'Face', 'Sunscreens & Self Tanners', 'Sunscreens'	18.39	Cetaphil
+B006L2137A	Cetaphil Dermacontrol Foam Wash, 8 Fluid Ounce	Health & Personal Care	63276.0	'Beauty', 'Skin Care', 'Face', 'Cleansers', 'Washes'	10.45	Cetaphil
+B006L6A06Q	Toni&amp;Guy Cleanse Shampoo for Damaged Hair, 8.5 Fluid Ounce	Beauty	331072.0	'Beauty', 'Hair Care', 'Shampoos'	11.36	Toni &amp; Guy
+B006L6A10G	Toni&amp;Guy Nourish Conditioner for Damaged Hair, 8.5 Fluid Ounce	Beauty	7736.0	'Beauty', 'Hair Care', 'Conditioners'	6.75	Toni &amp; Guy
+B006L6AA8Y	Toni&amp;Guy Prep Leave in Conditioner, 3.38 Fluid Ounce	Beauty	604696.0	'Beauty', 'Hair Care', 'Conditioners'	8.0	Toni &amp; Guy
+B006L6A9NK	Toni&amp;Guy Casual Sea Salt Texturising Spray, 6.8 Fluid Ounce	Beauty	49790.0	'Beauty', 'Hair Care', 'Styling Products', 'Hair Sprays'	14.97	Toni &amp; Guy
+B006MRM2TW	Goody Heat Wave Creator Styling Iron	Beauty	15978.0	'Beauty', 'Hair Care', 'Styling Tools', 'Irons', 'Curling Irons'	49.99	
+B006MRM2TC	Goody Heat Flash Dry Blow Dryer	Beauty	691038.0	'Beauty', 'Hair Care', 'Styling Tools', 'Hair Dryers'	17.25	Goody Heat
+B006RFZ8C2	Biore Blemish Fighting Ice Cleanser, 6.77 Ounce	Beauty	89604.0	'Beauty', 'Skin Care', 'Face', 'Cleansers'	6.95	Biore
+B006RFZ5ZM	Biore Pore Unclogging Scrub - 5 oz	Beauty	110501.0	'Beauty', 'Skin Care', 'Face', 'Exfoliators & Scrubs', 'Scrubs'	6.38	Biore
+B006RFZ66K	Biore Deep Cleansing Pore Strips, 24 Count	Beauty	24143.0	'Beauty', 'Skin Care', 'Face', 'Treatments & Masks', 'Pore Cleansing Strips'	7.7	Biore
+B006RFYH92	Biore Makeup Removing Towelettes, 30 Count	Beauty	164810.0	'Beauty', 'Skin Care', 'Face', 'Cleansers', 'Cloths & Towelettes'	5.55	Biore
+B006RFZ9IK	Biore Daily Deep Pore Cleansing Cloth, 60 Count	Beauty	222181.0	'Beauty', 'Skin Care', 'Face', 'Cleansers', 'Cloths & Towelettes'	6.73	Biore
+B006RFZ81S	Biore Pore Detoxifying Foam Cleanser, 6.7 Ounce	Beauty	33054.0	'Beauty', 'Skin Care', 'Face', 'Cleansers'	6.42	Biore
+B006RFZ8NG	Biore Combination Skin Balancing Cleanser, 6.77 Ounce	Beauty	173853.0	'Beauty', 'Skin Care', 'Face', 'Cleansers'	5.87	Biore
+B006RFZ98K	Biore Warming Anti-Blackhead Cleanser, 4.5 Ounce	Beauty	1055428.0	'Beauty', 'Skin Care', 'Face', 'Cleansers'	6.06	Biore
+B006WQBZ96	L'Oreal Paris, Age Perfect Day Cream for Mature Skin with Soy Seed Proteins, SPF 15, 2.5-Ounce	Health & Personal Care	194145.0	'Beauty', 'Skin Care', 'Face', 'Creams & Moisturizers', 'Day Creams'	54.25	
+B006YFRE90	SHANY COSMETICS Makeup Brush Set for Professionals	Health & Personal Care	438312.0	'Beauty', 'Tools & Accessories', 'Makeup Brushes & Tools', 'Brushes & Applicators'		
+B0072XRJ20	Motions Naturally You, Moisturizing Cleanser, 8 Ounce	Beauty	142060.0	'Beauty', 'Hair Care', 'Shampoos'	8.09	Motions
+B0072XT8BA	Motions Naturally You, Hydrate My Curls Pudding 8 Ounce	Beauty	358933.0	'Beauty', 'Hair Care', 'Styling Products', 'Creams, Gels & Lotions'	5.49	Motions
+B0072XR560	Motions Naturally You, Radiating Hair Gloss, 5.8 Ounce	Beauty	594318.0	'Beauty', 'Hair Care', 'Styling Products'	8.99	Motions
+B0072XUY7W	Motions Naturally You, Deep Conditioning Masque, 8 Ounce	Beauty	20927.0	'Beauty', 'Hair Care', 'Styling Products', 'Creams, Gels & Lotions'	5.99	Motions
+B0073P01RC	Cotz Face Natural Skin Tone SPF 40, 1.5 Ounce	Health & Personal Care	73928.0	'Beauty', 'Skin Care', 'Sun', 'Skin Protection'	15.76	CoTZ
+B0075J4TDI	Nivea Body Touch of Renewal Lathering Body Scrub, 12 Ounce	Beauty	349063.0	'Beauty', 'Bath & Body', 'Scrubs & Body Treatments', 'Body Scrubs'	6.46	Nivea
+B007A592HU	Motions Naturally You, Define My Curls Cr&egrave;me, 8 Ounce	Health & Personal Care	224551.0	'Beauty', 'Hair Care', 'Styling Products', 'Creams, Gels & Lotions'	7.99	Motions
+B007E0FR84	Remington D8410 Keratin Therapy Dryer	Beauty	314833.0	'Beauty', 'Hair Care', 'Styling Tools', 'Hair Dryers'	31.3	Remington
+B007E0FQ1W	Remington S8590 Keratin Therapy Straightener with Smart Sensor	Beauty	107316.0	'Beauty', 'Hair Care', 'Styling Tools', 'Irons', 'Flattening Irons'	39.99	Remington
+B007JT7AEY	Clear Men Scalp &amp; Hair 2 in 1 Shampoo and Conditioner, Clean &amp; Refresh, 12.9 Fluid Ounce	Health & Personal Care	333597.0	'Beauty', 'Hair Care', 'Shampoos'	6.79	Clear
+B007JT7AGC	CLEAR MEN SCALP THERAPY Anti-Dandruff Shampoo, Cool Sport Mint, 12.9 Fluid Ounce	Beauty	91414.0	'Beauty', 'Hair Care', 'Shampoos'	7.9	Clear
+B007JT7AIA	CLEAR MEN SCALP THERAPY 2 in 1 AntiDandruff Shampoo and Conditioner, Dry Scalp Hydration, 12.9oz	Health & Personal Care	627028.0	'Beauty', 'Hair Care', 'Shampoos'	4.0	Clear
+B007JT7AIK	CLEAR SCALP &amp; HAIR BEAUTY THERAPY Anti-Dandruff Shampoo, 12.9 Fluid Ounce	Health & Personal Care	330828.0	'Beauty', 'Hair Care', 'Shampoos'	1.5	Clear
+B007JT7ARQ	CLEAR MEN SCALP THERAPY AntiDandruff Shampoo, Clean &amp; Refresh, 12.9 Fluid Ounce	Health & Personal Care	50221.0	'Beauty', 'Hair Care', 'Shampoos'	6.99	Clear
+B007K449CE	CLEAR MEN SCALP THERAPY AntiDandruff Shampoo, Strong &amp; Full, 12.9 Fluid Ounce	Beauty	21631.0	'Beauty', 'Hair Care', 'Shampoos'	7.5	Clear
+B007K449EC	CLEAR MEN SCALP THERAPY Complete Care 2in1 Anti-Dandruff Shampoo &amp; Conditioner, 12.9 Fluid Ounce	Beauty	344955.0	'Beauty', 'Hair Care', 'Shampoos'	7.0	Clear
+B007PAD71M	Remington CI5325 Keratin Therapy Curling Wand, 1-Inch	Beauty	225291.0	'Beauty', 'Hair Care', 'Styling Tools', 'Irons', 'Curling Irons'	16.26	Remington
+B007RTR8AC	CLEAR SCALP &amp; HAIR BEAUTY Volumizing Root Boost Nourishing Shampoo, 12.9 Fluid Ounce	Beauty	22229.0	'Beauty', 'Hair Care', 'Shampoos'	1.66	Clear
+B007RTR8A2	CLEAR SCALP &amp; HAIR BEAUTY Moisturizing Dry Scalp Nourishing Shampoo, 12.9 Fluid Ounce	Beauty	339462.0	'Beauty', 'Hair Care', 'Shampoos'	1.23	Clear
+B007RTR8UM	CLEAR SCALP &amp; HAIR BEAUTY Volumizing Root Boost Nourishing Conditioner, 12.7 Fluid Ounce	Beauty	691992.0	'Beauty', 'Hair Care', 'Conditioners'	4.48	Clear
+B007RTR9DS	CLEAR SCALP &amp; HAIR BEAUTY THERAPY Ultra Shea Intense Scalp Nourishing Balm, 6.7 Fluid Ounce	Beauty	82195.0	'Beauty', 'Hair Care', 'Hair & Scalp Treatments'	5.58	Clear
+B007RTR9FQ	CLEAR SCALP &amp; HAIR BEAUTY Ultra Shea Cleanse &amp; Nourish Shampoo, 12.9 Fluid Ounce	Beauty	508031.0	'Beauty', 'Hair Care', 'Shampoos'	8.99	Clear
+B007RTR8UW	CLEAR SCALP &amp; HAIR BEAUTY Strong Lengths Nourishing Conditioner, 12.7 Fluid Ounce	Beauty	205225.0	'Beauty', 'Hair Care', 'Conditioners'	5.0	Clear
+B007RTR89S	CLEAR SCALP &amp; HAIR BEAUTY Damage &amp; Color Repair Nourishing Shampoo, 12.9 Fluid Ounce	Beauty	223602.0	'Beauty', 'Hair Care', 'Shampoos'	4.46	Clear
+B007RTR8AM	CLEAR SCALP &amp; HAIR BEAUTY Strong Lengths Nourishing Shampoo, 12.9 Fluid Ounce	Beauty	426520.0	'Beauty', 'Hair Care', 'Shampoos'	4.88	Clear
+B007RTR9E2	CLEAR SCALP &amp; HAIR BEAUTY Ultra Shea Smooth &amp; Nourish Conditioner, 12.7 Fluid Ounce	Beauty	941535.0	'Beauty', 'Hair Care', 'Conditioners'	4.48	
+B007RTR8UC	CLEAR SCALP &amp; HAIR BEAUTY Total Care Nourishing Conditioner, 12.7 Fluid Ounce	Beauty	1043823.0	'Beauty', 'Hair Care', 'Conditioners'	5.99	Clear
+B007RTR898	CLEAR SCALP &amp; HAIR BEAUTY Total Care Nourishing Shampoo, 12.9 Fluid Ounce	Beauty	1059939.0	'Beauty', 'Hair Care', 'Shampoos'	5.96	Clear
+B007RTR8T8	CLEAR SCALP &amp; HAIR BEAUTY Moisturizing Dry Scalp Nourishing Conditioner, 12.7 Fluid Ounce	Beauty	725511.0	'Beauty', 'Hair Care', 'Conditioners'	5.99	Clear
+B007RTR8TS	CLEAR SCALP &amp; HAIR BEAUTY Damage &amp; Color Repair Nourishing Conditioner, 12.7 Fluid Ounce	Beauty	64132.0	'Beauty', 'Hair Care'	4.25	Clear
+B007RTR9G0	CLEAR SCALP &amp; HAIR BEAUTY THERAPY Ultra Shea Nourishing Scalp &amp; Hair Oil, 3 Fluid Ounce	Toys & Games	638828.0	'Beauty', 'Hair Care', 'Hair & Scalp Treatments'	4.98	Clear
+B007SA3CD2	Tweezerman LTD Deluxe Metal Eyelash Curler	Beauty	818597.0	'Beauty', 'Tools & Accessories', 'Makeup Brushes & Tools', 'Eyelash Tools', 'Curlers'	12.34	Tweezerman
+B007UZO2G6	SHANY Cosmetics All Black Light Weighted Makeup Train Case, Moonless Night	Health & Personal Care	127918.0	'Beauty', 'Tools & Accessories', 'Bags & Cases', 'Train Cases'		
+B007WFZ0XI	Savanaah's Organic Argan Oil 4 Oz / 120 ML 100% Pure &amp; Cold Pressed -Ultra Premium Quality	Beauty	344956.0	'Beauty', 'Skin Care', 'Body', 'Moisturizers', 'Oils'	24.95	
+B007ZRXYK4	CoverGirl Flamed Out Eye Shadow Pot, Melted Gold, 0.07 Ounce	Beauty	296450.0	'Beauty', 'Makeup', 'Eyes', 'Eye Shadow'	4.99	COVERGIRL
+B0081E6X1W	Neutrogena Ultra Gentle Daily Cleanser, 12 Ounce	Beauty	430119.0	'Beauty', 'Skin Care', 'Face', 'Cleansers'	7.99	Neutrogena
+B0089JVDPK	Pond's Luminous Clean Wet Towelettes, 30Count	Beauty	394291.0	'Beauty', 'Skin Care', 'Face', 'Cleansers', 'Cloths & Towelettes'	2.59	Pond&#39;s
+B0089JVEOK	POND'S Luminous Clean Cream Cleanser, 6oz	Beauty	40551.0	'Beauty', 'Skin Care', 'Face', 'Cleansers'	2.68	Pond&#39;s
+B0089JVEPO	Pond's luminous clean daily exfoliating cleanser, 5oz	Beauty	197684.0	'Beauty', 'Skin Care', 'Face', 'Exfoliators & Scrubs', 'Scrubs'	6.64	Pond&#39;s
+B008AI211A	Non-comedogenic Sunscreen - Perfective Ceuticals Ultra-light Sunscreen SPF 40 with Titanium Dioxide	Beauty	595838.0	'Beauty', 'Skin Care', 'Sun', 'Skin Protection'		
+B008CT12G2	L'Oreal Paris RevitaLift Triple Power Eye Treatment, 0.5 Fluid Ounce	Health & Personal Care	492062.0	'Beauty', 'Skin Care', 'Eyes', 'Serums'	11.68	L&#39;Oreal Paris
+B008DCP8I6	Panasonic EH-SE60VP Heated Eyelash Curler	Beauty	2293.0	'Beauty', 'Tools & Accessories', 'Makeup Brushes & Tools', 'Eyelash Tools', 'Curlers'	26.24	Panasonic
+B008EKY8VK	L'Oreal Paris RevitaLift Triple Power Deep-Acting Moisturizer, 1.7 Fluid Ounce	Beauty	428670.0	'Beauty', 'Skin Care', 'Face', 'Creams & Moisturizers', 'Fluids & Lotions', 'Lotions'	9.0	L&#39;Oreal Paris
+B008FZ562E	L'Oreal Paris RevitaLift Triple Power Concentrated Serum Treatment, 1.0 Fluid Ounce	Beauty	59564.0	'Beauty', 'Skin Care', 'Eyes', 'Serums'	12.95	L&#39;Oreal Paris
+B008GSY7UM	Jerdon JGL10W Euro Tabletop Tri-Fold Two-Sided Lighted Makeup Mirror with 5x Magnification and 4-Light Settings, White Finish	Clothing	28171.0	'Beauty', 'Tools & Accessories', 'Mirrors', 'Makeup Mirrors'	37.45	Jerdon
+B008PUJBJS	Davidsbeenhere Hanging Travel Toiletry Cosmetics Bag Kit, Grey	Beauty	372376.0	'Beauty', 'Tools & Accessories', 'Bags & Cases', 'Toiletry Bags'	26.99	
+B008R56PAY	SHANY Cosmetics Intense Eyes Palette 72 Color Eyeshadow Palette, 17 Ounce	Beauty	167705.0	'Beauty', 'Makeup', 'Makeup Sets'	26.4	SHANY Cosmetics
+B008R56PVI	SHANY Cosmetics Eyelash Extend Assorted Reusable Eyelashes Thick and Dramatic, 3.6 Ounce	Health & Personal Care	277529.0	'Beauty', 'Tools & Accessories', 'Makeup Brushes & Tools', 'Eyelash Tools', 'Fake Eyelashes & Adhesives'	19.95	SHANY Cosmetics
+B008U2Y9BQ	Cotz Pediatric Spf 40, 3.5 Ounce	Beauty	167134.0	'Beauty', 'Skin Care', 'Face', 'Creams & Moisturizers'	17.3	CoTZ
+B008U5XS2O	Remington S8510DS Flat Iron, Frizz Therapy, 1 Inch	Clothing	704719.0	'Beauty', 'Hair Care', 'Styling Tools', 'Irons', 'Flattening Irons'	55.9	
+B008U5XRX4	Remington S8500DS Flat Iron, Shine Therapy, 1 Inch	Beauty	122909.0	'Beauty', 'Hair Care', 'Styling Tools', 'Irons', 'Flattening Irons'		
+B008VSYO5A	Dove Men Plus Care Body and Face Wash, Fresh Awake, 13.5 Ounce	Beauty	623374.0	'Beauty', 'Skin Care', 'Face', 'Cleansers', 'Washes'	7.98	Dove
+B008X2133K	SHANY Cosmetics French Nail Set, 7 Ounce	Beauty	76304.0	'Beauty', 'Tools & Accessories', 'Nail Tools', 'Sets & Kits'	20.42	SHANY Cosmetics
+B008X20V6A	Perfect Gift : SHANY Cosmetics All In One Heart Makeup	Beauty	384092.0	'Beauty', 'Makeup', 'Makeup Sets'	19.95	
+B0090ELFRO	SHANY Cosmetics Magnetic Nail Polish, Earth Colors, 14.6 Ounce	Beauty	385959.0	'Beauty', 'Makeup', 'Nails', 'Nail Polish'		
+B00910ZHJE	SHANY Cosmetics Nail Art Set, 24 Count	Beauty	204965.0	'Beauty', 'Makeup', 'Nails', 'Nail Polish'		
+B0094C43FI	AINHOA Senskin Sensitive Concentrate, 1.05 Fluid Ounce	Beauty	113233.0	'Beauty', 'Skin Care', 'Face', 'Creams & Moisturizers'	56.0	
+B0094C5C3A	AINHOA Men Vitality 24 Hours Cream, 1.7 Fluid Ounce	Beauty	451410.0	'Beauty', 'Skin Care', 'Face', 'Creams & Moisturizers'	53.0	
+B0094C4XOO	AINHOA Purity Purifying Fluid, 1.05 Fluid Ounce	Beauty	146350.0	'Beauty', 'Skin Care', 'Face', 'Cleansers'	44.65	
+B0094ELMBY	SHANY Cosmetics 3 In 1 Makeup Case Clear Nail Art Organizer and Case Makeup Organizer Set of 3, 3 Count	Beauty	92941.0	'Beauty', 'Tools & Accessories', 'Bags & Cases', 'Train Cases'		
+B0094GHGQM	Covergirl Clump Crusher Mascara By Lashblast, Very Black 800, 0.44 Ounce	Beauty	24198.0	'Beauty', 'Makeup', 'Eyes', 'Mascara'	8.86	COVERGIRL
+B0095BWH5Q	AINHOA Whitess Caviar Renewal Serum, 1.05 Fluid Ounce	Beauty	421916.0	'Beauty', 'Skin Care', 'Face', 'Oils & Serums'	82.21	
+B0095BWFTY	AINHOA Luxe Hydra Luxe Absolute Gift Set (Body Cream, Anti-Aging Cream)	Beauty	174722.0	'Beauty', 'Skin Care', 'Sets & Kits'	72.69	
+B0095BWGIE	AINHOA Specific Extreme Pack	Beauty	85825.0	'Beauty', 'Skin Care', 'Face', 'Treatments & Masks'	96.95	AINHOA
+B0095BWHV0	AINHOA Passion Mascara Volume Up, 0.27 Fluid Ounce	Health & Personal Care	929151.0	'Beauty', 'Makeup', 'Eyes', 'Mascara'	28.0	
+B0098JU8TW	Pantene Pro-V Expert Collection Agedefy Shampoo 10.1 Fl Oz	Beauty	164396.0	'Beauty', 'Hair Care', 'Shampoos'	3.2	Pantene
+B0098JU8T2	Pantene Pro-V Expert Collection Agedefy Conditioner 8.4 Fl Oz	Beauty	216041.0	'Beauty', 'Hair Care', 'Conditioners'	6.85	Pantene
+B0098JU8TC	Pantene Pro-V Expert Collection AgeDefy Advanced Thickening Treatment, 4.2 Fluid Ounce	Beauty	137491.0	'Beauty', 'Hair Care', 'Hair & Scalp Treatments'	13.63	Pantene
+B009CZR3Y0	Watts Beauty Moisturizing Hyaluronic Acid Advanced Skin Gel, 2.0 Ounce	Beauty	250510.0	'Beauty', 'Skin Care', 'Face', 'Oils & Serums'	18.99	Watts Beauty
+B009FKNGRA	Banana Boat Protect and Hydrate Sunscreen Lotion Spf 30, 6 Ounce	Beauty	852912.0	'Beauty', 'Skin Care', 'Sun', 'Skin Protection', 'Sports'	3.7	Banana Boat
+B009FKNGGQ	Banana Boat Sport Coolzone Sunscreen Lotion Spf 50, 6 Ounce	Beauty	368815.0	'Beauty', 'Skin Care', 'Sun', 'Skin Protection', 'Sports'	6.75	Banana Boat
+B009G0E19Q	Cristophe Professional Glossing Shampoo, 10 Ounce	Beauty	82816.0	'Beauty', 'Hair Care', 'Shampoos'		
+B009G0E90M	Cristophe Professional Volumizing Spray Tonic, 6 Ounce	Beauty	189894.0	'Beauty', 'Hair Care', 'Styling Products', 'Hair Sprays'		
+B009G0E9CK	Cristophe Professional Extra Strength Hair Serum, 1.8 Ounce	Beauty	175805.0	'Beauty', 'Hair Care', 'Styling Products', 'Hair Styling Serums'	7.36	Cristophe Professional
+B009G0E59M	Cristophe Professional Ultimate Shaping Hair Spray, 10 Ounce	Beauty	92956.0	'Beauty', 'Hair Care', 'Styling Products', 'Hair Sprays'	18.62	Cristophe Professional
+B009GEUPDS	Olay Fresh Effects Va-Va-Vivid! Powered Contour Cleansing System 1 Kit	Beauty	245620.0	'Beauty', 'Skin Care', 'Face', 'Sets & Kits'	6.2	Olay
+B009GEUPPG	Fresh Effects Long Live Moisture Satin Finish Lotion 1.7 Fl Oz	Beauty	121354.0	'Beauty', 'Skin Care', 'Body', 'Moisturizers', 'Lotions'	8.5	Olay
+B009GEUPMY	Olay Professional Pro-X Even Skin Tone Spot Fading Treatment 1.3 Fl Oz	Beauty	38489.0	'Beauty', 'Skin Care', 'Face', 'Treatments & Masks'	12.9	Olay
+B009GEUPXI	Olay Total Effects 7 In One Moisturizer + Serum Duo With Sunscreen Broad Spectrum SPF 15 1.35 Fl Oz	Beauty	152084.0	'Beauty', 'Skin Care', 'Face', 'Sets & Kits'	11.2	Olay
+B009GEUP6A	Olay Age Defying Sensitive Skin Night Cream 2 Oz	Beauty	132048.0	'Beauty', 'Skin Care', 'Face', 'Creams & Moisturizers', 'Night Creams'	9.5	Olay
+B009GEUOZ2	Fresh Effects BB Cream Skin Perfecting Tinted Moisturizer with Sunscreen, Light to Medium 2.5 Fl Oz	Health & Personal Care	22834.0	'Beauty', 'Skin Care', 'Face', 'Creams & Moisturizers'	7.35	Olay
+B009HKAWFC	Remington S7230 Wet 2 Straight Flat Iron with Soy Hydra Complex, 2 Inch	Beauty	560372.0	'Beauty', 'Hair Care', 'Styling Tools', 'Irons', 'Flattening Irons'	24.84	Remington
+B009LOJ5MA	Skinny Cream Clinically Proven Cellulite Reduction, 6 Ounce	Beauty	620121.0	'Beauty', 'Skin Care', 'Body', 'Moisturizers', 'Lotions'	29.99	Skinny Cream
+B009OY8GK4	TEMPTU AIRbrush Makeup System 2.0 and Signature Starter Kit, Fair	Beauty	134550.0	'Beauty', 'Makeup', 'Makeup Sets'	235.0	
+B009RNUH7M	Simple Protecting Light Moisturizer Spf 15, 4.2 Ounce	Clothing	416593.0	'Beauty', 'Skin Care', 'Face', 'Creams & Moisturizers', 'Fluids & Lotions', 'Lotions'	7.18	Simple
+B009VGNYFM	Dove Men Care Body and Face Wash Clean Defense, 13.5 Ounce	Beauty	29723.0	'Beauty', 'Skin Care', 'Face', 'Cleansers', 'Washes'	4.88	Dove
+B009XRFAJW	Hydroxatone Intensive Overnight Repair Cream, 1 oz.	Beauty	136718.0	'Beauty', 'Skin Care', 'Face', 'Creams & Moisturizers'	38.0	Hydroxatone
+B009XRFA88	Hydroxatone Hydrolyze Intensive Under Eye Treatment, Net Wt. 0.5 Oz.	Beauty	451217.0	'Beauty', 'Skin Care', 'Eyes', 'Creams'	27.99	Hydroxatone
+B009XRF9M0	Hydroxatone Anti-Aging BB Cream Broad Spectrum SPF 40, Light			'Beauty', 'Skin Care', 'Face', 'Creams & Moisturizers'	27.93	Hydroxatone
+B009YSSLAU	Dove Men+Care Sensitive + Face Lotion 1.69 FL.Oz.	Beauty	132051.0	'Beauty', 'Skin Care', 'Face', 'Creams & Moisturizers', 'Fluids & Lotions', 'Lotions'	6.5	Dove
+B009YSYNIY	Andis Tangerine Twist Curling Iron,1-Inch	Health & Personal Care	95512.0	'Beauty', 'Hair Care', 'Styling Tools', 'Irons', 'Curling Irons'	28.18	Andis
+B009ZRFJFA	Viviscal Hair Filler Fibers, Dark Brown/Black, 0.53 Ounce	Beauty	272184.0	'Beauty', 'Hair Care', 'Hair Loss Products', 'Styling Products'	10.99	Viviscal
+B00A0IWRUI	Suave Professionals Moroccan Infusion Color Care Conditioner 28 oz	Beauty	14582.0	'Beauty', 'Hair Care', 'Conditioners'	16.85	Suave
+B00A0IWRT4	Suave Professionals Moroccan Infusion Shine Shampoo 28 oz	Beauty	94620.0	'Beauty', 'Hair Care', 'Shampoos'	6.29	Suave
+B00A0IWSN4	Suave Professionals Moroccan Infusion Deep Conditioning Shine Mask, 8 Ounce	Beauty	686935.0	'Beauty', 'Hair Care', 'Conditioners'	3.57	Suave
+B00A0IWSIO	Suave Professionals Moroccan Infusion Moroccan Argan Styling Oil, 3 Ounce	Health & Personal Care	102767.0	'Beauty', 'Hair Care', 'Styling Products', 'Hair Styling Serums'	6.65	Suave
+B00A0IWT9C	Suave Suave Naturals Rainforest Fresh Conditioner, 22.5 Ounce	Beauty	678412.0	'Beauty', 'Hair Care', 'Conditioners'	8.75	Suave
+B00A0IWTDI	Suave Suave Naturals Rainforest Fresh Shampoo, 22.5 Ounce	Health & Personal Care	22057.0	'Beauty', 'Hair Care', 'Shampoos'	6.99	Suave
+B00A0IWRU8	Suave Professionals Moroccan Infusion Shine Conditioner 28 oz	Beauty	555396.0	'Beauty', 'Hair Care', 'Conditioners'	7.29	Suave
+B00A0J084Y	Axe Energizing Face Wash, Boost, 5 Ounce	Beauty	663925.0	'Beauty', 'Skin Care', 'Face', 'Oils & Serums'	5.0	AXE
+B00A0IWTEW	Suave Suave Kids Ocean Blast Gel, 7 Ounce	Beauty	320164.0	'Beauty', 'Hair Care', 'Styling Products', 'Creams, Gels & Lotions'	3.48	Suave
+B00A0J09G6	Dove Men+Care Sensitive + Face Wash, 5 Ounces	Beauty	955754.0	'Beauty', 'Skin Care', 'Face', 'Cleansers', 'Washes'	6.69	Dove
+B00A0IWTBA	Suave Suave Kids Cherry Vanilla Bop Mousse, 7 Ounce	Beauty	390119.0	'Beauty', 'Hair Care', 'Styling Products', 'Mousses & Foams'	7.48	Suave
+B00A0J09GG	Axe Face Hydrator and Post Shave Gel, Chilled, Cooling, 3.3 Ounce	Beauty	87688.0	'Beauty', 'Skin Care', 'Body', 'Moisturizers', 'Oils'	1.14	AXE
+B00A0J09C0	Dove Men+Care Hydrate + Shave Gel	Beauty	576753.0	'Beauty', 'Skin Care', 'Body', 'Moisturizers', 'Oils'	7.09	Dove
+B00A0IWRRG	Suave Professionals Moroccan Infusion Color Care Shampoo 28 oz	Beauty	396232.0	'Beauty', 'Hair Care', 'Shampoos'	5.99	Suave
+B00A3Q9LPG	Zadro Z Fogless Water Mirror with LED Light Panel and Tri Accessory Holder, 6-Inch, Stainless Steel	Beauty	547982.0	'Beauty', 'Tools & Accessories', 'Mirrors', 'Shower Mirrors'	49.99	Zadro
+B00A46OKFG	Burt's Bees Lip Gloss, Autumn Haze, 0.2 Fluid Ounces	Beauty	325780.0	'Beauty', 'Makeup', 'Lips', 'Lip Glosses'	6.69	Burt&#39;s Bees
+B00AAIOP44	Clear Scalp and Hair Beauty Therapy Frizz Control Nourishing Shampoo, 12.9 Fluid Ounce	Beauty	512147.0	'Beauty', 'Hair Care', 'Shampoos'	8.74	Clear
+B00AAJTDLI	Dove Men+Care Fresh Clean Fortifying 2 in 1 (12oz)	Beauty	406231.0	'Beauty', 'Hair Care', 'Shampoos'	7.49	Dove
+B00AE07932	Clear Men Scalp Therapy Scalp Comfort Anti-Dandruff 2 in1 Shampoo/Conditioner, 12.9 Fluid Ounce	Beauty	78460.0	'Beauty', 'Hair Care', 'Shampoos'	2.99	Clear
+B00AE07BC6	Axe 3 in 1 Shampoo Plus Conditioner Plus Bodywash Total Fresh, 12 Ounce	Beauty	120350.0	'Beauty', 'Hair Care', 'Shampoos'	23.88	AXE
+B00AE07B9O	Axe 2 in 1 Shampoo Plus Conditioner Apollo, 12 Ounce	Beauty	5245.0	'Beauty', 'Hair Care', 'Shampoos'	15.95	AXE
+B00AE078TM	Clear Scalp and Hair Beauty Therapy Frizz Control Nourishing Daily Conditioner, 12.7 Fluid Ounce	Beauty	678.0	'Beauty', 'Hair Care', 'Conditioners'	8.56	Clear
+B00AE07BMQ	Axe Styling Gum Messy Look, 3.2 Ounce	Beauty	54627.0	'Beauty', 'Hair Care', 'Styling Products', 'Creams, Gels & Lotions'	4.36	AXE
+B00AE07BDU	Axe Spiking Glue Spiked Up Look, 3.2 Ounce	Beauty	44647.0	'Beauty', 'Hair Care', 'Styling Products', 'Creams, Gels & Lotions'	6.97	AXE
+B00AE07EIM	Dove Men+Care Sensitive Scalp Fortifying 2 in 1 (12oz)	Beauty	162619.0	'Beauty', 'Hair Care', 'Shampoos'	4.79	Dove
+B00AE07H0M	Nexxus Youth Renewal Rejuvenating Elixir, 0.94 Ounce	Beauty	7086.0	'Beauty', 'Hair Care', 'Hair & Scalp Treatments'	7.96	Nexxus
+B00AE07FUE	Nexxus Youth Renewal Rejuvenating Shampoo, 13.5 Ounce	Beauty	12947.0	'Beauty', 'Hair Care', 'Shampoos'	10.7	Nexxus
+B00AE07BI0	Axe Wet Shine Gel Clean Cut Look, 3.2 Ounce	Beauty	20211.0	'Beauty', 'Hair Care', 'Styling Products', 'Creams, Gels & Lotions'	11.28	AXE
+B00AE07FUO	Tresemme Platinum Strength Shampoo, 25 Ounce	Beauty	13459.0	'Beauty', 'Hair Care', 'Shampoos'	5.63	TRESemme
+B00AE0790U	Clear Deep Nourishing Treatment Mask, Ultra Shea, 6 Fluid Ounce	Beauty	74714.0	'Beauty', 'Hair Care', 'Hair & Scalp Treatments'	5.5	Clear
+B00AE07FXQ	Tresemme Platinum Strength Deep Conditioning Treatment, 6 Ounce	Beauty	40048.0	'Beauty', 'Hair Care', 'Conditioners'	5.99	TRESemme
+B00AE07CRA	Axe Waterless Dry Shampoo Foam Reset, 5.07 Ounce	Beauty	10816.0	'Beauty', 'Bath & Body', 'Scrubs & Body Treatments', 'Body Scrubs'	4.5	AXE
+B00AE07IEM	Dove Bar Soap, Rebalance, 8 Count	Beauty	64127.0	'Beauty', 'Bath & Body', 'Cleansers', 'Soaps'	15.98	Dove
+B00AE07FQI	Tresemme Platinum Strength Heat Protect Spray, 8 Ounce	Beauty	768790.0	'Beauty', 'Hair Care', 'Styling Products', 'Hair Sprays'	4.27	TRESemme
+B00AE078YM	Clear 7 Day Intensive Treatment Tubes, Color and Damage Repair, 7 Count	Beauty	714840.0	'Beauty', 'Hair Care', 'Hair & Scalp Treatments'	7.67	Clear
+B00AE07CPM	Axe Anti-dandruff Styling Cream, 3.2 Ounce	Beauty	402037.0	'Beauty', 'Hair Care', 'Styling Products', 'Creams, Gels & Lotions'	7.49	AXE
+B00AE07CT8	Axe Gravity Defying Dust Messy Look, 0.035 Ounce	Beauty	185719.0	'Beauty', 'Hair Care', 'Styling Tools'	5.89	AXE
+B00AE07EGO	Dove Men+Care Thickening Fortifying Shampoo,12 FL.OZ.	Beauty	752649.0	'Beauty', 'Hair Care', 'Shampoos'	13.99	Dove
+B00AE07GX0	Nexxus Youth Renewal Plump and Lift Blow Dry Spray, 7.5 Ounce	Beauty	119631.0	'Beauty', 'Hair Care', 'Styling Products', 'Hair Sprays'	11.5	Nexxus
+B00AE07CTI	Dove Men+Care Anti Dandruff Fortifying Shampoo, 12-Ounces	Beauty	350069.0	'Beauty', 'Hair Care', 'Shampoos'	9.99	Dove
+B00AEM0YH8	EcoTools Barely There Lashes, 1.87 Ounce	Beauty	68776.0	'Beauty', 'Tools & Accessories', 'Makeup Brushes & Tools', 'Eyelash Tools', 'Fake Eyelashes & Adhesives'	5.46	EcoTools
+B00AFBSIPI	Conair Hot Clips Multi-Size Hot Rollers	Beauty	20713.0	'Beauty', 'Hair Care', 'Styling Tools', 'Hair Rollers'	38.08	Conair
+B00AFCP6F2	Old Spice High Endurance Pure Sport Scent Bar Soap Pack Of 6 - 24 Oz	Beauty	31541.0	'Beauty', 'Bath & Body', 'Cleansers', 'Soaps'	6.0	Old Spice
+B00AHF1GTM	Schick Hydro Silk Disposable Razor, 3 Count	Beauty	384620.0	'Beauty', 'Skin Care', 'Body', 'Moisturizers', 'Oils'	9.95	Schick
+B00AHF1GK6	Schick Hydro 5 Disposable Razor, 3 Count	Beauty	202834.0	'Beauty', 'Skin Care', 'Body', 'Moisturizers', 'Oils'	9.97	Schick
+B00AILKE6G	Remington D3020 Volume and Shine Hair Dryer	Beauty	192195.0	'Beauty', 'Hair Care', 'Styling Tools', 'Hair Dryers'	24.03	Remington
+B00AIQOKDY	Lysol Touch of Foam Foaming Hand Soap, Creamy Vanilla Orchid, Pump, 8.5 Ounce			'Beauty', 'Skin Care', 'Hands & Nails', 'Hand Soaps'	6.68	Lysol
+B00AK4QS7A	Jerdon JGL7W Euro Tabletop Two-Sided Lighted Makeup Mirror with 5x Magnification and 4-Light Settings, White Finish	Beauty	541970.0	'Beauty', 'Tools & Accessories', 'Mirrors', 'Makeup Mirrors'	45.08	Jerdon
+B00ALV8EJW	Nexxus Hydralight Weightless Moisture Conditioner, 13.5 Ounce	Beauty	279039.0	'Beauty', 'Hair Care', 'Conditioners'	18.3	Nexxus
+B00ALV8EJM	Nexxus Youth Renewal Rejuvenating Conditioner, 13.5 Ounce			'Beauty', 'Hair Care', 'Conditioners'	12.97	Nexxus
+B00ALV8EKQ	Nexxus Hydralight Weightless Moisture Leave-In Conditioning Foam, 5.5 Ounce	Health & Personal Care	109778.0	'Beauty', 'Hair Care', 'Conditioners'	9.49	Nexxus
+B00ALV8EL0	Nexxus Hydralight Weightless Moisture Shampoo, 13.5 Ounce	Beauty	427074.0	'Beauty', 'Hair Care', 'Shampoos'	4.47	Nexxus
+B00AM7BSXO	Conair Curl Fusion Ionic Ceramic Styler Hair Dryer	Beauty	531605.0	'Beauty', 'Hair Care', 'Styling Tools', 'Hair Dryers'	28.89	Conair
+B00AN5L8PS	Clearasil Ultra Rapid Action Acne Treatment Face Wash Gel, 6.78 Ounce	Beauty	480179.0	'Beauty', 'Skin Care', 'Face', 'Cleansers', 'Gels'	9.75	Clearasil
+B00AN5L8IU	Clearasil Ultra Rapid Action On-to-Go Acne Treatment Wipes, 30 Count	Beauty	91987.0	'Beauty', 'Skin Care', 'Body', 'Moisturizers', 'Oils'	3.18	Clearasil
+B00ANJQ8RC	Biotin Vitamin Supplement Benefits Skin, and Promotes Healthy Hair and Nail Growth and Weight Loss 5,000 mcg	Beauty	163881.0	'Beauty', 'Skin Care', 'Hands & Nails', 'Nail Treatments', 'Growth Formula'	17.5	
+B00AO379NE	Dove Men+Care Cool Silver Antiperspirant  2.7 Oz	Beauty	359916.0	'Beauty', 'Skin Care', 'Body', 'Moisturizers', 'Oils'	4.55	Dove
+B00AO4E9E0	Tresemme Keratin Smooth Infusing Shampoo, 25 Ounce	Beauty	6393.0	'Beauty', 'Hair Care', 'Shampoos'	3.99	TRESemme
+B00AO4EMKQ	Simple Radiance Wipes, 25 Count	Beauty	8597.0	'Beauty', 'Bath & Body', 'Scrubs & Body Treatments', 'Body Scrubs'	8.97	Simple
+B00AO4EL34	Simple Oil Balancing Wipes, 25 Count	Beauty	624804.0	'Beauty', 'Bath & Body', 'Scrubs & Body Treatments', 'Body Scrubs'	4.96	Simple
+B00AO4EBOI	TRESemme Keratin Smooth, Infusing Smoothing Serum, 3.3 Ounce	Beauty	33084.0	'Beauty', 'Hair Care', 'Styling Products', 'Hair Styling Serums'	8.62	TRESemme
+B00AO4EKSU	Simple Eye Make-Up Remover Pad, 30 Count	Home &amp; Kitchen	260490.0	'Beauty', 'Makeup', 'Makeup Remover', 'Eyes'	10.5	Simple
+B00AO4E9L8	Axe Shower Gel Apollo, 16 Ounce	Beauty	268353.0	'Beauty', 'Skin Care', 'Face', 'Cleansers'	5.49	AXE
+B00AO4E9MC	TRESemme Keratin Smooth Keratin Infusing Conditioner, 25 oz	Beauty	334973.0	'Beauty', 'Hair Care', 'Conditioners'	11.35	TRESemme
+B00ARCQHBC	Axe Shower Gel Deep Space, 16 Ounce	Beauty	323182.0	'Beauty', 'Bath & Body', 'Cleansers', 'Body Washes'	5.89	AXE
+B00ATY942M	Biore Acne Clearing Scrub (1% Salicylic  Acid), 4.5 Ounce	Health & Personal Care	80457.0	'Beauty', 'Skin Care', 'Face', 'Treatments & Masks', 'Acids & Peels', 'Salicylic Acid'	5.49	Biore
+B00AWLB9EI	Motions Straight Finish Cleanser, 8 Ounce	Beauty	1013911.0	'Beauty', 'Hair Care', 'Shampoos'	4.23	Motions
+B00AWLB9I4	Dove Color Care Daily Treatment Conditioner, 8 Ounce	Beauty	26690.0	'Beauty', 'Hair Care', 'Conditioners'	2.99	Dove
+B00AWLB9G6	Dove Color Care Leave On Conditioner, 4 Ounce	Beauty	570462.0	'Beauty', 'Hair Care', 'Conditioners'	4.48	Dove
+B00AWLBAE2	Motions Straight Finish Leave in Conditioner, 8 Ounce	Beauty	286144.0	'Beauty', 'Hair Care', 'Conditioners'	12.49	Motions
+B00AWLBACE	Motions Straight Finish Sealer, 3.3 Ounce	Beauty	149967.0	'Beauty', 'Hair Care', 'Hair & Scalp Treatments'	6.99	Motions
+B00AXRBAEA	L'Oreal Paris Age Perfect BB Cream Instant Radiance, 2.5 Fluid Ounce	Beauty	24408.0	'Beauty', 'Skin Care', 'Face', 'Creams & Moisturizers'	8.99	L&#39;Oreal Paris
+B00AY90J1C	InfinitiPro by Conair Full Size Salon Performance / AC Motor Dryer	Beauty	253167.0	'Beauty', 'Hair Care', 'Styling Tools', 'Hair Dryers'	30.89	Conair
+B00AYARK2C	Anti-aging Eye Cream - Perfective Ceuticals Anti-imperfection Eye Therapy Cream with Growth Factor (New Packaging)	Beauty	476087.0	'Beauty', 'Skin Care', 'Eyes', 'Creams'		
+B00AYOHWQW	L'Oreal Paris RevitaLift Triple Power SPF 30 Day Lotion, 1.7 Fluid Ounce	Beauty	222323.0	'Beauty', 'Skin Care', 'Face', 'Creams & Moisturizers', 'Fluids & Lotions', 'Lotions'	6.25	L&#39;Oreal Paris
+B00B1DRA94	L'Oreal Paris The Super Slim Eyeliner by Infallible, Black, 0.034 Ounces	Beauty	178099.0	'Beauty', 'Makeup', 'Eyes', 'Eyeliner'	10.34	L&#39;Oreal Paris
+B00B33Y2JI	Pond's Luminous Moisture Day SPF 15 Lotion, 1.7 Ounce	Health & Personal Care	718563.0	'Beauty', 'Skin Care', 'Face', 'Creams & Moisturizers', 'Fluids & Lotions', 'Lotions'	6.49	Pond&#39;s
+B00BB5YHFC	Remington HC5850 Virtually Indestructible Haircut Kit	Beauty	262854.0	'Beauty', 'Hair Care', 'Styling Tools', 'Hair Cutting Kits'	39.89	Remington
+B00BB5YHFW	Remington HC5950 Touch Control Haircut Kit	Beauty	289413.0	'Beauty', 'Hair Care', 'Styling Tools', 'Hair Cutting Kits'	54.0	Remington
+B00BB8ZHIU	Remington S9620 Silk Ceramic Flat Iron, 2 Inch	Beauty	445136.0	'Beauty', 'Hair Care', 'Styling Tools', 'Irons', 'Flattening Irons'	34.96	Remington
+B00BB8ZHJY	Remington Ci96z1 Silk Ceramic Elliptical Waving Wand	Beauty	182321.0	'Beauty', 'Hair Care', 'Styling Tools', 'Irons', 'Curling Irons'	25.32	Remington
+B00BB8ZIW0	Remington Ac9096 Silk Ceramic Ionic AC Professional Hair Dryer	Beauty	287354.0	'Beauty', 'Hair Care', 'Styling Tools', 'Hair Dryers'	34.89	Remington
+B00BB8ZHJE	Remington Ci96x1 Silk Ceramic Wide Styling Wand	Beauty	418959.0	'Beauty', 'Hair Care', 'Styling Tools', 'Irons', 'Curling Irons'	29.41	Remington
+B00BB8ZIRK	Remington S9500pp Pearl Pro Ceramic Flat Iron, 1 Inch	Beauty	250273.0	'Beauty', 'Hair Care', 'Styling Tools', 'Irons', 'Flattening Irons'	34.65	Remington
+B00BB8ZJPG	Remington Ac2015pp Pearl Pro AC Professional Hair Dryer	Beauty	702036.0	'Beauty', 'Hair Care', 'Styling Tools', 'Hair Dryers'	22.95	
+B00BB8ZIQQ	Remington H9096 Silk Ceramic Heated Clip Setter	Beauty	22171.0	'Beauty', 'Hair Care', 'Styling Tools', 'Hair Rollers'	35.19	Remington
+B00BB9WBC4	Rexaline Hydra Dose Hyper Hydrating Skin Densifying Anti Wrinkle Cream, 1.69 Ounce			'Beauty', 'Skin Care', 'Face', 'Creams & Moisturizers', 'Fluids & Lotions', 'Lotions'	19.99	Rexaline
+B00BRGUNV2	Nexcare Acne Absorbing Cover, Two Sizes, 36 Count	Beauty	403103.0	'Beauty', 'Skin Care', 'Face'	7.49	Nexcare
+B00BTISDW4	GHD Candy Collection Professional Styler, Classic Lemon, Yellow, 1 Inch	Beauty	42115.0	'Beauty', 'Hair Care', 'Styling Tools', 'Irons', 'Flattening Irons'	199.0	ghd PROFESSIONAL
+B00BUMDR1Q	U.S. Divers Women's Phantom LX Mask and Palau Snorkel, Aqua	Beauty	86461.0	'Beauty', 'Skin Care', 'Face', 'Treatments & Masks', 'Masks'	36.21	
+B00BV5EX88	Revlon RVST2091BLKD Nano Diamond Straightener, 1 Inch	Beauty	608439.0	'Beauty', 'Hair Care', 'Styling Tools', 'Irons', 'Flattening Irons'	21.2	Revlon
+B00BVKL08E	Nivea Body Touch of Frangipani Hydrating Shower Gel, 16.9 Ounce	Beauty	120307.0	'Beauty', 'Bath & Body', 'Cleansers', 'Body Washes'	9.15	Nivea
+B00C0CVAY6	MelanSol 100% Natural Baby Sunscreen SPF 30, 3.4 Ounce	Beauty	204056.0	'Beauty', 'Skin Care', 'Sun', 'Skin Protection'	29.99	MelanSol&reg;
+B00C0Z5CYW	MelanSol 100% Natural Sunscreen SPF 30, 3.4 Ounce	Beauty	859225.0	'Beauty', 'Skin Care', 'Sun', 'Skin Protection'	29.99	
+B00C1006ZG	MelanSol 100% Natural Sunburn Relief Gel, 3.4 Ounce	Beauty	829098.0	'Beauty', 'Skin Care', 'Sun', 'After Sun'	29.99	MelanSol&reg;
+B00C64GX4K	CoverGirl 250 Ink It by Perfect Point Plus Eyeliner, Charcoal Ink, 0.008 Ounce	Beauty	108809.0	'Beauty', 'Makeup', 'Eyes', 'Eyeliner'	2.0	COVERGIRL
+B00C67E3GW	CoverGirl 300 Flamed Out Mascara, Very Black Blaze, 0.37 Fluid Ounce	Beauty	518188.0	'Beauty', 'Makeup', 'Eyes', 'Mascara'	5.05	COVERGIRL
+B00C7DYBX0	OZ Naturals - THE BEST Hyaluronic Acid Serum For Skin - Prescription Strength Anti Aging Serum - Best Anti Wrinkle Serum With Vitamin C + Vitamin E - Our Customers Call It A Facelift In A Bottle. This Vegan Hyaluronic Acid Serum Will Plump &amp; Hydrate Dull Skin As It's Designed To Fill Those Fine Lines &amp; Wrinkles. Satisfaction 100% GUARANTEED			'Beauty', 'Skin Care', 'Face', 'Oils & Serums'	27.19	OZ Naturals
+B00C8YCFU4	Dead Sea Mud Facial Mask - Ancient Natural Facial Mask and Skin Care Treatment for Women, Men and Teens + FREE BONUS EBOOK! - Organic Mud Mask Offers Gentle Facial Cleanser, Exfoliator &amp; Natural Moisturizer to Restore Your Skin's Natural Radiance - This Renowned Anti-Aging Mud Mask Heals Dry &amp; Oily Skin, Acne, Eczema &amp; Psoriasis - Leaves You With a Youthful-Looking, Radiant Complexion	Beauty	439126.0	'Beauty', 'Skin Care', 'Face', 'Creams & Moisturizers', 'Fluids & Lotions', 'Fluids'	29.77	
+B00CA05FO4	Pantene Pro-V Expert Collection Advanced+ Keratin Repair Keragloss Oil Mist, 3.4 Fluid Ounce	Health & Personal Care	858928.0	'Beauty', 'Hair Care', 'Hair & Scalp Treatments'	13.13	Pantene
+B00CBD0M8Y	Toni&amp;Guy Casual Sculpting Powder, 0.035 Fluid Ounce	Beauty	276106.0	'Beauty', 'Makeup', 'Face', 'Powder'	7.55	Toni &amp; Guy
+B00CEPM91M	Shea Butter - Smooth Luxurious - Intense Long Lasting Moisturization in a Beautiful Scent - Ultra Rich Whipped Shea Body Butter Easily Absorbed Into Your Skin - Heals Extremely Dry, Rough or Damaged Skin - Leaving Your Skin Feeling and Looking Soft and Rejuvenated. This Is an FDA Certified Product.	Beauty	420862.0	'Beauty', 'Skin Care', 'Body', 'Moisturizers', 'Body Butter'	13.95	
+B00CGN9LQ8	Detangling Brush By Crave Naturals - Glide Thru Detangling Brush Works As a Detangler for Thick, Thin, Curly, Fine, Natural, Color Treated, Damaged, Wet or Dry Hair - No More Tangle - Adults &amp; Kids - Gentle As a Comb - Pink and Black Color - LIFETIME GUARANTEE	Beauty	13949.0	'Beauty', 'Hair Care', 'Styling Tools', 'Combs'	15.88	
+B00CHJDSUG	Arganesse Hair Treatment, 3.4 Ounce	Beauty	6821.0	'Beauty', 'Hair Care', 'Hair & Scalp Treatments'	39.95	Arganesse
+B00CM7YTO2	Infiniti Pro by Conair Curl Innovation Curling Iron with Rotating Clamp	Beauty	452967.0	'Beauty', 'Hair Care', 'Styling Tools', 'Irons', 'Curling Irons'	52.0	Conair
+B00CNOUZE2	Fogless Shower Mirror - HIGHEST RATED! - Includes Razor Hook - Modern - Anti-Fog Nanotechnology - Exclusive To Amazon	Beauty	20538.0	'Beauty', 'Tools & Accessories', 'Mirrors', 'Shower Mirrors'	14.99	
+B00CP0R5LK	Pantene Pro-V Heat Shield Heat Potion Serum 50 Ml, 1.7-Ounce	Health & Personal Care	227605.0	'Beauty', 'Hair Care', 'Shampoos'	4.27	Pantene
+B00CQ05FES	Babyganics Mineral-Based Sunscreen Spray SPF 30, 6 oz (Pack of 2), Packaging May Vary	Clothing	192781.0	'Beauty', 'Skin Care', 'Sun', 'Skin Protection', 'Sports'	20.29	BabyGanics
+B00CRKHGUS	ISA PROFESSIONAL FLAT IRON HAIR STRAIGHTENER DIGITAL 1&quot; TOURMALINE CERAMIC 2 YEAR WARRANTY - Professional Salon Quality 100% Solid Tourmaline Ceramic Pivoting Plates Neon background LCD display Digital Temperature Control 80 - 220 Celsius (175 to 425 Fahrenheit) Fast and Safe Straightening Curls and Waves Auto shut off Safety Feature THE BEST FLAT IRON HAIR STRAIGHTENER	Beauty	97329.0	'Beauty', 'Hair Care', 'Styling Tools', 'Irons', 'Flattening Irons'	94.5	
+B00CTKKE7I	Designer Whey Fit and Trim Premium Protein Powder with Soy, French Vanilla, 10 Ounce	Beauty	110466.0	'Beauty', 'Skin Care', 'Body', 'Moisturizers', 'Lotions'	13.05	Designer Whey
+B00CYA5E1O	Olay Pro-X Microdermabrasion Plus Advanced Cleansing System, 1-Kit	Beauty	313780.0	'Beauty', 'Skin Care', 'Face', 'Treatments & Masks', 'Microdermabrasion'	26.7	Olay
+B00CYDSAO4	TS-2 Millennium Professional Flat Iron	Beauty	137713.0	'Beauty', 'Hair Care', 'Styling Tools', 'Irons', 'Flattening Irons'	99.95	TS-2
+B00D18ZDM8	Bic Soleil Shave And Trim Shaver, 4 Count	Beauty	168837.0	'Beauty', 'Skin Care', 'Body', 'Moisturizers', 'Oils'	8.95	
+B00D6EDGZI	Pond's Luminous Finish BB Plus Cream with SPF 15, Medium Shade, 1.5 Ounce	Beauty	123364.0	'Beauty', 'Skin Care', 'Face', 'Creams & Moisturizers'	9.0	Pond&#39;s
+B00D6EDGYE	Pond's Luminous Finish BB Plus Cream with SPF 15, Light Shade, 1.5 Ounce	Beauty	168768.0	'Beauty', 'Skin Care', 'Face', 'Creams & Moisturizers'	7.02	Pond&#39;s
+B00D86VPHK	Blue Avocado (eco) Pouch Kit	Beauty	22532.0	'Beauty', 'Tools & Accessories', 'Bags & Cases', 'Cosmetic Bags'	19.99	XO Eco
+B00DCF7QW0	CELLULITE CREAM: #1 CAFFEINE &amp; RETINOL Body Firming Cream *** AS SEEN ON DR OZ *** Get Rid of Cellulite -Skin Firming - Cellulite Reduction - Bodishape Cellulite Reduction &amp; Body Firming Cream -With Active Ingredients CAFFEINE &amp; RETINOL * Clinically Proven To Eliminate Cellulite *** MADE IN USA *** 100 % UNCONDITIONAL Money Back Guarantee ***	Beauty	214107.0	'Beauty', 'Skin Care', 'Body', 'Moisturizers', 'Creams'	39.95	
+B00DCNBST4	100% Natural (Unlike Epsom Salt) Bath Salts Soak, Lavender	Beauty	36473.0	'Beauty', 'Bath & Body', 'Bath', 'Minerals & Salts'	17.97	
+B00DD96JVY	Bee Venom Cream by Beenigma	Beauty	331492.0	'Beauty', 'Skin Care', 'Face', 'Treatments & Masks', 'Masks'	129.99	
+B00DD94A4W	Beenigma Bee Venom Cream	Beauty	150136.0	'Beauty', 'Skin Care', 'Face', 'Treatments & Masks', 'Masks'	129.99	
+B00DEXA0LY	Eucerin Body Creme, Eczema Relief, 8 Ounce	Beauty	221781.0	'Beauty', 'Skin Care', 'Body', 'Moisturizers', 'Creams'	10.79	Eucerin
+B00DJQQEGQ	Shea Butter - 100% Natural African Ultra Rich Raw Shea Nuts Including Other Organic Ingredients- Intense Long Lasting Moisturization - Easily Absorbed Into Your Skin - Heals Extremely Dry, Rough or Damaged Skin -Naturally Rich in Essential Vitamins A, E &amp; F for Skin Balance, Skin Cells Regeneration and Rejuvenation, Can Help Preventing and Removing Skin Stretch Marks.	Beauty	26889.0	'Beauty', 'Skin Care', 'Body', 'Moisturizers', 'Body Butter'	17.97	
+B00DLRNSSK	DermaRESTORE - Stretch Mark and Scar Treatment - The Latest in Skin Repair technology - 4oz Cream	Health & Personal Care	313166.0	'Beauty', 'Skin Care', 'Maternity'	27.99	PRI
+B00DSW9D7S	Jojoba Facial Scrub, Exfoliating &amp; Smoothing Serum, Gentle, All Natural - &quot;Get Refreshed&quot; - For all Skin Types. Great for Oily/Sensitive/Acne Skin. Organic Ingredients &amp; Bentonite To Clean, Smooth &amp; Tighten Your Skin. You'll LOVE This! Money Back Guarantee EXTENDED For 1 Year!	Beauty	87864.0	'Beauty', 'Skin Care', 'Face', 'Exfoliators & Scrubs', 'Exfoliators'	32.95	
+B00EA4MHN0	Cucumber Infused Facial Cleansing Wipes, 33 Count	Beauty	3076.0	'Beauty', 'Skin Care', 'Face', 'Cleansers', 'Cloths & Towelettes'	4.95	
+B00EAJQOZC	Revlon RVSP3512 Advanced Facial Cleansing System, PinK/White	Beauty	207181.0	'Beauty', 'Tools & Accessories', 'Makeup Brushes & Tools', 'Treatment Tools', 'Face Cleansing Brushes'	24.99	
+B00EF1QRMU	Toni&amp;Guy Glamour Volume Plumping Whip, 2.82 Fluid Ounce	Beauty	497839.0	'Beauty', 'Hair Care', 'Styling Products', 'Creams, Gels & Lotions'	10.09	Toni &amp; Guy
+B00EHWP67E	Ellen Tracy Daytime Moisturizer Size Morning Moisturizer 1.77 OZ / 50 G	Beauty	403557.0	'Beauty', 'Skin Care', 'Face', 'Oils & Serums'	4.95	
+B00ENFS6Q8	BelleSha Moisturizing Gel Heel Socks	Beauty	616552.0	'Beauty', 'Skin Care', 'Hands & Nails', 'Moisturizing Gloves'	11.29	
+B00ENFS6IG	BelleSha 5 pack Foot File	Beauty	340893.0	'Beauty', 'Tools & Accessories', 'Nail Tools', 'Nail Files & Buffers'	6.99	
+B00EOP3MJI	Banana Boat for Men Triple Defense SPF 30, 6 Ounce	Beauty	428671.0	'Beauty', 'Skin Care', 'Sun', 'Skin Protection'	2.94	Banana Boat
+B00EOP3O3C	Banana Boat for Men Triple Defense Spray SPF 30, 6 Ounce	Beauty	14250.0	'Beauty', 'Skin Care', 'Sun', 'Skin Protection'	5.69	Banana Boat
+B00EYSNWXG	Pink Eyelash Curler - Pinch Free Design Creates Dramatic Eyelashes - Sturdy Handle, No Crooked Lashes - Professional Curl That Lasts All Day - Best Tools - Whiplash Plus 5 Refill Cushion Pads - LIFETIME GUARANTEE	Beauty	189169.0	'Beauty', 'Tools & Accessories', 'Makeup Brushes & Tools', 'Eyelash Tools', 'Curlers'	17.0	
+B00EYZY5VC	Fekkai Prx Oil 1.6 Fl Oz	Beauty	46229.0	'Beauty', 'Hair Care', 'Hair & Scalp Treatments'	17.5	Fekkai
+B00EYZY5TY	Fekkai Apple Cider Shampoo 236ml/8oz	Beauty	502776.0	'Beauty', 'Hair Care', 'Shampoos'	10.9	Fekkai
+B00EYZY684	Fekkai Prx Shampoo 8 Fl Oz, 8.000-Fluid Ounce	Health & Personal Care	164079.0	'Beauty', 'Hair Care', 'Shampoos'	12.26	Fekkai
+B00EYZY6SY	Fekkai Essential Shea Pot De Crme 5.2oz, 5.200-Fluid Ounce	Beauty	231715.0	'Beauty', 'Hair Care', 'Styling Products'	17.5	Fekkai
+B00EYZY68Y	Fekkai Prx Conditioner 8 Fl Oz, 8.000-Fluid Ounce	Beauty	507283.0	'Beauty', 'Hair Care', 'Conditioners'	13.99	Fekkai
+B00F008GFQ	Best Foundation Brush Flat Top Kabuki Brush By Beauty Junkees: Get Full Makeup Coverage Every Time, Vegan Friendly, Works with Creams, Powders, Liquids, and Mineral Makeup. Synthetic Dense Bristles That Do Not Shed, Quality Compares to Brand Names; Makes Great Gifts for Women and Teens!	Beauty	959101.0	'Beauty', 'Tools & Accessories', 'Makeup Brushes & Tools', 'Brushes & Applicators'	11.97	
+B00F2AFCJM	BelleSha Round Facial Sponge pack of 12	Beauty	191641.0	'Beauty', 'Skin Care', 'Face', 'Cleansers'	10.05	
+B00F5KDVDS	BelleSha Bath and Shower Sponge pack of 12 Assorted Colors	Beauty	364279.0	'Beauty', 'Bath & Body', 'Bathing Accessories', 'Loofahs, Sponges & Poufs'	12.49	
+B00F5KE8VM	BelleSha Spa Moisturizing Gel Socks	Health & Personal Care	437660.0	'Beauty', 'Skin Care', 'Hands & Nails', 'Moisturizing Gloves'	10.49	
+B00F5KDZ4S	BelleSha Double Exfoliating Bath Towel White	Beauty	27867.0	'Beauty', 'Bath & Body', 'Bathing Accessories', 'Bath Mitts & Cloths'	6.29	
+B00F5KDWYQ	BelleSha Breathable Ultra Moisturizing Hand Gloves	Beauty	164770.0	'Beauty', 'Skin Care', 'Hands & Nails', 'Moisturizing Gloves'	10.05	
+B00F6P3DTO	Conair True Glow Sonic Facial Skincare System	Beauty	346132.0	'Beauty', 'Skin Care', 'Face', 'Sets & Kits'	94.5	Conair
+B00F9Q6G5I	BelleSha Water Resistant Cosmetic Bag Blue	Beauty	196322.0	'Beauty', 'Tools & Accessories', 'Bags & Cases', 'Cosmetic Bags'	10.01	
+B00FDK0V4M	Vitamin C Serum for Face : Best Anti Aging Serum, FREE Product White Paper, VIDI AntiOxidant Face Serum With Vit C, A &amp; E for Anti Wrinkle Treatment, , Dark Spot Corrector &amp; Even Facial Skin Tone, 1 oz Pump Bottle	Beauty	212775.0	'Beauty', 'Skin Care', 'Face', 'Exfoliators & Scrubs', 'Exfoliators'	29.75	
+B00FEMQUKS	#1 Hair Growth Shampoo - Hair Regeneration System - For Hair Loss, Scalp Treatment and Dandruff Relief in Men and Women - Hair Growth Stimulating Shampoo 8oz Bottle - Great for Preventing Hair Loss in the Future - 100% satisfaction guarantee	Beauty	91596.0	'Beauty', 'Hair Care', 'Hair Loss Products', 'Shampoos'	19.95	PRI
+B00FF5B31U	Pantene Minoxidil Topical Solution Usp, 2% Hair Regrowth Treatment For Women 30 Day Supply 2 Fl Oz, 2.000-Fluid Ounce	Beauty	127590.0	'Beauty', 'Hair Care', 'Hair Loss Products', 'Hair Regrowth Treatments'	17.5	Pantene
+B00FFANXMM	Triple Action Vitamin C Serum + Hyaluronic Acid For Your Face - Contains THREE Forms of Vitamin C For Better Results - Pure, Undiluted, &amp; NO FILLERS - Vitamin C+ Hyaluronic Acid Serum Will Leave Your Skin Radiant &amp; More Youthful Looking By Neutralizing Free Radicals - Highest Quality Serum Available - 1 oz	Beauty	141566.0	'Beauty', 'Skin Care', 'Face', 'Oils & Serums'	19.95	
+B00FLRHYCE	Hawaiian Tropic Silk Hydration Face Lotion SPF 30, 1.7 Ounce	Beauty	72941.0	'Beauty', 'Skin Care', 'Sun', 'Skin Protection'	16.98	Hawaiian Tropic
+B00FRDPNA2	Fekkai Technician Color Care Conditioner 236ml/8oz	Beauty	4626.0	'Beauty', 'Hair Care', 'Conditioners'	19.99	Fekkai
+B00FRDPRQ2	Fekkai Brilliant Glossing Shampoo 236ml/8oz	Beauty	376306.0	'Beauty', 'Hair Care', 'Shampoos'	13.0	Fekkai
+B00FRDPRBW	Fekkai Essential Shea Shampoo 8 Fl Oz	Beauty	20380.0	'Beauty', 'Hair Care', 'Shampoos'	14.0	Fekkai
+B00FRDPNM0	Fekkai Brilliant Glossing Conditioner 236ml/8oz	Beauty	167981.0	'Beauty', 'Hair Care', 'Conditioners'	16.45	Fekkai
+B00FRDPMQC	Fekkai Brilliant Glossing Creme 4 Oz	Beauty	112085.0	'Beauty', 'Hair Care', 'Styling Products', 'Creams, Gels & Lotions'	19.95	Frederic Fekkai
+B00FRDPP6O	Fekkai Technician Color Care Shampoo 236ml/8oz	Beauty	19468.0	'Beauty', 'Hair Care', 'Shampoos'	14.5	Fekkai
+B00FRDPR4O	Fekkai Full Blown Volume Conditioner 236ml/8oz	Beauty	502155.0	'Beauty', 'Hair Care', 'Conditioners'	9.57	Fekkai
+B00FRDPOVU	Fekkai Full Blown Volume Shampoo 236ml/8oz	Beauty	451133.0	'Beauty', 'Hair Care', 'Shampoos'	19.95	Fekkai
+B00FRDPSE8	Fekkai Essential Shea Conditioner 8 Fl Oz	Beauty	76886.0	'Beauty', 'Hair Care', 'Conditioners'	14.0	Fekkai
+B00FU574H2	Conair Infiniti Pro Dryer AC Motor / Salon Performance Styling Tool, Purple	Beauty	610269.0	'Beauty', 'Hair Care', 'Styling Tools', 'Hair Dryers'	31.0	Conair
+B00G052NFE	SALE - Best Natural Vitamin C Serum for Your Face with Vitamin E + Hyaluronic Acid + Ferulic Acid | COMES WITH FREE E-BOOK | High Potency Natural Vitamin C 20% Serum Guaranteed to Leave You with Super Soft, Radiant, Supple, and Youthful Skin | Your Most Potent Anti-aging and Anti-wrinkle Solution | Brightening Formula Addresses Brown Spots, Dark Spots and Uneven Skin Tone | 100% MONEY BACK GUARANTEE	Beauty	176151.0	'Beauty', 'Skin Care', 'Eyes', 'Combinations'	24.0	
+B00G0K6ZQC	Blue Avocado Travel Duffle	Beauty	110152.0	'Beauty', 'Tools & Accessories', 'Bags & Cases', 'Cosmetic Bags'	27.88	BlueAvocado-Ross Bennett
+B00G2TQNZ4	Vitamin C Serum for Face 20% - With Vegan Hyaluronic Acid &amp; Vitamin E - Best Natural &amp; Organic Anti Aging Formula Stimulates Collagen, Repairs Wrinkles &amp; Fades Age Spots - Gives Skin a Radiant &amp; Youthful Glow - Guaranteed Results	Beauty	234364.0	'Beauty', 'Skin Care', 'Face', 'Creams & Moisturizers', 'Fluids & Lotions', 'Fluids'	25.0	Amara Organics
+B00G36TJKW	Natures Bounty Optimal Solutions Hair, Skin and Nails Gummies, 80 Count	Beauty	779090.0	'Beauty', 'Skin Care'	7.79	Nature&#39;s Bounty
+B00G3HM9ZI	Profoot Pedi-Rock Flexible Callus Foot File	Health & Personal Care	61959.0	'Beauty', 'Tools & Accessories', 'Nail Tools', 'Foot Rasps'	5.82	Profoot
+B00G5WO2VK	Premium Argan &#9733; 100% Organic Pure Moroccan Argan Oil, TRIPLE Extra Virgin Grade, FAST ABSORBING, Certified Organic - for Hair and Skin Care Treatment - 2oz (60ml) - Cold Pressed Oil EcoCert and USDA Approved Oil. Treat Dry Scalp, Nails, Cuticles. Excellent Daily Moisturizer. Guarantee Satisfaction. Results within Days.	Beauty	134228.0	'Beauty', 'Skin Care', 'Body', 'Moisturizers', 'Oils'	13.95	
+B00G75X158	BLOWOUT SALE!! BEST ORGANIC Vitamin C Serum For Your Face. Botanical 20% Vitamin C + E + Hyaluronic Acid Serum. Anti Aging Serum Moisturizer with Natural Ingredients. + Organic Aloe + Amino Blend, Anti Wrinkle Serum Facial Skin Care, Helps Repair Sun Damage, Gradually Fades Sun &amp; Age Spots &amp; Reduces Fine Lines. We Guarantee our Vitamin C Serum Will Leave Your Skin More Radiant, Beautiful &amp; Youthful Looking. We'll refund your money if you're not satisfied! Try Risk FREE!	Beauty	200512.0	'Beauty', 'Skin Care', 'Face', 'Creams & Moisturizers', 'Fluids & Lotions', 'Fluids'	19.5	
+B00G7U29KQ	Biore Self Heating One Minute Mask, 4 Count	Health & Personal Care	81387.0	'Beauty', 'Skin Care', 'Face', 'Treatments & Masks', 'Masks'	6.23	Biore
+B00G9TCKR2	BelleSha Water Resistant Shower Cap Cheetah	Beauty	465429.0	'Beauty', 'Bath & Body', 'Bathing Accessories', 'Shower Caps'	10.01	
+B00GAS8616	BelleSha Frequent Traveller's Sleep Mask Black	Beauty	469857.0	'Beauty', 'Bath & Body', 'Bathing Accessories', 'Eye Masks'	15.89	
+B00GAXJLRE	BelleSha Beauty Sleep Extra Comfortable Sleep Mask	Beauty	137180.0	'Beauty', 'Bath & Body', 'Bathing Accessories', 'Eye Masks'	14.49	
+B00GAXJJYY	BelleSha Smooth Silky Glowing Hair No Tangles Brush	Beauty	480604.0	'Beauty', 'Hair Care', 'Styling Tools', 'Brushes'	10.15	
+B00GBL8VJY	BelleSha Eyeshadow Applicators 2 dozens	Beauty	63582.0	'Beauty', 'Tools & Accessories', 'Makeup Brushes & Tools', 'Brushes & Applicators'		
+B00GBL5GDS	Bellesha Hands Free Foot Scrubber	Beauty	137392.0	'Beauty', 'Tools & Accessories', 'Nail Tools', 'Foot Rasps'	10.01	
+B00GBMTWDC	BelleSha Paddle Brush Red Pink	Beauty	537562.0	'Beauty', 'Hair Care', 'Styling Tools', 'Brushes'	7.99	
+B00GBQSS56	*ON SALE NOW* Best Vitamin C Serum For The Face - Anti Aging Skin Repair With Swiss Apple Stem Cells - Perfect Anti Wrinkle And Anti Blemish Serum - Most Potent Vitamin C Formula leaves Skin Radiant &amp; Youthful, Free Bonus &amp; Money Back Guarantee.	Beauty	208955.0	'Beauty', 'Skin Care', 'Face', 'Exfoliators & Scrubs', 'Exfoliators'	34.99	
+B00GCQMSVA	Best Vitamin C Serum Beautifies Face: GET GORGEOUS SALE! Restores &amp; Protects ~ FADES Sun &amp; Age Spots, Fine Lines &amp; Wrinkles ~ #1 in Luxury Skin Care Anti Aging Products With Organic Vitamin C + E + Hyaluronic Acid Serum ~ Want The Finest For Your Face? 1 Fl. Oz. Of Beauty!	Beauty	452197.0	'Beauty', 'Skin Care', 'Face', 'Creams & Moisturizers', 'Fluids & Lotions', 'Lotions'	18.5	
+B00GDLML02	Puracy Natural Liquid Hand Soap, Lavender &amp; Vanilla, 12 Ounces	Beauty	46884.0	'Beauty', 'Skin Care', 'Hands & Nails', 'Hand Soaps'		
+B00GFBWWWC	Nature's Best Vitamin C Serum - #1 For Face, Eyes &amp; Acne On The Market - C + E + Hyaluronic Acid Reverse Skin Aging &amp; Wrinkles - Look &amp; Feel 5, 10, even 15 Years Younger - Organic 20% Vitamin C Serum &gt; Vidi, Obagi, Powder, Cream - Limited Supply 45 Day Guarantee	Beauty	634608.0	'Beauty', 'Skin Care', 'Face', 'Oils & Serums'	17.95	
+B00GGH84CW	Moroccan Magic Argan Oil Serum - SALE 50% OFF TODAY - #1 Salon Quality Formula Hair Treatment Product That Will Condition, Moisturize and Enhance Your Hair, Skin &amp; Scalp. It Will Promote Shine and Calm Frizzy Hair Leaving Your Hair Healthy, Silky and Smooth - GUARANTEED - FREE BONUS 'BEAUTY' eBOOK INCLUDED	Beauty	45148.0	'Beauty', 'Hair Care', 'Hair Relaxers', 'Conditioners'	14.85	
+B00GGR7YGO	Pure Moroccan Argan Oil; - THE Must Have Beauty Product - SALE 60% OFF TODAY - 100% Virgin Organic 'Liquid Gold' from Morocco. High in Vitamin E which Helps Reduces Wrinkles &amp; Fine Lines, Acne Scars and Stretch Marks. Feeds, Conditions &amp; Restores Damaged Hair - Anti Frizz - Promotes Shine. Helps Relieve Psoriasis &amp; Eczema. Great For Nails &amp; Lips as well. FairTrade Approved. The very BEST natural all round skin and hair treatment with so many incredible benefits. FREE BONUS 'BEAUTY' eBOOK INCLUDED	Beauty	793849.0	'Beauty', 'Skin Care', 'Body', 'Moisturizers', 'Oils'	15.99	
+B00GJ7WV8M	Toni&amp;Guy Classic Smoothing Lotion, 3.56 Fluid Ounce	Beauty	187038.0	'Beauty', 'Hair Care', 'Styling Products', 'Creams, Gels & Lotions'	7.29	Toni &amp; Guy
+B00GJG9JCY	Burt's Bees Brightening Dark Spot Corrector, 1 Fluid Ounce	Beauty	574304.0	'Beauty', 'Skin Care', 'Body', 'Moisturizers', 'Creams'	16.97	Burt&#39;s Bees
+B00GJG9JBA	Burt's Bees Brightening Even-Tone Moisturizing Cream, 1.8 Ounces	Shoes	253219.0	'Beauty', 'Skin Care', 'Face', 'Creams & Moisturizers', 'Fluids & Lotions', 'Lotions'	10.39	Burt&#39;s Bees
+B00GJX58PE	Jojoba Oil, Organic, 100% Pure Cold Pressed Unrefined, Made in the USA Revitalizes Hair and Gives Skin a Radiant and Youthful Look, Great for Lips, Cuticles, Stretch Marks, Beard, Leaving You Vibrant. Similar to Argan Oil, but Without the Smell, in a 4 oz Dark Amber Bottle, and Glass Eye Dropper for Easy Application	Beauty	175340.0	'Beauty', 'Skin Care', 'Body', 'Moisturizers', 'Oils'	13.97	
+B00GLE8SNK	BEST Vitamin C Serum for Face with 20% Vitamin C and Nourishing Hyaluronic Acid - All Natural Ingredients Help Fade Age Spots, Minimize Wrinkles And Boost Collagen. This Anti Aging Serum Gives Your Skin That Healthy Glow!	Beauty	328331.0	'Beauty', 'Skin Care', 'Face', 'Treatments & Masks', 'Masks'	16.95	
+B00GLS55DC	John Frieda Precision Foam Hair Color, Glosser Warm Red, 6 Fluid Ounce	Beauty	34974.0	'Beauty', 'Hair Care', 'Hair Color', 'Chemical Hair Dyes'	4.25	John Frieda
+B00GLS58OS	John Frieda Precision Foam Hair Color, Glosser Cool Brunette, 6 Fluid Ounce	Beauty	62311.0	'Beauty', 'Hair Care', 'Hair Color', 'Highlights'	9.99	John Frieda
+B00GLS519U	Infiniti Pro by Conair Limited Edition Blow-Out Hair Dryer	Beauty	165298.0	'Beauty', 'Hair Care', 'Styling Tools', 'Hair Dryers'	32.69	Conair
+B00GLS5DKM	Jergens BB Body Cream for lighter Skin Tones, 7.5 Ounce	Beauty	166049.0	'Beauty', 'Skin Care', 'Body', 'Moisturizers', 'Lotions'	11.45	Jergens
+B00GLS5DVQ	Jergens BB Body Cream for All Medium-Deep Skin Tones, 7.5 Ounce	Beauty	163930.0	'Beauty', 'Skin Care', 'Body', 'Moisturizers', 'Lotions'	6.5	Jergens
+B00GLS5938	John Frieda Precision Foam Hair Color, Glosser Cool Red, 6 Fluid Ounce	Beauty	27759.0	'Beauty', 'Hair Care', 'Hair Color', 'Highlights'	8.75	John Frieda
+B00GLS58SO	John Frieda Precision Foam Hair Color, Glosser Cool Blonde, 6 Fluid Ounce	Beauty	129506.0	'Beauty', 'Hair Care', 'Hair Color', 'Highlights'	10.49	John Frieda
+B00GLS593S	John Frieda Precision Foam Hair Color, Glosser Warm Blonde, 6 Fluid Ounce	Beauty	32342.0	'Beauty', 'Hair Care', 'Hair Color', 'Highlights'	9.99	John Frieda
+B00GLS554Q	John Frieda Precision Foam Hair Color, Glosser Warm Brunette, 6 Fluid Ounce	Beauty	44956.0	'Beauty', 'Hair Care', 'Hair Color', 'Chemical Hair Dyes'	7.99	John Frieda
+B00GM6H9BO	Anti-Aging Eye Cream - Best Age Defying Anti-Wrinkle Skin Care for Men and Women - 100% Satisfaction Guaranteed - Natural Replenishing Moisturizer Eye Balm - Aloe Vera + Cucumber + Green Tea Reduces Puffiness, Dark Circles and Bags Under Eyes - Hydrolyzed Collagen + Elastin + Vitamin E for Smoothing Fine Lines Around Your Eyes - Licorice Root Naturally Brightens the Complexion - Advanced Formula for All Skin Types - Lightweight Hypoallergenic Eye Care with Powerful Antioxidant Properties - A Must Have Skin Care Product - 0.5oz lasts 60 Days	Beauty	888968.0	'Beauty', 'Skin Care', 'Eyes', 'Combinations'	49.97	
+B00GMWMMOW	Fekkai Sheer Hold Hair Spray 8oz	Beauty	495288.0	'Beauty', 'Hair Care', 'Styling Products', 'Hair Sprays'	17.48	Fekkai
+B00GMWMMOC	Fekkai Full Blown Volume Aerosol Styling Whip 6oz	Health & Personal Care	150732.0	'Beauty', 'Hair Care', 'Styling Tools'	13.42	Fekkai
+B00GMZUS2M	Eucerin Baby Eczema Relief Body Creme, 5 Ounce	Beauty	295342.0	'Beauty', 'Skin Care', 'Body', 'Moisturizers', 'Creams'	6.74	Eucerin
+B00GNA9KKM	EcoTools Eye Enhancing Duo Brush Set	Beauty	475681.0	'Beauty', 'Tools & Accessories', 'Makeup Brushes & Tools', 'Brushes & Applicators'	8.25	EcoTools
+B00GNA9K3E	EcoTools Skin Perfecting Brush	Health & Personal Care	77069.0	'Beauty', 'Tools & Accessories', 'Makeup Brushes & Tools', 'Brushes & Applicators'	7.99	EcoTools
+B00GNA9WG4	Ecotools Smooth Detangler Paddle Brush	Beauty	941032.0	'Beauty', 'Hair Care', 'Styling Tools', 'Brushes'	4.2	EcoTools
+B00GNAA2J0	Ecotools Full Volume Styler Hairbrush	Beauty	225851.0	'Beauty', 'Hair Care', 'Styling Tools', 'Brushes'	9.95	EcoTools
+B00GNA9W4G	Ecotools Pure Complexion Sponge Sensitive Brush	Beauty	180806.0	'Beauty', 'Makeup', 'Makeup Remover', 'Face'	6.99	EcoTools
+B00GNJCZ3M	Best Vitamin C Serum For Your Face Contains Vitamin C + E + Hyaluronic Acid Serum - Best Pure Organic Potent 1oz Bottle For Face and Skin - Makes Your Skin Radiant, Anti Aging, Anti Wrinkle, Fights Free Radicals To Make Your Skin Have That Youthful Glow. Free Bonus eBook On Skincare For Faster Results. Lifetime Money Back Guarantee.	Beauty	356090.0	'Beauty', 'Skin Care', 'Face', 'Oils & Serums'	29.95	
+B00GP2N66W	Anti-Aging Eye Cream MezmerEYES with Caffeine, Licorice and Vitamin A (Retinol). Best Eye Cream for Dark Circles Under Eyes, Puffy Eyes, Fine Lines, Crows Feet, Wrinkles, Puffiness.With Collagen, Hyaluronic Acid, Almond Oil, UNCONDITIONAL GUARANTEE			'Beauty', 'Skin Care', 'Eyes', 'Combinations'	18.99	
+B00GPDRFPO	Argan Oil - 100% Pure Unrefined Natural &amp; Cold Pressed from Morocco - Certified Organic USDA &amp; Ecocert - Multiple uses in Health &amp; Personal Care for Hair, Face, and Dry Skin Treatment such as intense hydrating mask - Many Benefits for Beauty &amp; Body	Beauty	147110.0	'Beauty', 'Skin Care', 'Body', 'Moisturizers', 'Oils'	29.95	
+B00GPWYF94	Hyaluronic Acid Serum with Vitamin C, A, D, E ~ Best Anti Aging Cream &amp; Anti Wrinkle Moisturizer ~ 60 DAY GUARANTEE ~ Recommended By Dr Oz ~ Botox Alternative Skin Care Products for Men &amp; Women ~ Benefits? Stimulates Collagen, Has a Firming &amp; Hydrating Effect Which Plumps Your Skin &amp; Reduces Fine Lines &amp; Wrinkles, Resulting in a Timeless Appearance ~ Proudly Made in the USA	Beauty	508082.0	'Beauty', 'Skin Care', 'Face', 'Oils & Serums'	19.99	
+B00GQ9I9IO	TruSkin Naturals BEST Vitamin C Serum for Face with Hyaluronic Acid | 20% C + Vitamin E | Professional Facial Skincare Formula | Topical Vitamin C with Natural &amp; Organic Ingredients Shown to Boost Collagen, Plump Skin, Repair Sun Damage, Fade Sun Spots, Age Spots, Dark Circles, Wrinkles &amp; Fine Lines for Smooth, Firm, Radiant, Youthful Skin that Glows -1 oz	Health & Personal Care	681355.0	'Beauty', 'Skin Care', 'Face', 'Oils & Serums'	24.79	
+B00GR4SSPW	Panasonic EH-HS95-K Smooth &amp; Shiny Flat Iron with nanoe Technology	Beauty	970187.0	'Beauty', 'Hair Care', 'Styling Tools', 'Irons', 'Flattening Irons'	169.01	
+B00GRBVM0S	Virgin Argan Oil for Hair &amp; Face Treatment - 100% Cold Pressed Pure Organic Moroccan Oil - 4 Oz - Perfect for Dry Skin, Split Ends, Acne &amp; Damaged Nails - Get Beautiful Skin &amp; Hair Starting Today, Guaranteed!	Beauty	447922.0	'Beauty', 'Skin Care', 'Body', 'Moisturizers', 'Oils'	35.0	
+B00GTC03AU	Suave Professionals Natural Infusion Seaweed and Lotus Blossom Shampoo, 12.6 Ounce	Beauty	84850.0	'Beauty', 'Hair Care', 'Shampoos'	9.33	Suave
+B00GTBZOVE	Suave Professionals Natural Infusion Macadamia Oil and White Orchid Conditioner, 12.6 Ounce	Beauty	3144.0	'Beauty', 'Hair Care', 'Conditioners'	1.88	Suave
+B00GTBZHUW	Suave Kids 2 In 1 Shampoo Conditioner, Peach, 12 Ounce	Beauty	13243.0	'Beauty', 'Hair Care', 'Shampoos'	6.59	Suave
+B00GTBZ7HA	Dove Restorative Treatment with Anatolian Pomegranate Seed Oil, 3.3 Ounce	Beauty	7714.0	'Beauty', 'Hair Care', 'Hair & Scalp Treatments'	9.51	
+B00GTBZNP6	Suave Kids Swinging Coconut Hairspray, 7 Ounce	Beauty	94451.0	'Beauty', 'Hair Care', 'Styling Products', 'Hair Sprays'	4.39	Suave
+B00GTC0DYQ	Suave Professionals Split End Rescue Conditioner, 12.6 Ounce	Beauty	775579.0	'Beauty', 'Hair Care', 'Conditioners'	1.98	
+B00GTC1FFW	Axe Face Wash, Peace, 5 Ounce	Clothing	1140729.0	'Beauty', 'Skin Care', 'Face', 'Cleansers', 'Gels'	3.99	AXE
+B00GTBZXA6	Suave Professionals Natural Infusion Awapuhi Ginger and Honeysuckle Shampoo, 12.6 Ounce	Beauty	36261.0	'Beauty', 'Hair Care', 'Shampoos'	7.94	Suave
+B00GTBZN4C	Suave Kids 3 In 1 Shampoo Conditioner and Body Wash, Pineapple, 22.5 Ounce	Beauty	159050.0	'Beauty', 'Hair Care', 'Shampoos'	8.39	Suave
+B00GTC0IY6	Suave Moroccan Infusion Dry Shampoo, 5 Ounce	Beauty	588398.0	'Beauty', 'Hair Care', 'Shampoos'	7.95	Suave
+B00GTC02LA	Suave Professionals Natural Infusion Awapuhi Ginger and Honeysuckle Light Leave-in Cream, 6 Ounce			'Beauty', 'Hair Care', 'Styling Products', 'Creams, Gels & Lotions'	15.95	Suave
+B00GTC03OG	Suave Professionals Natural Infusion Seaweed and Lotus Blossom Conditioner, 12.6 Ounce	Beauty	148829.0	'Beauty', 'Hair Care', 'Conditioners'	8.16	Suave
+B00GTC1HB4	Axe Styling Messy Look Matte Gel, 6 Ounce	Beauty	168122.0	'Beauty', 'Hair Care', 'Styling Products', 'Creams, Gels & Lotions'	9.98	AXE
+B00GTBZHCA	Suave Professionals Men 2 In 1 Shampoo and Conditioner, Alpine Fresh, 12.6 Ounce	Beauty	308597.0	'Beauty', 'Hair Care', 'Shampoos'	4.99	Suave
+B00GTC0DFK	Suave Professionals Split End Rescue Shampoo, 12.6 Ounce	Beauty	87485.0	'Beauty', 'Hair Care', 'Shampoos'	3.69	
+B00GTC1HCI	Axe Styling Spiked Up Look Gel, 6 Ounce	Beauty	430059.0	'Beauty', 'Hair Care', 'Styling Products', 'Creams, Gels & Lotions'	10.95	AXE
+B00GTBZI6A	Suave Professionals Men 2 In 1 Anti Dandruff Classic Clean Shampoo and Conditioner, 12.6 Ounce	Beauty	313301.0	'Beauty', 'Hair Care', 'Shampoos'	5.0	Suave
+B00GTC1KZ2	Axe Shampoo, Peace, 12 Ounce	Beauty	202885.0	'Beauty', 'Hair Care', 'Shampoos'	5.0	AXE
+B00GTBZXTC	Suave Professionals Natural Infusion Macadamia Oil and White Orchid Light Oil Spray, 3 Ounce	Beauty	358798.0	'Beauty', 'Hair Care', 'Styling Products'	6.84	Suave
+B00GTC1JHQ	Axe Peace Shower Gel, 16 Fluid Ounce	Beauty	365304.0	'Beauty', 'Bath & Body', 'Cleansers', 'Body Washes'	5.25	AXE
+B00GTBZWPW	Suave Professionals Natural Infusion Awapuhi Ginger and Honeysuckle Conditioner, 12.6 Ounce	Beauty	44211.0	'Beauty', 'Hair Care', 'Conditioners'	7.8	Suave
+B00GTC1JVM	Axe Harmony Shower Gel, 16 Fluid Ounce	Beauty	665137.0	'Beauty', 'Bath & Body', 'Cleansers', 'Body Washes'	9.99	AXE
+B00GTBZ85Q	Suave Naturals 2 In 1 Almond Verbena Shampoo, 22.5 Ounce	Beauty	9706.0	'Beauty', 'Hair Care', 'Shampoos'	8.49	Suave
+B00GTC0E1I	Suave Keratin Infusion Color Care Dry Shampoo, 5 Ounce	Beauty	551933.0	'Beauty', 'Hair Care', 'Shampoos'	4.7	Suave
+B00GTBZ8B0	Dove Nourishing Treatment with African Macadamia Oil, 3.3 Ounce	Beauty	183120.0	'Beauty', 'Hair Care', 'Hair & Scalp Treatments'	11.18	Dove
+B00GUC7XAW	Axe Hair Styling Control Cream, Peace, 2.64 Ounce	Health & Personal Care	25367.0	'Beauty', 'Hair Care', 'Styling Products', 'Creams, Gels & Lotions'	5.66	AXE
+B00GUTLC0C	#1 PREMIUM Hyaluronic Acid Serum - 100% Pure, Undiluted &amp; No Fillers - Ultimate Skin Rejuvenator &amp; Moisturizer HA Serum - Best Anti Wrinkle Serum with Vitamin C - Nutrient-Rich Organic Herbs For BETTER Results - Enhances Collagen Growth - Best Hyaluronic Acid Serum Choice - Free Guide &quot;Secrets to Glowing Skin&quot; - Experience Youthful Looking Skin &amp; Instant Glow	Beauty	606940.0	'Beauty', 'Skin Care', 'Face', 'Oils & Serums'	19.95	
+B00GW1HKHW	Derma Roller 0.5 / 1.0 - Best Dermaroller System For Younger Beautiful Looking Skin - Advanced &amp; Safest Micro Needle Treatment for Home Use (Safer than 1.5 , 2.0 mm) with Easy-Glide, 600 Tiny Microneedle Disc Technology and Replaceable Micro-Needle Heads with 360&ordm; Rotation - Use for Stretch Marks, Eyes, Face, Cellulite, Acne, Body, Hair Loss, Scar Removal and Beauty Enhancement - 100% Satisfaction Guarantee - GET RESULTS IN UNDER 10 SESSIONS Or Your Money Back!			'Beauty', 'Skin Care', 'Face'	19.0	
+B00GW61EB0	&quot;WOW! Your Skin Looks Great!&quot; :: People Will Want to Know Your &quot;Secret&quot; :: If You've Tried Facial Products Including Exfoliators, Treatments, Masks, or Other Therapeutic Skin Care Products with No Results, Your Search is Over :: AVIZAGE is the Best Vitamin C Serum for Your Face :: Backed by Our &quot;Love It or Leave It&quot; Money Back Guarantee.	Beauty	415256.0	'Beauty', 'Skin Care', 'Face', 'Oils & Serums'	19.99	
+B00GXBEV0A	Best Morocco Argan Oil Hair Treatment Mask - Organic Restorative Hydrating Mask Repairs Dry &amp; Damaged Hair - Intense Leave In Conditioner, Detangler &amp; Moisturizer Restores Natural Shine &amp; Lustre - All Natural Ingredients, Safe For Color Treated Hair - With Continued Use This Effective Masque Will Completely Revitalize Your Hair - 30 Day Guarantee!	Beauty	324449.0	'Beauty', 'Hair Care'	15.99	
+B00GXZS5VW	Nivea for Men Sensitive Face Wash for Men, 5 Ounce	Beauty	568653.0	'Beauty', 'Skin Care', 'Face', 'Cleansers'	12.29	Nivea Men
+B00GXZS7AG	Zwilling Pour Homme Multi-Use Tool	Beauty	236862.0	'Beauty', 'Tools & Accessories', 'Nail Tools', 'Clippers & Trimmers'	20.0	
+B00GYB1AUI	Tresemme Renewal Hair and Scalp Leave-In Conditioning Spray, 10 Ounce	Beauty	435128.0	'Beauty', 'Hair Care', 'Conditioners'	1.66	TRESemme
+B00GYB17TC	Tresemme Renewal Hair and Scalp Deep Conditioning Mask,6 Ounce	Beauty	267831.0	'Beauty', 'Hair Care', 'Conditioners'	4.25	TRESemme
+B00GYB1ECW	Tresemme 7 Day Keratin Smooth Conditioner, 9 Ounce	Beauty	163405.0	'Beauty', 'Hair Care', 'Conditioners'	5.86	TRESemme
+B00GYB17XI	Tresemme Renewal Hair and Scalp Shampoo, 25 Ounce	Beauty	459052.0	'Beauty', 'Hair Care', 'Shampoos'	11.06	TRESemme
+B00GYB107Q	Suave Professionals Body Lotion, Moroccan Infusion, 18 Ounce	Beauty	131846.0	'Beauty', 'Skin Care', 'Body', 'Moisturizers', 'Lotions'	9.95	Suave
+B00GYB1AQM	Tresemme 7 Day Keratin Smooth Shampoo, 9 Ounce	Beauty	122.0	'Beauty', 'Hair Care', 'Shampoos'	4.0	TRESemme
+B00GYB17P6	Tresemme Keratin Smooth Smoothing Creme Serum, 3.5 Ounce	Health & Personal Care	76048.0	'Beauty', 'Hair Care', 'Styling Products', 'Creams, Gels & Lotions'	8.65	TRESemme
+B00GYB13OQ	Suave Professionals Dry Body Oil Spray, Moroccan Infusion, 3 Ounce	Beauty	83740.0	'Beauty', 'Skin Care', 'Body', 'Moisturizers', 'Oils'	5.97	Suave
+B00GYF65TK	OZ Naturals - The BEST Eye Gel, Cream For Dark Circles Puffiness and Wrinkles - This Eye Gel Treatment Addresses Every Eye Concern - 100% Natural Ingredients Include Plant Stem Cells, Matrixyl 3000, Cucumber, Silk Amino Blend, Peptide Complex - The Most Effective Eye Gel Available - Your 100% Satisfaction is GUARANTEED!	Beauty	698968.0	'Beauty', 'Skin Care', 'Eyes', 'Combinations'	31.99	OZ Naturals
+B00GZ18LL8	Cetaphil Gentle Skin Cleansing Cloths, 25 Count	Beauty	263823.0	'Beauty', 'Skin Care', 'Face', 'Cleansers', 'Cloths & Towelettes'	10.24	Cetaphil
+B00H0CVFGO	Organic Argan Oil Young for Life - Certified, Pure, Natural, Virgin Moroccan Cold Pressed - For Your Hair, Skin, Face, Nails and Cuticals. Skin Problems Relief. Use Daily and Look Younger Like the Hollywood Beauties - Life-time No Questions Asked Guarantee!	Beauty	167620.0	'Beauty', 'Skin Care', 'Body', 'Moisturizers', 'Oils'	19.95	
+B00H0LVCVI	Derma Roller 1.0 mm Micro Needle	Beauty	77989.0	'Beauty', 'Skin Care', 'Maternity'	19.95	Skin Secret
+B00H2B2RLK	Remington Products WXA1080 Smooth and Silky Electric Roll-On Wax Kit	Health & Personal Care	65531.0	"'Beauty', 'Fragrance', ""Men's"", 'Cologne'"		
+B00H345TXO	Remington Products CI97M1A Ultimate Stylist Teardrop Wand	Beauty	236743.0	'Beauty', 'Hair Care', 'Styling Tools', 'Irons', 'Curling Irons'	27.99	
+B00H41LTL2	Burt's Bees Brightening Daily Facial Cleanser, 6 Ounces	Beauty	345325.0	'Beauty', 'Skin Care', 'Face', 'Cleansers'	9.99	Burt&#39;s Bees
+B00H5V3T8M	Suave Professionals, Gradual Self Tanner, Visible Glow, Medium-Tan, 7.5 Ounce	Beauty	572744.0	'Beauty', 'Skin Care', 'Body', 'Moisturizers', 'Lotions'	6.97	Suave
+B00H5V3T2I	Suave Professionals Gradual Self Tanner, Visible Glow-Fair-Medium, 7.5 Ounce	Beauty	183339.0	'Beauty', 'Skin Care', 'Body', 'Moisturizers', 'Lotions'	6.83	Suave
+B00H7NKNE6	Argan Oil for Hair &#9733;SALE!&#9733; ORGANIC Argan Oil | Highest Quality Moisturizing Moroccan Oil - Cold Pressed Virgin Argan Oil for Face, Hair, Skin and Nails | Pure and acclaimed as &quot;Nature's Liquid Gold&quot; | Certified Organic and EcoCert Certified Argania Spinosa | WORKS or YOUR MONEY BACK!	Beauty	460994.0	'Beauty', 'Skin Care', 'Body', 'Moisturizers', 'Oils'	13.85	
+B00H8C82IU	Anti Aging Active Botanical Eye Cream with Hydrolysed Collagen to Help Fight the Signs of Aging. Featuring a Superior Blend of Penetrable Lipids, This Collagen-based Anti Aging Eye Cream Gently Plumps Surface Dehydration (Without Causing Undereye Bags) and Fine Lines While Enhancing Skin Flexibility and Improving Texture.	Beauty	571257.0	'Beauty', 'Skin Care', 'Eyes', 'Creams'	29.95	
+B00H93NJLS	ORGANIC Argan Oil 4OZ &#9733;SALE&#9733; 100% PURE Argan Oil for Hair, Face, Skin &amp; Nails | USDA Certified | Best Argania Spinosa from Morocco - Cold Pressed, Unrefined Virgin Argan Oil | Great for Acne, Dry Scalp, Body, Cuticles - &#9733; WORKS OR YOUR MONEY BACK | 100% LIFETIME Money Back Guarantee	Beauty	109565.0	'Beauty', 'Skin Care', 'Body', 'Moisturizers', 'Oils'	17.77	
+B00HAT8EKW	Best Shampoo - Tru Moroccan Argan Oil Shampoo - The Absolute Best Moisturizing Shampoo For Frizzy Dry Hair - Natural Shampoo - Gain Silky Shiny Hair Instantly - Sells Out Fast	Beauty	5179.0	'Beauty', 'Hair Care', 'Shampoos'	24.95	
+B00HB2JQNM	Olay Total Effects 7 in one, Anti-Aging Moisturizer With SPF 30, 1.7 Fluid Ounce	Beauty	50891.0	'Beauty', 'Skin Care', 'Face', 'Creams & Moisturizers', 'Fluids & Lotions', 'Lotions'	15.0	Olay
+B00HD7SCLM	Olay Fresh Effects Dew Over Hydrating Gel Moisturizer, 1.7 Fluid Ounce	Beauty	588545.0	'Beauty', 'Skin Care', 'Face', 'Creams & Moisturizers', 'Fluids & Lotions', 'Fluids'	11.25	Olay
+B00HDL5VA8	Best Hair Conditioner - Tru Moroccan Argan Oil Conditioner - Gain Silky Shiny Hair Instantly With The Absolute Best Hair Conditioner With Argan Oil	Beauty	239325.0	'Beauty', 'Hair Care', 'Conditioners'	24.95	
+B00HE88JMC	UBU Super Softy Extra Large and Soft Powder Brush	Beauty	577695.0	'Beauty', 'Tools & Accessories', 'Makeup Brushes & Tools', 'Brushes & Applicators'	9.99	
+B00HHR0SYW	Best VITAMIN C SERUM for Face by Poppy Austin&reg; &#9733; This Bottle is TWICE the Size of All Other Vitamin C Serums &#9733; Contains Hyaluronic Acid Serum and Organic Jojoba Oil. See IMMEDIATE Results from our DOUBLE STRENGTH yet Gentle, All-Natural Anti Aging Formula. Six Months Supply in Just One Bottle. 100% Money Back Guarantee For One FULL YEAR After Purchase. Try it Risk Free Today.	Beauty	162004.0	'Beauty', 'Skin Care', 'Face', 'Exfoliators & Scrubs', 'Exfoliators'	29.95	
+B00HJCC9BA	Phytoceramides 350 mg Plant Derived Capsule	Beauty	534665.0	'Beauty', 'Skin Care', 'Eyes', 'Gels'	19.99	
+B00HJD8NLY	Vitamin C Serum - Antioxidant Treatment - Natural &amp; Organic - Incl. Organic Rosehip Oil &amp; Sea Buckthorn Oil - Brightening Serum - Rapid Absorption - Reduce Sun Spots and Wrinkles - Exclusive to Amazon - 1.18oz	Beauty	601968.0	'Beauty', 'Skin Care', 'Face', 'Oils & Serums'	35.0	
+B00HM6JLNW	Dove Oxygen Moisture Conditioner, 12 Ounce	Beauty	753619.0	'Beauty', 'Hair Care', 'Conditioners'	9.9	Dove
+B00HM6IVXI	Dove Hair Styling Oxygen Moisture Root Lift Spray, 3.3 Ounce	Beauty	481292.0	'Beauty', 'Hair Care', 'Styling Products', 'Hair Sprays'	17.95	Dove
+B00HM6IV6K	Dove Hair Styling Oxygen Moisture Leave In Foam, 5.1 Ounce	Beauty	541543.0	'Beauty', 'Hair Care', 'Styling Products', 'Mousses & Foams'	5.11	Dove
+B00HM6IXH2	Dove Oxygen Moisture Shampoo, 12 Ounce	Beauty	46655.0	'Beauty', 'Hair Care', 'Shampoos'	3.02	Dove
+B00HM6K6XQ	Dove Pure Care Dry Oil Conditioner, 12 Ounce	Beauty	83053.0	'Beauty', 'Hair Care', 'Conditioners'	7.89	Dove
+B00HM8PWEM	Vitamin C Serum for Face | With Natural Hyaluronic Acid and L-Arginine | Best Anti Aging Blend of Organic and Natural Ingredients | Lifetime Guarantee	Beauty	218548.0	'Beauty', 'Skin Care', 'Face', 'Oils & Serums'	19.98	
+B00HNKRWII	Clear Scalp and Hair Intense Hydration Nourishing Shampoo, 12.9 Ounce	Beauty	764658.0	'Beauty', 'Hair Care', 'Shampoos'	10.0	CLEAR
+B00HNKRWI8	Clear Scalp and Hair Intense Hydration Nourishing Conditioner, 12.7 Ounce	Beauty	7857.0	'Beauty', 'Hair Care', 'Hair & Scalp Treatments'	4.48	
+B00HNKRWX8	Clear Scalp and Hair Intense Hydration Nourishing Mask, 6 Ounce	Beauty	173882.0	'Beauty', 'Hair Care', 'Conditioners'	4.48	
+B00HNTBTOC	Vitamin-C Serum - Potent 20% Topical Vitamin C + E + A Serum - Best Anti-aging + Anti-wrinkle Skin Care Combination Erases Years of Your Face - &quot;Keeps Vitamins Fresh&quot; for Superior Results - 100% &quot;No One Can Guess Your Age&quot; Money Back Guarantee	Beauty	8257.0	'Beauty', 'Skin Care', 'Face', 'Oils & Serums'	23.95	
+B00HOHLKY2	Vitamin C Serum 20% with BONUS Vitamin C Eye Gel ($35 Value). Most Stable Vitamin C+ Hyaluronic Acid + Organic Aloe Resists Oxidation (MAKES OTHER SERUMS NOT WORK). Natural, Organic Collagen Boosting, Anti Aging, Anti Wrinkle, Skin Care. Best Value on Amazon. Proudly Made in USA	Beauty	310357.0	'Beauty', 'Skin Care', 'Eyes', 'Fillers'	18.95	
+B00HSNX1AS	Suave Professionals Natural Infusion Seaweed and Lotus Blossom Leave-in Foam, 5 Ounce	Beauty	185722.0	'Beauty', 'Hair Care', 'Styling Products', 'Mousses & Foams'	5.79	
+B00HSNWXV6	Caress Body Wash, Juicy Escape, 18 Ounce	Beauty	19533.0	'Beauty', 'Bath & Body', 'Cleansers', 'Body Washes'	10.59	Caress
+B00HSNWZKU	CLEAR Men Scalp and Hair 2 in 1 Shampoo and Conditioner, Ocean Mineral Hydration, 12.9 Ounce	Beauty	880987.0	'Beauty', 'Hair Care', 'Shampoos'	13.95	CLEAR
+B00HSNWZFU	Suave Professionals Natural Infusion Macadamia Oil and White Orchid Shampoo, 12.6 Ounce	Beauty	128579.0	'Beauty', 'Hair Care', 'Shampoos'	7.0	Suave
+B00HSNWXTI	Caress Body Wash, Aqua Sparkle, 18 Ounce	Beauty	72450.0	'Beauty', 'Bath & Body', 'Cleansers', 'Body Washes'	6.0	Caress
+B00HSNWXVQ	CLEAR Men Scalp and Hair 2 in 1 Shampoo and Conditioner, Citrus Fresh Hydration, 12.9 Ounce	Beauty	85696.0	'Beauty', 'Hair Care', 'Shampoos'	4.48	
+B00HSNWXYI	Caress Bar Soap, Emerald Rush, 6 Count, 4oz.	Beauty	315908.0	'Beauty', 'Bath & Body', 'Cleansers', 'Soaps'	7.49	
+B00HSNWXZM	Caress Body Wash, Emerald Rush, 18 Ounce	Health & Personal Care	378694.0	'Beauty', 'Bath & Body', 'Cleansers', 'Body Washes'	10.89	Caress
+B00HZ7IRSI	GUARANTEED FASTEST WORKING 20% Vitamin C Serum + E + Ferulic + 11% Hyaluronic Acid, Natural &amp; Organic Skin Repair Serum is the Best Vitamin C Serum For Your Face, Also Contains Organic Aloe + Amino Complex + Organic Jojoba Oil, Top Anti Aging Anti Wrinkle Facial Skin Care Serum Available, Deeply Penetrates Skin to Repair Sun Damage, Gradually Fades Age Spots, Reduces Fine Lines &amp; Wrinkles, Azure Naturals Guarantees Our ULTIMATE VITAMIN C Serum Will Leave Your Skin More Radiant, Beautiful &amp; Youthful Looking! 2 OZ Value Size Available			'Beauty', 'Skin Care', 'Face', 'Oils & Serums'	45.95	Azure Naturals
+B00I073WLE	Olay Regenerist Luminous Tone Perfecting Cream, 1.7 Ounce	Beauty	874490.0	'Beauty', 'Skin Care', 'Face', 'Creams & Moisturizers', 'Fluids & Lotions', 'Lotions'	20.32	Olay
+B00I2495QG	Best Hyaluronic Acid Serum For Skin - Groundbreaking Formula Produces Better Results - Low &amp; High Molecular Weights For Superior Performance &amp; Intense Hydration - Only LH Hyaluronic Acid Serum Sold On Amazon - 100% Pure Anti Aging Serum	Beauty	602955.0	'Beauty', 'Skin Care', 'Face', 'Oils & Serums'	24.95	
+B00I2OR6YE	Essential Makeup Brush Set - With Makeup Brush Holder - Leather Carrying Case 12 Professional Quality Brushes	Beauty	62.0	'Beauty', 'Tools & Accessories', 'Makeup Brushes & Tools', 'Brushes & Applicators'	59.0	
+B00I49QTXG	Nexxus Italian Motor Styling Tool	Beauty	27036.0	'Beauty', 'Hair Care', 'Styling Tools', 'Hair Dryers'	77.73	
+B00I4ZERGG	#1 Best Selling Organic Anti-Aging, Brightening Eye Cream 1 oz , Best Dark Circles, Puffiness, Dark Circle Eye Treatments, Wrinkles &amp; Bags Under Eyes Treatment, Fast-Acting &amp; All-Natural Facial Lines and Wrinkle Remover Using A Lightweight Oil-Free Formulation. Guaranteed to Work &amp; Backed by Our 90-Day No-Questions Asked Guarantee!	Beauty	148040.0	'Beauty', 'Skin Care', 'Eyes', 'Combinations'	28.0	
+B00I6CRX04	Irish Spring Gear Body Wash, Exfoliating, 15 Fl. Ounce			'Beauty', 'Bath & Body', 'Cleansers', 'Body Washes'	5.49	Irish Spring
+B00I6R90Q4	100% Pure Argan Oil for Hair, Face, Skin and Nails by NYGLOW - The #1 New Premium Moroccan Leave-in Treatment to Condition and Revitalize Damaged Lifeless Hair, Nourish Dry Skin and Strengthen Brittle Nails - Natural, Cold Pressed, Certified Organic, Extra Virgin Moroccan Oil - 100% Satisfaction Guarantee	Beauty	90285.0	'Beauty', 'Skin Care', 'Hands & Nails', 'Nail Treatments'		
+B00IAMTLS2	Best New Acne Treatment - Wipe Away That Pimple, Blackhead, Zit or Blemish from Face - It Was Best for Teens &amp; Young Adults Compared to Lotion, Wash, Cream, Pills, Gel, X Out, Zit No More Kit. The Hollywood Secret is Now Out. Stop Scars from Forming!	Beauty	358900.0	'Beauty', 'Skin Care', 'Face', 'Treatments & Masks', 'Acids & Peels', 'Salicylic Acid'	35.77	
+B00IBS9QC6	Dead Sea Mud Facial Mask and Deep Facial Cleanser by Adovia - Deep Pore Cleansing and Purifying Acne Treatment - Reduce Acne, Blackheads &amp; Pimples - Natural Face Mask, Exfoliator and Skin Care Treatment for Women, Men and Teens - Works for Eczema, Psoriasis, Acne and Blackheads - Leaves Your Skin Clear, Radiant and Younger Looking - 100% Satisfaction Guaranteed	Beauty	85130.0	'Beauty', 'Skin Care', 'Face', 'Treatments & Masks', 'Masks'	32.0	
+B00ID8H51S	Revlon Nutrifusion Conditioning Curling Iron, 3/4 inch	Beauty	91218.0	'Beauty', 'Hair Care', 'Styling Tools', 'Irons', 'Curling Irons'	18.46	
+B00ID8H16W	Revlon Nutrifusion Conditioning Straightener, 1 inch	Beauty	28612.0	'Beauty', 'Hair Care', 'Styling Tools', 'Irons', 'Flattening Irons'	28.0	Revlon
+B00ID8H4OG	Revlon NutrifusionConditioning Curling Iron, 1 inch	Beauty	204163.0	'Beauty', 'Hair Care', 'Styling Tools', 'Irons', 'Curling Irons'	19.29	Revlon
+B00IDWP4IA	Vitamin C Serum For Face 20% &#9733;Weekend SALE&#9733; Organic Serum + Hyaluronic Acid, Ferulic Acid &amp; Vitamin E | Best Anti-Aging Anti-Wrinkle Facial Skin Care Serum | Helps Diminish Appearance of Sun Damaged Skin, Sun Spots, Age Spots, Skin Discoloration, Fine Lines &amp; Wrinkles! | INSTANATURAL backs this product with a WORKS OR YOUR MONEY BACK Guarantee! &#9733; We'll refund your money if you're not satisfied! Try Risk FREE and Get The Beautiful, Radiant and Youthful Skin You Have Always Desired!	Beauty	570048.0	'Beauty', 'Skin Care', 'Face', 'Oils & Serums'	15.87	
+B00IG9L8QM	Hyaluronic Pure Moisturizing Cream (Post-peel Repair and Restore) Enhanced with Squalane and Botanical Extracts	Beauty	441889.0	'Beauty', 'Skin Care', 'Face', 'Treatments & Masks', 'Masks'	21.95	
+B00IH49VBU	100% Organic Argan Oil for Skin &amp; Hair - Pure Virgin Argan Oil is Cold Pressed for Highest Quality - Supports Hair Growth - One of the Best Natural Anti-Aging/Anti-Wrinkle Skin Care Products - Super Antioxidant Moisturizer with Vitamin E - Fast Absorbing and Non Greasy Beauty Treatment - Feel Confident with Our Satisfaction Guarantee!	Health & Personal Care	21701.0	'Beauty', 'Skin Care', 'Face', 'Oils & Serums'	24.95	
+B00IIB82FS	Petunia Skincare Revitalize Eye Serum | BEST PREMIUM Eye Serum with Sea Kelp for Tired Eyes and Dark Circles | Reduces Puffiness and Wrinkles| Fills in Fine Lines &amp; Moisturizes and Hydrates Eyes | Contains Hyaluronic Acid for Maximum Hydration | COMES WITH FREE e-BOOK | 100% Money Back Guarantee | Try It Risk Free | 100% Customer Satisfaction	Beauty	94437.0	'Beauty', 'Skin Care', 'Eyes', 'Dark Circle Treatments'	26.0	
+B00IIBB7A0	BEST Hyaluronic Acid Serum for Your Skin | Potent Anti-Aging &amp; Moisturizing Serum With Vitamin C &amp; Ferulic Acid | COMES WITH FREE e-BOOK | 100% Natural Skincare Product | Best Moisturizer Serum | 100% MONEY BACK GUARANTEE	Beauty	500720.0	'Beauty', 'Skin Care', 'Face', 'Oils & Serums'	18.0	
+B00IJZJ9K0	Replacement Brush Head for Sensitive Cleansing - (Generic) Twin Pack - 100% Money Back Guarantee	Beauty	337168.0	'Beauty', 'Skin Care', 'Face'	10.99	Love&#39;s Health
+B00IMHN0B4	Moroccan Rose Water 100% Pure &amp; Natural For Face, Skin &amp; Hair | Facial Toner, Cleanser, Hydrator, Moisturizer, Makeup Remover by &#9733; InstaNatural - Best Skin Care - 4 oz. - 100 Days 100% Money Back Guarantee	Health & Personal Care	18988.0	'Beauty', 'Skin Care', 'Face', 'Cleansers', 'Washes'	11.95	
+B00IP42FBA	Organic Rosehip Oil 4OZ &#9733;SALE&#9733; 100% Pure Rosehip Seed Oil &amp; USDA Certified BEST Rosehip Oil For Face and Skin - InstaNatural | Great Moisturizer for Dry Skin, Hair, Nails, Stretch Marks, Scars, &amp; Spots | Unrefined, Cold Pressed Virgin Rosehip Seed Oil | 100% LIFETIME GUARANTEE :: We'll refund your money if you're not satisfied! Try Risk FREE!	Beauty	16422.0	'Beauty', 'Skin Care', 'Face', 'Oils & Serums'	24.97	
+B00IRBY2R6	Lavender Dead Sea Salts &amp; Milk Bath Soak &#9733; Organic Spa Recipe - A Blend Of Pure Essential Oils, Vitamins, Minerals And Milk Proteins &#9733; A Great Gift For Men &amp; Women &#9733; Revive In A Rich, Creamy Bath That Calms Your Senses And Nourishes Your Skin	Beauty	287336.0	'Beauty', 'Bath & Body', 'Bath', 'Minerals & Salts'	14.97	
+B00IRMZ6S4	Daily Moisturizer EmFACEize Anti-Aging Face Cream - Best Facial Moisturizing Cream Contains Vitamin E, Hyaluronic Acid, Collagen, Avocado Oil, Jojoba Oil, Almond Oil, Pomegranate Seed Oil &amp; Antioxidant Boost + UNCONDITIONAL GUARANTEE	Beauty	748440.0	'Beauty', 'Skin Care', 'Face', 'Creams & Moisturizers', 'Day Creams'	29.99	
+B00IROPDPS	Night Cream - ResurFACE Premium Moisturizing Anti Wrinkle Cream for Dry Skin. Advanced Antioxidant Healing Power of Sea Kelp, CoQ10, Sodium PCA, Shea Butter, Avocado &amp; Jojoba Oil. Regenerating &amp; Nutrient-Enriched. Larger 2oz Jar! Results GUARANTEED	Health & Personal Care	71212.0	'Beauty', 'Skin Care', 'Face', 'Creams & Moisturizers', 'Night Creams'	35.0	
+B00IS6XPQY	1 Day Sale! Eyelash Enhancement Serum EmbelLASH Grows More Eyelashes. Thicker Eyebrows and Longer Lashes. Best Natural Eyelash Accelerator, Treatment and Conditioner with Clinically Proven Ingredients &amp; 100% Guaranteed (10ml/0.34oz)	Health & Personal Care	355008.0	'Beauty', 'Makeup', 'Eyes', 'Mascara'	39.99	
+B00ISDOYV2	Seaweed Powder - The Best Cellulite Treatment - Cellulite Remover PowerHouse - Pure Ascophyllum Nodosum Kelp Powder to be Used in Body Wraps or Masks For Skin Detox - Kosher Certified Ingredient - Satisfaction Guaranteed (1.5 Pound)	Beauty	142484.0	'Beauty', 'Bath & Body', 'Scrubs & Body Treatments', 'Body Scrubs'	19.95	
+B00ISW91BG	Remington Products S6301 3 In 1 Straightener	Beauty	40.0	'Beauty', 'Hair Care', 'Styling Tools', 'Irons', 'Flattening Irons'		
+B00ISW92F6	Remington Products S7211 Wet to Straight Straightener, 1 Inch	Beauty	710427.0	'Beauty', 'Hair Care', 'Styling Tools', 'Irons', 'Flattening Irons'	27.3	Remington
+B00ISW92FG	Remington Products S8530 Anti Frizz Therapy Straightener, 2 Inch	Beauty	138419.0	'Beauty', 'Hair Care', 'Styling Tools', 'Irons', 'Flattening Irons'	82.71	
+B00ISW8ZVS	Remington Products AS7055 Ultimate Stylist Big and Bouncy	Beauty	404078.0	'Beauty', 'Hair Care', 'Styling Tools', 'Hair Rollers'	27.29	Remington
+B00IT1HKV4	ORGANIC Argan Oil For Hair &amp; Face - 100% Pure &amp; ECO Certified Organic - Larger 4 oz Bottle - Miracle Oil For Every Skin Condition, Hair, Nails, Anti-aging &amp; More! Pure Moroccan Argan Oil - 100% Guaranteed to Work Wonders for Your Body!	Beauty	9628.0	'Beauty', 'Hair Care', 'Hair Relaxers', 'Conditioners'	15.95	
+B00IT69F62	ORGANIC Rosehip Oil - 100% Pure &amp; ECO Certified Organic - #1 Rosehip Oil - Great For Face, Dry Skin, Dermatitis, Brittle Nails, Psoriasis, Eczema, Dry Hair, Scars, Anti-Aging, &amp; More! - Larger 1 oz Bottle - 100% Guaranteed to Work Wonders for Your Body!	Beauty	514985.0	'Beauty', 'Skin Care', 'Face', 'Creams & Moisturizers'	15.99	
+B00ITAANDW	Anti Aging Serum COLLAGE with Collagen, Vitamin C, Hyaluronic Acid &amp; Antioxidants. Anti Wrinkle Serum Heals Sun Damage, Lightens Skin Tone, Reduces Acne Scars, Increases Elasticity, Nourishes &amp; Hydrates. Niacinamide (B3), Sodium PCA, Sea Kelp 100% GUARANTEED	Beauty	1231178.0	'Beauty', 'Skin Care', 'Face', 'Oils & Serums'	24.99	
+B00ITA8HD0	Vitamin C Serum for Face C-RUM 20% Ascorbic Acid Anti-Aging Skin Care. With Vitamin E, Hyaluronic Acid, Pomegranate Seed Oil. Smooths Fine Lines &amp; Wrinkles. Builds Collagen, Lightens Skin Tone &amp; Makes Skin Radiant 100% Results GUARANTEE	Beauty	120706.0	'Beauty', 'Skin Care', 'Face', 'Oils & Serums'	21.99	
+B00ITA41T4	Anti-Aging Retinol Serum. A+CTIVE Best Vitamin A Night Serum for Wrinkles with Collagen, Sea Kelp &amp; Hyaluronic Acid to Smooth Skin, Reduce Wrinkles &amp; Under-Eye Puffiness. Nourishes, Heals &amp; Protects Skin. Unconditional GUARANTEE	Beauty	349119.0	'Beauty', 'Skin Care', 'Face', 'Oils & Serums'	23.99	
+B00IU079YM	Hyaluronic Acid Skin Serum, Anti Aging Wrinkle Serums Care Botox Alternative 100% Pure, Skin Rejuvenator - FREE Ebook Hydrate &amp; Moisturizer, Activates Collagen, Plump &amp; Toned Beautiful Skin, HA Men &amp; Women Buy &amp; Get Results Now!	Beauty	88292.0	'Beauty', 'Skin Care', 'Face', 'Exfoliators & Scrubs', 'Polishes'	22.95	
+B00IU2C148	Hyaluronic Acid Serum with Vitamin C &amp; Vitamin E- Get Rid of Wrinkles - Instant Face Lift Filling in Lines &amp; Wrinkles on Your Face *** MADE IN USA *** GMP &amp; FDA Approved Manufacturing Facility - Best Hyaluronic Anti Aging Serum - Works Best with Bodishape Phytoceramides &amp; Bodi Skincare's Matrixyl 3000 Moisturizer - *** 100% UNCONDITIONAL MONEY BACK GUARANTEE ***	Beauty	211111.0	'Beauty', 'Skin Care', 'Face', 'Oils & Serums'	39.99	
+B00IXVY8HO	Collagen Supplements One Plus - 120 Capsules with 750mg Per Capsules - Hydrolyzed and Hydrolysate for Better Body Absorption - Easier to Swallow Than Collagen Pills - Contains Protein - Excellent for Skin. 100% Satisfaction Guarantee or Your Money Back.	Beauty	168900.0	'Beauty', 'Skin Care'	24.99	Nutrihealth One
+B00IZQ66V8	MATRIXYL 3000 - Best Anti-Aging Moisturiser with Matrixyl 3000 - Hypo-Allergenic Deep Wrinkle Cream, Fast Absorption, Neutral Scent and Fast Acting***MADE IN USA*** GMP &amp; FDA Approved Manufacturing Facility- Works Best With Bodishape Phytoceramide 350mg and Bodi Skincare's Potent Hyaluronic Acid Serum ***100% UNCONDITIONAL GUARANTEE***	Beauty	61805.0	'Beauty', 'Skin Care', 'Face', 'Oils & Serums'	34.99	Bodi Skincare
+B00J3JDCH2	Revlon Curl Collection Heated Styling Brush	Beauty	24285.0	'Beauty', 'Hair Care', 'Styling Tools', 'Brushes'	18.69	Revlon
+B00J4JWLJG	Vidal Sassoon Pro Series 1 Inch Touch Control Digital Straightener	Beauty	192655.0	'Beauty', 'Hair Care', 'Styling Tools', 'Irons', 'Flattening Irons'	53.83	Vidal Sassoon
+B00J4JWN2Q	Vidal Sassoon Pro Series 1 Inch Touch Control Digital Curling Iron	Beauty	251677.0	'Beauty', 'Hair Care', 'Styling Tools', 'Irons', 'Curling Irons'	20.0	
+B00J4SCZFM	Makeup Brush Set - 15 Professional Makeup Brushes with Makeup Brush Carrying Case. Our Makeup Brush Sets Have Cheek, Eye, Lip and Face Makeup Brushes. Makeup Applicators for Every Need. Satisfaction Guaranteed.	Beauty	852007.0	'Beauty', 'Tools & Accessories', 'Makeup Brushes & Tools', 'Brushes & Applicators'	29.5	
+B00J5D8BY0	59% OFF TODAY ONLY! Best Daily MOISTURIZER with Hyaluronic Acid and VITAMIN C,A,D &amp; E &#9679; 2oz/50ml &#9679; 100% Pure &#9679; Highest Quality Anti-Wrinkle and Anti-Aging Serum Available on Amazon &#9679; Natural Skin Care Product recommended by Dr. Oz &#9679; For Oily, Dry and Sensitive Skin &#9679; Hydrates and Rejuvenates the Skin in no time &#9679; Total Satisfaction in 90 Days Or 100% MONEY BACK &#9679; SELLS OUT FAST!!!	Beauty	196798.0	'Beauty', 'Skin Care', 'Face', 'Oils & Serums'	27.95	
+B00J9E8MPS	Stretch Mark Cream ~ One of the Best Natural, Preventative, Anti Stretch Mark Firming Creams ~ 60 DAY GUARANTEE ~ Suitable for Men and Women ~ Remove, Repair and Prevent Your Pregnancy Stretch Marks ~ Scar Removal Cream ~ Pregnant and Wondering How to Get Rid of Stretch Marks? Massage Our Superior Moisturizing Cream Into Your Skin for the Answer! ~ 4oz	Clothing	58126.0	'Beauty', 'Skin Care', 'Body', 'Moisturizers', 'Creams'	24.99	
+B00JC77VEK	Derma Roller 1.0-QMD  Titanium &amp; FREE Case -*FDA registered- 540 Micro Needles 1.0 mm Long - Medical Dermarolling Proven as The Best Acne Scar Removal Treatment Up to Date -Dermaroller Micro Needling Improves Wrinkles Scars Stretch Marks Cellulite and Hair Loss -Our Dermarollers are Supplied Sterile- Get Rid of Your Unwanted Marks, Get the Smooth Beautiful Skin You Deserve! (100% Guaranteed)	Beauty	656080.0	'Beauty', 'Skin Care', 'Face'	16.47	
+B00JCE89SU	Premium Phytoceramide Skin Care ~ A Revolution in Beauty Products ~ Restores Youthful Look &amp; Feel ~ Moisturizes &amp; Protects ~ Unsurpassed among Therapeutic Skin Care Supplements ~ Benefits Hair, Skin and Nails ~ 350mg Ceramides + Nutritional Antioxidant Combination: Vitamin A, C, D, &amp; E Complex*	Beauty	38354.0	'Beauty', 'Skin Care', 'Face', 'Creams & Moisturizers'	18.88	
+B00JEIM6MY	Phytoceramides - The #1 'Fake a Facelift' Phenomenon As Seen on Tv's Dr Oz - 350mg of Wheat Based, Plant Derived Ceramides - A 100% Natural 'Better Than Botox' Skin Rejuvenation Supplement That Reduces Wrinkles &amp; Fine Lines and Restores Hydration &amp; Elasticity - 30 Day Supply - Includes Skin Protection Vitamins A, C, D and E - For Women and Men - 100% Lifetime Money Back Guarantee!	Beauty	60800.0	'Beauty', 'Skin Care'	19.77	
+B00JF3RYPM	CeraVe Baby Lotion, 8 Ounce	Beauty	100688.0	'Beauty', 'Skin Care', 'Body', 'Moisturizers', 'Lotions'	8.84	CeraVe
+B00JJVG6HC	Dead Sea Mud Shampoo - Fast, Natural Relief from Dandruff - Itchy, Dry, Flaky Scalp - Scalp Psoriasis - Seborrhea Dermatitis - with Dead Sea Mud, Olive Oil &amp; Shea Butter - Highly Effective - Satisfaction Guaranteed	Beauty	155178.0	'Beauty', 'Hair Care', 'Shampoos'	27.5	
+B00JK3ZHIS	Vitamin C Serum for Face &#9733;SALE!&#9733; Best Vitamin C Serum with Hyaluronic Acid | Powerful Anti-Aging Serum | ADVANCED FORMULA | Premium Quality Natural and Organic Ingredients | Diminish Wrinkles, Fine Lines, Age Spots and Skin Discoloration with ease | GET RESULTS - IT WORKS or YOUR MONEY BACK!	Beauty	275987.0	'Beauty', 'Skin Care', 'Face', 'Oils & Serums'	16.99	
+B00JL2TURM	Konjac Sponge - Activated Charcoal - Facial Sponge, 100% Natural Sponge, Eco-Friendly - Gentle Exfoliating Sponge, Deep Cleansing, Improved Skin Texture - Konjac Facial Cleansing Sponge - Natural Beauty Products -Free of Chemicals, Parabens, Sulphates, Fragrances &amp; Coloring. Good for Sensitive Skin, Hypoallergenic - Cruelty Free, Vegan, Biodegradable, Naturally Sustainable - 100% Money Back Guarantee	Beauty	139359.0	'Beauty', 'Bath & Body', 'Bathing Accessories', 'Loofahs, Sponges & Poufs'	13.49	
+B00JMJ6E5A	Revlon Rose Gold Professional Curling Iron, 1 Inch	Beauty	213984.0	'Beauty', 'Hair Care', 'Styling Tools', 'Irons', 'Curling Irons'	21.7	Revlon
+B00JNI1DZQ	Eyelash Curler: Eye &amp; Mighty By Bella and Bear - BEST Eyelash Curler for Longer More Dramatic Eyelashes - Special Bonus - 100% LIFETIME MONEY BACK GUARANTEE	Beauty	50220.0	'Beauty', 'Tools & Accessories', 'Makeup Brushes & Tools', 'Eyelash Tools', 'Curlers'		
+B00JPK2K0Y	SALE: LIMITED TIME ONLY Phytoceramides Best Anti Aging Skin Care Highest Quality Skin Restoring Ceramides Supplement Capsules 350 mg Plant Derived Formula with VITAMINS A, C, D and E for Great Complexion and Skin Health - Provides Optimum Hydration and Moisturizer For Your Skin - A Miracle in a Bottle - Ideal for Men and Women - An Alternative to Hyaluronic Acid Anti-Aging, Vitamin C Serum, Skinceuticals, Dead Sea Mud Facial Mask and Collagen + FREE Bonus + 100% Money Back Guarantee	Beauty	42404.0	'Beauty', 'Skin Care'	25.95	
+B00JPMJK7I	Moisturizer for Men - UTurn by ProudGuy Skin Care 5-in-1 Aftershave Gel - Anti Aging - Paraben FREE - Dark Circles Under Eyes - Skin Tightening &amp; Repair - Anti Shine - Minimize Pores Reduce Wrinkles - Instant 24 Hour Youthful Result - Unique Gift Ideas - USA Made	Beauty	108695.0	'Beauty', 'Skin Care', 'Face', 'Creams & Moisturizers'	22.48	
+B00JQ12U0M	Best Glycolic Exfoliating Gel Facial Cleanser with Anti-Oxidants and Fruit extracts that deeply and gently exfoliates. Paraben and Gluten free ***MADE IN USA*** GMP &amp; FDA Approved Manufacturing Facility - Best Anti Aging Face Wash - 100% UNCONDITIONAL MONEY BACK GUARANTEE	Beauty	25975.0	'Beauty', 'Skin Care', 'Face', 'Cleansers', 'Washes'	19.99	Belle1 Skincare
+B00JQ2UXOQ	Best Anti Aging BB Cream With SPF 25 That Gives You Radiant Smooth Complexion, contains Matrixyl***MADE IN USA***Best Anti Aging BB, Foundation and Tinted Moisturizer Make Up-100% UNCONDITIONAL MONEY BACK GUARANTEE	Beauty	23145.0	'Beauty', 'Skin Care', 'Face', 'Creams & Moisturizers'	29.0	
+B00JQP1SP6	Seaweed Powder - Pure 100% HIGH QUALITY Natural Atlantic Kelp Powder &#9733; Cellulite Treatment &#9733; Freshly Harvested Norwegian Ascophyllum Nodosum (Kelp) - Kosher Certified - Reduces Fat Cell (Cellulite) Appearance - Perfect Cellulite Treatment - Satisfaction Guaranteed (1 lb)	Beauty	26009.0	'Beauty', 'Bath & Body', 'Scrubs & Body Treatments', 'Body Mud'	21.95	
+B00JR4FKGY	Revlon Rose Gold Professional Curling Iron, 1-1/4 Inch	Beauty	654576.0	'Beauty', 'Hair Care', 'Styling Tools', 'Irons', 'Curling Irons'	24.96	
+B00JR4FOLA	Vidal Sassoon Pro Series Touch Control Digital Hair Dryer, 1875 Watt	Beauty	582470.0	'Beauty', 'Hair Care', 'Styling Tools', 'Hair Dryers'	44.96	
+B00JT74V1O	Phytoceramides - Miracle Phytoceramides 350mg Softgel Capsules as Recommended by DR Oz ***VEGAN SAFE, NON-GMO &amp; GLUTEN FREE *** -Plant Derived Anti-aging Formula - 100% All Natural - Clinically Proven Anti-Wrinkle Active Ingredients *** MADE IN USA *** Your Ultimate Skin Restoring Supplement- Natural Facelift- Use With Bodiskincare Hyaluronic Acid Serum and Matrixyl 3000 Moisurizer for Optimum Results - ***THE ONLY ONE WITH AN UNCONDITIONAL 100% MONEY BACK GUARANTEE***	Beauty	19873.0	'Beauty', 'Skin Care'	34.95	
+B00JTY6WQ4	SALE 70% OFF, TODAY ONLY! - Derma Roller by Diva d'or - Titanium Micro Needle Roller - 540 Needles - Best Skin DermaRoller for Body and Face + FREE Travel Case - 1.0mm Needle Length - SAFE FOR HOME USE - Micro-Needles skin care therapy dermatology system - Use microneedling for Anti Ageing, Acne Scars, Stretch Marks, Wrinkles, Eyes pouches, body, Hair Loss, Cellulite, Scalp and Beauty enhancement - Incredible benefits for Beauty, Health, Personal Care. Multiplies the results of Skincare products like Vitamin C, anti ageing serum &amp; Hyaluronic Face Serum. 100% SATISFACTION GUARANTEE	Beauty	10113.0	'Beauty', 'Skin Care', 'Eyes', 'Complexes'	15.75	
+B00JX979CQ	Emu Oil 100% Pure Moisturizing Oil For Face, Skin, Hair Growth, Stretch Marks, And More | Fully Refined. Get Radiant, Younger looking, Plump Skin - Best Emu Oil - 100 Days 100% Money Back Policy (If you're not satisfied, we'll refund your money + you get to keep the bottle). Try RISK FREE!			'Beauty', 'Skin Care', 'Face', 'Oils & Serums'	21.77	
+B00JYY576U	GUARANTEED BEST Hyaluronic Acid Moisturizer For Your Face, Our Anti Aging Vitamin C Serum Contains Botanical Hyaluronic Acid + 10% Vitamin C + Vitamin E + Organic Aloe, Our Top Anti Wrinkle Skin Care Product Will Moisturize &amp; Hydrate Dull Skin, Filling In Fine Lines &amp; Wrinkles, Azure Naturals Guarantees Our ULTIMATE HYALURONIC ACID Serum Will Leave Your Skin More Radiant, Beautiful &amp; Youthful Looking! 2 OZ Value Size Available	Beauty	34564.0	'Beauty', 'Skin Care', 'Face', 'Creams & Moisturizers', 'Fluids & Lotions', 'Fluids'	27.95	Azure Naturals
+B00JZVMTOU	Acne Sunscreen SPF 30 For Glamorous, Sensitive Skin - Oil Free Protection that prevents breakouts, nourishes &amp; moisturizes - Therapeutic facial care products &amp; sport tanning sunscreens - Lifetime Guarantee... It does exactly what is says on the label, period.	Beauty	426579.0	'Beauty', 'Skin Care', 'Sun', 'Skin Protection'	35.77	
+B00K1H6AY2	Acne Face Wash - Acne Cleanser moisturizing, mild and effective	Beauty	15065.0	'Beauty', 'Skin Care', 'Face', 'Cleansers'	35.77	
+B00K1GQW5K	Acne Treatments - Hollywood acne treatment cream that works	Beauty	153502.0	'Beauty', 'Skin Care', 'Face', 'Oils & Serums'	39.75	
+B00K2O3NV2	Hyaluronic Acid Serum 2 OZ! &#9733;SALE&#9733; With Vitamin C Serum, Vitamin E &amp; Green Tea | Great For Face, Fine Lines, Wrinkles And Dry Skin | HUGE 2 Oz | Moisturizing Serum For Skin | Loaded with Antioxidants For Youthful, Clear, Vibrant Skin - 100% Money Back Guarantee (If you're not satisfied it's on us - keep the bottle and get a refund)	Beauty	618832.0	'Beauty', 'Skin Care', 'Face', 'Oils & Serums'	14.97	
+B00K4FD59E	Cellulite Cream - The Best Firming, Toning, and AntiCellulite Treatment Available - Active Ingredients Retinyl &amp; Caffeine - Two Ingredients Clinically Proven to Eliminate Cellulte, Moisturize The Skin, and Increase Collagen - UNCONDITIONAL Moneyback Guarantee &amp; Free Shipping - [Buy 2 Get 1 Free Use Code RVWCMQDT]	Beauty	55911.0	'Beauty', 'Skin Care', 'Sets & Kits'		
+B00K7PO996	Eye Cream for Dark Circles and Puffiness &#9733;SALE!&#9733; BEST Anti Aging Eye Cream | Complete and Proven Formula | Natural Eye Cream with Organic Moisturizers | Achieve Youthful Radiance with Ease | Totally Refreshed and Beautiful Eyes | GET RESULTS - IT WORKS or YOUR MONEY BACK!	Beauty	45506.0	'Beauty', 'Skin Care', 'Eyes', 'Creams'	15.97	
+B00K861Z4G	Hyaluronic Acid Serum Cream|Best Pure Premium Salon-Grade Anti-Aging,Anti-Wrinkle Liquid Complex|Superb Rich Moisturizer For Men AND Women|Look Younger Or Your Money Back!Youthful,Elastic Skin Again|Eye Bags,Wrinkles,Crows Feet,Dark Circles,Dry Skin,Age Spots- All Reduced|As Seen On The Dr Oz Show|Timeless,Pure Glowing Sensuous Skin!Made In The USA	Beauty	49479.0	'Beauty', 'Skin Care', 'Face', 'Oils & Serums'		
+B00KAL5JAU	Dead Sea Salt Deep Hair Conditioner - for Dry or Damaged Hair - Great for Natural Curly Hair - for Men and Women - Deeply Hydrating and Nourishing on Scalp &amp; Hair - Helps to Reduce Dandruff and Dry Scalp - Made with Pure Dead Sea Salt and Minerals, Chamomile, Vitamin E &amp; Natural Aloe Vera - Leaves Your Hair Looking &amp; Feeling Healthy, Silky and Hydrated	Health & Personal Care	84640.0	'Beauty', 'Hair Care', 'Conditioners'	19.0	
+B00KBIX8MS	[2 PACK] Foam Sleeping Masks, Concave Eye Pocket for REM Deep Sleep PLUS 6 x Soft Foam Disposable Ear Plugs and Convenient Travel Pouch - Lifetime Warranty	Beauty	119269.0	'Beauty', 'Bath & Body', 'Bathing Accessories', 'Eye Masks'		
+B00KCFAZTE	Eye Cream For Dark Circles, Puffiness, Wrinkles &amp; Bags - 1.7 OZ | Best Under Eye Gel Treatment Solution For Crows Feet, Dry Skin, Fine Lines, Eye Bags &amp; Sagging Eyes | By InstaNatural - With Plant Stem Cells, Hyaluronic Acid, Matrixyl 3000, Cucumber, Peptide Complex, Cucumber, Aloe, MSM &amp; More! 100 DAYS 100% MONEY BACK GUARANTEE!	Beauty	84567.0	'Beauty', 'Skin Care', 'Eyes', 'Puffiness Treatments'	22.95	
+B00KCTER3U	Anti-Aging Facial Moisturizer Cream 3.4 OZ For Face, Under Eye, Oily, Sensitive, &amp; Dry Skin &#9733;LIMITED SALE!&#9733; Best Anti-Wrinkle Cream | Youth Express Age-Defying Moisturizer | Suitable for Men &amp; Women | Reduces Appearance of Wrinkles, Fine Lines &amp; Hydrates the Skin - Moisturizing Night &amp; Day Cream | Perfectly Suitable As Hand Cream &amp; Eye Cream | 100 Days 100% Satisfaction Guarantee	Beauty	98932.0	'Beauty', 'Skin Care', 'Face', 'Creams & Moisturizers', 'Fluids & Lotions', 'Lotions'	19.95	
+B00KD73PBQ	Argan Oil For Hair Treatment &amp; Elixir Serum &#9733;LIMITED SALE&#9733; #1 Hair Oil Treatment! Infused With Organic Jojoba Oil, Organic Argan Oil, Coconut Oil, Olive Oil, Shea Butter, Sunflower Oil, Grapeseed Oil And Vitamin B5 For Hair - Best Hair Care Leave-In Conditioner Treatment | Use As Hair Conditioner, Frizzy, Damaged, Dry Hair Treatment - We'll refund your money if you're not satisfied! Try Risk FREE!	Beauty	898.0	'Beauty', 'Hair Care', 'Styling Products', 'Hair Styling Serums'	19.95	
+B00KDOV8DG	Dead Sea Mud Mask &#9733; 100% SATISFACTION GUARANTEED OR YOUR MONEY BACK &#9733; Brilliant Organic &amp; Natural Skin Therapy To Combat Acne, Aging, Itchiness, And Blackheads &#9733; DETOXES SKIN &#9733; COMPLETELY NATURAL - No Preservatives &#9733; Cleanses And Purifies For Women and Men - Get Brighter Skin NOW!	Beauty	38707.0	'Beauty', 'Skin Care', 'Face', 'Treatments & Masks', 'Masks'	24.99	
+B00KH6F6TM	Best Bentonite Clay - Top Healing Clay - Finest Azteca Gold Blended Bentonite Clay, Purest Highest Quality You Can Buy - The Real Secret Formula Your Face Needs To Stay Looking Young, Detox, Deep Pore Cleaning, Strongest Strength. 100% Natural No Additives And Ultra Pure, Hypoallergenic. Money Back Guarantee, Free Bonus. Use the Best Secret Indian Healing Clay.	Beauty	236499.0	'Beauty', 'Skin Care', 'Face', 'Treatments & Masks', 'Masks'	16.22	
+B00KHGIK54	Adovia Facial Serum - Anti Aging, Skin Lifting, Facial Serum with Vitamin C, Dead Sea Salt and Green Tea - Get Firmer, More Radiant Looking Skin - Non-Oily Deep Moisturizer Delivers Minerals &amp; Nutrients Deep Into Skin - Satisfaction Guaranteed	Clothing	359923.0	'Beauty', 'Skin Care', 'Face', 'Oils & Serums'	50.0	
+B00KHH2VOY	Dead Sea Salt Soap - Face and Body Soap - 100% Natural Soap - with Dead Sea Salt and Minerals - Deeply Moisturizing Cleanser for Very Dry Skin, Infuses Skin with Dead Sea Minerals from 100% Genuine and Pure Dead Sea Salt - Satisfaction Guaranteed	Beauty	224496.0	'Beauty', 'Skin Care', 'Face', 'Cleansers', 'Bars'	12.0	
+B00KK62714	BEST Cellulite Cream with Caffeine and Retinol - Body slimming and firming ***CONTAINS Dr. OZ RECOMMENDED ingredients*** Fragrance Free | 100% UNCONDITIONAL MONEY BACK Guaranteed to work!	Beauty	32147.0	'Beauty', 'Bath & Body', 'Scrubs & Body Treatments', 'Body Souffles & Mousse'	29.95	
+B00KLA4INE	SALE 70% OFF TODAY | Best 1.0 mm 540 Needles Derma Microneedle Roller for Face and Body | Micro Needle Roller Titanium for Wrinkles, Crows Feet, Fine Lines and Scars, Stretch Marks, Large Pores, Cellulite Removal | COMES WITH FREE e-BOOK | Skin Care Therapy to Treat Hair Loss | Micro Derma Roller System Promotes Collagen Production to Discover Firmer Tighter and Smoother Skin in Just Days | Money Back Guarantee	Beauty	9492.0	'Beauty', 'Skin Care', 'Face'	15.0	
+B00KLZO2JE	The Best Eye Serum For dramatically removing and reducing Dark Circles under eyes, Puffy eyes and wrinkles like Crow's feet - this eye gel treatment is all you need to help delay the visible signs of premature skin ageing and promote younger looking skin - can be used safely on women and men just like Garnier and Olay.	Beauty	782051.0	'Beauty', 'Skin Care', 'Eyes', 'Serums'	39.95	
+B00KNIL36E	Face Cream - Anti Wrinkle Complex - Skin Care For AM/PM - Black Diamond Dust Infused - Beauty Skin Care Product - Skin Rejuvenation - Wrinkle and Fine Line Prevention - Collagen Restoring - Try This One of a Kind Anti Aging Wrinkle Complex With Confidence By Lilian Fache - 1oz./30ml	Beauty	43825.0	'Beauty', 'Skin Care', 'Face', 'Creams & Moisturizers', 'Day Creams'		
+B00KPKIV8I	Best Vitamin C Serum for Face &amp; Skin -Super Brightening Vitamin C 20% Serum by Joyal Beauty. Best Skin Tightener + Best Skin Lightening Product for Your Best Skin Ever! The Highest Quality Stabilized Potent Vitamin C + Vegan Hyaluronic Acid+Vitamin E+Ferulic Acid. Natural and Organic Antioxidants Give Your Skin a Radiant and Youthful Glow within 4 weeks. 1 OZ	Beauty	29004.0	'Beauty', 'Skin Care', 'Face', 'Oils & Serums'	28.95	
+B00KQ4PEBU	Hyaluronic Acid Serum For Skin: Put Your Best Face Forward With Potent Hyaluronic Acid, Essential Vitamin C &amp; More ~ Enjoy Benefits Of Natural, Deep Hydration &amp; Boosted Collagen Production ~ Supplements With Antioxidants To Reduce Fine Lines &amp; Wrinkles.	Beauty	6435.0	'Beauty', 'Skin Care', 'Face', 'Creams & Moisturizers', 'Fluids & Lotions'	18.5	
+B00KQBR9FM	Adovia Eye Cream - Powerful Eye Gel for Eye Puffiness, Dark Circles and Wrinkles by Adovia Mineral Skin Care - Reduce Appearance of Fine Lines &amp; Wrinkles Around the Eyes - with Dead Sea Salt &amp; Minerals, Vitamin C and Vitamin A Retinol	Beauty	71479.0	'Beauty', 'Skin Care', 'Eyes', 'Creams'	30.0	Adovia
+B00KQVTX06	Adovia Exfoliating Facial Sea Salts - At Home Microdermabrasion Crystals - Dead Sea Salt Exfoliating Crystals for Acne, Oily Skin and Blackheads - Finely Ground Facial Sea Salt for Face Exfoliation - Remove Dead Skin Cells and Reveal a Radiant, Clear Layer of Skin - Mix with Cleanser, Soap, Masks or for At Home Microdermabrasion with Dead Sea Salts	Beauty	43012.0	'Beauty', 'Skin Care', 'Face', 'Treatments & Masks', 'Microdermabrasion'	19.0	
+B00KTAJAIY	Anti Aging Skin Care Cream Used By Movie Stars - Therapeutic Facial Skin Care, Sunscreens &amp; Sport Tanning Products	Beauty	405081.0	'Beauty', 'Skin Care', 'Face', 'Sunscreens & Self Tanners', 'Sunscreens'	39.75	
+B00KTLBEEQ	Curel Rough Skin Rescue, 20 Ounce	Beauty	33733.0	'Beauty', 'Skin Care', 'Body', 'Moisturizers', 'Lotions'	8.88	
+B00KTLBDYM	Curel Rough Skin Rescue, 13 Ounce	Beauty	191306.0	'Beauty', 'Skin Care', 'Body', 'Moisturizers', 'Lotions'	25.08	
+B00KXG8JF4	GUARANTEED STRONGEST WRINKLE ERASER 2.5% Retinol + 10% Hyaluronic Acid + Vitamin E + Organic Green Tea + Organic Aloe &amp; Jojoba Oil, Our New Advanced Formula Deeply Penetrates Skin to Erase Fine Lines &amp; Wrinkles, Softens &amp; Heals, Top Acne Treatment, Reduces &amp; Unclogs Pores, Best Anti Aging, Anti Wrinkle Natural Skin Care Product Available, Works Best With Azure Naturals ULTIMATE VITAMIN C Serum	Beauty	150817.0	'Beauty', 'Skin Care', 'Face', 'Treatments & Masks', 'Acids & Peels', 'Retinol'	37.95	
+B00L0C529Q	ONE DAY BLOWOUT SALE | Best 1.0 mm Derma Microneedle Roller for Face and Body | Micro Needle Roller Titanium for Wrinkles, Crows Feet, Fine Lines and Scars, Stretch Marks, Large Pores, Cellulite Removal | COMES WITH FREE e-BOOK | Skin Care Therapy to Treat Hair Loss | Micro Derma Roller System Promotes Collagen Production to Discover Firmer Tighter and Smoother Skin in Just Days | Money Back Guarantee	Beauty	346606.0	'Beauty', 'Skin Care', 'Face', 'Sets & Kits'	14.0	
+B00L3K91OW	Anti Aging Serum Vitamin C from CAMU CAMU 100% &#9733; Exclusive Formula &#9733; With Hyaluronic Acid, Pure Green Tea Extract , Acai, Noni, Pomegranate, Aloe, Mangosteen, Anti-Aging, Sun Damage Repair Helps reduce Fine Lines and Wrinkles, Brightens Skin			'Beauty', 'Skin Care', 'Face', 'Oils & Serums'	48.85	
+B00L3LB0IG	Anti Aging Cream VITAMIN C From CAMU CAMU &#9733; Exclusive Formula &#9733; Shea Butter, Acai, Noni, Pomegranate, Aloe, Pure Green Tea Extract, Mangosteen, Collagen, Anti-Wrinkle Sun Damage Repair Reduces Fine Lines and Wrinkles, Brightens Skin			'Beauty', 'Skin Care', 'Face', 'Creams & Moisturizers', 'Day Creams'	48.85	
+B00L3LBUGI	Facial Mask VITAMIN C From CAMU CAMU &#9733; Exclusive Formula &#9733; Wet Mask With Coconut Oil, Zeolite, Acai, Noni, Pomegranate, Aloe, Pure Green Tea Extract, Mangosteen, Anti-Aging, Sun Damage Repair, Helps Reduce Fine Lines and Wrinkles, Brightens, Stimulates, Tones and Energizes Skin, Restores Luster and Renews the Look and Feel of your Face.			'Beauty', 'Skin Care', 'Face', 'Treatments & Masks', 'Masks'	58.85	
+B00L5KTZ0K	Phytoceramides Anti Aging Supplement Reviews - Healthy Life Brand - Plant Derived 350 mg Skin Care Restoring Supplement Products - Helps Reduce Fine Lines, Wrinkles and Sun Damage - Veggie Capsules			'Beauty', 'Skin Care'	18.36	
