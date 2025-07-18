@@ -66,7 +66,7 @@ if __name__ == "__main__":
     # }
     # run_recbole(model='SASRec', dataset='ml-100k', config_dict=parameter_dict)
     # exit()
-    create_item_popularity_csv("ml-1m", 0.2)
+    # create_item_popularity_csv("ml-1m", 0.2)
     parser = argparse.ArgumentParser()
     parser.add_argument("--model", "-m", type=str, default="BPR", help="name of models")
     parser.add_argument("--train", action="store_true", help="Whether to train model")
@@ -127,18 +127,26 @@ if __name__ == "__main__":
     )
 
     config_dict = dict()
+    config_dict = {
+        "base_path": "./saved/zorduda.pth",
+        "sae_scale_size": [64, 64],
+        "sae_k": [8, 8],
+        "learning_rate": [1e-4, 1e-4],
+        "alpha": [1.0, 1.0],
+        "steer": [0, 0],
+        "analyze": False
+    }
     if hasattr(args, "train") and args.train == True:
-        if hasattr(args, "base_path") and args.base_path != "no path":
-            config_dict["base_path"] = args.base_path
-        if hasattr(args, "scale_size"):
-            config_dict["sae_scale_size"] = args.base_path
-        if hasattr(args, "sae_k"):
-            config_dict["sae_k"] = args.sae_k
-        if hasattr(args, "lr"):
-            config_dict["learning_rate"] = args.lr
-        if hasattr(args, "early_stop"):
-            config_dict["early_stop"] = args.early_stop
 
+        config_dict = {
+            "base_path": "./saved/zorduda.pth",
+            "sae_scale_size": [64, 64],
+            "sae_k": [8, 8],
+            "learning_rate": 1e-3,
+            "alpha": [1.0, 1.0],
+            "steer": [0, 0],
+            "analyze": False
+        }
         run(
             args.model,
             args.dataset,
@@ -150,19 +158,6 @@ if __name__ == "__main__":
             port=args.port,
             group_offset=args.group_offset,
         )
-
-    
-    elif hasattr(args, "analyze") and args.analyze == True:
-        config, model, dataset, train_data, valid_data, test_data = load_data_and_model(
-            model_file=args.path, device=device
-        )  
-        
-        trainer = get_trainer(config["MODEL_TYPE"], config["model"])(config, model)
-        trainer.analyze_neurons(train_data, eval_data=False, sae=False)
-
-        save_mean_SD(config["dataset"], popular=True)
-        save_mean_SD(config["dataset"], popular=False)
-        save_cohens_d(config["dataset"])
 
 
     elif hasattr(args, "test") and args.test == True:

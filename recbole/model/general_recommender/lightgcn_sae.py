@@ -71,6 +71,7 @@ class LightGCN_SAE(LightGCN):
 	def forward(self, train_mode=None):
 		if self.base_i is None or self.base_u is None:
 			self.base_u, self.base_i = super().forward()
+
 		i_emb_sae = self.sae_module_i(self.base_i, train_mode=train_mode)
 		u_emb_sae = self.sae_module_u(self.base_u, train_mode=train_mode)
 		return u_emb_sae, i_emb_sae
@@ -91,6 +92,10 @@ class LightGCN_SAE(LightGCN):
 
 	def full_sort_predict(self, interaction):
 		user = interaction[self.USER_ID]
+		# df = pd.read_csv(rf"./dataset/{self.dataset}/user_popularity_labels.csv")
+		# print(user, " ffff")
+		# row = df[df['user_id:token'] == user]
+		# self.sae_module_i.dampen = (row.iloc[0]['popularity_label'] != 1)
 		if self.restore_user_e is None or self.restore_item_e is None:
 			self.restore_user_e, self.restore_item_e = self.forward(train_mode=False)
 		u_embeddings = self.restore_user_e[user]
@@ -139,9 +144,15 @@ class SAE(nn.Module):
 		super(SAE, self).__init__()
 		self.side=side
 		self.dataset = config["dataset"]
-		self.k = config["sae_k"]
+		self.index = 0 if side == "item" else 1
+		self.k = config["sae_k"][self.index]
+		self.scale_size = config["sae_scale_size"][self.index]
+		self.alpha = config['alpha'][self.index]
+		self.N = config['N'][self.index]
+		self.steer = config['steer'][self.index]
+		self.analyze = config['analyze']
 		self.fvu = torch.tensor(0.0)
-		self.scale_size = config["sae_scale_size"]
+		self.dampen=False
 		self.neuron_count = None
 		self.unpopular_only = None
 		self.corr_file = None
@@ -149,8 +160,6 @@ class SAE(nn.Module):
 		self.dtype = torch.float32
 		self.to(self.device)
 		self.d_in = config['input_dim']
-		self.N = config['N'] if 'N' in config else 0
-		self.alpha = config['alpha'] if 'alpha' in config else 0
 		self.hidden_dim = self.d_in * self.scale_size
 		self.activation_count = torch.zeros(self.hidden_dim, device=config["device"])
 		self.encoder = nn.Linear(self.d_in, self.hidden_dim, device=self.device,dtype = self.dtype)
@@ -173,15 +182,7 @@ class SAE(nn.Module):
 			}
 			for j in range(self.hidden_dim)
 		}
-		return
-
-
-	def set_dampen_hyperparam(self, corr_file=None, N=None, beta=None, unpopular_only=False):
-		self.corr_file = corr_file
-		self.N = N
-		self.beta = beta
-		self.unpopular_only = unpopular_only	
-  
+		return  
   
 	def get_dead_latent_ratio(self, need_update=0):
 		# Calculate the dead latent ratio
@@ -279,7 +280,7 @@ class SAE(nn.Module):
 	def dampen_neurons(self, pre_acts, dataset=None):
 		# if self.N is None or self.N==0:
 		# 	return pre_acts
-		pop_neurons, unpop_neurons = utils.get_extreme_correlations('cohens_d.csv', dataset=dataset)
+		pop_neurons, unpop_neurons = utils.get_extreme_correlations(rf'{self.side}/cohens_d.csv', dataset=dataset)
   
 		# Combine both groups into one list while labeling the group type.
 		# 'unpop' neurons are those with higher activations for unpopular inputs (to be reinforced),
@@ -289,10 +290,10 @@ class SAE(nn.Module):
 						
 		# Now sort by the absolute Cohen's d value (in descending order) and pick the overall top N neurons.
 		combined_sorted = sorted(combined_neurons, key=lambda x: abs(x[1]), reverse=True)
-		top_neurons = combined_sorted[:4096]
+		top_neurons = combined_sorted[:self.N]
 		# Load the corresponding statistics files.
-		stats_unpop = pd.read_csv(rf"./dataset/{dataset}/neuron_stats_popular.csv")
-		stats_pop = pd.read_csv(rf"./dataset/{dataset}/neuron_stats_unpopular.csv")
+		stats_unpop = pd.read_csv(rf"./dataset/{dataset}/{self.side}/neuron_stats_popular.csv")
+		stats_pop = pd.read_csv(rf"./dataset/{dataset}/{self.side}/neuron_stats_unpopular.csv")
   
 		# Create tensors of the absolute Cohen's d values for the selected neurons.
 		abs_cohens = torch.tensor([abs(c) for _, c, _ in top_neurons], device=pre_acts.device)
@@ -304,9 +305,9 @@ class SAE(nn.Module):
 			if max_val == min_val:
 				return torch.full_like(x, (new_min + new_max) / 2)
 			return (x - min_val) / (max_val - min_val) * (new_max - new_min) + new_min
-
+		
 		# Normalize the Cohen's d values to [0, 2.5]
-		weights = normalize_to_range(abs_cohens, new_min=0, new_max=2.0)
+		weights = normalize_to_range(abs_cohens, new_min=0, new_max=self.alpha)
 
 		# Now update the neuron activations based on group.
 		for i, (neuron_idx, cohen, group) in enumerate(top_neurons):
@@ -366,12 +367,12 @@ class SAE(nn.Module):
 	 
 	 
 	def forward(self, x, sequences=None, train_mode=False, save_result=False, epoch=None, dataset=None, pop_scores=None):
-		
 			sae_in = x - self.b_dec
 			pre_acts1 = self.encoder(sae_in)
 			self.last_activations = pre_acts1
 			# if self.N != 0:
-			# pre_acts1 = self.dampen_neurons(pre_acts1, dataset=self.dataset)
+			if self.steer == True:
+				pre_acts1 = self.dampen_neurons(pre_acts1, dataset=self.dataset)
 				# pre_acts = self.add_noise(pre_acts, std=self.beta)
 			pre_acts = nn.functional.relu(pre_acts1)   
 			z = self.topk_activation(pre_acts, sequences, save_result=False)
@@ -380,8 +381,8 @@ class SAE(nn.Module):
 			e = x_reconstructed - x
 			total_variance = (x - x.mean(0)).pow(2).sum()
 			self.fvu = e.pow(2).sum() / total_variance
-			# if not train_mode:
-				# compute_neuron_stats_by_row(activations=pre_acts1, dataset=self.dataset)
+			if self.analyze == True:
+				compute_neuron_stats_by_row(activations=pre_acts1, dataset=self.dataset, side=self.side)
 			if train_mode:
 				if self.new_epoch == True:
 					self.new_epoch = False
