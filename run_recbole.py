@@ -148,9 +148,25 @@ if __name__ == "__main__":
 
 
     elif hasattr(args, "test") and args.test == True:
+        if args.config_json is None:
+            config_dict = {
+                "alpha": [1.0, 1.0],
+                "steer": [0, 0],
+                "analyze": False,
+                "N": [4096, 4096],
+            }
         config, model, dataset, train_data, valid_data, test_data = load_data_and_model(
-            model_file=args.path
+            model_file=args.path, dict=config_dict
         )  
+        # if args.config_json is None:
+        #     config.update ({
+        #         "sae_scale_size": [32, 32],
+        #         "sae_k": [8, 8],
+        #         "alpha": [1.0, 1.0],
+        #         "steer": [0, 0],
+        #         "analyze": False
+        #     })
+
         trainer = get_trainer(config["MODEL_TYPE"], config["model"])(config, model)
 
         test_result = trainer.evaluate(
@@ -163,7 +179,7 @@ if __name__ == "__main__":
             'ndcg@10',
             'hit@10',
             'deep_lt_coverage@10',
-            'gini@10'
+            'giniindex@10'
         ]
 
         max_key_len = max(len(k) for k in keys)

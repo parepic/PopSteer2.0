@@ -238,7 +238,9 @@ class Collector(object):
         And reset some of outdated resource.
         """
         for key in self.data_struct._data_dict:
-            self.data_struct._data_dict[key] = self.data_struct._data_dict[key].cpu()
+            print(key)
+            if key != "data.num_items" and key != "data.count_items" :
+                self.data_struct._data_dict[key] = self.data_struct._data_dict[key].cpu()
         returned_struct = copy.deepcopy(self.data_struct)
         for key in ["rec.topk", "rec.meanrank", "rec.score", "rec.items", "data.label", "SAE_Loss_i", "SAE_Loss_u", "SAE_Loss_total", "recommendation_count"]:
             if key in self.data_struct:

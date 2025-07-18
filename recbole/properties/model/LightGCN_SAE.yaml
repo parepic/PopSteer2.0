@@ -2,7 +2,7 @@ embedding_size: 128              # (int) The embedding size of users and items.
 n_layers: 2                     # (int) The number of layers in LightGCN.
 reg_weight: 1e-05               # (float) The L2 regularization weight.
 input_dim: 128
-metrics: ["Recall","MRR","NDCG","Hit","Precision","SAE_Loss_i", "SAE_Loss_u", "SAE_Loss_total", "Gini", "Deep_LT_Coverage"]  # (list or str) Evaluation metrics.
+metrics: ["Recall","MRR","NDCG","Hit","Precision","SAE_Loss_i", "SAE_Loss_u", "SAE_Loss_total", "Gini", "Deep_LT_Coverage", "GiniIndex", "TailPercentage"]  # (list or str) Evaluation metrics.
 
 
 

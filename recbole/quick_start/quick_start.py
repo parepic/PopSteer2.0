@@ -231,7 +231,7 @@ def objective_function(config_dict=None, config_file_list=None, saved=True):
 
 import torch
 
-def load_data_and_model(model_file, device='cpu'):
+def load_data_and_model(model_file, device='cpu', dict=None):
     r"""Load filtered dataset, split dataloaders and saved model.
 
     Args:
@@ -250,6 +250,9 @@ def load_data_and_model(model_file, device='cpu'):
 
     checkpoint = torch.load(model_file, weights_only=False, map_location=torch.device(device))
     config = checkpoint["config"]
+    for key, value in dict.items():
+        config[key] = value
+    
     if(device == 'cpu'):
         config.internal_config_dict['use_gpu'] = False
         config.internal_config_dict['gpu_id'] = '-1'
