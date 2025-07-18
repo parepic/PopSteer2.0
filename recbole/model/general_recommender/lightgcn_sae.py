@@ -85,15 +85,16 @@ class LightGCN_SAE(LightGCN):
 		
 		user_all_embeddings, item_all_embeddings = self.forward(train_mode=True)
 		sae_loss_i = self.sae_module_i.fvu + self.sae_module_i.auxk_loss / 2
-		# sae_loss_u = self.sae_module_u.fvu + self.sae_module_u.auxk_loss / 2
+		sae_loss_u = self.sae_module_u.fvu + self.sae_module_u.auxk_loss / 2
 		
-		return sae_loss_i
+		return sae_loss_i +sae_loss_u
 
 	def full_sort_predict(self, interaction):
 		user = interaction[self.USER_ID]
 		if self.restore_user_e is None or self.restore_item_e is None:
 			self.restore_user_e, self.restore_item_e = self.forward(train_mode=False)
 		u_embeddings = self.restore_user_e[user]
+
 		scores = torch.matmul(u_embeddings, self.restore_item_e.transpose(0, 1))
 		top_recs = torch.argsort(scores, dim=1, descending=True)[:, :10]
 		scores[:, 0] =  float("-inf")
