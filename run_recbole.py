@@ -71,24 +71,12 @@ if __name__ == "__main__":
     parser.add_argument("--model", "-m", type=str, default="BPR", help="name of models")
     parser.add_argument("--train", action="store_true", help="Whether to train model")
     parser.add_argument("--test", action="store_true", help="Whether to test model")
+    parser.add_argument('--config_json', type=str, default=None,
+                    help="JSON string with config overrides")
 
     parser.add_argument(
         "--dataset", "-d", type=str, default="ml-100k", help="name of datasets"
     )
-    parser.add_argument('--sae_k', '-k', type=int, default=32,
-                        help="Sparsity parameter K: keep only the top‑k activations per input in the SAE (Eq. 1).")
-    parser.add_argument('--lr', '-lr', type=float, default=1e-4,
-                        help="learning rate")
-
-    parser.add_argument('--scale', '--scale_size', type=int, default=8,
-                        dest='scale',
-                        help="Scale factor s controlling the SAE hidden size relative to the input (s × d).")
-    parser.add_argument('--N', '-n', type=int, default=0,
-                        help="Number of neurons to steer")
-    parser.add_argument('--alpha', '-a', type=float, default=0,
-                        help="Alpha")
-    parser.add_argument('--early_stop', '-e', type=int, default=0,
-                        help="early_stop")
 
 
     parser.add_argument("--config_files", type=str, default=None, help="config files")
@@ -127,26 +115,25 @@ if __name__ == "__main__":
     )
 
     config_dict = dict()
-    config_dict = {
-        "base_path": "./saved/zorduda.pth",
-        "sae_scale_size": [64, 64],
-        "sae_k": [8, 8],
-        "learning_rate": [1e-4, 1e-4],
-        "alpha": [1.0, 1.0],
-        "steer": [0, 0],
-        "analyze": False
-    }
-    if hasattr(args, "train") and args.train == True:
+    if args.config_json:
+        import json, ast
+        # Allow either strict JSON or python-literal (for lists)
+        try:
+            config_dict = json.loads(args.config_json)
+        except json.JSONDecodeError:
+            config_dict = ast.literal_eval(args.config_json)
 
-        config_dict = {
-            "base_path": "./saved/zorduda.pth",
-            "sae_scale_size": [64, 64],
-            "sae_k": [8, 8],
-            "learning_rate": 1e-3,
-            "alpha": [1.0, 1.0],
-            "steer": [0, 0],
-            "analyze": False
-        }
+    if hasattr(args, "train") and args.train == True:
+        if args.config_json is None:
+            config_dict = {
+                "base_path": "./saved/zorduda4.pth",
+                "sae_scale_size": [32, 32],
+                "sae_k": [8, 8],
+                "learning_rate": 1e-3,
+                "alpha": [1.0, 1.0],
+                "steer": [0, 0],
+                "analyze": False
+            }
         run(
             args.model,
             args.dataset,
