@@ -57,6 +57,9 @@ class LightGCN_SAE(LightGCN):
 		self.val_fvu_i = torch.tensor(0.0, device=self.device)
 		self.val_fvu_u = torch.tensor(0.0, device=self.device)
 		self.dataset = config["dataset"]
+		self.base_i = None
+		self.base_u = None
+
 		for param in self.parameters():
 			param.requires_grad = False
 
@@ -66,16 +69,16 @@ class LightGCN_SAE(LightGCN):
 			param.requires_grad = True  
 
 	def forward(self, train_mode=None):
-		u_emb, i_emb = super().forward()
-		i_emb_sae = self.sae_module_i(i_emb, train_mode=train_mode)
-		# u_emb_sae = self.sae_module_u(u_emb, train_mode=train_mode)
-		return u_emb, i_emb_sae
+		if self.base_i is None or self.base_u is None:
+			self.base_u, self.base_i = super().forward()
+		i_emb_sae = self.sae_module_i(self.base_i, train_mode=train_mode)
+		u_emb_sae = self.sae_module_u(self.base_u, train_mode=train_mode)
+		return u_emb_sae, i_emb_sae
 	
 	def calculate_loss(self, interaction):
 		if self.val_fvu_i.item() != 0:
 			self.val_fvu_i = torch.tensor(0.0, device=self.device)
 			self.val_fvu_u = torch.tensor(0.0, device=self.device)
-
 			self.recommendation_count = torch.zeros(self.n_items, dtype=torch.long, device=self.device)
 		if self.restore_user_e is not None or self.restore_item_e is not None:
 			self.restore_user_e, self.restore_item_e = None, None
@@ -302,7 +305,7 @@ class SAE(nn.Module):
 			return (x - min_val) / (max_val - min_val) * (new_max - new_min) + new_min
 
 		# Normalize the Cohen's d values to [0, 2.5]
-		weights = normalize_to_range(abs_cohens, new_min=0, new_max=10.0)
+		weights = normalize_to_range(abs_cohens, new_min=0, new_max=2.0)
 
 		# Now update the neuron activations based on group.
 		for i, (neuron_idx, cohen, group) in enumerate(top_neurons):
@@ -318,21 +321,21 @@ class SAE(nn.Module):
 				vals = pre_acts[:, neuron_idx]
 				# Increase activations by an amount proportional to the standard deviation and effective weight.
 				pre_acts[:, neuron_idx] += weight * std_val
-			# else:  # group == 'pop'
-			# 	# For neurons to be dampened, use the popular statistics for impact.
-			# 	pop_mean = stats_pop.iloc[neuron_idx]["mean"]
-			# 	pop_sd = stats_pop.iloc[neuron_idx]["sd"]
+			else:  # group == 'pop'
+				# For neurons to be dampened, use the popular statistics for impact.
+				pop_mean = stats_pop.iloc[neuron_idx]["mean"]
+				pop_sd = stats_pop.iloc[neuron_idx]["sd"]
 
-			# 	# Still fetch the comparison stats from the unpopular stats file
-			# 	# (this is from your original logic; adjust if needed).
-			# 	row = stats_unpop.iloc[neuron_idx]
-			# 	mean_val = row["mean"]
-			# 	std_val = row["sd"]
+				# Still fetch the comparison stats from the unpopular stats file
+				# (this is from your original logic; adjust if needed).
+				row = stats_unpop.iloc[neuron_idx]
+				mean_val = row["mean"]
+				std_val = row["sd"]
 
-			# 	# Identify positions where the neuron's activation is below its mean.
-			# 	vals = pre_acts[:, neuron_idx]
-			# 	# Decrease activations proportionally.
-			# 	pre_acts[:, neuron_idx] -= weight * pop_sd
+				# Identify positions where the neuron's activation is below its mean.
+				vals = pre_acts[:, neuron_idx]
+				# Decrease activations proportionally.
+				pre_acts[:, neuron_idx] -= weight * pop_sd
 	
 		return pre_acts
 	 
