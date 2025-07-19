@@ -3,4 +3,4 @@ n_layers: 2                     # (int) The number of layers in LightGCN.
 reg_weight: 1e-05               # (float) The L2 regularization weight.
 
 stopping_step: 20
-metrics: ["Recall","MRR","NDCG","Hit","Precision", "Gini", "Deep_LT_Coverage", "GiniIndex", "TailPercentage", "AveragePopularity"]
+metrics: ["Recall","MRR","NDCG","Hit","Precision", "Gini", "Deep_LT_Coverage", "GiniIndex", "TailPercentage", "AveragePopularity", "ShannonEntropy"]

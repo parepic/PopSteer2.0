@@ -211,7 +211,7 @@ class LightGCN(GeneralRecommender):
         # dot with all item embedding to accelerate
         scores = torch.matmul(u_embeddings, self.restore_item_e.transpose(0, 1))
         scores[:, 0] =  float("-inf")
-        # scores = self.FAIR(scores).to(self.device)
+        scores = self.FAIR(scores).to(self.device)
         top_recs = torch.argsort(scores, dim=1, descending=True)[:, :10]
         scores[:, 0] =  float("-inf")
         for key in top_recs.flatten():

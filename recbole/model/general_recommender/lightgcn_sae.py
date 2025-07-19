@@ -370,7 +370,8 @@ class SAE(nn.Module):
 			sae_in = x - self.b_dec
 			pre_acts1 = self.encoder(sae_in)
 			self.last_activations = pre_acts1
-			# if self.N != 0:
+			if self.analyze == True:
+				compute_neuron_stats_by_row(activations=pre_acts1, dataset=self.dataset, side=self.side)
 			if self.steer == True:
 				pre_acts1 = self.dampen_neurons(pre_acts1, dataset=self.dataset)
 				# pre_acts = self.add_noise(pre_acts, std=self.beta)
@@ -381,8 +382,6 @@ class SAE(nn.Module):
 			e = x_reconstructed - x
 			total_variance = (x - x.mean(0)).pow(2).sum()
 			self.fvu = e.pow(2).sum() / total_variance
-			if self.analyze == True:
-				compute_neuron_stats_by_row(activations=pre_acts1, dataset=self.dataset, side=self.side)
 			if train_mode:
 				if self.new_epoch == True:
 					self.new_epoch = False

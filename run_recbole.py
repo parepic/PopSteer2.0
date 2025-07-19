@@ -17,6 +17,115 @@ from recbole.utils import (
 
 from recbole.data import create_item_popularity_csv
 
+def tune(args):
+    if args.config_json is None:
+        config_dict = {
+            "alpha": [0.5, 0],
+            "steer": [0, 1],
+            "analyze": True,
+            "N": [4096, 4096],
+            "tail_ratio": 0.2,
+            "metrics": ["Recall","MRR","NDCG","Hit","Precision","SAE_Loss_i", "SAE_Loss_u", "SAE_Loss_total", "Gini", "Deep_LT_Coverage", "GiniIndex", "TailPercentage", "AveragePopularity", "ShannonEntropy"]        
+            }
+    config, model, dataset, train_data, valid_data, test_data = load_data_and_model(
+        model_file=args.path, dict=config_dict
+    )
+    trainer = get_trainer(config["MODEL_TYPE"], config["model"])(config, model)
+    trainer.eval_collector.data_collect(train_data)
+
+    change1 = [0.0, 0.5, 1, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0]
+
+    metric_keys = [
+        'mrr@10',
+        'ndcg@10',
+        'hit@10',
+        'deep_lt_coverage@10',
+        'giniindex@10',
+        'averagepopularity@10',
+        'tailpercentage@10',
+        'shannonentropy@10'
+    ]
+
+    SHORT_NAMES = {
+        'mrr@10': 'MRR@10',
+        'ndcg@10': 'NDCG@10',
+        'hit@10': 'HIT@10',
+        'deep_lt_coverage@10': 'DLTC@10',
+        'giniindex@10': 'GINI@10',
+        'averagepopularity@10': 'AVGPOP@10',
+        'tailpercentage@10': 'TAIL%@10',
+        'shannonentropy@10': 'SHANNON@10'
+    }
+
+    # Collect raw metric values
+    rows_raw = []
+    for c1 in change1:
+        trainer.model.sae_module_u.alpha = c1
+        test_result = trainer.evaluate(
+            valid_data,
+            model_file=args.path,
+            load_best_model=False,
+            show_progress=config["show_progress"]
+        )
+        trainer.model.restore_item_e = None
+        rows_raw.append({
+            'alpha': c1,
+            **{k: test_result[k] for k in metric_keys}
+        })
+
+    baseline = rows_raw[0]
+
+    value_decimals = 4
+    pct_decimals = 2
+    show_zero_pct_on_baseline = False  # set True if you want (+0.00%)
+
+    # First build formatted string cells (without widths yet)
+    header_labels = ['alpha'] + [SHORT_NAMES[k] for k in metric_keys]
+
+    formatted_rows = []
+    for i, r in enumerate(rows_raw):
+        is_baseline = (i == 0)
+        formatted_row = {}
+        formatted_row['alpha'] = f"{r['alpha']:.2f}"
+
+        for k in metric_keys:
+            val = r[k]
+            base = baseline[k]
+            if is_baseline:
+                if show_zero_pct_on_baseline and base != 0:
+                    formatted_row[SHORT_NAMES[k]] = f"{val:.{value_decimals}f} (+0.00%)"
+                else:
+                    formatted_row[SHORT_NAMES[k]] = f"{val:.{value_decimals}f}"
+            else:
+                if base == 0:
+                    formatted_row[SHORT_NAMES[k]] = f"{val:.{value_decimals}f} (n/a)"
+                else:
+                    pct = (val - base) / base * 100.0
+                    sign = '+' if pct >= 0 else ''
+                    formatted_row[SHORT_NAMES[k]] = f"{val:.{value_decimals}f} ({sign}{pct:.{pct_decimals}f}%)"
+        formatted_rows.append(formatted_row)
+
+    # Compute column widths: max of header and all cell contents
+    col_width = {}
+    for h in header_labels:
+        max_cell = max(len(row[h]) for row in formatted_rows)
+        col_width[h] = max(len(h), max_cell)
+
+    # Build and print header
+    header_line = " | ".join(f"{h:<{col_width[h]}}" for h in header_labels)
+    sep_line = "-+-".join("-" * col_width[h] for h in header_labels)
+    print(header_line)
+    print(sep_line)
+
+    # Print each row
+    for fr in formatted_rows:
+        line = " | ".join(f"{fr[h]:<{col_width[h]}}" for h in header_labels)
+        print(line)
+
+    # Return raw plus formatted if needed downstream
+    return rows_raw, formatted_rows
+
+
 
 def remove_sparse_users_items(n, dataset):
     # --- Step 1: Load the Data ---
@@ -71,6 +180,8 @@ if __name__ == "__main__":
     parser.add_argument("--model", "-m", type=str, default="BPR", help="name of models")
     parser.add_argument("--train", action="store_true", help="Whether to train model")
     parser.add_argument("--test", action="store_true", help="Whether to test model")
+    parser.add_argument("--tune", action="store_true", help="Whether to train model")
+
     parser.add_argument('--config_json', type=str, default=None,
                     help="JSON string with config overrides")
 
@@ -122,6 +233,10 @@ if __name__ == "__main__":
             config_dict = json.loads(args.config_json)
         except json.JSONDecodeError:
             config_dict = ast.literal_eval(args.config_json)
+    
+    if args.tune == True:
+        tune(args)
+        exit()
 
     if hasattr(args, "train") and args.train == True:
         if args.config_json is None:
@@ -150,27 +265,23 @@ if __name__ == "__main__":
     elif hasattr(args, "test") and args.test == True:
         if args.config_json is None:
             config_dict = {
-                "alpha": [1.0, 1.0],
+                "alpha": [0.5, 1.5],
                 "steer": [0, 0],
-                "analyze": False,
+                "analyze": True,
                 "N": [4096, 4096],
+                "tail_ratio": 0.2,
+                "metrics": ["Recall","MRR","NDCG","Hit","Precision", "Gini", "Deep_LT_Coverage", "GiniIndex", "TailPercentage", "AveragePopularity", "ShannonEntropy"]        
             }
+
         config, model, dataset, train_data, valid_data, test_data = load_data_and_model(
             model_file=args.path, dict=config_dict
-        )  
-        # if args.config_json is None:
-        #     config.update ({
-        #         "sae_scale_size": [32, 32],
-        #         "sae_k": [8, 8],
-        #         "alpha": [1.0, 1.0],
-        #         "steer": [0, 0],
-        #         "analyze": False
-        #     })
+        )
 
         trainer = get_trainer(config["MODEL_TYPE"], config["model"])(config, model)
+        trainer.eval_collector.data_collect(train_data)
 
         test_result = trainer.evaluate(
-            test_data, model_file=args.path, load_best_model = False, show_progress=config["show_progress"]
+            valid_data, model_file=args.path, load_best_model = False, show_progress=config["show_progress"]
         )
         
         keys = [
@@ -179,7 +290,10 @@ if __name__ == "__main__":
             'ndcg@10',
             'hit@10',
             'deep_lt_coverage@10',
-            'giniindex@10'
+            'giniindex@10',
+            'averagepopularity@10',
+            'tailpercentage@10',
+            'shannonentropy@10'
         ]
 
         max_key_len = max(len(k) for k in keys)
@@ -192,3 +306,5 @@ if __name__ == "__main__":
         for key in keys:
             value = test_result[key]             # get value from your OrderedDict
             print(f"{key:<{max_key_len}} | {value:>7.4f}")
+
+

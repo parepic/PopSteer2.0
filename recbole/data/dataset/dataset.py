@@ -1690,7 +1690,8 @@ class Dataset(torch.utils.data.Dataset):
             item_id=next_df[0]["item_id"],
             user_id=next_df[0]["user_id"]
         )
-        create_item_popularity_csv(self.dataset_name, 0.1)
+
+        create_item_popularity_csv(self.dataset_name, p_top=0.1, p_bottom=0.1)
         create_user_popularity_csv(self.dataset_name, top_frac=0.1)
 
         next_ds = [self.copy(_) for _ in next_df]
