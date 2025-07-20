@@ -453,6 +453,73 @@ def create_item_popularity_csv(dataset: str, p_top: float, p_bottom: float):
 
 
 
+# def create_item_popularity_csv(dataset: str, p: float):
+#     """
+#     Create a CSV assigning popularity labels based on item rank (not interaction mass).
+
+#     Args:
+#         dataset : dataset directory name under ./dataset/{dataset}
+#         p       : fraction (0 < p < 1). Example: 0.1 -> top 10% items get +1, bottom 10% get -1.
+#                   Usually choose p <= 0.5 to avoid overlap.
+
+#     Output:
+#         Writes ./dataset/{dataset}/item_popularity_labels.csv with columns:
+#             item_id:token, interaction_count, pop_score, popularity_label
+#     """
+#     if not (0 < p < 1):
+#         raise ValueError("p must be in (0,1)")
+#     if p > 0.5:
+#         print("Warning: p > 0.5 causes overlap of top and bottom sets. Proceeding but resolving conflicts toward +1.")
+
+#     dataset_path = os.path.join(".", "dataset", dataset)
+#     train_npz_path = os.path.join(dataset_path, "biased_eval_train.npz")
+#     data = np.load(train_npz_path)
+#     item_ids = data["item_id"]
+#     total_interactions = len(item_ids)
+
+#     unique_items, counts = np.unique(item_ids, return_counts=True)
+#     pop_scores = counts / total_interactions
+
+#     df = pd.DataFrame({
+#         "item_id:token": unique_items,
+#         "interaction_count": counts,
+#         "pop_score": pop_scores
+#     })
+
+#     n_items = len(df)
+#     k = max(1, int(round(p * n_items)))   # number of items in each extreme set
+
+#     # Sort descending for top set
+#     df_sorted_desc = df.sort_values("interaction_count", ascending=False).reset_index(drop=True)
+#     # Sort ascending for bottom set
+#     df_sorted_asc = df.sort_values("interaction_count", ascending=True).reset_index(drop=True)
+
+#     # Determine cut indices
+#     # Using rank positions: first k items in desc list -> top, first k items in asc list -> bottom
+#     top_item_ids = set(df_sorted_desc.head(k)["item_id:token"])
+#     bottom_item_ids = set(df_sorted_asc.head(k)["item_id:token"])
+
+#     # If overlap occurs (possible if p > 0.5 or ties + small n) resolve: priority to top (+1)
+#     overlap = top_item_ids & bottom_item_ids
+#     if overlap:
+#         bottom_item_ids -= overlap
+
+#     def assign_label(item_id):
+#         if item_id in top_item_ids:
+#             return 1
+#         if item_id in bottom_item_ids:
+#             return -1
+#         return 0
+
+#     df["popularity_label"] = df["item_id:token"].apply(assign_label)
+
+#     # Optional: sort by interaction_count descending for readability
+#     df_out = df.sort_values("interaction_count", ascending=False).reset_index(drop=True)
+
+#     out_path = os.path.join(dataset_path, "item_popularity_labels.csv")
+#     df_out.to_csv(out_path, index=False)
+#     print(f"Written {out_path}")
+#     print(f"Top set size: {len(top_item_ids)}  Bottom set size: {len(bottom_item_ids)}  Total items: {n_items}")
 
 
 import os
@@ -464,50 +531,50 @@ from typing import Optional
 
 
 
+from pathlib import Path
+import numpy as np
+import pandas as pd
+
 def create_user_popularity_csv(
     dataset: str,
-    top_frac: float = 0.10,
-    bottom_frac: Optional[float] = None,
+    user_frac: float = 0.8,
 ) -> None:
     """
-    Create <dataset>/user_popularity_labels.csv by averaging per-user item
-    popularity scores and labeling the top / bottom quantiles.
+    Create <dataset>/user_popularity_labels.csv by computing per-user fractions
+    of interactions with popular/unpopular items (based on item popularity_label)
+    and labeling based on a fraction threshold.
 
     Source files expected in "./dataset/<dataset>/":
         - biased_eval_train.npz    (arrays "item_id", "user_id" of equal length)
-        - item_popularity_labels.csv  (columns: item_id:token, popularity_score, ...)
+        - item_popularity_labels.csv  (columns: item_id:token, popularity_label, ...)
 
     Steps
     -----
     1. Load all interactions (user_id, item_id) from the NPZ.
-    2. Load item popularity scores.
-    3. For each user, compute the *mean* popularity_score across all interacted
-       items for which a score is available. (Items missing from the CSV are ignored.)
-       If a user has zero scored items, their pop_score is NaN → later treated as 0.
-    4. Determine score cutoffs:
-          * top users: score >= (1 - top_frac) quantile  → label  1
-          * bottom users: score <= bottom_frac quantile → label -1
+    2. Load item labels and identify head/tail item sets:
+       - Head items: items with popularity_label == 1.
+       - Tail items: items with popularity_label == -1.
+    3. For each user, compute:
+       - fraction_pop: proportion of interacted items in head set.
+       - fraction_unpop: proportion of interacted items in tail set.
+    4. Label users:
+          * popular: fraction_pop >= user_frac    → label  1
+          * unpopular: fraction_unpop >= user_frac → label -1
           * everyone else → label 0
-       (If bottom_frac is None, it defaults to top_frac.)
-    5. Users with NaN pop_score are labeled 0 and treated as score 0 for sorting.
-    6. Write CSV sorted by descending pop_score.
+    5. Users with no interactions are labeled 0 with fraction_pop=0.
+    6. Write CSV sorted by descending fraction_pop (as "pop_score").
 
     Parameters
     ----------
     dataset : str
         Dataset subdirectory name under "./dataset".
-    top_frac : float, default 0.10
-        Fraction of users to mark as popular (top tail). Used for 1 - top_frac quantile.
-    bottom_frac : float, optional
-        Fraction of users to mark as unpopular (bottom tail). If None, uses top_frac.
+    user_frac : float, default 0.8
+        Fraction threshold for labeling a user as popular/unpopular.
 
     Output
     ------
     Writes "./dataset/<dataset>/user_popularity_labels.csv".
     """
-    if bottom_frac is None:
-        bottom_frac = top_frac
-
     # Paths
     dataset_path = Path(".", "dataset", dataset)
     train_npz_path = dataset_path / "biased_eval_train.npz"
@@ -522,48 +589,60 @@ def create_user_popularity_csv(
     # Build interaction DataFrame
     df_inter = pd.DataFrame({"user_id": user_ids, "item_id:token": item_ids})
 
-    # Load item popularity scores
-    # We only need item_id:token + popularity_score
-    df_items = pd.read_csv(item_pop_csv, usecols=["item_id:token", "pop_score"])
+    # Load item labels
+    df_items = pd.read_csv(item_pop_csv, usecols=["item_id:token", "popularity_label"])
 
-    # Join scores onto interactions
-    df = df_inter.merge(df_items, on="item_id:token", how="left")
+    # Drop NaNs for computation
+    df_items = df_items.dropna(subset=["popularity_label"])
 
-    # Aggregate mean score per user (ignore NaNs automatically via mean(skipna=True))
-    user_scores = (
-        df.groupby("user_id")["pop_score"]
-          .mean()  # skipna=True default
-    )
-
-    # user_scores is a Series indexed by user_id
-    # Compute quantile cutoffs from *non-NaN* scores
-    non_nan_scores = user_scores.dropna()
-    if len(non_nan_scores) == 0:
-        # degenerate case: no scored items anywhere
-        # produce empty-ish CSV with all users score=0,label=0
-        pop_score = user_scores.fillna(0.0)
-        labels = pd.Series(0, index=user_scores.index)
+    if df_items.empty:
+        # Degenerate case: no labeled items
+        head_items = set()
+        tail_items = set()
     else:
-        q_top = non_nan_scores.quantile(1 - top_frac)
-        q_bot = non_nan_scores.quantile(bottom_frac)
+        # Head items: popularity_label == 1
+        head_df = df_items[df_items["popularity_label"] == 1]
+        head_items = set(head_df["item_id:token"])
 
-        # Build label series
-        pop_score = user_scores.fillna(0.0)  # treat missing as 0 for output & sorting
-        labels = pd.Series(0, index=pop_score.index, dtype="int8")
-        labels.loc[user_scores >= q_top] = 1
-        labels.loc[user_scores <= q_bot] = -1
-        # NaN users (had no scored items) remain 0 because user_scores NaN <not> >= q_top or <= q_bot
+        # Tail items: popularity_label == -1
+        tail_df = df_items[df_items["popularity_label"] == -1]
+        tail_items = set(tail_df["item_id:token"])
 
-    # Assemble output DataFrame
-    out_df = pd.DataFrame({
-        "user_id:token": pop_score.index,
-        "pop_score": pop_score.values,
-        "popularity_label": labels.loc[pop_score.index].values,
-    }).sort_values("pop_score", ascending=False)
+    # Group interactions by user to get set of unique interacted items
+    user_groups = df_inter.groupby("user_id")["item_id:token"].apply(set).reset_index()
+
+    # Compute fractions
+    def calc_fractions(items_set):
+        if not items_set:
+            return 0.0, 0.0
+        num_total = len(items_set)
+        num_pop = len(items_set & head_items)
+        num_unpop = len(items_set & tail_items)
+        return num_pop / num_total, num_unpop / num_total
+
+    fractions = user_groups["item_id:token"].apply(calc_fractions)
+    user_groups["fraction_pop"] = fractions.apply(lambda x: x[0])
+    user_groups["fraction_unpop"] = fractions.apply(lambda x: x[1])
+
+    # Labels
+    def get_label(row):
+        if row["fraction_pop"] >= user_frac:
+            return 1
+        elif row["fraction_unpop"] >= user_frac:
+            return -1
+        else:
+            return 0
+
+    user_groups["popularity_label"] = user_groups.apply(get_label, axis=1)
+
+    # Output DF
+    out_df = user_groups[["user_id", "fraction_pop", "popularity_label"]].rename(
+        columns={"user_id": "user_id:token", "fraction_pop": "pop_score"}
+    ).sort_values("pop_score", ascending=False)
 
     out_df.to_csv(out_csv, index=False)
 
-
+    
 # def create_item_popularity_csv(dataset: str, p: float):
 #     # -------------------------------
 #     # Step 1: Load the training NPZ file and compute item frequencies.

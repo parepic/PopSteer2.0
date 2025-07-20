@@ -26,7 +26,7 @@ import torch
 from recbole.model.abstract_recommender import GeneralRecommender
 from recbole.model.init import xavier_uniform_initialization
 from recbole.model.loss import BPRLoss, EmbLoss
-from recbole.utils import InputType, compute_neuron_stats_by_row
+from recbole.utils import InputType, compute_neuron_stats_by_row, compute_weighted_neuron_stats_by_row_item
 from recbole.model.general_recommender.lightgcn import LightGCN
 
 
@@ -323,21 +323,21 @@ class SAE(nn.Module):
 				vals = pre_acts[:, neuron_idx]
 				# Increase activations by an amount proportional to the standard deviation and effective weight.
 				pre_acts[:, neuron_idx] += weight * std_val
-			else:  # group == 'pop'
-				# For neurons to be dampened, use the popular statistics for impact.
-				pop_mean = stats_pop.iloc[neuron_idx]["mean"]
-				pop_sd = stats_pop.iloc[neuron_idx]["sd"]
+			# else:  # group == 'pop'
+			# 	# For neurons to be dampened, use the popular statistics for impact.
+			# 	pop_mean = stats_pop.iloc[neuron_idx]["mean"]
+			# 	pop_sd = stats_pop.iloc[neuron_idx]["sd"]
 
-				# Still fetch the comparison stats from the unpopular stats file
-				# (this is from your original logic; adjust if needed).
-				row = stats_unpop.iloc[neuron_idx]
-				mean_val = row["mean"]
-				std_val = row["sd"]
+			# 	# Still fetch the comparison stats from the unpopular stats file
+			# 	# (this is from your original logic; adjust if needed).
+			# 	row = stats_unpop.iloc[neuron_idx]
+			# 	mean_val = row["mean"]
+			# 	std_val = row["sd"]
 
-				# Identify positions where the neuron's activation is below its mean.
-				vals = pre_acts[:, neuron_idx]
-				# Decrease activations proportionally.
-				pre_acts[:, neuron_idx] -= weight * pop_sd
+			# 	# Identify positions where the neuron's activation is below its mean.
+			# 	vals = pre_acts[:, neuron_idx]
+			# 	# Decrease activations proportionally.
+			# 	pre_acts[:, neuron_idx] -= weight * pop_sd
 	
 		return pre_acts
 	 
@@ -371,7 +371,10 @@ class SAE(nn.Module):
 			pre_acts1 = self.encoder(sae_in)
 			self.last_activations = pre_acts1
 			if self.analyze == True:
-				compute_neuron_stats_by_row(activations=pre_acts1, dataset=self.dataset, side=self.side)
+				if self.side == "user":
+					compute_weighted_neuron_stats_by_row_item(activations=pre_acts1, dataset=self.dataset, side=self.side)
+				else:
+					compute_weighted_neuron_stats_by_row_item(activations=pre_acts1, dataset=self.dataset, side=self.side)
 			if self.steer == True:
 				pre_acts1 = self.dampen_neurons(pre_acts1, dataset=self.dataset)
 				# pre_acts = self.add_noise(pre_acts, std=self.beta)

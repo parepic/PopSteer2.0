@@ -20,10 +20,9 @@ from recbole.data import create_item_popularity_csv
 def tune(args):
     if args.config_json is None:
         config_dict = {
-            "alpha": [0.5, 0],
+            "alpha": [0, 0],
             "steer": [0, 1],
             "analyze": True,
-            "N": [4096, 4096],
             "tail_ratio": 0.2,
             "metrics": ["Recall","MRR","NDCG","Hit","Precision","SAE_Loss_i", "SAE_Loss_u", "SAE_Loss_total", "Gini", "Deep_LT_Coverage", "GiniIndex", "TailPercentage", "AveragePopularity", "ShannonEntropy"]        
             }
@@ -33,7 +32,7 @@ def tune(args):
     trainer = get_trainer(config["MODEL_TYPE"], config["model"])(config, model)
     trainer.eval_collector.data_collect(train_data)
 
-    change1 = [0.0, 0.5, 1, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0]
+    change1 = [0.0, -0.5, -1, -1.5, -2.0, -2.5, -3.0]
 
     metric_keys = [
         'mrr@10',
@@ -42,7 +41,6 @@ def tune(args):
         'deep_lt_coverage@10',
         'giniindex@10',
         'averagepopularity@10',
-        'tailpercentage@10',
         'shannonentropy@10'
     ]
 
@@ -53,7 +51,6 @@ def tune(args):
         'deep_lt_coverage@10': 'DLTC@10',
         'giniindex@10': 'GINI@10',
         'averagepopularity@10': 'AVGPOP@10',
-        'tailpercentage@10': 'TAIL%@10',
         'shannonentropy@10': 'SHANNON@10'
     }
 
@@ -168,7 +165,7 @@ def remove_sparse_users_items(n, dataset):
 
 
 if __name__ == "__main__":
-    # remove_sparse_users_items(20, "ml-100k")
+    # remove_sparse_users_items(5, "lastfm")
     # exit()
     # parameter_dict = {
     # 'train_neg_sample_args': None,
@@ -265,10 +262,10 @@ if __name__ == "__main__":
     elif hasattr(args, "test") and args.test == True:
         if args.config_json is None:
             config_dict = {
-                "alpha": [0.5, 1.5],
-                "steer": [0, 0],
+                "alpha": [0.5, 1.0],
+                "steer": [1, 1],
                 "analyze": True,
-                "N": [4096, 4096],
+                "N": [4096, 8192],
                 "tail_ratio": 0.2,
                 "metrics": ["Recall","MRR","NDCG","Hit","Precision", "Gini", "Deep_LT_Coverage", "GiniIndex", "TailPercentage", "AveragePopularity", "ShannonEntropy"]        
             }
@@ -281,7 +278,7 @@ if __name__ == "__main__":
         trainer.eval_collector.data_collect(train_data)
 
         test_result = trainer.evaluate(
-            valid_data, model_file=args.path, load_best_model = False, show_progress=config["show_progress"]
+            test_data, model_file=args.path, load_best_model = False, show_progress=config["show_progress"]
         )
         
         keys = [

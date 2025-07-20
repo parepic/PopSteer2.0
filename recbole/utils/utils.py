@@ -528,13 +528,95 @@ from typing import Union
 #     }).to_csv(cohens_d_out, index=False)
 
 
+def compute_weighted_neuron_stats_by_row_item(
+        activations: torch.Tensor,
+        dataset: str,
+        side: str
+    ) -> None:
+    labels_csv_path = rf"./dataset/{dataset}/{side}_popularity_labels.csv"
+    popular_out = rf"./dataset/{dataset}/{side}/neuron_stats_popular.csv"
+    unpopular_out = rf"./dataset/{dataset}/{side}/neuron_stats_unpopular.csv"
+    cohens_d_out = rf"./dataset/{dataset}/{side}/cohens_d.csv"
+    if activations.ndim != 2:
+        raise ValueError("`activations` must have shape (B, N)")
+    B, N = activations.shape
+
+    df = pd.read_csv(labels_csv_path, usecols=[rf"{side}_id:token", "popularity_label", "pop_score"])
+    df['item_id'] = df[rf"{side}_id:token"].astype(int)  # Assuming general 'item_id' for index
+    label_ser = df.set_index('item_id')["popularity_label"]
+    pop_score_ser = df.set_index('item_id')["pop_score"]
+
+    labels = torch.zeros(B, dtype=torch.int8)
+    known_idx = label_ser.index.intersection(range(B))
+    labels[known_idx] = torch.tensor(label_ser.loc[known_idx].values, dtype=torch.int8)
+
+    pop_scores = torch.zeros(B, dtype=torch.float)
+    pop_scores[known_idx] = torch.tensor(pop_score_ser.loc[known_idx].values, dtype=torch.float)
+    # Normalize pop_scores to [0, 1]
+    min_pop = pop_scores.min()
+    max_pop = pop_scores.max()
+    if max_pop > min_pop:
+        pop_scores = (pop_scores - min_pop) / (max_pop - min_pop)
+
+    pop_mask = labels == 1
+    unpop_mask = labels == -1  # Assuming -1 for unpopular, adjust if necessary to ==0
+
+    # Helper: weighted stats for a boolean mask
+    def _stats(mask: torch.Tensor, is_pop: bool) -> tuple[torch.Tensor, torch.Tensor, float]:
+        mask_idx = mask.nonzero(as_tuple=False).squeeze(-1)
+        n_items = len(mask_idx)
+        if n_items == 0:
+            return torch.zeros(N), torch.zeros(N), 0.0
+        subset = activations[mask_idx]  # (n, N)
+        group_pop_scores = pop_scores[mask_idx]
+        weights = group_pop_scores if is_pop else (1.0 - group_pop_scores)
+        effective_n = weights.sum().item()
+        if effective_n <= 0:
+            return torch.zeros(N), torch.zeros(N), 0.0
+        # Weighted mean
+        mean = torch.sum(weights.unsqueeze(1) * subset, dim=0) / effective_n
+        # Weighted variance (population style, matching original std unbiased=False)
+        var = torch.sum(weights.unsqueeze(1) * (subset - mean.unsqueeze(0))**2, dim=0) / effective_n
+        sd = torch.sqrt(var)
+        return mean, sd, effective_n
+
+    # Compute group stats
+    mean_pop, sd_pop, effective_n_pop = _stats(pop_mask, is_pop=True)
+    mean_unp, sd_unp, effective_n_unp = _stats(unpop_mask, is_pop=False)
+
+    # Save per-group CSVs
+    def _to_csv(fname: str, mean: torch.Tensor, sd: torch.Tensor):
+        pd.DataFrame({
+            "neuron": range(N),
+            "mean":   mean.tolist(),
+            "sd":     sd.tolist(),
+        }).to_csv(fname, index=False)
+
+    _to_csv(popular_out, mean_pop, sd_pop)
+    _to_csv(unpopular_out, mean_unp, sd_unp)
+
+    # Cohen’s d per neuron
+    denom = max(effective_n_pop + effective_n_unp - 2, 1)
+    pooled_var = ((effective_n_pop - 1) * sd_pop.pow(2) +
+                  (effective_n_unp - 1) * sd_unp.pow(2)) / denom
+    pooled_sd = torch.sqrt(pooled_var)
+
+    valid = (pooled_sd != 0) & (effective_n_pop > 0) & (effective_n_unp > 0)
+    cohens_d = torch.full((N,), float('nan'))
+    cohens_d[valid] = (mean_pop[valid] - mean_unp[valid]) / pooled_sd[valid]
+
+    pd.DataFrame({
+        "neuron":   range(N),
+        "cohens_d": cohens_d.tolist(),
+    }).to_csv(cohens_d_out, index=False)
+
+
 
 def compute_neuron_stats_by_row(
         activations: torch.Tensor,
         dataset: str,
         side: str
     ) -> None:
-    print("side blya ", side)
     labels_csv_path = rf"./dataset/{dataset}/{side}_popularity_labels.csv"
     popular_out = rf"./dataset/{dataset}/{side}/neuron_stats_popular.csv"
     unpopular_out = rf"./dataset/{dataset}/{side}/neuron_stats_unpopular.csv"
@@ -554,7 +636,7 @@ def compute_neuron_stats_by_row(
     labels[known_idx] = torch.tensor(label_ser.loc[known_idx].values, dtype=torch.int8)
 
     pop_mask  = labels ==  1
-    unpop_mask = labels == -1
+    unpop_mask = labels == 0
 
     # Helper: stats for a boolean mask
     def _stats(mask: torch.Tensor) -> tuple[torch.Tensor, torch.Tensor, int]:
