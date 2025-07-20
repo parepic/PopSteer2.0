@@ -20,7 +20,7 @@ from recbole.data import create_item_popularity_csv
 def tune(args):
     if args.config_json is None:
         config_dict = {
-            "alpha": [0, 0],
+            "alpha": [0, 2.5],
             "steer": [0, 1],
             "analyze": True,
             "tail_ratio": 0.2,
@@ -32,7 +32,8 @@ def tune(args):
     trainer = get_trainer(config["MODEL_TYPE"], config["model"])(config, model)
     trainer.eval_collector.data_collect(train_data)
 
-    change1 = [0.0, -0.5, -1, -1.5, -2.0, -2.5, -3.0]
+    # change1 = [0.0, -0.5, -1, -1.5, -2.0, -2.5, -3.0]
+    change1 = [0, 50, 256, 512, 1024, 4096, 8192]
 
     metric_keys = [
         'mrr@10',
@@ -57,7 +58,7 @@ def tune(args):
     # Collect raw metric values
     rows_raw = []
     for c1 in change1:
-        trainer.model.sae_module_u.alpha = c1
+        trainer.model.sae_module_u.N = c1
         test_result = trainer.evaluate(
             valid_data,
             model_file=args.path,

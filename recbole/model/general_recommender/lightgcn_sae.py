@@ -300,7 +300,7 @@ class SAE(nn.Module):
 		min_cohen = min(abs(c) for _, c, _ in combined_neurons)
 		# Define a helper normalization function.
 		def normalize_to_range(x, new_min, new_max):
-			min_val = min_cohen
+			min_val = 0
 			max_val = torch.max(x)
 			if max_val == min_val:
 				return torch.full_like(x, (new_min + new_max) / 2)
@@ -375,7 +375,7 @@ class SAE(nn.Module):
 					compute_weighted_neuron_stats_by_row_item(activations=pre_acts1, dataset=self.dataset, side=self.side)
 				else:
 					compute_weighted_neuron_stats_by_row_item(activations=pre_acts1, dataset=self.dataset, side=self.side)
-			if self.steer == True:
+			if self.steer == True and self.N != 0:
 				pre_acts1 = self.dampen_neurons(pre_acts1, dataset=self.dataset)
 				# pre_acts = self.add_noise(pre_acts, std=self.beta)
 			pre_acts = nn.functional.relu(pre_acts1)   
