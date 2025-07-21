@@ -119,8 +119,8 @@ def tune(args):
         line = " | ".join(f"{fr[h]:<{col_width[h]}}" for h in header_labels)
         print(line)
 
-    # --- Write selected results to CSV (with separate alphas) ---
-    csv_path = rf"./dataset/{config['dataset']}/PopSteer_{config["dataset"]}_full.csv"
+    # --- Write selected results to CSV (with separate alphas) --
+    csv_path = rf'./dataset/{config["dataset"]}/PopSteer_{config["dataset"]}_full.csv'
     fieldnames = ["alpha_u", "alpha_i", "ndcg", "dltc@10", "avgpop@10", "gini@10"]
 
     with open(csv_path, mode="w", newline="", encoding="utf-8") as f:
