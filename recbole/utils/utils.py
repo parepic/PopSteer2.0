@@ -796,7 +796,7 @@ def plot_ndcg_vs_fairness(show=True, dataset=None, add_lightgcn=True):
     user_file = rf"dataset/{dataset}/results/PopSteer_{dataset}_user-side.csv"
     item_file = rf"dataset/{dataset}/results/PopSteer_{dataset}_item-side.csv"
     full_file = rf"dataset/{dataset}/results/PopSteer_{dataset}_full.csv"
-    fair_file = rf"dataset/{dataset}/results/PopSteer_{dataset}_FAIR.csv"
+    fair_file = rf"dataset/{dataset}/results/FAIR_{dataset}.csv"
 
     def load_csv(path):
         if not os.path.isfile(path):
@@ -824,10 +824,10 @@ def plot_ndcg_vs_fairness(show=True, dataset=None, add_lightgcn=True):
 
     # LightGCN reference metrics (single point). Add other dataset baselines if needed.
     lightgcn_point_lastfm = {
-        "ndcg": 0.2103,
-        "dltc@10": 0.4064,
-        "avgpop@10": 130.3174,
-        "gini@10": 0.8426,
+        "ndcg": 0.8289,
+        "dltc@10": 0.9068,
+        "avgpop@10": 91.7490,
+        "gini@10": 0.7053,
     }
     lightgcn_point = None
     if dataset.lower() == "lastfm":

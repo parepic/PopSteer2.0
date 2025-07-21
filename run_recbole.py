@@ -32,7 +32,7 @@ if __name__ == "__main__":
     # run_recbole(model='SASRec', dataset='ml-100k', config_dict=parameter_dict)
     # exit()
     # create_item_popularity_csv("ml-1m", 0.2)
-    # plot_ndcg_vs_fairness(dataset="ml-1mm")
+    # plot_ndcg_vs_fairness(dataset="lastfm")
     # exit()
     parser = argparse.ArgumentParser()
     parser.add_argument("--model", "-m", type=str, default="BPR", help="name of models")
@@ -124,7 +124,7 @@ if __name__ == "__main__":
         if args.config_json is None:
             config_dict = {
                 "alpha": [0.5, 0.5],
-                "steer": [1, 1],
+                "steer": [0, 0],
                 "analyze": True,
                 "tail_ratio": 0.2,
                 "metrics": ["Recall","MRR","NDCG","Hit","Precision", "Gini", "Deep_LT_Coverage", "GiniIndex", "TailPercentage", "AveragePopularity", "ShannonEntropy"]        

@@ -161,7 +161,7 @@ class LightGCN(GeneralRecommender):
         # clear the storage variable when training
         if self.restore_user_e is not None or self.restore_item_e is not None:
             self.restore_user_e, self.restore_item_e = None, None
-
+            self.recommendation_count = torch.zeros(self.n_items, dtype=torch.long, device=self.device)
         user = interaction[self.USER_ID]
         pos_item = interaction[self.ITEM_ID]
         neg_item = interaction[self.NEG_ITEM_ID]
@@ -215,7 +215,8 @@ class LightGCN(GeneralRecommender):
         if self.fair:
             scores = self.FAIR(scores, p=self.a1,alpha=self.a2).to(self.device)
         top_recs = torch.argsort(scores, dim=1, descending=True)[:, :10]
-        scores[:, 0] =  float("-inf")
+        for key in top_recs.flatten():
+            self.recommendation_count[key] += 1
         return scores.view(-1)
 
 
