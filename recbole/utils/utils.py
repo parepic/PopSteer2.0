@@ -764,3 +764,182 @@ def plot_tensor_sorted_by_popularity(tensor: torch.Tensor, dataset: str):
     plt.tight_layout()
     plt.show()
 
+
+import csv
+
+import os
+import csv
+import matplotlib.pyplot as plt
+
+def plot_ndcg_vs_fairness(show=True, dataset=None, add_lightgcn=True):
+    """
+    Create three scatter plots: NDCG vs each fairness metric (dltc@10, avgpop@10, gini@10),
+    overlaying points from user-side, item-side, full, FAIR CSV results, and (optionally) a LightGCN baseline.
+
+    Parameters
+    ----------
+    show : bool
+        If True, call plt.show() at the end.
+    dataset : str
+        Name of the dataset directory under ./dataset/ that contains the CSV files.
+    add_lightgcn : bool
+        Whether to plot the LightGCN reference point.
+
+    Returns
+    -------
+    figs : dict[str, matplotlib.figure.Figure]
+        Mapping from metric key to the created Figure.
+    """
+    if dataset is None:
+        raise ValueError("Please provide dataset name (e.g. dataset='lastfm').")
+
+    user_file = rf"dataset/{dataset}/results/PopSteer_{dataset}_user-side.csv"
+    item_file = rf"dataset/{dataset}/results/PopSteer_{dataset}_item-side.csv"
+    full_file = rf"dataset/{dataset}/results/PopSteer_{dataset}_full.csv"
+    fair_file = rf"dataset/{dataset}/results/PopSteer_{dataset}_FAIR.csv"
+
+    def load_csv(path):
+        if not os.path.isfile(path):
+            raise FileNotFoundError(f"File not found: {path}")
+        rows = []
+        with open(path, "r", encoding="utf-8") as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                try:
+                    rows.append({
+                        "ndcg": float(row["ndcg"]),
+                        "dltc@10": float(row["dltc@10"]),
+                        "avgpop@10": float(row["avgpop@10"]),
+                        "gini@10": float(row["gini@10"]),
+                    })
+                except (KeyError, ValueError):
+                    # Skip malformed / incomplete rows
+                    continue
+        return rows
+
+    user_rows = load_csv(user_file)
+    item_rows = load_csv(item_file)
+    full_rows = load_csv(full_file)
+    fair_rows = load_csv(fair_file)
+
+    # LightGCN reference metrics (single point). Add other dataset baselines if needed.
+    lightgcn_point_lastfm = {
+        "ndcg": 0.2103,
+        "dltc@10": 0.4064,
+        "avgpop@10": 130.3174,
+        "gini@10": 0.8426,
+    }
+    lightgcn_point = None
+    if dataset.lower() == "lastfm":
+        lightgcn_point = lightgcn_point_lastfm
+
+    fairness_metrics = [
+        ("dltc@10", "Deep LT Coverage @10"),
+        ("avgpop@10", "Average Popularity @10"),
+        ("gini@10", "Gini Index @10"),
+    ]
+
+    figs = {}
+
+    for metric_key, metric_full_name in fairness_metrics:
+        fig, ax = plt.subplots()
+
+        if user_rows:
+            ax.scatter(
+                [r["ndcg"] for r in user_rows],
+                [r[metric_key] for r in user_rows],
+                marker="o",
+                label="User-side",
+                alpha=0.8,
+                edgecolors="none"
+            )
+        if item_rows:
+            ax.scatter(
+                [r["ndcg"] for r in item_rows],
+                [r[metric_key] for r in item_rows],
+                marker="s",
+                label="Item-side",
+                alpha=0.8,
+                edgecolors="none"
+            )
+        if full_rows:
+            ax.scatter(
+                [r["ndcg"] for r in full_rows],
+                [r[metric_key] for r in full_rows],
+                marker="^",
+                label="Both-sides",
+                alpha=0.8,
+                edgecolors="none"
+            )
+        if fair_rows:
+            ax.scatter(
+                [r["ndcg"] for r in fair_rows],
+                [r[metric_key] for r in fair_rows],
+                marker="D",
+                label="FAIR",
+                alpha=0.85,
+                edgecolors="none"
+            )
+
+        if add_lightgcn and lightgcn_point is not None:
+            ax.scatter(
+                [lightgcn_point["ndcg"]],
+                [lightgcn_point[metric_key]],
+                marker="*",
+                s=180,
+                label="LightGCN",
+                alpha=0.95,
+                edgecolors="black",
+                linewidths=0.6
+            )
+
+        ax.set_xlabel("NDCG@10")
+        ax.set_ylabel(metric_full_name)
+        ax.set_title(f"{dataset} NDCG vs {metric_full_name}")
+        ax.grid(True, linestyle="--", linewidth=0.5, alpha=0.6)
+        ax.legend()
+        figs[metric_key] = fig
+
+    if show:
+        plt.show()
+
+    return figs
+
+
+def remove_sparse_users_items(n, dataset):
+    # --- Step 1: Load the Data ---
+    # The files use tab as the delimiter and have headers that include type annotations.
+    items = pd.read_csv(rf"./dataset/{dataset}/{dataset}.item", sep="\t", header=0)
+    interactions = pd.read_csv(rf"./dataset/{dataset}/{dataset}.inter", sep="\t", header=0)
+    # --- Step 2: Iterative Filtering ---
+    # We use a threshold of at least 5 interactions for both users and items.
+    iteration = 0
+    while True:
+        iteration += 1
+        current_shape = interactions.shape[0]
+        
+        # Remove users with fewer than 5 interactions:
+        user_counts = interactions["user_id:token"].value_counts()
+        valid_users = user_counts[user_counts >= n].index
+        interactions = interactions[interactions["user_id:token"].isin(valid_users)]
+                
+        # Remove items with fewer than 5 interactions:
+        item_counts = interactions["item_id:token"].value_counts()
+        valid_items = item_counts[item_counts >= n].index
+        interactions = interactions[interactions["item_id:token"].isin(valid_items)]
+        
+        new_shape = interactions.shape[0]
+        print(f"Iteration {iteration}: {current_shape} -> {new_shape} interactions remain")
+        
+        if new_shape == current_shape:
+            break
+    # --- Step 3: Synchronize Items With Interactions ---
+    # Keep only those items that still appear in the filtered interactions.
+    items = items[items["item_id:token"].isin(interactions["item_id:token"])]
+
+    # --- Step 4: Save the Filtered Files ---
+    # Files are saved with the header intact (including the type annotations).
+    items.to_csv(rf"./dataset/{dataset}/{dataset}.item.filtered", sep="\t", index=False, header=True)
+    interactions.to_csv(rf"./dataset/{dataset}/{dataset}.inter.filtered", sep="\t", index=False, header=True)
+
+    print(f"Filtering complete. Files saved as '{dataset}.item.filtered', '{dataset}.inter.filtered'.")

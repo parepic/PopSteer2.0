@@ -15,7 +15,9 @@ from recbole.utils.utils import (
     list_to_latex,
     compute_neuron_stats_by_row,
     plot_tensor_sorted_by_popularity,
-    compute_weighted_neuron_stats_by_row_item
+    compute_weighted_neuron_stats_by_row_item,
+    plot_ndcg_vs_fairness,
+    remove_sparse_users_items
 )
 from recbole.utils.enum_type import *
 from recbole.utils.argument_list import *
@@ -51,5 +53,7 @@ __all__ = [
     "WandbLogger",
     "compute_neuron_stats_by_row",
     "plot_tensor_sorted_by_popularity",
-    "compute_weighted_neuron_stats_by_row_item"
+    "compute_weighted_neuron_stats_by_row_item",
+    "plot_ndcg_vs_fairness",
+    "remove_sparse_users_items"
 ]

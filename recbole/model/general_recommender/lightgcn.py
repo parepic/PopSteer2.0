@@ -47,7 +47,9 @@ class LightGCN(GeneralRecommender):
     def __init__(self, config, dataset):
         super(LightGCN, self).__init__(config, dataset)
         self.recommendation_count = torch.zeros(self.n_items, dtype=torch.long, device=self.device)
-
+        self.a1 = config["alpha"][0]
+        self.a2 = config["alpha"][1]
+        self.fair = False
         # load dataset info
         self.interaction_matrix = dataset.inter_matrix(form="coo").astype(np.float32)
         self.dataset = config["dataset"]
@@ -158,7 +160,6 @@ class LightGCN(GeneralRecommender):
     def calculate_loss(self, interaction):
         # clear the storage variable when training
         if self.restore_user_e is not None or self.restore_item_e is not None:
-            self.recommendation_count = torch.zeros(self.n_items, dtype=torch.long, device=self.device)
             self.restore_user_e, self.restore_item_e = None, None
 
         user = interaction[self.USER_ID]
@@ -211,12 +212,10 @@ class LightGCN(GeneralRecommender):
         # dot with all item embedding to accelerate
         scores = torch.matmul(u_embeddings, self.restore_item_e.transpose(0, 1))
         scores[:, 0] =  float("-inf")
-        # scores = self.FAIR(scores).to(self.device)
+        if self.fair:
+            scores = self.FAIR(scores, p=self.a1,alpha=self.a2).to(self.device)
         top_recs = torch.argsort(scores, dim=1, descending=True)[:, :10]
         scores[:, 0] =  float("-inf")
-        for key in top_recs.flatten():
-            self.recommendation_count[key] += 1
-
         return scores.view(-1)
 
 
