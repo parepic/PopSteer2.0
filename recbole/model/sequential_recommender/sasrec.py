@@ -50,6 +50,7 @@ class SASRec(SequentialRecommender):
 
         self.initializer_range = config["initializer_range"]
         self.loss_type = config["loss_type"]
+        self.dataset = config["dataset"]
 
         # define layers and loss
         self.item_embedding = nn.Embedding(

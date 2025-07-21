@@ -143,7 +143,7 @@ class Trainer(AbstractTrainer):
         self.learning_rate = config["learning_rate"]
         self.epochs = config["epochs"]
         self.eval_step = min(config["eval_step"], self.epochs)
-        self.stopping_step = config["stopping_step"]
+        self.stopping_step = 100
         self.clip_grad_norm = config["clip_grad_norm"]
         self.valid_metric = config["valid_metric"].lower()
         self.valid_metric_bigger = config["valid_metric_bigger"]
@@ -943,7 +943,7 @@ class DecisionTreeTrainer(AbstractTrainer):
         saved_model_file = "{}-{}.pth".format(self.config["model"], get_local_time())
         self.saved_model_file = os.path.join(self.checkpoint_dir, saved_model_file)
 
-        self.stopping_step = 100
+        self.stopping_step = config["stopping_step"]
         self.valid_metric_bigger = config["valid_metric_bigger"]
         self.cur_step = 0
         self.best_valid_score = -np.inf if self.valid_metric_bigger else np.inf
