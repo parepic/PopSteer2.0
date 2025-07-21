@@ -27,7 +27,7 @@ if __name__ == "__main__":
     # remove_sparse_users_items(20, "yelp2018")
     # exit()
     # parameter_dict = {
-    # 'train_neg_sample_args': None,
+    # 'train_neg_samplze_args': None,
     # }
     # run_recbole(model='SASRec', dataset='ml-100k', config_dict=parameter_dict)
     # exit()
@@ -99,8 +99,8 @@ if __name__ == "__main__":
     if args.train == True:
         if args.config_json is None:
             config_dict = {
-                "base_path": "./saved/zorduda4.pth",
-                "sae_scale_size": [32, 32],
+                "base_path": "./saved/lastfm.pth",
+                "sae_scale_size": [16, 16],
                 "sae_k": [8, 8],
                 "learning_rate": 1e-3,
                 "alpha": [1.0, 1.0],
