@@ -39,15 +39,19 @@ class SASRec_SAE(SASRec):
         )
         position_ids = position_ids.unsqueeze(0).expand_as(item_seq)
         position_embedding = self.position_embedding(position_ids)
-        # item_emb = self.item_embedding(item_seq)
+		
+		# Reconstruct the embedding weights using SAE
         reconstructed_weights = self.sae_module_i(self.item_embedding.weight)
+        # Use reconstructed weights for embedding lookup
         item_emb = torch.nn.functional.embedding(item_seq, reconstructed_weights, padding_idx=0)
 
-        print(item_emb.shape)
+
         item_emb_sae = self.sae_module_i(item_emb, train_mode=train_mode)
         input_emb = item_emb_sae + position_embedding
         input_emb = self.LayerNorm(input_emb)
         input_emb = self.dropout(input_emb)
+
+		
 
         extended_attention_mask = self.get_attention_mask(item_seq)
 
