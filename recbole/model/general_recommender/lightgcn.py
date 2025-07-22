@@ -255,7 +255,6 @@ class LightGCN(GeneralRecommender):
             base     = scores[b].max().item() + 1.0
             offsets  = torch.arange(K - 1, -1, -1, dtype=scores.dtype)
             scores[b, orig_pos] = base + offsets            # keep FA*IR order
-
         return scores
 
 
@@ -272,7 +271,7 @@ class LightGCN(GeneralRecommender):
         # --------------------------------------------------------------
         # helper: minimum #protected required at each prefix
         def _min_protected_per_prefix(k, p_, alpha_):
-            alpha_c = 1.0 - (1.0 - alpha_) ** (1.0 / k)          # Šidák :contentReference[oaicite:0]{index=0}&#8203;:contentReference[oaicite:1]{index=1}
+            alpha_c = 1.0 - (1.0 - alpha_) ** (1.0 / k)          # Šidák
             m = np.zeros(k, dtype=int)
             for t in range(1, k + 1):                            # prefix length
                 cdf = 0.0
@@ -283,7 +282,7 @@ class LightGCN(GeneralRecommender):
                         break
             return m
 
-        m_needed = _min_protected_per_prefix(K, p, alpha)        # :contentReference[oaicite:2]{index=2}&#8203;:contentReference[oaicite:3]{index=3}
+        m_needed = _min_protected_per_prefix(K, p, alpha)
 
         # --------------------------------------------------------------
         # build two quality-sorted lists
@@ -297,7 +296,10 @@ class LightGCN(GeneralRecommender):
         for pos in range(K):                                     # positions 0..K-1
             need = m_needed[pos]                                 # min protected so far
             if tp < need:                                        # *must* take protected
-                choose = prot_list[pp];  pp += 1;  tp += 1
+                if pp < len(prot_list):  # NEW: Check if protected available
+                    choose = prot_list[pp];  pp += 1;  tp += 1
+                else:  # NEW: Fall back to non-protected if exhausted
+                    choose = nonprot_list[np_ptr];  np_ptr += 1;  tn += 1
             else:                                                # free to take best
                 next_p  = prot_list[pp]  if pp  < len(prot_list)     else None
                 next_np = nonprot_list[np_ptr] if np_ptr < len(nonprot_list) else None

@@ -59,6 +59,7 @@ class LightGCN_SAE(LightGCN):
 		self.dataset = config["dataset"]
 		self.base_i = None
 		self.base_u = None
+		self.mode = config["sae_mode"]
 
 		for param in self.parameters():
 			param.requires_grad = False
@@ -69,12 +70,19 @@ class LightGCN_SAE(LightGCN):
 			param.requires_grad = True  
 
 	def forward(self, train_mode=None):
+		u_emb, i_emb = self.base_u, self.base_i
 		if self.base_i is None or self.base_u is None:
 			self.base_u, self.base_i = super().forward()
-
-		i_emb_sae = self.sae_module_i(self.base_i, train_mode=train_mode)
-		u_emb_sae = self.sae_module_u(self.base_u, train_mode=train_mode)
-		return u_emb_sae, i_emb_sae
+			u_emb, i_emb = self.base_u, self.base_i
+		if self.mode == "test":
+			if self.sae_module_i.steer:
+				i_emb = self.sae_module_i(self.base_i, train_mode=train_mode)
+			if self.sae_module_u.steer:
+				u_emb = self.sae_module_u(self.base_u, train_mode=train_mode)
+		else:
+			i_emb = self.sae_module_i(self.base_i, train_mode=train_mode)
+			u_emb = self.sae_module_u(self.base_u, train_mode=train_mode)
+		return u_emb, i_emb
 	
 	def calculate_loss(self, interaction):
 		if self.restore_user_e is not None or self.restore_item_e is not None:
@@ -137,7 +145,6 @@ class SAE(nn.Module):
 		self.k = config["sae_k"][self.index]
 		self.scale_size = config["sae_scale_size"][self.index]
 		self.alpha = config['alpha'][self.index]
-		self.N = config['N'][self.index]
 		self.steer = config['steer'][self.index]
 		self.analyze = config['analyze']
 		self.fvu = torch.tensor(0.0)
@@ -150,6 +157,7 @@ class SAE(nn.Module):
 		self.to(self.device)
 		self.d_in = config['input_dim']
 		self.hidden_dim = self.d_in * self.scale_size
+		self.N = self.hidden_dim
 		self.activation_count = torch.zeros(self.hidden_dim, device=config["device"])
 		self.encoder = nn.Linear(self.d_in, self.hidden_dim, device=self.device,dtype = self.dtype)
 		self.encoder.bias.data.zero_()

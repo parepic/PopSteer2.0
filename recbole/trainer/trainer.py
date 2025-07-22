@@ -290,13 +290,11 @@ class Trainer(AbstractTrainer):
                 clip_grad_norm_(self.model.parameters(), **self.clip_grad_norm)
             scaler.step(self.optimizer)
             scaler.update()
-            if self.gpu_available and show_progress:
-                iter_data.set_postfix_str(
-                    set_color("GPU RAM: " + get_gpu_usage(self.device), "yellow")
-                )
         if self.model.__class__.__name__ == 'LightGCN_SAE':
             self.model.sae_module_i.new_epoch=True
             self.model.sae_module_u.new_epoch=True
+            self.model.sae_module_i.epoch_idx = epoch_idx
+            self.model.sae_module_u.epoch_idx = epoch_idx
 
                 
         return total_loss
@@ -658,10 +656,6 @@ class Trainer(AbstractTrainer):
         for batch_idx, batched_data in enumerate(iter_data):
             num_sample += len(batched_data)
             interaction, scores, positive_u, positive_i = eval_func(batched_data)
-            if self.gpu_available and show_progress:
-                iter_data.set_postfix_str(
-                    set_color("GPU RAM: " + get_gpu_usage(self.device), "yellow")
-                )
             self.eval_collector.eval_batch_collect(
                 scores, interaction, positive_u, positive_i
             )
@@ -1520,10 +1514,6 @@ class NCLTrainer(Trainer):
                 clip_grad_norm_(self.model.parameters(), **self.clip_grad_norm)
             scaler.step(self.optimizer)
             scaler.update()
-            if self.gpu_available and show_progress:
-                iter_data.set_postfix_str(
-                    set_color("GPU RAM: " + get_gpu_usage(self.device), "yellow")
-                )
         return total_loss
 
 
