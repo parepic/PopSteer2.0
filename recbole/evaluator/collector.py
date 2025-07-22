@@ -206,18 +206,19 @@ class Collector(object):
             self.data_struct.update_tensor(
                     "SAE_Loss_i", model.val_fvu_i
             )
+            model.val_fvu_i.fill_(0.0)      
         if self.register.need("SAE_Loss_u"):
             self.data_struct.update_tensor(
                     "SAE_Loss_u", model.val_fvu_u
             )    
+            model.val_fvu_u.fill_(0.0)      
         if self.register.need("SAE_Loss_total"):
             self.data_struct.update_tensor(
                     "SAE_Loss_total", (model.val_fvu_u + model.val_fvu_i)
-            )        
-        if self.register.need("recommendation_count"):
-            self.data_struct.update_tensor(
-                'recommendation_count', model.recommendation_count
-            )
+            )                    
+            model.val_fvu_u.fill_(0.0)      
+            model.val_fvu_i.fill_(0.0)      
+
 
     def eval_collect(self, eval_pred: torch.Tensor, data_label: torch.Tensor):
         """Collect the evaluation resource from total output and label.
@@ -238,10 +239,10 @@ class Collector(object):
         And reset some of outdated resource.
         """
         for key in self.data_struct._data_dict:
-            if key != "data.num_items" and key != "data.count_items" :
+            if key != "data.num_items" and key != "data.count_items" and key != "data.num_items" and key != "data.num_users":
                 self.data_struct._data_dict[key] = self.data_struct._data_dict[key].cpu()
         returned_struct = copy.deepcopy(self.data_struct)
-        for key in ["rec.topk", "rec.meanrank", "rec.score", "rec.items", "data.label", "SAE_Loss_i", "SAE_Loss_u", "SAE_Loss_total", "recommendation_count"]:
+        for key in ["rec.topk", "rec.meanrank", "rec.score", "rec.items", "data.label", "SAE_Loss_i", "SAE_Loss_u", "SAE_Loss_total"]:
             if key in self.data_struct:
                 del self.data_struct[key]
         return returned_struct

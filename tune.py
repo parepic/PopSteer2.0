@@ -14,7 +14,7 @@ def tune(args):
     if args.config_json is None:
         config_dict = {
             "alpha": [0, 0],
-            "steer": [1, 1],
+            "steer": [1, 0],
             "analyze": True,
             "tail_ratio": 0.2,
             "metrics": ["Recall","MRR","NDCG","Hit","SAE_Loss_i", "SAE_Loss_u", "SAE_Loss_total", "Deep_LT_Coverage", "GiniIndex", "AveragePopularity", "ItemCoverage"]        
@@ -25,10 +25,10 @@ def tune(args):
     )
     trainer = get_trainer(config["MODEL_TYPE"], config["model"])(config, model)
     trainer.eval_collector.data_collect(train_data)
-    # change2 = [0.0, 0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2.0]
-    # change1 = [0.0]
-    change1 = [0.5, 1, 1.5, 2.0]
-    change2 = [0.5, 1, 1.5, 2.0]
+    change1 = [0.0, 0.5, 1, 1.5,  2.0, 2.5, 3.0, 3.5]
+    change2 = [0.0]
+    # change1 = [0.5, 1, 1.5, 2.0]
+    # change2 = [0.5, 1, 1.5, 2.0]
 
     # change2 = [0.0, 0.5, 1, 1.5, 2.0, 2.5, 3.0]
 
@@ -42,7 +42,11 @@ def tune(args):
         'giniindex@10',
         'averagepopularity@10',
         'itemcoverage@10'
+        # 'sae_loss_total',
+        # 'sae_loss_i',
+        # 'sae_loss_u' 
     ]
+
 
     SHORT_NAMES = {
         'mrr@10': 'MRR@10',
@@ -52,11 +56,15 @@ def tune(args):
         'giniindex@10': 'GINI@10',
         'averagepopularity@10': 'AVGPOP@10',
         'itemcoverage@10': 'COV@10'
+        # 'sae_loss_total': 'SAELOSS',
+        # 'sae_loss_i': 'SAELOSS_i',
+        # 'sae_loss_u': 'SAELOSS_u'
     }
 
     rows_raw = []
     for a_i in change1:
         for a_u in change2:
+            print(trainer.model.sae_module_i.N)
             trainer.model.recommendation_count = torch.zeros(trainer.model.n_items, dtype=torch.long, device=trainer.device)
             trainer.model.sae_module_i.alpha = a_i
             trainer.model.sae_module_u.alpha = a_u
@@ -124,7 +132,7 @@ def tune(args):
         print(line)
 
     # --- Write selected results to CSV (with separate alphas) --
-    csv_path = rf'./dataset/{config["dataset"]}/results/PopSteer_{config["dataset"]}_full.csv'
+    csv_path = rf'./dataset/{config["dataset"]}/results/PopSteer_{config["dataset"]}_item.csv'
     fieldnames = ["alpha_u", "alpha_i", "ndcg", "dltc@10", "avgpop@10", "gini@10", "cov@10"]
 
     with open(csv_path, mode="w", newline="", encoding="utf-8") as f:

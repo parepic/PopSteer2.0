@@ -835,7 +835,7 @@ def plot_ndcg_vs_fairness(show=True, dataset=None, add_lightgcn=True):
 
     lightgcn_point_ml_1m = {
         "ndcg": 0.2190,
-        "dltc@10": 0.2508,
+        "dltc@10": 0.3016,
         "avgpop@10": 1101.8943,
         "gini@10": 0.8696,
         "cov@10": 0.5236,

@@ -259,7 +259,6 @@ class LightGCN(GeneralRecommender):
         return scores
 
 
-
     def fair_topk(self,
                 scores1d: torch.Tensor,
                 protected1d: torch.Tensor,

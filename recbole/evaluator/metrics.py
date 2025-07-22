@@ -151,26 +151,27 @@ class SAE_Loss(AbstractMetric):
         return {"sae_loss": float(loss)}
 
 class SAE_Loss_i(SAE_Loss):
-    metric_need = ['SAE_Loss_i']
+    metric_need = ['SAE_Loss_i', 'data.num_items']
 
     def calculate_metric(self, dataobject):
         loss = dataobject.get('SAE_Loss_i')
-        return {"sae_loss_i": float(loss)}
+        return {"sae_loss_i": float(loss) / dataobject.get('data.num_items') }
 
 class SAE_Loss_u(SAE_Loss):
-    metric_need = ['SAE_Loss_u']
-
+    metric_need = ['SAE_Loss_u', 'data.num_users']
     def calculate_metric(self, dataobject):
         loss = dataobject.get('SAE_Loss_u')
-        return {"sae_loss_u": float(loss)}
+        return {"sae_loss_u": float(loss) / dataobject.get('data.num_users') }
     
 class SAE_Loss_total(SAE_Loss):
-    metric_need = ['SAE_Loss_u', 'SAE_Loss_i']
+    metric_need = ['SAE_Loss_u', 'SAE_Loss_i', 'data.num_users', 'data.num_items']
 
     def calculate_metric(self, dataobject):
         loss_i = dataobject.get('SAE_Loss_i')
         loss_u = dataobject.get('SAE_Loss_u')
-        return {"sae_loss_total": float(loss_i + loss_u)}
+        c_u = dataobject.get('data.num_users')
+        c_i = dataobject.get('data.num_items')
+        return {"sae_loss_total": float(loss_i / c_i + loss_u /c_u )}
 
 
 

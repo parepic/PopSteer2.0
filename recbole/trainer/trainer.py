@@ -442,6 +442,7 @@ class Trainer(AbstractTrainer):
         saved=True,
         show_progress=False,
         callback_fn=None,
+        sae_file=None
     ):
         r"""Train the model based on the train data and the valid data.
 
@@ -458,6 +459,16 @@ class Trainer(AbstractTrainer):
         Returns:
              (float, dict): best valid score and best valid result. If valid_data is None, it returns (-1, None)
         """
+
+        if sae_file:
+            checkpoint = torch.load(sae_file, weights_only=False, map_location=self.device)
+            self.model.load_state_dict(checkpoint["state_dict"])
+            self.model.load_other_parameter(checkpoint.get("other_parameter"))
+            message_output = "sLoading model structure and parameters from {}".format(
+                sae_file
+            )
+            self.logger.info(message_output)
+
         if saved and self.start_epoch >= self.epochs:
             self._save_checkpoint(-1, verbose=verbose)
 
@@ -1034,7 +1045,7 @@ class DecisionTreeTrainer(AbstractTrainer):
 
     def fit(
         self, train_data, valid_data=None, verbose=True, saved=True, show_progress=False
-    ):
+    ): 
         for epoch_idx in range(self.epochs):
             self._train_at_once(train_data, valid_data)
 

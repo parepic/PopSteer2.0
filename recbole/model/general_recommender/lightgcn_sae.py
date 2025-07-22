@@ -77,9 +77,6 @@ class LightGCN_SAE(LightGCN):
 		return u_emb_sae, i_emb_sae
 	
 	def calculate_loss(self, interaction):
-		if self.val_fvu_i.item() != 0:
-			self.val_fvu_i = torch.tensor(0.0, device=self.device)
-			self.val_fvu_u = torch.tensor(0.0, device=self.device)
 		if self.restore_user_e is not None or self.restore_item_e is not None:
 			self.restore_user_e, self.restore_item_e = None, None
 		

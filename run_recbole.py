@@ -32,7 +32,7 @@ if __name__ == "__main__":
     # run_recbole(model='SASRec', dataset='ml-100k', config_dict=parameter_dict)
     # exit()
     # create_item_popularity_csv("ml-1m", 0.2)
-    # plot_ndcg_vs_fairness(dataset="lastfm")
+    # plot_ndcg_vs_fairness(dataset="ml-1mm")
     # exit()
     parser = argparse.ArgumentParser()
     parser.add_argument("--model", "-m", type=str, default="BPR", help="name of models")
@@ -99,14 +99,17 @@ if __name__ == "__main__":
     if args.train == True:
         if args.config_json is None:
             config_dict = {
-                "base_path": "./saved/lastfm.pth",
-                "sae_scale_size": [16, 16],
-                "sae_k": [8, 8],
+                "base_path": "./saved/yelp2018.pth",
+                "load": "./saved/yelp2018-32-32.pth",
+                "sae_scale_size": [32, 32],
+                "sae_k": [32, 32],
                 "learning_rate": 1e-3,
                 "alpha": [1.0, 1.0],
                 "steer": [0, 0],
-                "analyze": False
+                "analyze": False,
+                "metrics": ["Recall","MRR","NDCG","Hit","SAE_Loss_i", "SAE_Loss_u", "SAE_Loss_total", "Deep_LT_Coverage", "GiniIndex", "AveragePopularity", "ItemCoverage"]        
             }
+
         run(
             args.model,
             args.dataset,
@@ -123,8 +126,8 @@ if __name__ == "__main__":
     elif args.test == True:
         if args.config_json is None:
             config_dict = {
-                "alpha": [1.5, 0.5],
-                "steer": [1, 0],
+                "alpha": [1.5, 1.5],
+                "steer": [0, 1],
                 "analyze": True,
                 "tail_ratio": 0.2,
                 "metrics": ["Recall","MRR","NDCG","Hit", "Deep_LT_Coverage", "GiniIndex", "AveragePopularity", "ItemCoverage"]        
@@ -135,6 +138,8 @@ if __name__ == "__main__":
         )
         if args.fair:
             model.fair = True
+            model.a1 = 0.9
+            model.a2 = 0.1
         trainer = get_trainer(config["MODEL_TYPE"], config["model"])(config, model)
         trainer.eval_collector.data_collect(train_data)
 

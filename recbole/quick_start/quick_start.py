@@ -118,6 +118,10 @@ def run_recbole(
         config_file_list=config_file_list,
         config_dict=config_dict,
     )
+    file = None
+    if "load" in config_dict:
+        file = config_dict["load"]
+        del config_dict["load"]
     init_seed(config["seed"], config["reproducibility"])
     # logger initialization
     init_logger(config)
@@ -146,7 +150,7 @@ def run_recbole(
 
     # model training
     best_valid_score, best_valid_result = trainer.fit(
-        train_data, valid_data, saved=saved, show_progress=config["show_progress"]
+        train_data, valid_data, saved=saved, show_progress=config["show_progress"], sae_file=file
     )
 
     # model evaluation
@@ -270,6 +274,7 @@ def load_data_and_model(model_file, device='cpu', dict=None):
     init_seed(config["seed"], config["reproducibility"])
     # config["metrics"] = ["Recall", "MRR", "NDCG", "Hit", "Precision", "Gini", "Deep_LT_Coverage"]
     # config['base_path'] = './saved/zorduda.pth'
+    config["show_proggress"] = False
     model = get_model(config["model"])(config, train_data._dataset).to(config["device"])
     model.load_state_dict(checkpoint["state_dict"])
     # model.load_other_parameter(checkpoint.get("other_parameter"))
