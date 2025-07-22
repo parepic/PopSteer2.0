@@ -793,8 +793,8 @@ def plot_ndcg_vs_fairness(show=True, dataset=None, add_lightgcn=True):
     if dataset is None:
         raise ValueError("Please provide dataset name (e.g. dataset='lastfm').")
 
-    user_file = rf"dataset/{dataset}/results/PopSteer_{dataset}_user-side.csv"
-    item_file = rf"dataset/{dataset}/results/PopSteer_{dataset}_item-side.csv"
+    user_file = rf"dataset/{dataset}/results/PopSteer_{dataset}_user.csv"
+    item_file = rf"dataset/{dataset}/results/PopSteer_{dataset}_item.csv"
     full_file = rf"dataset/{dataset}/results/PopSteer_{dataset}_full.csv"
     fair_file = rf"dataset/{dataset}/results/FAIR_{dataset}.csv"
 
@@ -811,6 +811,8 @@ def plot_ndcg_vs_fairness(show=True, dataset=None, add_lightgcn=True):
                         "dltc@10": float(row["dltc@10"]),
                         "avgpop@10": float(row["avgpop@10"]),
                         "gini@10": float(row["gini@10"]),
+                        "cov@10": float(row["cov@10"]),
+
                     })
                 except (KeyError, ValueError):
                     # Skip malformed / incomplete rows
@@ -828,15 +830,28 @@ def plot_ndcg_vs_fairness(show=True, dataset=None, add_lightgcn=True):
         "dltc@10": 0.9068,
         "avgpop@10": 91.7490,
         "gini@10": 0.7053,
+        "cov@10": 0.8051,
     }
+
+    lightgcn_point_ml_1m = {
+        "ndcg": 0.2190,
+        "dltc@10": 0.2508,
+        "avgpop@10": 1101.8943,
+        "gini@10": 0.8696,
+        "cov@10": 0.5236,
+    }
+
     lightgcn_point = None
     if dataset.lower() == "lastfm":
         lightgcn_point = lightgcn_point_lastfm
+    if dataset.lower() == "ml-1mm":
+        lightgcn_point = lightgcn_point_ml_1m
 
     fairness_metrics = [
         ("dltc@10", "Deep LT Coverage @10"),
         ("avgpop@10", "Average Popularity @10"),
         ("gini@10", "Gini Index @10"),
+        ("cov@10", "Coverage @10"),
     ]
 
     figs = {}

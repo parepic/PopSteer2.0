@@ -3,6 +3,7 @@ from recbole.utils import (
     get_trainer,
 )
 import csv
+import torch
 
 
 def tune(args):
@@ -16,8 +17,9 @@ def tune(args):
             "steer": [0, 1],
             "analyze": True,
             "tail_ratio": 0.2,
-            "metrics": ["Recall","MRR","NDCG","Hit","Precision","SAE_Loss_i", "SAE_Loss_u", "SAE_Loss_total", "Gini", "Deep_LT_Coverage", "GiniIndex", "TailPercentage", "AveragePopularity", "ShannonEntropy"]        
+            "metrics": ["Recall","MRR","NDCG","Hit","Precision","SAE_Loss_i", "SAE_Loss_u", "SAE_Loss_total", "Gini", "Deep_LT_Coverage", "GiniIndex", "TailPercentage", "AveragePopularity", "ItemCoverage"]        
             }
+    
     config, model, dataset, train_data, valid_data, test_data = load_data_and_model(
         model_file=args.path, dict=config_dict
     )
@@ -25,9 +27,8 @@ def tune(args):
     trainer.eval_collector.data_collect(train_data)
     # change2 = [0.0, 0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2.0]
     # change1 = [0.0]
-
+    change2 = [0.0, 0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2.0, 2.25, 2.5, 2.75, 3.0]
     change1 = [0.0]
-    change2 = [0.0, 0.5, 1, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0]
 
     # change2 = [0.0, 0.5, 1, 1.5, 2.0, 2.5, 3.0]
 
@@ -40,7 +41,7 @@ def tune(args):
         'deep_lt_coverage@10',
         'giniindex@10',
         'averagepopularity@10',
-        'shannonentropy@10'
+        'itemcoverage@10'
     ]
 
     SHORT_NAMES = {
@@ -50,12 +51,13 @@ def tune(args):
         'deep_lt_coverage@10': 'DLTC@10',
         'giniindex@10': 'GINI@10',
         'averagepopularity@10': 'AVGPOP@10',
-        'shannonentropy@10': 'SHANNON@10'
+        'itemcoverage@10': 'COV@10'
     }
 
     rows_raw = []
     for a_i in change1:
         for a_u in change2:
+            trainer.model.recommendation_count = torch.zeros(trainer.model.n_items, dtype=torch.long, device=trainer.device)
             trainer.model.sae_module_i.alpha = a_i
             trainer.model.sae_module_u.alpha = a_u
             test_result = trainer.evaluate(
@@ -122,8 +124,8 @@ def tune(args):
         print(line)
 
     # --- Write selected results to CSV (with separate alphas) --
-    csv_path = rf'./dataset/{config["dataset"]}/results/PopSteer_{config["dataset"]}_user-side.csv'
-    fieldnames = ["alpha_u", "alpha_i", "ndcg", "dltc@10", "avgpop@10", "gini@10"]
+    csv_path = rf'./dataset/{config["dataset"]}/results/PopSteer_{config["dataset"]}_user.csv'
+    fieldnames = ["alpha_u", "alpha_i", "ndcg", "dltc@10", "avgpop@10", "gini@10", "cov@10"]
 
     with open(csv_path, mode="w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=fieldnames)
@@ -136,22 +138,24 @@ def tune(args):
                 "dltc@10": r["deep_lt_coverage@10"],
                 "avgpop@10": r["averagepopularity@10"],
                 "gini@10": r["giniindex@10"],
+                "cov@10": r["itemcoverage@10"],
+
             })
 
     return rows_raw, formatted_rows
-
 
 
 def tune_FAIR(args):
     if args.config_json is None:
         config_dict = {
             "alpha": [0.5, 0.5],
-            "metrics": ["Recall","MRR","NDCG","Hit","Precision", "Gini", "Deep_LT_Coverage", "GiniIndex", "TailPercentage", "AveragePopularity", "ShannonEntropy"]        
+            "metrics": ["Recall","MRR","NDCG","Hit","Precision", "Gini", "Deep_LT_Coverage", "GiniIndex", "TailPercentage", "AveragePopularity", "ItemCoverage" ]        
             }
     
     config, model, dataset, train_data, valid_data, test_data = load_data_and_model(
         model_file=args.path, dict=config_dict
     )
+
     model.fair = True
     trainer = get_trainer(config["MODEL_TYPE"], config["model"])(config, model)
     trainer.eval_collector.data_collect(train_data)
@@ -170,7 +174,7 @@ def tune_FAIR(args):
         'deep_lt_coverage@10',
         'giniindex@10',
         'averagepopularity@10',
-        'shannonentropy@10'
+        'itemcoverage@10'
     ]
 
     SHORT_NAMES = {
@@ -180,12 +184,13 @@ def tune_FAIR(args):
         'deep_lt_coverage@10': 'DLTC@10',
         'giniindex@10': 'GINI@10',
         'averagepopularity@10': 'AVGPOP@10',
-        'shannonentropy@10': 'SHANNON@10'
+        'itemcoverage@10': 'COV@10'
     }
 
     rows_raw = []
     for a_u in change1:
         for a_i in change2:
+            trainer.model.recommendation_count = torch.zeros(trainer.model.n_items, dtype=torch.long, device=trainer.device)
             trainer.model.a1 = a_u
             trainer.model.a2 = a_i
             test_result = trainer.evaluate(
@@ -253,7 +258,7 @@ def tune_FAIR(args):
 
     # --- Write selected results to CSV (with separate alphas) ---
     csv_path = rf'./dataset/{config["dataset"]}/results/FAIR_{config["dataset"]}.csv'
-    fieldnames = ["alpha_u", "alpha_i", "ndcg", "dltc@10", "avgpop@10", "gini@10"]
+    fieldnames = ["alpha_u", "alpha_i", "ndcg", "dltc@10", "avgpop@10", "gini@10", "cov@10"]
 
     with open(csv_path, mode="w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=fieldnames)
@@ -266,6 +271,8 @@ def tune_FAIR(args):
                 "dltc@10": r["deep_lt_coverage@10"],
                 "avgpop@10": r["averagepopularity@10"],
                 "gini@10": r["giniindex@10"],
+                "cov@10": r["itemcoverage@10"],
+
             })
 
     return rows_raw, formatted_rows

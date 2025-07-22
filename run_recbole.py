@@ -24,7 +24,7 @@ from recbole.data import create_item_popularity_csv
 
 
 if __name__ == "__main__":
-    # remove_sparse_users_items(20, "yelp2018")
+    # remove_sparse_users_items(10, "goodreads")
     # exit()
     # parameter_dict = {
     # 'train_neg_samplze_args': None,
@@ -127,7 +127,7 @@ if __name__ == "__main__":
                 "steer": [0, 0],
                 "analyze": True,
                 "tail_ratio": 0.2,
-                "metrics": ["Recall","MRR","NDCG","Hit","Precision", "Gini", "Deep_LT_Coverage", "GiniIndex", "TailPercentage", "AveragePopularity", "ShannonEntropy"]        
+                "metrics": ["Recall","MRR","NDCG","Hit","Precision", "Gini", "Deep_LT_Coverage", "GiniIndex", "TailPercentage", "AveragePopularity", "ItemCoverage"]        
             }
         config, model, dataset, train_data, valid_data, test_data = load_data_and_model(
             model_file=args.path, dict=config_dict
@@ -150,7 +150,7 @@ if __name__ == "__main__":
             'giniindex@10',
             'averagepopularity@10',
             'tailpercentage@10',
-            'shannonentropy@10'
+            'itemcoverage@10'
         ]
 
         max_key_len = max(len(k) for k in keys)

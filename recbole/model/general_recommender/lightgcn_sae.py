@@ -80,7 +80,6 @@ class LightGCN_SAE(LightGCN):
 		if self.val_fvu_i.item() != 0:
 			self.val_fvu_i = torch.tensor(0.0, device=self.device)
 			self.val_fvu_u = torch.tensor(0.0, device=self.device)
-			self.recommendation_count = torch.zeros(self.n_items, dtype=torch.long, device=self.device)
 		if self.restore_user_e is not None or self.restore_item_e is not None:
 			self.restore_user_e, self.restore_item_e = None, None
 		
@@ -88,7 +87,7 @@ class LightGCN_SAE(LightGCN):
 		sae_loss_i = self.sae_module_i.fvu + self.sae_module_i.auxk_loss / 2
 		sae_loss_u = self.sae_module_u.fvu + self.sae_module_u.auxk_loss / 2
 		
-		return sae_loss_i +sae_loss_u
+		return sae_loss_i + sae_loss_u
 
 	def full_sort_predict(self, interaction):
 		user = interaction[self.USER_ID]

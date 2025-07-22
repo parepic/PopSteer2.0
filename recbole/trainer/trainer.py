@@ -316,6 +316,7 @@ class Trainer(AbstractTrainer):
             valid_data, load_best_model=False, show_progress=show_progress
         )
         valid_score = calculate_valid_score(valid_result, self.valid_metric)
+        self.model.recommendation_count = torch.zeros(self.model.n_items, dtype=torch.long, device=self.device)
         return valid_score, valid_result
 
     def _save_checkpoint(self, epoch, verbose=True, **kwargs):

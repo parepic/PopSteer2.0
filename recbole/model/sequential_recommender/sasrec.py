@@ -51,6 +51,7 @@ class SASRec(SequentialRecommender):
         self.initializer_range = config["initializer_range"]
         self.loss_type = config["loss_type"]
         self.dataset = config["dataset"]
+        self.recommendation_count = torch.zeros(self.n_items, dtype=torch.long, device=self.device)
 
         # define layers and loss
         self.item_embedding = nn.Embedding(
@@ -119,6 +120,8 @@ class SASRec(SequentialRecommender):
         item_seq_len = interaction[self.ITEM_SEQ_LEN]
         seq_output = self.forward(item_seq, item_seq_len)
         pos_items = interaction[self.POS_ITEM_ID]
+        # if self.val_fvu_i.item() != 0:
+
         if self.loss_type == "BPR":
             neg_items = interaction[self.NEG_ITEM_ID]
             pos_items_emb = self.item_embedding(pos_items)
