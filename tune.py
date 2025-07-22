@@ -14,10 +14,10 @@ def tune(args):
     if args.config_json is None:
         config_dict = {
             "alpha": [0, 0],
-            "steer": [0, 1],
+            "steer": [1, 1],
             "analyze": True,
             "tail_ratio": 0.2,
-            "metrics": ["Recall","MRR","NDCG","Hit","Precision","SAE_Loss_i", "SAE_Loss_u", "SAE_Loss_total", "Gini", "Deep_LT_Coverage", "GiniIndex", "TailPercentage", "AveragePopularity", "ItemCoverage"]        
+            "metrics": ["Recall","MRR","NDCG","Hit","SAE_Loss_i", "SAE_Loss_u", "SAE_Loss_total", "Deep_LT_Coverage", "GiniIndex", "AveragePopularity", "ItemCoverage"]        
             }
     
     config, model, dataset, train_data, valid_data, test_data = load_data_and_model(
@@ -27,8 +27,8 @@ def tune(args):
     trainer.eval_collector.data_collect(train_data)
     # change2 = [0.0, 0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2.0]
     # change1 = [0.0]
-    change2 = [0.0, 0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2.0, 2.25, 2.5, 2.75, 3.0]
-    change1 = [0.0]
+    change1 = [0.5, 1, 1.5, 2.0]
+    change2 = [0.5, 1, 1.5, 2.0]
 
     # change2 = [0.0, 0.5, 1, 1.5, 2.0, 2.5, 3.0]
 
@@ -124,7 +124,7 @@ def tune(args):
         print(line)
 
     # --- Write selected results to CSV (with separate alphas) --
-    csv_path = rf'./dataset/{config["dataset"]}/results/PopSteer_{config["dataset"]}_user.csv'
+    csv_path = rf'./dataset/{config["dataset"]}/results/PopSteer_{config["dataset"]}_full.csv'
     fieldnames = ["alpha_u", "alpha_i", "ndcg", "dltc@10", "avgpop@10", "gini@10", "cov@10"]
 
     with open(csv_path, mode="w", newline="", encoding="utf-8") as f:
@@ -149,7 +149,7 @@ def tune_FAIR(args):
     if args.config_json is None:
         config_dict = {
             "alpha": [0.5, 0.5],
-            "metrics": ["Recall","MRR","NDCG","Hit","Precision", "Gini", "Deep_LT_Coverage", "GiniIndex", "TailPercentage", "AveragePopularity", "ItemCoverage" ]        
+            "metrics": ["Recall","MRR","NDCG","Hit", "Deep_LT_Coverage", "GiniIndex", "AveragePopularity", "ItemCoverage" ]        
             }
     
     config, model, dataset, train_data, valid_data, test_data = load_data_and_model(

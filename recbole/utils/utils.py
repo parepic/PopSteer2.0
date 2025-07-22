@@ -827,7 +827,7 @@ def plot_ndcg_vs_fairness(show=True, dataset=None, add_lightgcn=True):
     # LightGCN reference metrics (single point). Add other dataset baselines if needed.
     lightgcn_point_lastfm = {
         "ndcg": 0.8289,
-        "dltc@10": 0.9068,
+        "dltc@10": 0.7291,
         "avgpop@10": 91.7490,
         "gini@10": 0.7053,
         "cov@10": 0.8051,

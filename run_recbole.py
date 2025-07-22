@@ -123,12 +123,13 @@ if __name__ == "__main__":
     elif args.test == True:
         if args.config_json is None:
             config_dict = {
-                "alpha": [0.5, 0.5],
-                "steer": [0, 0],
+                "alpha": [1.5, 0.5],
+                "steer": [1, 0],
                 "analyze": True,
                 "tail_ratio": 0.2,
-                "metrics": ["Recall","MRR","NDCG","Hit","Precision", "Gini", "Deep_LT_Coverage", "GiniIndex", "TailPercentage", "AveragePopularity", "ItemCoverage"]        
+                "metrics": ["Recall","MRR","NDCG","Hit", "Deep_LT_Coverage", "GiniIndex", "AveragePopularity", "ItemCoverage"]        
             }
+
         config, model, dataset, train_data, valid_data, test_data = load_data_and_model(
             model_file=args.path, dict=config_dict
         )
@@ -149,7 +150,6 @@ if __name__ == "__main__":
             'deep_lt_coverage@10',
             'giniindex@10',
             'averagepopularity@10',
-            'tailpercentage@10',
             'itemcoverage@10'
         ]
 

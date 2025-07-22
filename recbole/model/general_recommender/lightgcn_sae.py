@@ -100,11 +100,7 @@ class LightGCN_SAE(LightGCN):
 		u_embeddings = self.restore_user_e[user]
 
 		scores = torch.matmul(u_embeddings, self.restore_item_e.transpose(0, 1))
-		top_recs = torch.argsort(scores, dim=1, descending=True)[:, :10]
 		scores[:, 0] =  float("-inf")
-		for key in top_recs.flatten():
-			self.recommendation_count[key] += 1
-		
 		self.val_fvu_i += (self.sae_module_i.fvu)
 		self.val_fvu_u += (self.sae_module_u.fvu)
 		return scores.view(-1)
@@ -115,10 +111,7 @@ class LightGCN_SAE(LightGCN):
 			self.restore_user_e, self.restore_item_e = self.forward(train_mode=False)
 		u_embeddings = self.restore_user_e[user]
 		scores = torch.matmul(u_embeddings, self.restore_item_e.transpose(0, 1))
-		top_recs = torch.argsort(scores, dim=1, descending=True)[:, :10]
 		scores[:, 0] =  float("-inf")
-		for key in top_recs.flatten():
-			self.recommendation_count[key] += 1
 		self.val_fvu += (self.sae_module_i.fvu + self.sae_module_u.fvu)
 		return scores.view(-1)
 
