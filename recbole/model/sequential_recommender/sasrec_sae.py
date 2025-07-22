@@ -41,7 +41,7 @@ class SASRec_SAE(SASRec):
         position_embedding = self.position_embedding(position_ids)
 
 		# Reconstruct the embedding weights using SAE
-        reconstructed_weights = self.sae_module_i(self.item_embedding.weight)
+        reconstructed_weights = self.sae_module_i(self.item_embedding.weight, train_mode=True)
         # Use reconstructed weights for embedding lookup
         item_emb = torch.nn.functional.embedding(item_seq, reconstructed_weights, padding_idx=0)
 
@@ -336,6 +336,7 @@ class SAE(nn.Module):
 			sae_in = x - self.b_dec
 			pre_acts1 = self.encoder(sae_in)
 			self.last_activations = pre_acts1
+
 			# if self.steer == True and self.N != 0:
 			# 	pre_acts1 = self.dampen_neurons(pre_acts1, dataset=self.dataset)
 			# pre_acts = self.add_noise(pre_acts, std=self.beta)
