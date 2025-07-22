@@ -126,7 +126,7 @@ if __name__ == "__main__":
         if args.config_json is None:
             config_dict = {
                 "alpha": [1.5, 1.5],
-                "steer": [0, 1],
+                "steer": [0, 0],
                 "analyze": True,
                 "tail_ratio": 0.2,
                 "metrics": ["Recall","MRR","NDCG","Hit", "Deep_LT_Coverage", "GiniIndex", "AveragePopularity", "ItemCoverage"]        

@@ -42,7 +42,7 @@ class SASRec_SAE(SASRec):
 
         item_emb = self.item_embedding(item_seq)
         item_emb_sae = self.sae_module_i(item_emb, train_mode=train_mode)
-        input_emb = item_emb_sae + position_embedding
+        input_emb = item_emb + position_embedding
         input_emb = self.LayerNorm(input_emb)
         input_emb = self.dropout(input_emb)
 
