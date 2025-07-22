@@ -41,8 +41,7 @@ class SASRec_SAE(SASRec):
         position_embedding = self.position_embedding(position_ids)
         reconstructed_weights = self.sae_module_i(self.item_embedding.weight, train_mode=True)
         item_emb = self.item_embedding(item_seq)
-        item_emb_sae = self.sae_module_i(item_emb, train_mode=train_mode)
-        input_emb = item_emb_sae + position_embedding
+        input_emb = item_emb + position_embedding
         input_emb = self.LayerNorm(input_emb)
         input_emb = self.dropout(input_emb)
 
