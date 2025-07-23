@@ -46,7 +46,9 @@ from recbole.utils import (
     set_color,
     get_gpu_usage,
     WandbLogger,
-    plot_tensor_sorted_by_popularity
+    plot_tensor_sorted_by_popularity,
+    save_cohens_d,
+    save_mean_SD
 )
 from torch.nn.parallel import DistributedDataParallel
 
@@ -158,8 +160,6 @@ class Trainer(AbstractTrainer):
         self.saved_model_file = os.path.join(self.checkpoint_dir, saved_model_file)
         self.weight_decay = config["weight_decay"]
         self.dataset = config["dataset"]
-
-
         self.start_epoch = 0
         self.cur_step = 0
         self.best_valid_score = -np.inf if self.valid_metric_bigger else np.inf
@@ -709,6 +709,70 @@ class Trainer(AbstractTrainer):
                 result = result.unsqueeze(0)
             result_list.append(result)
         return torch.cat(result_list, dim=0)
+
+
+
+    @torch.no_grad()
+    def analyze_neurons(
+        self, data, model_file=None, show_progress=True, eval_data=True, sae=True
+    ):
+        r"""Evaluate the model based on the eval data.
+
+        Args:
+            eval_data (DataLoader): the eval data
+            load_best_model (bool, optional): whether load the best model in the training process, default: True.
+                                              It should be set True, if users want to test the model after training.
+            model_file (str, optional): the saved model file, default: None. If users want to test the previously
+                                        trained model file, they can set this parameter.
+            show_progress (bool): Show the progress of evaluate epoch. Defaults to ``False``.
+
+        Returns:
+            collections.OrderedDict: eval result, key is the eval metric and value in the corresponding metric value.
+        """
+        
+        checkpoint_file = model_file
+        checkpoint = torch.load(checkpoint_file, map_location=self.device, weights_only=False)
+        self.model.load_state_dict(checkpoint["state_dict"])
+        self.model.load_other_parameter(checkpoint.get("other_parameter"))
+        self.device = torch.device(self.device)
+        message_output = "Loading model structure and parameters from {}".format(
+            checkpoint_file
+        )
+        self.logger.info(message_output)
+        self.model.create_synthetic_dataset()
+        self.model.eval()
+        iter_data = (
+            tqdm(
+                data,
+                total=len(data),
+                ncols=100,
+            )
+            if show_progress
+            else data
+        )
+        for batch_idx, batched_data in enumerate(iter_data):
+            if eval_data:
+                interaction, history_index, positive_u, positive_i = batched_data
+            else:
+                interaction = batched_data
+            interaction = interaction.to(self.device)
+            self.optimizer.zero_grad()
+            with torch.autocast(device_type=self.device.type, enabled=self.enable_amp):
+                self.model.full_sort_predict(interaction, popular=True)
+                self.model.full_sort_predict(interaction, popular=False)
+        save_mean_SD(self.dataset, popular=True)
+        save_mean_SD(self.dataset, popular=False)
+        save_cohens_d(self.dataset)
+        if os.path.exists(rf"./dataset/{self.dataset}/neuron_activations_sasrecsae_final_pop.h5"):
+            os.remove(rf"./dataset/{self.dataset}/neuron_activations_sasrecsae_final_pop.h5")
+        if os.path.exists(rf"./dataset/{self.dataset}/neuron_activations_sasrecsae_final_unpop.h5"):
+            os.remove(rf"./dataset/{self.dataset}/neuron_activations_sasrecsae_final_unpop.h5")
+
+
+
+
+
+
 
 
 class KGTrainer(Trainer):
@@ -1516,32 +1580,3 @@ class NCLTrainer(Trainer):
             scaler.update()
         return total_loss
 
-
-    @torch.no_grad()
-    def analyze_neurons(
-        self, data, show_progress=True, eval_data=False):        
-        self.model.eval()
-        iter_data = (
-            tqdm(
-                data,
-                total=len(data),
-                ncols=100,
-            )
-            if show_progress
-            else data
-        )
-        for batch_idx, batched_data in enumerate(iter_data):
-            if eval_data:
-                interaction, history_index, positive_u, positive_i = batched_data
-            else:
-                interaction = batched_data
-            interaction = interaction.to(self.device)
-            # Update the maximum value
-            self.optimizer.zero_grad()
-            with torch.autocast(device_type=self.device.type, enabled=self.enable_amp):
-                self.model.full_sort_predict(interaction, dataset=self.dataset, popular=True)
-                self.model.full_sort_predict(interaction, dataset=self.dataset, popular=False)
-
-        ending = '_eval' if eval_data else ''
-        # self.model.sae_module.save_highest_activations()
-    

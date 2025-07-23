@@ -17,7 +17,13 @@ from recbole.utils.utils import (
     plot_tensor_sorted_by_popularity,
     compute_weighted_neuron_stats_by_row_item,
     plot_ndcg_vs_fairness,
-    remove_sparse_users_items
+    remove_sparse_users_items,
+    create_pop_unpop_mappings,
+    replace_with_mappings,
+    save_batch_activations,
+    save_cohens_d,
+    save_mean_SD
+
 )
 from recbole.utils.enum_type import *
 from recbole.utils.argument_list import *
@@ -55,5 +61,10 @@ __all__ = [
     "plot_tensor_sorted_by_popularity",
     "compute_weighted_neuron_stats_by_row_item",
     "plot_ndcg_vs_fairness",
-    "remove_sparse_users_items"
+    "remove_sparse_users_items",
+    "create_pop_unpop_mappings",
+    "replace_with_mappings",
+    "save_batch_activations",
+    "save_mean_SD",
+    "save_cohens_d"
 ]

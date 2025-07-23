@@ -14,7 +14,7 @@ def tune(args):
     if args.config_json is None:
         config_dict = {
             "alpha": [0, 0],
-            "steer": [0, 1],
+            "steer": [1, 0],
             "analyze": True,
             "tail_ratio": 0.2,
             "sae_mode": "test",
@@ -26,8 +26,8 @@ def tune(args):
     )
     trainer = get_trainer(config["MODEL_TYPE"], config["model"])(config, model)
     trainer.eval_collector.data_collect(train_data)
-    change2 = [0.0, 0.5, 1, 1.5,  2.0]
-    change1 = [0.0]
+    change1 = [0.0, 0.5, 1, 1.5,  2.0, 2.5, 3.0, 3.5, 4.0, 4.5]
+    change2 = [0.0]
     # change1 = [0.5, 1, 1.5, 2.0]
     # change2 = [0.5, 1, 1.5, 2.0]
 
@@ -133,7 +133,7 @@ def tune(args):
         print(line)
 
     # --- Write selected results to CSV (with separate alphas) --
-    csv_path = rf'./dataset/{config["dataset"]}/results/PopSteer_{config["dataset"]}_user.csv'
+    csv_path = rf'./dataset/{config["dataset"]}/results/PopSteer_{config["dataset"]}SASRec_SAE_item.csv'
     fieldnames = ["alpha_u", "alpha_i", "ndcg", "dltc@10", "avgpop@10", "gini@10", "cov@10"]
 
     with open(csv_path, mode="w", newline="", encoding="utf-8") as f:
@@ -266,7 +266,7 @@ def tune_FAIR(args):
         print(line)
 
     # --- Write selected results to CSV (with separate alphas) ---
-    csv_path = rf'./dataset/{config["dataset"]}/results/FAIR_{config["dataset"]}.csv'
+    csv_path = rf'./dataset/{config["dataset"]}/results/SASREC_FAIR_{config["dataset"]}.csv'
     fieldnames = ["alpha_u", "alpha_i", "ndcg", "dltc@10", "avgpop@10", "gini@10", "cov@10"]
 
     with open(csv_path, mode="w", newline="", encoding="utf-8") as f:
@@ -281,7 +281,6 @@ def tune_FAIR(args):
                 "avgpop@10": r["averagepopularity@10"],
                 "gini@10": r["giniindex@10"],
                 "cov@10": r["itemcoverage@10"],
-
             })
 
     return rows_raw, formatted_rows

@@ -18,6 +18,7 @@ import importlib
 import os
 import random
 import pandas as pd
+import h5py
 
 import numpy as np
 import torch
@@ -793,10 +794,14 @@ def plot_ndcg_vs_fairness(show=True, dataset=None, add_lightgcn=True):
     if dataset is None:
         raise ValueError("Please provide dataset name (e.g. dataset='lastfm').")
 
-    user_file = rf"dataset/{dataset}/results/PopSteer_{dataset}_user.csv"
-    item_file = rf"dataset/{dataset}/results/PopSteer_{dataset}_item.csv"
-    full_file = rf"dataset/{dataset}/results/PopSteer_{dataset}_full.csv"
-    fair_file = rf"dataset/{dataset}/results/FAIR_{dataset}.csv"
+    # user_file = rf"dataset/{dataset}/results/PopSteer_{dataset}_user.csv"
+    # item_file = rf"dataset/{dataset}/results/PopSteer_{dataset}_item.csv"
+    # full_file = rf"dataset/{dataset}/results/PopSteer_{dataset}_full.csv"
+    # fair_file = rf"dataset/{dataset}/results/FAIR_{dataset}.csv"
+    user_file = rf"dataset/{dataset}/results/PopSteer_{dataset}SASRec_SAE_user.csv"
+    item_file = rf"dataset/{dataset}/results/PopSteer_{dataset}SASRec_SAE_item.csv"
+    full_file = rf"dataset/{dataset}/results/PopSteer_{dataset}SASRec_SAE_full.csv"
+    fair_file = rf"dataset/{dataset}/results/SASREC_FAIR_{dataset}.csv"
 
     def load_csv(path):
         if not os.path.isfile(path):
@@ -825,13 +830,22 @@ def plot_ndcg_vs_fairness(show=True, dataset=None, add_lightgcn=True):
     fair_rows = load_csv(fair_file)
 
     # LightGCN reference metrics (single point). Add other dataset baselines if needed.
+    # lightgcn_point_lastfm = {
+    #     "ndcg": 0.8289,
+    #     "dltc@10": 0.7291,
+    #     "avgpop@10": 91.7490,
+    #     "gini@10": 0.7053,
+    #     "cov@10": 0.8051,
+    # }
+
     lightgcn_point_lastfm = {
-        "ndcg": 0.8289,
-        "dltc@10": 0.7291,
-        "avgpop@10": 91.7490,
-        "gini@10": 0.7053,
-        "cov@10": 0.8051,
+        "ndcg": 0.6103,
+        "dltc@10": 0.7946,
+        "avgpop@10": 87.6849,
+        "gini@10": 0.6555,
+        "cov@10": 0.8461,
     }
+
 
     lightgcn_point_ml_1m = {
         "ndcg": 0.2190,
@@ -958,3 +972,272 @@ def remove_sparse_users_items(n, dataset):
     interactions.to_csv(rf"./dataset/{dataset}/{dataset}.inter.filtered", sep="\t", index=False, header=True)
 
     print(f"Filtering complete. Files saved as '{dataset}.item.filtered', '{dataset}.inter.filtered'.")
+
+
+def create_pop_unpop_mappings(dataset: str, embeddings: torch.Tensor) -> None:
+    """
+    Creates mapping CSV files for popular and unpopular item pairs based on embeddings and popularity labels.
+
+    Args:
+        embeddings (torch.Tensor): Tensor of item embeddings with shape (N, 64), where N is the number of items
+                                   and the nth row corresponds to item ID n (0 to N-1).
+        item_pop_csv (str): Path to the input CSV file containing 'item_id:token' and 'popularity_label' columns.
+        pop_mapping_csv (str): Path to save the popular mapping CSV (columns: item_id, paired_id).
+        unpop_mapping_csv (str): Path to save the unpopular mapping CSV (columns: item_id, paired_id).
+    """
+    
+    dataset_path = Path(".", "dataset", dataset)
+    item_pop_csv = dataset_path / "item_popularity_labels.csv"
+    unpop_mapping_csv = dataset_path / "unpop_mapping.csv"
+    pop_mapping_csv = dataset_path / "pop_mapping.csv"
+
+    df_items = pd.read_csv(item_pop_csv, usecols=["item_id:token", "popularity_label"])
+    df_items = df_items.dropna(subset=["popularity_label"])
+    df_items = df_items.rename(columns={"item_id:token": "item_id"})
+    df_items["item_id"] = df_items["item_id"].astype(int)
+
+    # Get N from embeddings
+    N = embeddings.shape[0]
+
+    # Extract popular and unpopular item IDs
+    popular_ids = df_items[df_items["popularity_label"] == 1]["item_id"].values
+    unpopular_ids = df_items[df_items["popularity_label"] == -1]["item_id"].values
+
+    # Create a dict for quick label lookup (default to 0 if missing)
+    label_dict = df_items.set_index("item_id")["popularity_label"].to_dict()
+
+    # Unpopular mapping
+    if len(unpopular_ids) > 0:
+        unpop_embeddings = embeddings[unpopular_ids]  # (num_unpop, 64)
+        sim_unpop = embeddings @ unpop_embeddings.T  # (N, num_unpop)
+    else:
+        sim_unpop = torch.empty((N, 0))  # Handle edge case with no unpopular items
+
+    pairs_unpop = []
+    for i in range(N):
+        label = label_dict.get(i, 0)
+        if label == -1:
+            pairs_unpop.append(i)
+        else:
+            if len(unpopular_ids) == 0:
+                pairs_unpop.append(i)  # Fallback to self if no unpopular items
+            else:
+                closest_idx = sim_unpop[i].argmax().item()
+                pairs_unpop.append(unpopular_ids[closest_idx])
+
+    df_unpop = pd.DataFrame({"item_id": range(N), "paired_id": pairs_unpop})
+    df_unpop.to_csv(unpop_mapping_csv, index=False)
+
+    # Popular mapping
+    if len(popular_ids) > 0:
+        pop_embeddings = embeddings[popular_ids]  # (num_pop, 64)
+        sim_pop = embeddings @ pop_embeddings.T  # (N, num_pop)
+    else:
+        sim_pop = torch.empty((N, 0))  # Handle edge case with no popular items
+
+    pairs_pop = []
+    for i in range(N):
+        label = label_dict.get(i, 0)
+        if label == 1:
+            pairs_pop.append(i)
+        else:
+            if len(popular_ids) == 0:
+                pairs_pop.append(i)  # Fallback to self if no popular items
+            else:
+                closest_idx = sim_pop[i].argmax().item()
+                pairs_pop.append(popular_ids[closest_idx])
+
+    df_pop = pd.DataFrame({"item_id": range(N), "paired_id": pairs_pop})
+    df_pop.to_csv(pop_mapping_csv, index=False)
+
+
+def create_pop_unpop_mappings(dataset: str, embeddings: torch.Tensor) -> None:
+    """
+    Creates mapping CSV files for popular and unpopular item pairs based on embeddings and popularity labels.
+
+    Args:
+        embeddings (torch.Tensor): Tensor of item embeddings with shape (N, 64), where N is the number of items
+                                   and the nth row corresponds to item ID n (0 to N-1).
+        item_pop_csv (str): Path to the input CSV file containing 'item_id:token' and 'popularity_label' columns.
+        pop_mapping_csv (str): Path to save the popular mapping CSV (columns: item_id, paired_id).
+        unpop_mapping_csv (str): Path to save the unpopular mapping CSV (columns: item_id, paired_id).
+    """
+    
+    dataset_path = Path(".", "dataset", dataset)
+    item_pop_csv = dataset_path / "item_popularity_labels.csv"
+    unpop_mapping_csv = dataset_path / "unpop_mapping.csv"
+    pop_mapping_csv = dataset_path / "pop_mapping.csv"
+
+    df_items = pd.read_csv(item_pop_csv, usecols=["item_id:token", "popularity_label"])
+    df_items = df_items.dropna(subset=["popularity_label"])
+    df_items = df_items.rename(columns={"item_id:token": "item_id"})
+    df_items["item_id"] = df_items["item_id"].astype(int)
+
+    # Get N from embeddings
+    N = embeddings.shape[0]
+
+    # Extract popular and unpopular item IDs
+    popular_ids = df_items[df_items["popularity_label"] == 1]["item_id"].values
+    unpopular_ids = df_items[df_items["popularity_label"] == -1]["item_id"].values
+
+    # Create a dict for quick label lookup (default to 0 if missing)
+    label_dict = df_items.set_index("item_id")["popularity_label"].to_dict()
+
+    # Unpopular mapping
+    if len(unpopular_ids) > 0:
+        unpop_embeddings = embeddings[unpopular_ids]  # (num_unpop, 64)
+        sim_unpop = embeddings @ unpop_embeddings.T  # (N, num_unpop)
+    else:
+        sim_unpop = torch.empty((N, 0))  # Handle edge case with no unpopular items
+
+    pairs_unpop = []
+    for i in range(N):
+        if i == 0:
+            pairs_unpop.append(0)
+            continue
+        label = label_dict.get(i, 0)
+        if label == -1:
+            pairs_unpop.append(i)
+        else:
+            if len(unpopular_ids) == 0:
+                pairs_unpop.append(i)  # Fallback to self if no unpopular items
+            else:
+                closest_idx = sim_unpop[i].argmax().item()
+                pairs_unpop.append(unpopular_ids[closest_idx])
+
+    df_unpop = pd.DataFrame({"item_id": range(N), "paired_id": pairs_unpop})
+    df_unpop.to_csv(unpop_mapping_csv, index=False)
+
+    # Popular mapping
+    if len(popular_ids) > 0:
+        pop_embeddings = embeddings[popular_ids]  # (num_pop, 64)
+        sim_pop = embeddings @ pop_embeddings.T  # (N, num_pop)
+    else:
+        sim_pop = torch.empty((N, 0))  # Handle edge case with no popular items
+
+    pairs_pop = []
+    for i in range(N):
+        if i == 0:
+            pairs_pop.append(0)
+            continue
+        label = label_dict.get(i, 0)
+        if label == 1:
+            pairs_pop.append(i)
+        else:
+            if len(popular_ids) == 0:
+                pairs_pop.append(i)  # Fallback to self if no popular items
+            else:
+                closest_idx = sim_pop[i].argmax().item()
+                pairs_pop.append(popular_ids[closest_idx])
+
+    df_pop = pd.DataFrame({"item_id": range(N), "paired_id": pairs_pop})
+    df_pop.to_csv(pop_mapping_csv, index=False)
+
+
+
+def replace_with_mappings(sequences: torch.Tensor, popular: bool, dataset: str) -> torch.Tensor:
+    """
+    Replaces item IDs in the input sequences tensor with their mapped paired IDs based on the popularity flag.
+
+    Args:
+        sequences (torch.Tensor): Input tensor of shape (B, M) containing item IDs (integers from 0 to N-1).
+        popular (bool): If True, use popular mapping; if False, use unpopular mapping.
+        pop_mapping_csv (str): Path to the popular mapping CSV (columns: item_id, paired_id).
+        unpop_mapping_csv (str): Path to the unpopular mapping CSV (columns: item_id, paired_id).
+
+    Returns:
+        torch.Tensor: Output tensor of shape (B, M) with replaced item IDs.
+    """
+    dataset_path = Path(".", "dataset", dataset)
+    unpop_mapping_csv = dataset_path / "unpop_mapping.csv"
+    pop_mapping_csv = dataset_path / "pop_mapping.csv"
+
+    mapping_csv = pop_mapping_csv if popular else unpop_mapping_csv
+    df_map = pd.read_csv(mapping_csv)
+    max_id = df_map['item_id'].max()
+    map_list = [0] * (max_id + 1)
+    for _, row in df_map.iterrows():
+        map_list[int(row['item_id'])] = int(row['paired_id'])
+    map_tensor = torch.tensor(map_list, dtype=torch.long, device=sequences.device)
+    result = map_tensor[sequences]
+    return result
+
+
+def save_batch_activations(bulk_data, neuron_count, dataset, popular):
+    if popular == True:
+        file_path = rf"./dataset/{dataset}/neuron_activations_sasrecsae_final_pop.h5"
+    if popular == False:
+        file_path = rf"./dataset/{dataset}/neuron_activations_sasrecsae_final_unpop.h5"
+        
+    bulk_data = bulk_data.permute(1, 0).detach().cpu().numpy()  # [neuron_count, batch_size]
+    real_batch_size = bulk_data.shape[1]  # Might be < batch_size in final step
+
+    if not os.path.exists(file_path):
+        with h5py.File(file_path, "w") as f:
+            max_shape = (neuron_count, None)
+            f.create_dataset(
+                "dataset",
+                data=bulk_data,
+                maxshape=max_shape,
+                chunks=(neuron_count, real_batch_size),
+                dtype="float32",
+            )
+    else:
+        with h5py.File(file_path, "a") as f:
+            dset = f["dataset"]
+            current_cols = dset.shape[1]
+            new_cols = current_cols + real_batch_size
+            dset.resize((neuron_count, new_cols))
+            dset[:, current_cols:new_cols] = bulk_data
+            
+
+def save_mean_SD(dataset, popular=None):
+    # Load your .h5 file
+    if popular == True:  
+        file_path = rf"./dataset/{dataset}/neuron_activations_sasrecsae_final_pop.h5"
+    elif popular == False:  
+        file_path = rf"./dataset/{dataset}/neuron_activations_sasrecsae_final_unpop.h5"
+    dataset_name = 'dataset'  # Replace with actual dataset name inside the h5 file
+
+    # Load the real indices from the filtered CSV
+    # index_csv = r"./dataset/ml-1m/nonzero_activations_sasrecsae_k48-32.csv"
+    # real_indices = pd.read_csv(index_csv, index_col=0).index.tolist()
+
+    with h5py.File(file_path, 'r') as f:
+        data = f[dataset_name][()]  # Reads full dataset into memory
+
+    # Compute mean and standard deviation for each row
+    means = np.mean(data, axis=1)
+    stds = np.std(data, axis=1)
+    # Combine into a DataFrame with the correct index
+    df = pd.DataFrame({
+        'mean': means,
+        'std': stds,
+    })
+
+    if popular == True:  
+        output_csv_path = rf"./dataset/{dataset}/user/neuron_stats_popular.csv"
+    if popular == False:  
+        output_csv_path = rf"./dataset/{dataset}/user/neuron_stats_unpopular.csv"
+    df.to_csv(output_csv_path)
+    print(f"Row-wise mean and std saved to {output_csv_path}")
+    
+    
+
+def save_cohens_d(dataset):
+    df1 = pd.read_csv(rf"./dataset/{dataset}/user/neuron_stats_popular.csv", index_col=0)
+    df2 = pd.read_csv(rf"./dataset/{dataset}/user/neuron_stats_unpopular.csv", index_col=0)
+
+    # Compute pooled standard deviation
+    s_pooled = np.sqrt((df1['std']**2 + df2['std']**2) / 2)
+
+    # Compute Cohen's d
+    cohen_d = (df1['mean'] - df2['mean']) / s_pooled
+
+    # Create result DataFrame with same index
+    df_result = pd.DataFrame({'cohen_d': cohen_d})
+
+    # Save to CSV with index column
+    df_result.to_csv(rf"./dataset/{dataset}/user/cohens_d.csv")
+
+    print("Cohen's d values saved to cohens_d.csv")

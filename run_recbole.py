@@ -32,13 +32,14 @@ if __name__ == "__main__":
     # run_recbole(model='SASRec', dataset='ml-100k', config_dict=parameter_dict)
     # exit()
     # create_item_popularity_csv("ml-1m", 0.2)
-    # plot_ndcg_vs_fairness(dataset="ml-1mm")
+    # plot_ndcg_vs_fairness(dataset="lastfm")
     # exit()
     parser = argparse.ArgumentParser()
     parser.add_argument("--model", "-m", type=str, default="BPR", help="name of models")
     parser.add_argument("--train", action="store_true", help="Whether to train model")
     parser.add_argument("--test", action="store_true", help="Whether to test model")
     parser.add_argument("--fair", action="store_true", help="Whether to use FAIR")
+    parser.add_argument("--analyze", action="store_true", help="Whether to analyze neurons")
 
     parser.add_argument("--tune", action="store_true", help="Whether to train model")
 
@@ -99,7 +100,7 @@ if __name__ == "__main__":
     if args.train == True:
         if args.config_json is None:
             config_dict = {
-                "base_path": "./saved/sasrec_lastfm.pth",
+                # "base_path": "./saved/sasrec_lastfm.pth",
                 "sae_scale_size": [64, 64],
                 "sae_k": [32, 32],
                 "learning_rate": 5e-3,
@@ -125,8 +126,8 @@ if __name__ == "__main__":
     elif args.test == True:
         if args.config_json is None:
             config_dict = {
-                "alpha": [1.5, 1.5],
-                "steer": [0, 0],
+                "alpha": [1.5, 2.0],
+                "steer": [0, 1],
                 "analyze": True,
                 "tail_ratio": 0.2,
                 "metrics": ["Recall","MRR","NDCG","Hit", "Deep_LT_Coverage", "GiniIndex", "AveragePopularity", "ItemCoverage"]        
@@ -141,7 +142,9 @@ if __name__ == "__main__":
             model.a2 = 0.1
         trainer = get_trainer(config["MODEL_TYPE"], config["model"])(config, model)
         trainer.eval_collector.data_collect(train_data)
-
+        if args.analyze:
+            trainer.analyze_neurons(train_data, model_file=args.path, eval_data=False)
+            exit()
         test_result = trainer.evaluate(
             valid_data, model_file=args.path, load_best_model = False, show_progress=config["show_progress"]
         )
