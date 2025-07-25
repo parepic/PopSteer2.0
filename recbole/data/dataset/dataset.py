@@ -1685,14 +1685,14 @@ class Dataset(torch.utils.data.Dataset):
         self._drop_unused_col()
         next_df = [self.inter_feat[index] for index in next_index]
         
-        # np.savez(
-        #     rf'./dataset/{self.dataset_name}/biased_eval_train.npz',
-        #     item_id=next_df[0]["item_id"],
-        #     user_id=next_df[0]["user_id"]
-        # )
+        np.savez(
+            rf'./dataset/{self.dataset_name}/biased_eval_train.npz',
+            item_id=next_df[0]["item_id"],
+            user_id=next_df[0]["user_id"]
+        )
 
-        # create_item_popularity_csv(self.dataset_name, p_top=0.2, p_bottom=0.2)
-        # create_user_popularity_csv(self.dataset_name, 0.6)
+        create_item_popularity_csv(self.dataset_name, p_top=0.2, p_bottom=0.2)
+        create_user_popularity_csv(self.dataset_name, 0.4)
 
         next_ds = [self.copy(_) for _ in next_df]
         return next_ds
@@ -1768,7 +1768,7 @@ class Dataset(torch.utils.data.Dataset):
         )
 
         create_item_popularity_csv(self.dataset_name, p_top=0.2, p_bottom=0.2)
-        create_user_popularity_csv(self.dataset_name, 0.6)
+        create_user_popularity_csv(self.dataset_name, 0.5)
 
 
         next_ds = [self.copy(_) for _ in next_df]

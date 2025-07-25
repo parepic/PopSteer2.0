@@ -22,7 +22,10 @@ from recbole.utils.utils import (
     replace_with_mappings,
     save_batch_activations,
     save_cohens_d,
-    save_mean_SD
+    save_mean_SD,
+    make_items_popular,
+    make_items_unpopular
+
 
 )
 from recbole.utils.enum_type import *
@@ -66,5 +69,7 @@ __all__ = [
     "replace_with_mappings",
     "save_batch_activations",
     "save_mean_SD",
-    "save_cohens_d"
+    "save_cohens_d",
+    "make_items_popular",
+    "make_items_unpopular"
 ]

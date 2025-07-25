@@ -24,7 +24,7 @@ from recbole.data import create_item_popularity_csv
 
 
 if __name__ == "__main__":
-    # remove_sparse_users_items(10, "goodreads")
+    # remove_sparse_users_items(15, "steam")
     # exit()
     # parameter_dict = {
     # 'train_neg_samplze_args': None,
@@ -32,7 +32,7 @@ if __name__ == "__main__":
     # run_recbole(model='SASRec', dataset='ml-100k', config_dict=parameter_dict)
     # exit()
     # create_item_popularity_csv("ml-1m", 0.2)
-    # plot_ndcg_vs_fairness(dataset="lastfm")
+    # plot_ndcg_vs_fairness(dataset="yelp2018")
     # exit()
     parser = argparse.ArgumentParser()
     parser.add_argument("--model", "-m", type=str, default="BPR", help="name of models")
@@ -100,15 +100,18 @@ if __name__ == "__main__":
     if args.train == True:
         if args.config_json is None:
             config_dict = {
-                # "base_path": "./saved/sasrec_lastfm.pth",
+                "base_path": "./saved/steam.pth",
                 "sae_scale_size": [64, 64],
-                "sae_k": [32, 32],
-                "learning_rate": 5e-3,
+                "sae_k": [8, 8],
+                "learning_rate": 1e-4,
                 "alpha": [1.0, 1.0],
                 "steer": [0, 0],
                 "analyze": False,
-                "metrics": ["Recall","MRR","NDCG","Hit","SAE_Loss_i", "SAE_Loss_u", "SAE_Loss_total", "Deep_LT_Coverage", "GiniIndex", "AveragePopularity", "ItemCoverage"]        
-            }
+                "metrics": ["Recall","MRR","NDCG","Hit","SAE_Loss_i", "SAE_Loss_u", "SAE_Loss_total", "Deep_LT_Coverage", "GiniIndex", "AveragePopularity", "ItemCoverage"]
+                            }
+
+
+#                "metrics": ["Recall","MRR","NDCG","Hit","SAE_Loss_i", "SAE_Loss_u", "SAE_Loss_total", "Deep_LT_Coverage", "GiniIndex", "AveragePopularity", "ItemCoverage"],        
 
         run(
             args.model,
@@ -127,7 +130,7 @@ if __name__ == "__main__":
         if args.config_json is None:
             config_dict = {
                 "alpha": [1.5, 2.0],
-                "steer": [0, 1],
+                "steer": [0, 0],
                 "analyze": True,
                 "tail_ratio": 0.2,
                 "metrics": ["Recall","MRR","NDCG","Hit", "Deep_LT_Coverage", "GiniIndex", "AveragePopularity", "ItemCoverage"]        

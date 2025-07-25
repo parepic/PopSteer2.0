@@ -772,7 +772,7 @@ import os
 import csv
 import matplotlib.pyplot as plt
 
-def plot_ndcg_vs_fairness(show=True, dataset=None, add_lightgcn=True):
+def plot_ndcg_vs_fairness(show=True, dataset=None, add_lightgcn=True, model="LightGCN"):
     """
     Create three scatter plots: NDCG vs each fairness metric (dltc@10, avgpop@10, gini@10),
     overlaying points from user-side, item-side, full, FAIR CSV results, and (optionally) a LightGCN baseline.
@@ -798,10 +798,10 @@ def plot_ndcg_vs_fairness(show=True, dataset=None, add_lightgcn=True):
     # item_file = rf"dataset/{dataset}/results/PopSteer_{dataset}_item.csv"
     # full_file = rf"dataset/{dataset}/results/PopSteer_{dataset}_full.csv"
     # fair_file = rf"dataset/{dataset}/results/FAIR_{dataset}.csv"
-    user_file = rf"dataset/{dataset}/results/PopSteer_{dataset}SASRec_SAE_user.csv"
-    item_file = rf"dataset/{dataset}/results/PopSteer_{dataset}SASRec_SAE_item.csv"
-    full_file = rf"dataset/{dataset}/results/PopSteer_{dataset}SASRec_SAE_full.csv"
-    fair_file = rf"dataset/{dataset}/results/SASREC_FAIR_{dataset}.csv"
+    user_file = rf"dataset/{dataset}/results/{model}_user_{dataset}.csv"
+    item_file = rf"dataset/{dataset}/results/{model}_item_{dataset}.csv"
+    full_file = rf"dataset/{dataset}/results/{model}_full_{dataset}.csv"
+    fair_file = rf"dataset/{dataset}/results/{model}_fair_{dataset}.csv"
 
     def load_csv(path):
         if not os.path.isfile(path):
@@ -856,10 +856,10 @@ def plot_ndcg_vs_fairness(show=True, dataset=None, add_lightgcn=True):
     }
 
     lightgcn_point = None
-    if dataset.lower() == "lastfm":
-        lightgcn_point = lightgcn_point_lastfm
-    if dataset.lower() == "ml-1mm":
-        lightgcn_point = lightgcn_point_ml_1m
+    # if dataset.lower() == "lastfm":
+    #     lightgcn_point = lightgcn_point_lastfm
+    # if dataset.lower() == "ml-1mm":
+    #     lightgcn_point = lightgcn_point_ml_1m
 
     fairness_metrics = [
         ("dltc@10", "Deep LT Coverage @10"),
@@ -934,45 +934,58 @@ def plot_ndcg_vs_fairness(show=True, dataset=None, add_lightgcn=True):
 
     return figs
 
+import shutil
 
-def remove_sparse_users_items(n, dataset):
-    # --- Step 1: Load the Data ---
-    # The files use tab as the delimiter and have headers that include type annotations.
-    items = pd.read_csv(rf"./dataset/{dataset}/{dataset}.item", sep="\t", header=0)
-    interactions = pd.read_csv(rf"./dataset/{dataset}/{dataset}.inter", sep="\t", header=0)
-    # --- Step 2: Iterative Filtering ---
-    # We use a threshold of at least 5 interactions for both users and items.
+def remove_sparse_users_items(n: int, dataset: str, base_dir: str = "./dataset") -> None:
+    ds_dir = Path(base_dir) / dataset
+    inter_path = ds_dir / f"{dataset}.inter"
+    item_path  = ds_dir / f"{dataset}.item"
+    inter_bak  = ds_dir / f"{dataset}.inter.original"
+    item_bak   = ds_dir / f"{dataset}.item.original"
+
+    # --- Step 0: Backups (only once) ---
+    if not inter_bak.exists():
+        shutil.copy2(inter_path, inter_bak)
+    if not item_bak.exists():
+        shutil.copy2(item_path, item_bak)
+
+    # --- Step 1: Load ---
+    interactions = pd.read_csv(inter_path, sep="\t", header=0)
+    items        = pd.read_csv(item_path,  sep="\t", header=0)
+
+    # --- Step 2: Iterative filtering ---
     iteration = 0
     while True:
         iteration += 1
-        current_shape = interactions.shape[0]
-        
-        # Remove users with fewer than 5 interactions:
-        user_counts = interactions["user_id:token"].value_counts()
-        valid_users = user_counts[user_counts >= n].index
+        before = interactions.shape[0]
+
+        valid_users = interactions["user_id:token"].value_counts()
+        valid_users = valid_users[valid_users >= n].index
         interactions = interactions[interactions["user_id:token"].isin(valid_users)]
-                
-        # Remove items with fewer than 5 interactions:
-        item_counts = interactions["item_id:token"].value_counts()
-        valid_items = item_counts[item_counts >= n].index
+
+        valid_items = interactions["item_id:token"].value_counts()
+        valid_items = valid_items[valid_items >= n].index
         interactions = interactions[interactions["item_id:token"].isin(valid_items)]
-        
-        new_shape = interactions.shape[0]
-        print(f"Iteration {iteration}: {current_shape} -> {new_shape} interactions remain")
-        
-        if new_shape == current_shape:
+
+        after = interactions.shape[0]
+        print(f"Iteration {iteration}: {before} -> {after} interactions remain")
+        if after == before:
             break
-    # --- Step 3: Synchronize Items With Interactions ---
-    # Keep only those items that still appear in the filtered interactions.
+
+    # --- Step 3: Sync items ---
     items = items[items["item_id:token"].isin(interactions["item_id:token"])]
 
-    # --- Step 4: Save the Filtered Files ---
-    # Files are saved with the header intact (including the type annotations).
-    items.to_csv(rf"./dataset/{dataset}/{dataset}.item.filtered", sep="\t", index=False, header=True)
-    interactions.to_csv(rf"./dataset/{dataset}/{dataset}.inter.filtered", sep="\t", index=False, header=True)
+    # --- Step 4: Overwrite originals (atomic-ish) ---
+    tmp_inter = inter_path.with_suffix(".inter.tmp")
+    tmp_item  = item_path.with_suffix(".item.tmp")
 
-    print(f"Filtering complete. Files saved as '{dataset}.item.filtered', '{dataset}.inter.filtered'.")
+    interactions.to_csv(tmp_inter, sep="\t", index=False)
+    items.to_csv(tmp_item, sep="\t", index=False)
 
+    tmp_inter.replace(inter_path)
+    tmp_item.replace(item_path)
+
+    print(f"Done. Wrote {interactions.shape[0]} interactions and {items.shape[0]} items.")
 
 def create_pop_unpop_mappings(dataset: str, embeddings: torch.Tensor) -> None:
     """
@@ -1212,7 +1225,7 @@ def save_mean_SD(dataset, popular=None):
     # Combine into a DataFrame with the correct index
     df = pd.DataFrame({
         'mean': means,
-        'std': stds,
+        'sd': stds,
     })
 
     if popular == True:  
@@ -1229,15 +1242,72 @@ def save_cohens_d(dataset):
     df2 = pd.read_csv(rf"./dataset/{dataset}/user/neuron_stats_unpopular.csv", index_col=0)
 
     # Compute pooled standard deviation
-    s_pooled = np.sqrt((df1['std']**2 + df2['std']**2) / 2)
+    s_pooled = np.sqrt((df1['sd']**2 + df2['sd']**2) / 2)
 
     # Compute Cohen's d
     cohen_d = (df1['mean'] - df2['mean']) / s_pooled
 
     # Create result DataFrame with same index
-    df_result = pd.DataFrame({'cohen_d': cohen_d})
+    df_result = pd.DataFrame({'cohens_d': cohen_d})
 
     # Save to CSV with index column
     df_result.to_csv(rf"./dataset/{dataset}/user/cohens_d.csv")
 
     print("Cohen's d values saved to cohens_d.csv")
+
+
+
+def make_items_popular(item_seq_len, dataset, n):
+    item_labels = pd.read_csv(rf"./dataset/{dataset}/item_popularity_labels.csv")
+    
+    # Filter rows where popularity_label == -1
+    filtered_items = item_labels[item_labels['popularity_label'] == 1]
+    available_ids = filtered_items['item_id:token'].tolist()
+    
+    # Count how many items are in each row of the batch
+    nonzero_counts = (item_seq_len != 0).sum(dim=1).tolist()
+    selected_item_ids = []
+
+    for count in nonzero_counts:
+        sampled = pd.Series(available_ids).sample(n=count, replace=True).tolist()
+        
+        # Pad with 0s if needed to reach length 50
+        if len(sampled) < n:
+            sampled += [0] * (n - len(sampled))
+        else:
+            sampled = sampled[:n]  # In case count > 50 for any reason
+
+        selected_item_ids.append(sampled)
+
+    # Convert to tensor of shape (batch_size, 50)
+    selected_tensor = torch.tensor(selected_item_ids)
+    return selected_tensor
+
+
+def make_items_unpopular(item_seq_len, dataset, n):
+
+    item_labels = pd.read_csv(rf"./dataset/{dataset}/item_popularity_labels.csv")
+    
+    # Filter rows where popularity_label == -1
+    filtered_items = item_labels[item_labels['popularity_label'] == -1]
+    available_ids = filtered_items['item_id:token'].tolist()
+    
+    # Count how many items are in each row of the batch
+    nonzero_counts = (item_seq_len != 0).sum(dim=1).tolist()
+    selected_item_ids = []
+
+    for count in nonzero_counts:
+        sampled = pd.Series(available_ids).sample(n=count, replace=True).tolist()
+        
+        # Pad with 0s if needed to reach length 50
+        if len(sampled) < n:
+            sampled += [0] * (n - len(sampled))
+        else:
+            sampled = sampled[:n]  # In case count > 50 for any reason
+
+        selected_item_ids.append(sampled)
+
+    # Convert to tensor of shape (batch_size, 50)
+    selected_tensor = torch.tensor(selected_item_ids)
+
+    return selected_tensor

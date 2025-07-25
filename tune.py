@@ -14,7 +14,7 @@ def tune(args):
     if args.config_json is None:
         config_dict = {
             "alpha": [0, 0],
-            "steer": [1, 0],
+            "steer": [1, 1],
             "analyze": True,
             "tail_ratio": 0.2,
             "sae_mode": "test",
@@ -26,14 +26,11 @@ def tune(args):
     )
     trainer = get_trainer(config["MODEL_TYPE"], config["model"])(config, model)
     trainer.eval_collector.data_collect(train_data)
-    change1 = [0.0, 0.5, 1, 1.5,  2.0, 2.5, 3.0, 3.5, 4.0, 4.5]
-    change2 = [0.0]
-    # change1 = [0.5, 1, 1.5, 2.0]
-    # change2 = [0.5, 1, 1.5, 2.0]
+    # change1 = [0.0, 0.5, 1, 1.5,  2.0, 2.5, 3.0, 3.5, 4.0, 4.5]
+    # change2 = [0.0]
+    change1 = [0.1, 0.5, 1, 1.5, 2.0]
+    change2 = [0.1, 0.5, 1, 1.5, 2.0]
 
-    # change2 = [0.0, 0.5, 1, 1.5, 2.0, 2.5, 3.0]
-
-    # change1 = [0, 50, 256, 512, 1024, 4096, 8192]
 
     metric_keys = [
         'mrr@10',
@@ -42,10 +39,9 @@ def tune(args):
         'deep_lt_coverage@10',
         'giniindex@10',
         'averagepopularity@10',
-        'itemcoverage@10'
-        # 'sae_loss_total',
-        # 'sae_loss_i',
-        # 'sae_loss_u' 
+        'itemcoverage@10',
+        'sae_loss_i',
+        'sae_loss_u' 
     ]
 
 
@@ -56,10 +52,9 @@ def tune(args):
         'deep_lt_coverage@10': 'DLTC@10',
         'giniindex@10': 'GINI@10',
         'averagepopularity@10': 'AVGPOP@10',
-        'itemcoverage@10': 'COV@10'
-        # 'sae_loss_total': 'SAELOSS',
-        # 'sae_loss_i': 'SAELOSS_i',
-        # 'sae_loss_u': 'SAELOSS_u'
+        'itemcoverage@10': 'COV@10',
+        'sae_loss_i': 'SAELOSS_i',
+        'sae_loss_u': 'SAELOSS_u'
     }
 
     rows_raw = []
@@ -69,6 +64,7 @@ def tune(args):
             trainer.model.recommendation_count = torch.zeros(trainer.model.n_items, dtype=torch.long, device=trainer.device)
             trainer.model.sae_module_i.alpha = a_i
             trainer.model.sae_module_u.alpha = a_u
+
             test_result = trainer.evaluate(
                 valid_data,
                 model_file=args.path,
@@ -133,8 +129,8 @@ def tune(args):
         print(line)
 
     # --- Write selected results to CSV (with separate alphas) --
-    csv_path = rf'./dataset/{config["dataset"]}/results/PopSteer_{config["dataset"]}SASRec_SAE_item.csv'
-    fieldnames = ["alpha_u", "alpha_i", "ndcg", "dltc@10", "avgpop@10", "gini@10", "cov@10"]
+    csv_path = rf'./dataset/{config["dataset"]}/results/LightGCN_full_{config["dataset"]}kayf.csv'
+    fieldnames = ["alpha_u", "alpha_i", "ndcg", "mrr", "hit", "dltc@10", "avgpop@10", "gini@10", "cov@10"]
 
     with open(csv_path, mode="w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=fieldnames)
@@ -144,11 +140,12 @@ def tune(args):
                 "alpha_u": r["alpha_u"],
                 "alpha_i": r["alpha_i"],
                 "ndcg": r["ndcg@10"],
+                "mrr": r["mrr@10"],
+                "hit": r["hit@10"],
                 "dltc@10": r["deep_lt_coverage@10"],
                 "avgpop@10": r["averagepopularity@10"],
                 "gini@10": r["giniindex@10"],
                 "cov@10": r["itemcoverage@10"],
-
             })
 
     return rows_raw, formatted_rows
@@ -266,8 +263,8 @@ def tune_FAIR(args):
         print(line)
 
     # --- Write selected results to CSV (with separate alphas) ---
-    csv_path = rf'./dataset/{config["dataset"]}/results/SASREC_FAIR_{config["dataset"]}.csv'
-    fieldnames = ["alpha_u", "alpha_i", "ndcg", "dltc@10", "avgpop@10", "gini@10", "cov@10"]
+    csv_path = rf'./dataset/{config["dataset"]}/results/LightGCN_fair_{config["dataset"]}.csv'
+    fieldnames = ["alpha_u", "alpha_i", "ndcg", "mrr", "hit", "dltc@10", "avgpop@10", "gini@10", "cov@10"]
 
     with open(csv_path, mode="w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=fieldnames)
@@ -277,6 +274,8 @@ def tune_FAIR(args):
                 "alpha_u": r["alpha_u"],
                 "alpha_i": r["alpha_i"],
                 "ndcg": r["ndcg@10"],
+                "mrr": r["mrr@10"],
+                "hit": r["hit@10"],
                 "dltc@10": r["deep_lt_coverage@10"],
                 "avgpop@10": r["averagepopularity@10"],
                 "gini@10": r["giniindex@10"],

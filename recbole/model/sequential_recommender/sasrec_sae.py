@@ -5,7 +5,7 @@ SASRec
 Reference:
     Wang-Cheng Kang et al. "Self-Attentive Sequential Recommendation." in ICDM 2018.
 
-Reference:
+Reference:_
     https://github.com/kang205/SASRec
 
 """
@@ -13,7 +13,7 @@ Reference:
 import torch
 from torch import nn
 from recbole.model.sequential_recommender.sasrec import SASRec
-from recbole.utils import replace_with_mappings, save_batch_activations, compute_weighted_neuron_stats_by_row_item
+from recbole.utils import replace_with_mappings, save_batch_activations, compute_weighted_neuron_stats_by_row_item, make_items_popular, make_items_unpopular
 
 class SASRec_SAE(SASRec):
     def __init__(self, config, dataset):
@@ -39,8 +39,8 @@ class SASRec_SAE(SASRec):
         position_ids = position_ids.unsqueeze(0).expand_as(item_seq)
         position_embedding = self.position_embedding(position_ids)
         reconstructed_weights = self.sae_module_i(self.item_embedding.weight, train_mode=True)
-        # item_emb = torch.nn.functional.embedding(item_seq, reconstructed_weights, padding_idx=0)
-        item_emb = self.item_embedding(item_seq)
+        item_emb = torch.nn.functional.embedding(item_seq, reconstructed_weights, padding_idx=0)
+        # item_emb = self.item_embedding(item_seq)
         input_emb = item_emb + position_embedding
         input_emb = self.LayerNorm(input_emb)
         input_emb = self.dropout(input_emb)
@@ -78,7 +78,16 @@ class SASRec_SAE(SASRec):
     def full_sort_predict(self, interaction, popular=None):
         item_seq = interaction[self.ITEM_SEQ]
         item_seq_len = interaction[self.ITEM_SEQ_LEN]
+        # if popular == True:
+        #     item_seq = make_items_popular(item_seq, self.dataset, self.max_seq_length).to(self.device)
+        # elif popular == False:
+        #     item_seq = make_items_unpopular(item_seq, self.dataset, self.max_seq_length).to(self.device)
+
         if popular is not None:
+            # if popular == True:
+            #     item_seq = make_items_popular(item_seq, self.dataset, self.max_seq_length).to(self.device)
+            # elif popular == False:
+            #     item_seq = make_items_unpopular(item_seq, self.dataset, self.max_seq_length).to(self.device)
             item_seq = replace_with_mappings(sequences=item_seq, popular=popular, dataset=self.dataset)
             seq_output = self.forward(item_seq, item_seq_len, train_mode=False)
             save_batch_activations(self.sae_module_u.last_activations, self.sae_module_u.hidden_dim, self.dataset, popular) 

@@ -143,9 +143,9 @@ class Trainer(AbstractTrainer):
         self.wandblogger = WandbLogger(config)
         self.learner = config["learner"]
         self.learning_rate = config["learning_rate"]
-        self.epochs = 500
+        self.epochs = 1000
         self.eval_step = min(config["eval_step"], self.epochs)
-        self.stopping_step = 50
+        self.stopping_step = 30
         self.clip_grad_norm = config["clip_grad_norm"]
         self.valid_metric = config["valid_metric"].lower()
         self.valid_metric_bigger = config["valid_metric_bigger"]
