@@ -59,7 +59,7 @@ class Deep_LT_Coverage(AbstractMetric):
     def __init__(self, config):
         super().__init__(config)
         self.topk = config["topk"]
-        self.tail = 0.2
+        self.tail = 0.1
         if self.tail is None or self.tail <= 0:
             self.tail = 0.1
 

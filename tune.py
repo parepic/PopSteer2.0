@@ -14,7 +14,7 @@ def tune(args):
     if args.config_json is None:
         config_dict = {
             "alpha": [0, 0],
-            "steer": [1, 1],
+            "steer": [0, 1],
             "analyze": True,
             "tail_ratio": 0.2,
             "sae_mode": "test",
@@ -28,8 +28,8 @@ def tune(args):
     trainer.eval_collector.data_collect(train_data)
     # change1 = [0.0, 0.5, 1, 1.5,  2.0, 2.5, 3.0, 3.5, 4.0, 4.5]
     # change2 = [0.0]
-    change1 = [0.1, 0.5, 1, 1.5, 2.0]
-    change2 = [0.1, 0.5, 1, 1.5, 2.0]
+    change1 = [0]
+    change2 = [0.0, 3.0, 4.0, 5.0]
 
 
     metric_keys = [
@@ -60,7 +60,6 @@ def tune(args):
     rows_raw = []
     for a_i in change1:
         for a_u in change2:
-            print(trainer.model.sae_module_i.N)
             trainer.model.recommendation_count = torch.zeros(trainer.model.n_items, dtype=torch.long, device=trainer.device)
             trainer.model.sae_module_i.alpha = a_i
             trainer.model.sae_module_u.alpha = a_u
@@ -129,7 +128,7 @@ def tune(args):
         print(line)
 
     # --- Write selected results to CSV (with separate alphas) --
-    csv_path = rf'./dataset/{config["dataset"]}/results/LightGCN_full_{config["dataset"]}kayf.csv'
+    csv_path = rf'./dataset/{config["dataset"]}/results/SASRec_user_{config["dataset"]}-new.csv'
     fieldnames = ["alpha_u", "alpha_i", "ndcg", "mrr", "hit", "dltc@10", "avgpop@10", "gini@10", "cov@10"]
 
     with open(csv_path, mode="w", newline="", encoding="utf-8") as f:
@@ -149,6 +148,8 @@ def tune(args):
             })
 
     return rows_raw, formatted_rows
+
+
 
 
 def tune_FAIR(args):
@@ -263,7 +264,7 @@ def tune_FAIR(args):
         print(line)
 
     # --- Write selected results to CSV (with separate alphas) ---
-    csv_path = rf'./dataset/{config["dataset"]}/results/LightGCN_fair_{config["dataset"]}.csv'
+    csv_path = rf'./dataset/{config["dataset"]}/results/SASRec_fair_{config["dataset"]}-new.csv'
     fieldnames = ["alpha_u", "alpha_i", "ndcg", "mrr", "hit", "dltc@10", "avgpop@10", "gini@10", "cov@10"]
 
     with open(csv_path, mode="w", newline="", encoding="utf-8") as f:

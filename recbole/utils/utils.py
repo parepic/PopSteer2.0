@@ -798,10 +798,10 @@ def plot_ndcg_vs_fairness(show=True, dataset=None, add_lightgcn=True, model="Lig
     # item_file = rf"dataset/{dataset}/results/PopSteer_{dataset}_item.csv"
     # full_file = rf"dataset/{dataset}/results/PopSteer_{dataset}_full.csv"
     # fair_file = rf"dataset/{dataset}/results/FAIR_{dataset}.csv"
-    user_file = rf"dataset/{dataset}/results/{model}_user_{dataset}.csv"
-    item_file = rf"dataset/{dataset}/results/{model}_item_{dataset}.csv"
-    full_file = rf"dataset/{dataset}/results/{model}_full_{dataset}.csv"
-    fair_file = rf"dataset/{dataset}/results/{model}_fair_{dataset}.csv"
+    user_file = rf"dataset/{dataset}/results/{model}_user_{dataset}-new.csv"
+    item_file = rf"dataset/{dataset}/results/{model}_item_{dataset}-new.csv"
+    full_file = rf"dataset/{dataset}/results/{model}_full_{dataset}-new.csv"
+    fair_file = rf"dataset/{dataset}/results/{model}_fair_{dataset}-new.csv"
 
     def load_csv(path):
         if not os.path.isfile(path):
@@ -825,8 +825,8 @@ def plot_ndcg_vs_fairness(show=True, dataset=None, add_lightgcn=True, model="Lig
         return rows
 
     user_rows = load_csv(user_file)
-    item_rows = load_csv(item_file)
-    full_rows = load_csv(full_file)
+    item_rows = None
+    full_rows = None
     fair_rows = load_csv(fair_file)
 
     # LightGCN reference metrics (single point). Add other dataset baselines if needed.
@@ -939,19 +939,19 @@ import shutil
 def remove_sparse_users_items(n: int, dataset: str, base_dir: str = "./dataset") -> None:
     ds_dir = Path(base_dir) / dataset
     inter_path = ds_dir / f"{dataset}.inter"
-    item_path  = ds_dir / f"{dataset}.item"
+    # item_path  = ds_dir / f"{dataset}.item"
     inter_bak  = ds_dir / f"{dataset}.inter.original"
-    item_bak   = ds_dir / f"{dataset}.item.original"
+    # item_bak   = ds_dir / f"{dataset}.item.original"
 
     # --- Step 0: Backups (only once) ---
     if not inter_bak.exists():
         shutil.copy2(inter_path, inter_bak)
-    if not item_bak.exists():
-        shutil.copy2(item_path, item_bak)
+    # if not item_bak.exists():
+        # shutil.copy2(item_path, item_bak)
 
     # --- Step 1: Load ---
     interactions = pd.read_csv(inter_path, sep="\t", header=0)
-    items        = pd.read_csv(item_path,  sep="\t", header=0)
+    # items        = pd.read_csv(item_path,  sep="\t", header=0)
 
     # --- Step 2: Iterative filtering ---
     iteration = 0
@@ -959,9 +959,9 @@ def remove_sparse_users_items(n: int, dataset: str, base_dir: str = "./dataset")
         iteration += 1
         before = interactions.shape[0]
 
-        valid_users = interactions["user_id:token"].value_counts()
+        valid_users = interactions["session_id:token"].value_counts()
         valid_users = valid_users[valid_users >= n].index
-        interactions = interactions[interactions["user_id:token"].isin(valid_users)]
+        interactions = interactions[interactions["session_id:token"].isin(valid_users)]
 
         valid_items = interactions["item_id:token"].value_counts()
         valid_items = valid_items[valid_items >= n].index
@@ -973,19 +973,21 @@ def remove_sparse_users_items(n: int, dataset: str, base_dir: str = "./dataset")
             break
 
     # --- Step 3: Sync items ---
-    items = items[items["item_id:token"].isin(interactions["item_id:token"])]
+    # items = items[items["item_id:token"].isin(interactions["item_id:token"])]
 
     # --- Step 4: Overwrite originals (atomic-ish) ---
     tmp_inter = inter_path.with_suffix(".inter.tmp")
-    tmp_item  = item_path.with_suffix(".item.tmp")
+    # tmp_item  = item_path.with_suffix(".item.tmp")
 
     interactions.to_csv(tmp_inter, sep="\t", index=False)
-    items.to_csv(tmp_item, sep="\t", index=False)
+    # items.to_csv(tmp_item, sep="\t", index=False)
 
     tmp_inter.replace(inter_path)
-    tmp_item.replace(item_path)
+    # tmp_item.replace(item_path)
 
-    print(f"Done. Wrote {interactions.shape[0]} interactions and {items.shape[0]} items.")
+    print(f"Done. Wrote {interactions.shape[0]} interactions and {len(interactions['item_id:token'].unique())} items.")
+
+
 
 def create_pop_unpop_mappings(dataset: str, embeddings: torch.Tensor) -> None:
     """
@@ -1311,3 +1313,6 @@ def make_items_unpopular(item_seq_len, dataset, n):
     selected_tensor = torch.tensor(selected_item_ids)
 
     return selected_tensor
+
+
+

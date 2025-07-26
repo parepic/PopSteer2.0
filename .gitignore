@@ -12,5 +12,6 @@ docs/build/
 wandb/*
 /ray_log*
 venv/
+docs/
+settings.json
 dataset/
-

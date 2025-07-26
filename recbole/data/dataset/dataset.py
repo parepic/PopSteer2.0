@@ -1189,10 +1189,10 @@ class Dataset(torch.utils.data.Dataset):
         for alias in self.alias.values():
             remap_list = self._get_remap_list(alias)
             self._remap(remap_list)
-            if(alias == 'item_id'):
-                self.remap_item_data( rf'./dataset/{self.dataset_name}/{self.dataset_name}.item', rf'./dataset/{self.dataset_name}/items_remapped.csv',
-                                        rf'./dataset/{self.dataset_name}/{self.dataset_name}.inter', rf'./dataset/{self.dataset_name}/interactions_remapped.csv'
-                                        )
+            # if(alias == 'item_id'):
+            #     self.remap_item_data( rf'./dataset/{self.dataset_name}/{self.dataset_name}.item', rf'./dataset/{self.dataset_name}/items_remapped.csv',
+            #                             rf'./dataset/{self.dataset_name}/{self.dataset_name}.inter', rf'./dataset/{self.dataset_name}/interactions_remapped.csv'
+            #                             )
         for field in self._rest_fields:
             remap_list = self._get_remap_list(np.array([field]))
             self._remap(remap_list)
@@ -1691,8 +1691,8 @@ class Dataset(torch.utils.data.Dataset):
             user_id=next_df[0]["user_id"]
         )
 
-        create_item_popularity_csv(self.dataset_name, p_top=0.2, p_bottom=0.2)
-        create_user_popularity_csv(self.dataset_name, 0.4)
+        create_item_popularity_csv(self.dataset_name, p_top=0.1, p_bottom=0.1)
+        create_user_popularity_csv(self.dataset_name, p_pop=0.05, p_niche=0.05)
 
         next_ds = [self.copy(_) for _ in next_df]
         return next_ds
@@ -1767,8 +1767,8 @@ class Dataset(torch.utils.data.Dataset):
             user_id=next_df[0]["user_id"]
         )
 
-        create_item_popularity_csv(self.dataset_name, p_top=0.2, p_bottom=0.2)
-        create_user_popularity_csv(self.dataset_name, 0.5)
+        create_item_popularity_csv(self.dataset_name, p_top=0.1, p_bottom=0.1)
+        create_user_popularity_csv(self.dataset_name, p_pop=0.1, p_niche=0.1)
 
 
         next_ds = [self.copy(_) for _ in next_df]

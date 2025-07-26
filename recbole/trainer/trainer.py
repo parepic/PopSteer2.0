@@ -750,7 +750,12 @@ class Trainer(AbstractTrainer):
             if show_progress
             else data
         )
+        times = 200
+        cur = 0
         for batch_idx, batched_data in enumerate(iter_data):
+            if cur >= times:
+                break
+            cur+=1
             if eval_data:
                 interaction, history_index, positive_u, positive_i = batched_data
             else:
