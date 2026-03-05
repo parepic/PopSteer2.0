@@ -21,7 +21,7 @@ import torch.nn as nn
 from recbole.utils import utils
 import pandas as pd
 import random
-from recbole.utils import save_batch_activations, make_items_popular, make_items_unpopular, save_batch_users
+from recbole.utils import save_batch_activations, make_items_popular, make_items_unpopular, save_batch_users, save_batch_activations_dense
 
 
 class SASRec_SAE(SASRec):
@@ -95,11 +95,14 @@ class SASRec_SAE(SASRec):
             test_items_emb = self.item_embedding.weight
             scores = torch.matmul(seq_output, test_items_emb.transpose(0, 1))
             save_batch_activations(self.sae_module_u.last_activations, self.sae_module_u.hidden_dim, self.dataset, popular) 
+
             return
         else:
             seq_output = self.forward(item_seq, item_seq_len, train_mode=False)
             if save:
                 save_batch_activations(self.sae_module_u.last_activations, self.sae_module_u.hidden_dim, self.dataset, popular, steered=False) 
+                save_batch_activations_dense(self.sae_module_u.last_activations_dense, self.hidden_size, self.dataset) 
+
                 # save_batch_users(user_ids, self.dataset)
             test_items_emb = self.item_embedding.weight
             scores = torch.matmul(seq_output, test_items_emb.transpose(0, 1))
@@ -146,6 +149,7 @@ class SAE(nn.Module):
         self.item_activations = np.zeros(self.hidden_dim)
         self.steer_vec = None        # cached steering vector
         self._steer_ready = False    # flag
+        self.last_activations_dense = None
 
         return  
   
@@ -296,6 +300,7 @@ class SAE(nn.Module):
     
 
     def forward(self, x, sequences=None, train_mode=False, save_result=False, epoch=None, dataset=None, pop_scores=None):
+            self.last_activations_dense = x
             sae_in = x - self.b_dec
             pre_acts1 = self.encoder(sae_in)
             # if self.analyze == True:

@@ -792,7 +792,9 @@ class Trainer(AbstractTrainer):
         """
         if os.path.exists(rf"./dataset/{self.dataset}/neuron_activations_sasrecsae_final.h5"):
             os.remove(rf"./dataset/{self.dataset}/neuron_activations_sasrecsae_final.h5")
-        
+        if os.path.exists(rf"./dataset/{self.dataset}/neuron_activations_sasrec_final.h5"):
+            os.remove(rf"./dataset/{self.dataset}/neuron_activations_sasrec_final.h5")
+
         checkpoint_file = model_file
         checkpoint = torch.load(checkpoint_file, map_location=self.device, weights_only=False)
         self.model.load_state_dict(checkpoint["state_dict"])

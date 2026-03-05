@@ -69,7 +69,7 @@ python run.py --path=saved/popsteer_model_path.pth  --save_activations --epochs_
 | Flag      | Description                                                                                  | Default / Example                    |
 |-----------|----------------------------------------------------------------------------------------------|--------------------------------      |
 | `--path`  | Path to the trained checkpoint to analyze (e.g., SASRec + SAE run).                          | `saved/sasrec_ml-1m-44.pth`    |
-| `--save_activations` | Saves SAE activations as .h5 file inside dataset/{dataset_name} folder. | Presence-based flag                  |
+| `--save_activations` | Saves both sparse SAE activations and input dense activations as .h5 file inside dataset/{dataset_name} folder (2 seperate files). | Presence-based flag                  |
 | `--epochs_save` | Number of batches of training data to save. If null, all training activations will be saved. |  100 
 |
 
