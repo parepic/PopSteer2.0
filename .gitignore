@@ -12,5 +12,4 @@ wandb/*
 venv/
 docs/
 settings.json
-dataset/
-saved/
+__pycache__/
