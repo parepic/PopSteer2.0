@@ -40,6 +40,9 @@ All hyperparameters are controlled via the YAML configuration file. Model weight
 - Use **`SASRec_SAE`** to train PopSteer. In this case, add the `base_path` parameter in your YAML to point to the pretrained recommender file.
 
 
+
+
+
 ### 2 · Neuron analysis
 
 Analyzes neurons through generating synthetic data and feeding it to model.
@@ -55,8 +58,32 @@ python run.py --path=saved/popsteer_model_path.pth  --analyze
 | `--analyze` | Runs neuron analysis: generates synthetic profiles, records activations, computes metrics. | Presence-based flag                  |
 
 
+### 3 · SAE activation analysis
 
-### 3 · Test PopSteer
+Saves the SAE activations for training set.
+
+```
+python run.py --path=saved/popsteer_model_path.pth  --save_activations --epochs_save=100
+```
+
+| Flag      | Description                                                                                  | Default / Example                    |
+|-----------|----------------------------------------------------------------------------------------------|--------------------------------      |
+| `--path`  | Path to the trained checkpoint to analyze (e.g., SASRec + SAE run).                          | `saved/sasrec_ml-1m-44.pth`    |
+| `--save_activations` | Saves SAE activations as .h5 file inside dataset/{dataset_name} folder. | Presence-based flag                  |
+| `--epochs_save` | Number of batches of training data to save. If null, all training activations will be saved. |  100 
+|
+
+Example command to run:
+```
+python run.py --path=saved/sasrec_ml-1m-44.pth  --save_activations --epochs_save=100
+```
+
+`sasrec_ml-1m-44.pth` is already trained sasrec-sae model with ml-1m database.
+
+
+
+
+### 4 · Test PopSteer
 
 Run evaluation with PopSteer steering enabled or disabled. The flags map to the paper’s main 3 hyperparameters:
 `--a_pop` → α_pop (suppresses popularity-aligned neurons),
@@ -77,7 +104,7 @@ Run evaluation with PopSteer steering enabled or disabled. The flags map to the 
 | `--test`    | Flag to indicate testing                                                                              | –                 |
 
 
-### 4 · Tuning
+### 5 · Tuning
 We provide code for tuning PopSteer and the baselines. To tune PopSteer, use:
 
 ```
@@ -92,7 +119,7 @@ python run.py --tune --path=saved/base_model_path.pth --fair
 
 Tuning results are written to 'dataset/dataset_name/results' folder.
 
-### 5 · LightGCN experiments
+### 6 · LightGCN experiments
 We also tested PopSteer when using LighGCN as a base recommender. For training PopSteer and LightGCN, use:
 
 `
@@ -102,7 +129,7 @@ python run.py --model=LightGCN --dataset=ml-1m --config_files=example_config_lig
 Rest of the initial steps also apply to LightGCN version of PopSteer.
 
 
-### 6 · LightGCN results
+### 7 · LightGCN results
 
 The plots display the results of baselines and PopSteer in ml-1m dataset when using LightGCN as a base recommender.  
 
