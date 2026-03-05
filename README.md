@@ -1,0 +1,118 @@
+# PopSteer
+
+This repository contains the code used for the experiments in "From Insight to Intervention: Interpretable Neuron Steering for
+Controlling Popularity Bias in Recommender Systems"
+
+# Installation
+
+```bash
+git clone https://github.com/ANONYMOUS/PopSteer.git
+cd PopSteer2.0
+
+# install Python dependencies
+pip install -r requirements.txt
+```
+
+## Dataset preparation
+
+PopSteer expects datasets to be provided in an [atomic](https://recbole.io/docs/user_guide/data/atomic_files.html) format and stored in the `./dataset` folder.  
+
+The repository already includes the datasets used in the paper. You can easily extend it by adding additional datasets in the same format.  
+
+### 1 · Train PopSteer
+
+First, train a baseline recommender model that will act as the teacher for PopSteer. Later, train PopSteer pointing to the base recommender.   
+All hyperparameters are controlled via the YAML configuration file. Model weights are written to 'saved' path.
+
+    python run.py --model=SASRec --dataset=ml-1m --config_files=example_config.yaml --train
+
+#### Flags
+
+| Flag             | Description                                                                 | Default (used in paper) |
+|------------------|-----------------------------------------------------------------------------|-------------------------|
+| `--train`        | Runs the training pipeline (presence-based flag).                           | –                       |
+| `--dataset`      | Dataset identifier. Options: `ml-1m`, `Steam`, `BeerAdvocate`, `Yelp`.      | All four datasets       |
+| `--model`        | Model architecture to train.                                                | `SASRec` / `SASRec_SAE` |
+| `--config_files` | YAML configuration file(s) with hyperparameters.                            | `example_config.yaml`   |
+
+#### Notes
+- Uuse **`SASRec`** to train the base recommender model.  
+- Use **`SASRec_SAE`** to train PopSteer. In this case, add the `base_path` parameter in your YAML to point to the pretrained recommender file.
+
+
+### 2 · Neuron analysis
+
+Analyzes neurons through generating synthetic data and feeding it to model.
+
+
+```
+python run.py --path=saved/popsteer_model_path.pth  --analyze    
+```
+
+| Flag      | Description                                                                                  | Default / Example                    |
+|-----------|----------------------------------------------------------------------------------------------|--------------------------------      |
+| `--path`  | Path to the trained checkpoint to analyze (e.g., SASRec + SAE run).                          | `saved/sasrec_popsteer_ml-1m.pth`    |
+| `--analyze` | Runs neuron analysis: generates synthetic profiles, records activations, computes metrics. | Presence-based flag                  |
+
+
+
+### 3 · Test PopSteer
+
+Run evaluation with PopSteer steering enabled or disabled. The flags map to the paper’s main 3 hyperparameters:
+`--a_pop` → α_pop (suppresses popularity-aligned neurons),
+`--a_unpop` → α_unpop (amplifies long-tail neurons),
+`--D` → β (Cohen’s-d threshold).
+
+    python run.py --path=saved/model_path.pth --a_pop=1.0 --a_unpop=1.0 --D=0 --steer --test
+
+#### Flags
+
+| Flag        | Description                                                                                           | Default / Example |
+|-------------|-------------------------------------------------------------------------------------------------------|-------------------|
+| `--path`    | Path to the trained checkpoint to load for testing/steering (e.g., SASRec(+SAE) run).                 | `saved/sasrec_ml-1m-44.pth` |
+| `--a_pop`   | Steering strength for popularity-aligned neurons (**αPop**). Larger → stronger suppression.           | `1.0`             |
+| `--a_unpop` | Steering strength for unpopularity-aligned neurons (**αUnpop**). Larger → stronger amplification.     | `1.0`             |
+| `--D`       | Cohen’s-d threshold (**β**) selecting which neurons to steer (`0` steers all; larger steers fewer).   | `0`               |
+| `--steer`   | Enable neuron steering at inference. If false, steering will not be done.                                                                   | –                 |
+| `--test`    | Flag to indicate testing                                                                              | –                 |
+
+
+### 4 · Tuning
+We provide code for tuning PopSteer and the baselines. To tune PopSteer, use:
+
+```
+python run.py --tune --path=saved/popsteer_model_path.pth 
+```
+
+To tune the baselines, use one of the flags `--fair`, `--ipr`, `--duor`, `--pct`, `--min_reg`. For instance:
+
+```
+python run.py --tune --path=saved/base_model_path.pth --fair
+```
+
+Tuning results are written to 'dataset/dataset_name/results' folder.
+
+### 5 · LightGCN experiments
+We also tested PopSteer when using LighGCN as a base recommender. For training PopSteer and LightGCN, use:
+
+`
+python run.py --model=LightGCN --dataset=ml-1m --config_files=example_config_lightgcn.yaml --train
+`
+
+Rest of the initial steps also apply to LightGCN version of PopSteer.
+
+
+### 6 · LightGCN results
+
+The plots display the results of baselines and PopSteer in ml-1m dataset when using LightGCN as a base recommender.  
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/bc308077-eac8-4b88-a3fb-894ac34e5c1c" width="450"/>
+  <img src="https://github.com/user-attachments/assets/6fbf997e-bf0d-42c5-a2f6-2b1805bd9961" width="450"/>
+</p>
+
+
+As shown in the plots, PopSteer achieves comparable performance when LightGCN is used as the base recommender instead of SASRec. In this variant, biased neurons were identified using real user interaction data rather than synthetic profiles. In particular, we selected the top 10% of users with the strongest preference for popular items and the top 10% with the strongest preference for unpopular items. A user’s popularity preference was determined by the average popularity score of the items they interacted with. As a result, the improvements are slightly less pronounced than with SASRec, since real users do not typically represent the extreme ends of the popularity spectrum. Nevertheless, PopSteer remains competitive with, and in many cases outperforms, baseline methods, particularly at lower nDCG values.
+
+
+

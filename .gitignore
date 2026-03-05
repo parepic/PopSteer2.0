@@ -1,0 +1,16 @@
+*.pth
+.vscode/
+.idea/
+*.pyc
+*.log
+log_tensorboard
+*.lprof
+*.egg-info/
+docs/build/
+wandb/*
+/ray_log*
+venv/
+docs/
+settings.json
+dataset/
+saved/
