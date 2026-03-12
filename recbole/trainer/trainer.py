@@ -161,6 +161,7 @@ class Trainer(AbstractTrainer):
         self.enable_scaler = torch.cuda.is_available() and config["enable_scaler"]
         ensure_dir(self.checkpoint_dir)
         saved_model_file = "{}-{}.pth".format(self.config["model"], get_local_time())
+        self.model_name = self.config["model"]
         self.saved_model_file = os.path.join(self.checkpoint_dir, saved_model_file)
         self.weight_decay = config["weight_decay"]
         self.dataset = config["dataset"]
@@ -790,10 +791,10 @@ class Trainer(AbstractTrainer):
         Args:
             eval_daanalyze_neurons.OrderedDict: eval result, key is the eval metric and value in the corresponding metric value.
         """
-        if os.path.exists(rf"./dataset/{self.dataset}/neuron_activations_sasrecsae_final.h5"):
-            os.remove(rf"./dataset/{self.dataset}/neuron_activations_sasrecsae_final.h5")
-        if os.path.exists(rf"./dataset/{self.dataset}/neuron_activations_sasrec_final.h5"):
-            os.remove(rf"./dataset/{self.dataset}/neuron_activations_sasrec_final.h5")
+        if os.path.exists(rf"./dataset/{self.dataset}/experiment_neuron_activations_{self.model_name}_final.h5"):
+            os.remove(rf"./dataset/{self.dataset}/experiment_neuron_activations_{self.model_name}_final.h5")
+        if os.path.exists(rf"./dataset/{self.dataset}/experiment_neuron_activations_{self.model_name}_final_dense.h5"):
+            os.remove(rf"./dataset/{self.dataset}/experiment_neuron_activations_{self.model_name}_final_dense.h5")
 
         checkpoint_file = model_file
         checkpoint = torch.load(checkpoint_file, map_location=self.device, weights_only=False)
@@ -829,7 +830,6 @@ class Trainer(AbstractTrainer):
             self.optimizer.zero_grad()
             with torch.autocast(device_type=self.device.type, enabled=self.enable_amp):
                 self.model.full_sort_predict(interaction, save=True)
-        n3 = save_mean_SD(self.dataset, popular=None)
 
 
     @torch.no_grad()
@@ -872,12 +872,6 @@ class Trainer(AbstractTrainer):
             with torch.autocast(device_type=self.device.type, enabled=self.enable_amp):
                 self.model.full_sort_predict(interaction, save=True)
         
-        # if os.path.exists(rf"./dataset/{self.dataset}/neuron_activations_sasrecsae_final_pop.h5"):
-        #     os.remove(rf"./dataset/{self.dataset}/neuron_activations_sasrecsae_final_pop.h5")
-        # if os.path.exists(rf"./dataset/{self.dataset}/neuron_activations_sasrecsae_final_unpop.h5"):
-        #     os.remove(rf"./dataset/{self.dataset}/neuron_activations_sasrecsae_final_unpop.h5")
-        # if os.path.exists(rf"./dataset/{self.dataset}/neuron_activations_sasrecsae_final.h5"):
-        #     os.remove(rf"./dataset/{self.dataset}/neuron_activations_sasrecsae_final.h5")
 
 
 

@@ -21,7 +21,7 @@ import torch.nn as nn
 from recbole.utils import utils
 import pandas as pd
 import random
-from recbole.utils import save_batch_activations, make_items_popular, make_items_unpopular, save_batch_users, save_batch_activations_dense
+from recbole.utils import save_batch_activations, make_items_popular, make_items_unpopular, store_activations
 
 
 class SASRec_SAE(SASRec):
@@ -32,6 +32,7 @@ class SASRec_SAE(SASRec):
         self.load_state_dict(checkpoint['state_dict'])
         self.sae_module_i = SAE(config, side="item")
         self.sae_module_u = SAE(config, side="user")
+        self.model_name = config["model"]
         self.a1 = 0.9
         self.a2 = 0.1
         for param in self.parameters():
@@ -95,13 +96,14 @@ class SASRec_SAE(SASRec):
             test_items_emb = self.item_embedding.weight
             scores = torch.matmul(seq_output, test_items_emb.transpose(0, 1))
             save_batch_activations(self.sae_module_u.last_activations, self.sae_module_u.hidden_dim, self.dataset, popular) 
-
             return
         else:
             seq_output = self.forward(item_seq, item_seq_len, train_mode=False)
             if save:
                 save_batch_activations(self.sae_module_u.last_activations, self.sae_module_u.hidden_dim, self.dataset, popular, steered=False) 
-                save_batch_activations_dense(self.sae_module_u.last_activations_dense, self.hidden_size, self.dataset) 
+                # save_batch_activations_dense(self.sae_module_u.last_activations_dense, self.hidden_size, self.dataset) 
+                store_activations(self.sae_module_u.last_activations_dense, self.hidden_size, self.dataset, model_name=self.model_name, dense=True)
+                store_activations(self.sae_module_u.last_activations, self.sae_module_u.hidden_dim, self.dataset, model_name=self.model_name)
 
                 # save_batch_users(user_ids, self.dataset)
             test_items_emb = self.item_embedding.weight

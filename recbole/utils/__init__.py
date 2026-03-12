@@ -37,7 +37,7 @@ from recbole.utils.utils import (
     save_batch_users,
     print_top_users,
     save_skew_kurtosis,
-    save_batch_activations_dense
+    store_activations
 )
 from recbole.utils.enum_type import *
 from recbole.utils.argument_list import *
@@ -95,5 +95,5 @@ __all__ = [
     "save_batch_users",
     "print_top_users",
     "save_skew_kurtosis",
-    "save_batch_activations_dense"
+    "store_activations"
 ]

@@ -26,104 +26,95 @@ import torch
 from recbole.model.abstract_recommender import GeneralRecommender
 from recbole.model.init import xavier_uniform_initialization
 from recbole.model.loss import BPRLoss, EmbLoss
-from recbole.utils import InputType, compute_neuron_stats_by_row, compute_weighted_neuron_stats_by_row_item
+from recbole.utils import InputType, compute_neuron_stats_by_row, compute_weighted_neuron_stats_by_row_item, store_activations
 from recbole.model.general_recommender.lightgcn import LightGCN
 
 
-
-
 class LightGCN_SAE(LightGCN):
-	r"""LightGCN is a GCN-based recommender model.
 
-	LightGCN includes only the most essential component in GCN — neighborhood aggregation — for
-	collaborative filtering. Specifically, LightGCN learns user and item embeddings by linearly
-	propagating them on the user-item interaction graph, and uses the weighted sum of the embeddings
-	learned at all layers as the final embedding.
+    r"""LightGCN is a GCN-based recommender model.
 
-	We implement the model following the original author with a pairwise training mode.
-	"""
+    LightGCN includes only the most essential component in GCN — neighborhood aggregation — for
+    collaborative filtering. Specifically, LightGCN learns user and item embeddings by linearly
+    propagating them on the user-item interaction graph, and uses the weighted sum of the embeddings
+    learned at all layers as the final embedding.
 
-	input_type = InputType.PAIRWISE
+    We implement the model following the original author with a pairwise training mode.
+    """
 
-	def __init__(self, config, dataset):
-		super().__init__(config, dataset)
-		model_path = config["base_path"]
-		checkpoint = torch.load(model_path, map_location=self.device, weights_only=False)
-		self.load_state_dict(checkpoint['state_dict'])
-		self.sae_module_i = SAE(config, side="item")
-		self.sae_module_u = SAE(config, side="user")
-		self.restore_item_e = None
-		self.restore_user_e = None
-		self.val_fvu_i = torch.tensor(0.0, device=self.device)
-		self.val_fvu_u = torch.tensor(0.0, device=self.device)
-		self.dataset = config["dataset"]
-		self.base_i = None
-		self.base_u = None
-		self.mode = config["sae_mode"]
+    input_type = InputType.PAIRWISE
 
-		for param in self.parameters():
-			param.requires_grad = False
+    def __init__(self, config, dataset):
+        super().__init__(config, dataset)
+        model_path = config["base_path"]
+        checkpoint = torch.load(model_path, map_location=self.device, weights_only=False)
+        self.load_state_dict(checkpoint['state_dict'])
+        self.sae_module_i = SAE(config, side="item")
+        self.sae_module_u = SAE(config, side="user")
+        self.restore_item_e = None
+        self.restore_user_e = None
+        self.model_name = config["model"]
+        self.val_fvu_i = torch.tensor(0.0, device=self.device)
+        self.val_fvu_u = torch.tensor(0.0, device=self.device)
+        self.dataset = config["dataset"]
+        self.base_i = None
+        self.base_u = None
+        self.mode = config["sae_mode"]
 
-		for param in self.sae_module_i.parameters():
-			param.requires_grad = True  
-		for param in self.sae_module_u.parameters():
-			param.requires_grad = True  
+        for param in self.parameters():
+            param.requires_grad = False
 
-	def forward(self, train_mode=None):
-		u_emb, i_emb = self.base_u, self.base_i
-		if self.base_i is None or self.base_u is None:
-			self.base_u, self.base_i = super().forward()
-			u_emb, i_emb = self.base_u, self.base_i
-		if self.mode == "test":
-			# if self.sae_module_i.steer:
-			# 	i_emb = self.sae_module_i(self.base_i, train_mode=train_mode)
-			if self.sae_module_u.steer:
-				u_emb = self.sae_module_u(self.base_u, train_mode=train_mode)
-		else:
-			# i_emb = self.sae_module_i(self.base_i, train_mode=train_mode)
-			u_emb = self.sae_module_u(self.base_u, train_mode=train_mode)
-		return u_emb, i_emb
-	
-	def calculate_loss(self, interaction):
-		if self.restore_user_e is not None or self.restore_item_e is not None:
-			self.restore_user_e, self.restore_item_e = None, None
-		
-		user_all_embeddings, item_all_embeddings = self.forward(train_mode=True)
-		# sae_loss_i = self.sae_module_i.fvu + self.sae_module_i.auxk_loss / 2
-		sae_loss_u = self.sae_module_u.fvu + self.sae_module_u.auxk_loss / 2
-		
-		return sae_loss_u
+        for param in self.sae_module_i.parameters():
+            param.requires_grad = True
+        for param in self.sae_module_u.parameters():
+            param.requires_grad = True
 
-	def full_sort_predict(self, interaction):
-		user = interaction[self.USER_ID]
-		# df = pd.read_csv(rf"./dataset/{self.dataset}/user_popularity_labels.csv")
-		# print(user, " ffff")
-		# row = df[df['user_id:token'] == user]
-		# self.sae_module_i.dampen = (row.iloc[0]['popularity_label'] != 1)
-		if self.restore_user_e is None or self.restore_item_e is None:
-			self.restore_user_e, self.restore_item_e = self.forward(train_mode=False)
-		u_embeddings = self.restore_user_e[user]
+    def forward(self, train_mode=None):
+        self.base_u, self.base_i = super().forward()
+        u_emb, i_emb = self.base_u, self.base_i
+        u_emb = self.sae_module_u(self.base_u, train_mode=train_mode)
+        return u_emb, i_emb
 
-		scores = torch.matmul(u_embeddings, self.restore_item_e.transpose(0, 1))
-		scores[:, 0] =  float("-inf")
-		self.val_fvu_i += (self.sae_module_i.fvu)
-		self.val_fvu_u += (self.sae_module_u.fvu)
-		return scores.view(-1)
-	
-	def synthetic_inference(self, interaction, popular=None):
-		user = interaction[self.USER_ID]
-		if self.restore_user_e is None or self.restore_item_e is None:
-			self.restore_user_e, self.restore_item_e = self.forward(train_mode=False)
-		u_embeddings = self.restore_user_e[user]
-		scores = torch.matmul(u_embeddings, self.restore_item_e.transpose(0, 1))
-		scores[:, 0] =  float("-inf")
-		self.val_fvu += (self.sae_module_i.fvu + self.sae_module_u.fvu)
-		return scores.view(-1)
+    def calculate_loss(self, interaction):
+        if self.restore_user_e is not None or self.restore_item_e is not None:
+            self.restore_user_e, self.restore_item_e = None, None
 
+        user_all_embeddings, item_all_embeddings = self.forward(train_mode=True)
+        # sae_loss_i = self.sae_module_i.fvu + self.sae_module_i.auxk_loss / 2
+        sae_loss_u = self.sae_module_u.fvu + self.sae_module_u.auxk_loss / 2
 
-	def set_sae_mode(self, train_mode=True):
-		self.sae_module_i.train_mode=train_mode
-		self.sae_module_u.train_mode=train_mode
+        return sae_loss_u
+
+    def full_sort_predict(self, interaction, save=None, popular=None):
+        user = interaction[self.USER_ID]
+        # df = pd.read_csv(rf"./dataset/{self.dataset}/user_popularity_labels.csv")
+        # row = df[df['user_id:token'] == user]
+        # self.sae_module_i.dampen = (row.iloc[0]['popularity_label'] != 1)
+        # if self.restore_user_e is None or self.restore_item_e is None:
+        self.restore_user_e, self.restore_item_e = self.forward(train_mode=False)
+        u_embeddings = self.restore_user_e[user]
+        store_activations(self.sae_module_u.last_activations, self.sae_module_u.hidden_dim, self.dataset, model_name=self.model_name)
+        store_activations(self.sae_module_u.last_activations_dense, self.latent_dim, self.dataset, model_name=self.model_name, dense=True)
+
+        scores = torch.matmul(u_embeddings, self.restore_item_e.transpose(0, 1))
+        scores[:, 0] = float("-inf")
+        self.val_fvu_i += (self.sae_module_i.fvu)
+        self.val_fvu_u += (self.sae_module_u.fvu)
+        return scores.view(-1)
+
+    def synthetic_inference(self, interaction, popular=None):
+        user = interaction[self.USER_ID]
+        if self.restore_user_e is None or self.restore_item_e is None:
+            self.restore_user_e, self.restore_item_e = self.forward(train_mode=False)
+        u_embeddings = self.restore_user_e[user]
+        scores = torch.matmul(u_embeddings, self.restore_item_e.transpose(0, 1))
+        scores[:, 0] = float("-inf")
+        self.val_fvu += (self.sae_module_i.fvu + self.sae_module_u.fvu)
+        return scores.view(-1)
+
+    def set_sae_mode(self, train_mode=True):
+        self.sae_module_i.train_mode = train_mode
+        self.sae_module_u.train_mode = train_mode
 
 
 import torch
@@ -320,6 +311,7 @@ class SAE(nn.Module):
 
     def forward(self, x, sequences=None, train_mode=False, save_result=False, epoch=None, dataset=None, pop_scores=None):
             sae_in = x - self.b_dec
+            self.last_activations_dense = x
             pre_acts1 = self.encoder(sae_in)
             # if self.analyze == True:
             #     if self.side == "item":
@@ -369,7 +361,3 @@ class SAE(nn.Module):
                 self.auxk_loss = scale * auxk_loss / total_variance
 
             return x_reconstructed
-
-
-
-

@@ -1551,8 +1551,11 @@ def save_batch_activations(bulk_data, neuron_count, dataset, popular=None, steer
             dset[:, current_cols:new_cols] = bulk_data
             
 
-def save_batch_activations_dense(bulk_data, neuron_count, dataset):
-    file_path = rf"./dataset/{dataset}/neuron_activations_sasrec_final.h5"
+def store_activations(bulk_data, neuron_count, dataset, model_name=None, dense=False):
+    if dense:
+        file_path = rf"./dataset/{dataset}/experiment_neuron_activations_{model_name}_final_dense.h5"
+    else:
+        file_path = rf"./dataset/{dataset}/experiment_neuron_activations_{model_name}_final.h5"
     bulk_data = bulk_data.permute(1, 0).detach().cpu().numpy()  # [neuron_count, batch_size]
     real_batch_size = bulk_data.shape[1]  # Might be < batch_size in final step
     if not os.path.exists(file_path):
@@ -1572,7 +1575,6 @@ def save_batch_activations_dense(bulk_data, neuron_count, dataset):
             new_cols = current_cols + real_batch_size
             dset.resize((neuron_count, new_cols))
             dset[:, current_cols:new_cols] = bulk_data
-
 
 
 def save_batch_users(bulk_data, dataset):
