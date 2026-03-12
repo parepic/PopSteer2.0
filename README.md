@@ -77,6 +77,7 @@ Example command to run:
 ```
 python run.py --path=saved/sasrec_ml-1m-44.pth  --save_activations --epochs_save=100
 ```
+For Lightgcn, set 'epochs_save' save flag to one, since first epoch already contains all user embeddings. 
 
 `sasrec_ml-1m-44.pth` is already trained sasrec-sae model with ml-1m database.
 

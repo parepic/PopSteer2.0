@@ -100,7 +100,7 @@ class SASRec_SAE(SASRec):
         else:
             seq_output = self.forward(item_seq, item_seq_len, train_mode=False)
             if save:
-                save_batch_activations(self.sae_module_u.last_activations, self.sae_module_u.hidden_dim, self.dataset, popular, steered=False) 
+                # save_batch_activations(self.sae_module_u.last_activations, self.sae_module_u.hidden_dim, self.dataset, popular, steered=False) 
                 # save_batch_activations_dense(self.sae_module_u.last_activations_dense, self.hidden_size, self.dataset) 
                 store_activations(self.sae_module_u.last_activations_dense, self.hidden_size, self.dataset, model_name=self.model_name, dense=True)
                 store_activations(self.sae_module_u.last_activations, self.sae_module_u.hidden_dim, self.dataset, model_name=self.model_name)
